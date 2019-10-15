@@ -11,8 +11,7 @@ use Nines\UtilBundle\Entity\AbstractEntity;
  * @ORM\Table(name="manufacturer")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ManufacturerRepository")
  */
-class Manufacturer extends AbstractEntity
-{
+class Manufacturer extends AbstractEntity {
 
     /**
      * Force all entities to provide a stringify function.

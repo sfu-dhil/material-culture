@@ -7,11 +7,22 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Ceramic
  *
- * @ORM\Table(name="ceramic")
+ * @ORM\Table(name="artefact_ceramic")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CeramicRepository")
  */
-class Ceramic extends Artefact
-{
+class Ceramic extends Artefact {
+
+    private $form;
+
+    private $glaze;
+
+    private $paste;
+
+    /**
+     * see https://en.wikipedia.org/wiki/Munsell_color_system
+     */
+    private $munsell;
+
     /**
      * Force all entities to provide a stringify function.
      *

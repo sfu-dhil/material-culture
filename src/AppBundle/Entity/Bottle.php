@@ -7,11 +7,19 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Bottle
  *
- * @ORM\Table(name="bottle")
+ * @ORM\Table(name="artefact_bottle")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\BottleRepository")
  */
-class Bottle extends Artefact
-{
+class Bottle extends Artefact {
+
+    private $company;
+
+    private $brand;
+
+    private $manufacturer;
+
+    private $content;
+
     /**
      * Force all entities to provide a stringify function.
      *

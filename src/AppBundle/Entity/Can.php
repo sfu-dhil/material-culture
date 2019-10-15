@@ -7,11 +7,23 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Can
  *
- * @ORM\Table(name="can")
+ * @ORM\Table(name="artefact_can")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CanRepository")
  */
-class Can extends Artefact
-{
+class Can extends Artefact {
+
+    private $product;
+
+    private $company;
+
+    private $brand;
+
+    private $manufacturer;
+
+    private $label;
+
+    private $productionLocation;
+
     /**
      * Force all entities to provide a stringify function.
      *

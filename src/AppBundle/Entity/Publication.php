@@ -11,8 +11,13 @@ use Nines\UtilBundle\Entity\AbstractEntity;
  * @ORM\Table(name="publication")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PublicationRepository")
  */
-class Publication extends AbstractEntity
-{
+class Publication extends AbstractEntity {
+
+    private $title;
+
+    private $doi;
+
+    private $citation;
 
     /**
      * Force all entities to provide a stringify function.

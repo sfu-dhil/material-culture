@@ -11,8 +11,15 @@ use Nines\UtilBundle\Entity\AbstractEntity;
  * @ORM\Table(name="institution")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\InstitutionRepository")
  */
-class Institution extends AbstractEntity
-{
+class Institution extends AbstractEntity {
+
+    private $name;
+
+    private $url;
+
+    private $address;
+
+    private $contact;
 
     /**
      * Force all entities to provide a stringify function.

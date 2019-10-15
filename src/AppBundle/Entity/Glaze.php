@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Nines\UtilBundle\Entity\AbstractEntity;
+use Nines\UtilBundle\Entity\AbstractTerm;
 
 /**
  * Glaze
@@ -11,15 +12,6 @@ use Nines\UtilBundle\Entity\AbstractEntity;
  * @ORM\Table(name="glaze")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\GlazeRepository")
  */
-class Glaze extends AbstractEntity
-{
+class Glaze extends AbstractTerm {
 
-    /**
-     * Force all entities to provide a stringify function.
-     *
-     * @return string
-     */
-    public function __toString() {
-        // TODO: Implement __toString() method.
-    }
 }

@@ -11,8 +11,13 @@ use Nines\UtilBundle\Entity\AbstractEntity;
  * @ORM\Table(name="location")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\LocationRepository")
  */
-class Location extends AbstractEntity
-{
+class Location extends AbstractEntity {
+
+    private $geonameId;
+
+    private $latitude;
+
+    private $longitude;
 
     /**
      * Force all entities to provide a stringify function.

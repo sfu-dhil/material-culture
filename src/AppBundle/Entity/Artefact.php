@@ -28,9 +28,29 @@ abstract class Artefact extends AbstractEntity {
 
     private $recoveryLocation;
 
+    private $recoveryDate;
+
     private $manufactureLocation;
 
-    private $holder;
+    private $manufactureDate;
+
+    private $institution;
+
+    private $catalogNumber;
+
+    /**
+     * public notes
+     */
+    private $description;
+
+    private $furtherReading;
+
+    /**
+     * private notes
+     */
+    private $note;
+
+    private $references;
 
     public function __construct() {
         parent::__construct();

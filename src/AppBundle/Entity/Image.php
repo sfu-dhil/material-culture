@@ -10,16 +10,28 @@ use Nines\UtilBundle\Entity\AbstractEntity;
  *
  * @ORM\Table(name="image")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ImageRepository")
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="category", type="string")
+ * @ORM\DiscriminatorMap({
+ *   "photo" = "Photograph",
+ *   "drawing" = "Drawing",
+ *   "scan3d" = "Scan3d"
+ * })
  */
-class Image extends AbstractEntity
-{
+abstract class Image extends AbstractEntity {
 
-    /**
-     * Force all entities to provide a stringify function.
-     *
-     * @return string
-     */
-    public function __toString() {
-        // TODO: Implement __toString() method.
+    const PHOTO = "photo";
+
+    const DRAWING = "drawing";
+
+    const SCAN3D = "Scan3d";
+
+    private $file;
+
+    public function __construct() {
+        parent::__construct();
     }
+
+    abstract public function getCategory();
+
 }
