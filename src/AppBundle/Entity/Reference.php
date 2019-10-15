@@ -13,10 +13,22 @@ use Nines\UtilBundle\Entity\AbstractEntity;
  */
 class Reference extends AbstractEntity {
 
+    /**
+     * @var Publication
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Publication", inversedBy="references")
+     */
     private $publication;
 
+    /**
+     * @var Artefact
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Artefact", inversedBy="references")
+     */
     private $artefact;
 
+    /**
+     * @var string
+     * @ORM\Column(type="text", nullable=true)
+     */
     private $description;
 
     /**

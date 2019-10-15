@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Nines\UtilBundle\Entity\AbstractEntity;
+use Nines\UtilBundle\Entity\AbstractTerm;
 
 /**
  * Content
@@ -11,14 +12,18 @@ use Nines\UtilBundle\Entity\AbstractEntity;
  * @ORM\Table(name="content")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ContentRepository")
  */
-class Content extends AbstractEntity {
+class Content extends AbstractTerm {
 
     /**
-     * Force all entities to provide a stringify function.
-     *
-     * @return string
+     * @var Collection|Bottle[]
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Bottle", mappedBy="content")
      */
-    public function __toString() {
-        // TODO: Implement __toString() method.
-    }
+    private $bottles;
+
+    /**
+     * @var Collection|Can[]
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Can", mappedBy="content")
+     */
+    private $cans;
+
 }

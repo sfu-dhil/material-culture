@@ -12,12 +12,28 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Bottle extends Artefact {
 
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=true)
+     */
     private $company;
 
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=true)
+     */
     private $brand;
 
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=true)
+     */
     private $manufacturer;
 
+    /**
+     * @var Content
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Content", inversedBy="bottles")
+     */
     private $content;
 
     /**
@@ -26,7 +42,7 @@ class Bottle extends Artefact {
      * @return string
      */
     public function __toString() {
-        // TODO: Implement __toString() method.
+        return $this->company . " " . $this->brand;
     }
 
     public function getCategory() {

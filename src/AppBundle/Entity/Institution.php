@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Nines\UtilBundle\Entity\AbstractEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Institution
@@ -13,12 +14,32 @@ use Nines\UtilBundle\Entity\AbstractEntity;
  */
 class Institution extends AbstractEntity {
 
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=false)
+     */
     private $name;
 
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Url(
+     *     normalizer='trim',
+     *     protocols = {"http", "https"}
+     * )
+     */
     private $url;
 
+    /**
+     * @var string
+     * @ORM\Column(type="text", nullable=true)
+     */
     private $address;
 
+    /**
+     * @var string
+     * @ORM\Column(type="text", nullable=true)
+     */
     private $contact;
 
     /**
@@ -27,6 +48,6 @@ class Institution extends AbstractEntity {
      * @return string
      */
     public function __toString() {
-        // TODO: Implement __toString() method.
+        return $this->name;
     }
 }

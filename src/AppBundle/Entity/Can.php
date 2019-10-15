@@ -12,17 +12,35 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Can extends Artefact {
 
-    private $product;
-
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=true)
+     */
     private $company;
 
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=true)
+     */
     private $brand;
 
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=true)
+     */
     private $manufacturer;
 
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=true)
+     */
     private $label;
 
-    private $productionLocation;
+    /**
+     * @var Content
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Content", inversedBy="cans")
+     */
+    private $content;
 
     /**
      * Force all entities to provide a stringify function.

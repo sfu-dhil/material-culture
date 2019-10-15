@@ -13,11 +13,23 @@ use Nines\UtilBundle\Entity\AbstractEntity;
  */
 class Publication extends AbstractEntity {
 
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=false)
+     */
     private $title;
 
-    private $doi;
-
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=false)
+     */
     private $citation;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $doi;
 
     /**
      * Force all entities to provide a stringify function.
@@ -25,6 +37,6 @@ class Publication extends AbstractEntity {
      * @return string
      */
     public function __toString() {
-        // TODO: Implement __toString() method.
+        return $this->title;
     }
 }

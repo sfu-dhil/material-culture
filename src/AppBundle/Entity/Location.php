@@ -11,20 +11,24 @@ use Nines\UtilBundle\Entity\AbstractEntity;
  * @ORM\Table(name="location")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\LocationRepository")
  */
-class Location extends AbstractEntity {
-
-    private $geonameId;
-
-    private $latitude;
-
-    private $longitude;
+class Location extends AbstractTerm {
 
     /**
-     * Force all entities to provide a stringify function.
-     *
-     * @return string
+     * @var string
+     * @ORM\Column(type="string", length=16, nullable=true)
      */
-    public function __toString() {
-        // TODO: Implement __toString() method.
-    }
+    private $geonameId;
+
+    /**
+     * @var double
+     * @ORM\Column(type="double", nullable=true)
+     */
+    private $latitude;
+
+    /**
+     * @var double
+     * @ORM\Column(type="double", nullable=true)
+     */
+    private $longitude;
+
 }

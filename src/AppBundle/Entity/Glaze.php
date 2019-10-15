@@ -14,4 +14,10 @@ use Nines\UtilBundle\Entity\AbstractTerm;
  */
 class Glaze extends AbstractTerm {
 
+    /**
+     * @var Collection|Ceramic[]
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Ceramic", mappedBy="glaze")
+     */
+    private $ceramics;
+
 }

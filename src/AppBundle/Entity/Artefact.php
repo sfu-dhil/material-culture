@@ -32,6 +32,10 @@ abstract class Artefact extends AbstractEntity {
      */
     private $recoveryLocation;
 
+    /**
+     * @var CircaDate
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\CircaDate")
+     */
     private $recoveryDate;
 
     /**
@@ -40,6 +44,10 @@ abstract class Artefact extends AbstractEntity {
      */
     private $manufactureLocation;
 
+    /**
+     * @var CircaDate
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\CircaDate")
+     */
     private $manufactureDate;
 
     /**
