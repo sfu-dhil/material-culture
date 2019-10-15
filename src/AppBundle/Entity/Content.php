@@ -26,4 +26,76 @@ class Content extends AbstractTerm {
      */
     private $cans;
 
+
+    /**
+     * Add bottle.
+     *
+     * @param \AppBundle\Entity\Bottle $bottle
+     *
+     * @return Content
+     */
+    public function addBottle(\AppBundle\Entity\Bottle $bottle)
+    {
+        $this->bottles[] = $bottle;
+
+        return $this;
+    }
+
+    /**
+     * Remove bottle.
+     *
+     * @param \AppBundle\Entity\Bottle $bottle
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeBottle(\AppBundle\Entity\Bottle $bottle)
+    {
+        return $this->bottles->removeElement($bottle);
+    }
+
+    /**
+     * Get bottles.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBottles()
+    {
+        return $this->bottles;
+    }
+
+    /**
+     * Add can.
+     *
+     * @param \AppBundle\Entity\Can $can
+     *
+     * @return Content
+     */
+    public function addCan(\AppBundle\Entity\Can $can)
+    {
+        $this->cans[] = $can;
+
+        return $this;
+    }
+
+    /**
+     * Remove can.
+     *
+     * @param \AppBundle\Entity\Can $can
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeCan(\AppBundle\Entity\Can $can)
+    {
+        return $this->cans->removeElement($can);
+    }
+
+    /**
+     * Get cans.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCans()
+    {
+        return $this->cans;
+    }
 }

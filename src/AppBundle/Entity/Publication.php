@@ -46,4 +46,112 @@ class Publication extends AbstractEntity {
     public function __toString() {
         return $this->title;
     }
+
+    /**
+     * Set title.
+     *
+     * @param string $title
+     *
+     * @return Publication
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title.
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set citation.
+     *
+     * @param string $citation
+     *
+     * @return Publication
+     */
+    public function setCitation($citation)
+    {
+        $this->citation = $citation;
+
+        return $this;
+    }
+
+    /**
+     * Get citation.
+     *
+     * @return string
+     */
+    public function getCitation()
+    {
+        return $this->citation;
+    }
+
+    /**
+     * Set doi.
+     *
+     * @param string|null $doi
+     *
+     * @return Publication
+     */
+    public function setDoi($doi = null)
+    {
+        $this->doi = $doi;
+
+        return $this;
+    }
+
+    /**
+     * Get doi.
+     *
+     * @return string|null
+     */
+    public function getDoi()
+    {
+        return $this->doi;
+    }
+
+    /**
+     * Add reference.
+     *
+     * @param \AppBundle\Entity\Reference $reference
+     *
+     * @return Publication
+     */
+    public function addReference(\AppBundle\Entity\Reference $reference)
+    {
+        $this->references[] = $reference;
+
+        return $this;
+    }
+
+    /**
+     * Remove reference.
+     *
+     * @param \AppBundle\Entity\Reference $reference
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeReference(\AppBundle\Entity\Reference $reference)
+    {
+        return $this->references->removeElement($reference);
+    }
+
+    /**
+     * Get references.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReferences()
+    {
+        return $this->references;
+    }
 }

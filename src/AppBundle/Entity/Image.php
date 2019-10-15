@@ -33,4 +33,28 @@ class Image extends AbstractEntity {
     public function __toString() {
         return $this->getOriginalName();
     }
+
+    /**
+     * Set description.
+     *
+     * @param string|null $description
+     *
+     * @return Image
+     */
+    public function setDescription($description = null)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description.
+     *
+     * @return string|null
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
 }

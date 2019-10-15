@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bottle List{% endblock %}
+
+{% block pageheader %}
+    <h1>Bottle List</h1>
+    <p class="count">
+        Displaying {{ bottles|length }} bottles of {{ bottles.getTotalItemCount }} total.
+    </p>
+ {% endblock %} 
+
+{% block body %}
+
+    <div class='btn-toolbar pull-right'>
+        <div class='btn-group'>
+                        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('bottle_new') }}" class="btn btn-default">
+                <span class="glyphicon glyphicon-plus"></span> New
+            </a>
+            {% endif %}
+                        <a href="{{ path('bottle_search') }}" class="btn btn-default">
+                <span class="glyphicon glyphicon-search"></span> Search
+            </a>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-condensed table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Company</th>
+                <th>Brand</th>
+                </tr>
+        </thead>
+        <tbody>
+        {% for bottle in bottles %}
+            <tr>
+                <td>
+                    <a href="{{ path('bottle_show', { 'id': bottle.id }) }}">
+                        {{ bottle.company }}
+                    </a>
+                </td>
+                <td>{{ bottle.brand }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="navigation">
+        {{ knp_pagination_render(bottles) }}
+    </div>
+
+{% endblock %}

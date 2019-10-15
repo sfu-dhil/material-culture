@@ -50,4 +50,100 @@ class Ceramic extends Artefact {
     public function getCategory() {
         return self::CERAMIC;
     }
+
+    /**
+     * Set paste.
+     *
+     * @param string|null $paste
+     *
+     * @return Ceramic
+     */
+    public function setPaste($paste = null)
+    {
+        $this->paste = $paste;
+
+        return $this;
+    }
+
+    /**
+     * Get paste.
+     *
+     * @return string|null
+     */
+    public function getPaste()
+    {
+        return $this->paste;
+    }
+
+    /**
+     * Set munsell.
+     *
+     * @param string|null $munsell
+     *
+     * @return Ceramic
+     */
+    public function setMunsell($munsell = null)
+    {
+        $this->munsell = $munsell;
+
+        return $this;
+    }
+
+    /**
+     * Get munsell.
+     *
+     * @return string|null
+     */
+    public function getMunsell()
+    {
+        return $this->munsell;
+    }
+
+    /**
+     * Set shape.
+     *
+     * @param \AppBundle\Entity\Shape|null $shape
+     *
+     * @return Ceramic
+     */
+    public function setShape(\AppBundle\Entity\Shape $shape = null)
+    {
+        $this->shape = $shape;
+
+        return $this;
+    }
+
+    /**
+     * Get shape.
+     *
+     * @return \AppBundle\Entity\Shape|null
+     */
+    public function getShape()
+    {
+        return $this->shape;
+    }
+
+    /**
+     * Set glaze.
+     *
+     * @param \AppBundle\Entity\Glaze|null $glaze
+     *
+     * @return Ceramic
+     */
+    public function setGlaze(\AppBundle\Entity\Glaze $glaze = null)
+    {
+        $this->glaze = $glaze;
+
+        return $this;
+    }
+
+    /**
+     * Get glaze.
+     *
+     * @return \AppBundle\Entity\Glaze|null
+     */
+    public function getGlaze()
+    {
+        return $this->glaze;
+    }
 }

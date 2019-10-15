@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Can List{% endblock %}
+
+{% block pageheader %}
+    <h1>Can List</h1>
+    <p class="count">
+        Displaying {{ cans|length }} cans of {{ cans.getTotalItemCount }} total.
+    </p>
+ {% endblock %} 
+
+{% block body %}
+
+    <div class='btn-toolbar pull-right'>
+        <div class='btn-group'>
+                        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('can_new') }}" class="btn btn-default">
+                <span class="glyphicon glyphicon-plus"></span> New
+            </a>
+            {% endif %}
+                        <a href="{{ path('can_search') }}" class="btn btn-default">
+                <span class="glyphicon glyphicon-search"></span> Search
+            </a>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-condensed table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Company</th>
+                <th>Brand</th>
+                <th>Label</th>
+                </tr>
+        </thead>
+        <tbody>
+        {% for can in cans %}
+            <tr>
+                <td>
+                    <a href="{{ path('can_show', { 'id': can.id }) }}">
+                        {{ can.company }}
+                    </a>
+                </td>
+                <td>{{ can.brand }}</td>
+                <td>{{ can.label }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="navigation">
+        {{ knp_pagination_render(cans) }}
+    </div>
+
+{% endblock %}

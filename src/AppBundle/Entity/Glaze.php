@@ -20,4 +20,40 @@ class Glaze extends AbstractTerm {
      */
     private $ceramics;
 
+
+    /**
+     * Add ceramic.
+     *
+     * @param \AppBundle\Entity\Ceramic $ceramic
+     *
+     * @return Glaze
+     */
+    public function addCeramic(\AppBundle\Entity\Ceramic $ceramic)
+    {
+        $this->ceramics[] = $ceramic;
+
+        return $this;
+    }
+
+    /**
+     * Remove ceramic.
+     *
+     * @param \AppBundle\Entity\Ceramic $ceramic
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeCeramic(\AppBundle\Entity\Ceramic $ceramic)
+    {
+        return $this->ceramics->removeElement($ceramic);
+    }
+
+    /**
+     * Get ceramics.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCeramics()
+    {
+        return $this->ceramics;
+    }
 }

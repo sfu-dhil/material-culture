@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Institution List{% endblock %}
+
+{% block pageheader %}
+    <h1>Institution List</h1>
+    <p class="count">
+        Displaying {{ institutions|length }} institutions of {{ institutions.getTotalItemCount }} total.
+    </p>
+ {% endblock %} 
+
+{% block body %}
+
+    <div class='btn-toolbar pull-right'>
+        <div class='btn-group'>
+                        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('institution_new') }}" class="btn btn-default">
+                <span class="glyphicon glyphicon-plus"></span> New
+            </a>
+            {% endif %}
+                        <a href="{{ path('institution_search') }}" class="btn btn-default">
+                <span class="glyphicon glyphicon-search"></span> Search
+            </a>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-condensed table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Url</th>
+                <th>Address</th>
+                <th>Contact</th>
+                </tr>
+        </thead>
+        <tbody>
+        {% for institution in institutions %}
+            <tr>
+                <td>
+                    <a href="{{ path('institution_show', { 'id': institution.id }) }}">
+                        {{ institution.name }}
+                    </a>
+                </td>
+                <td>{{ institution.url }}</td>
+                <td>{{ institution.address }}</td>
+                <td>{{ institution.contact }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="navigation">
+        {{ knp_pagination_render(institutions) }}
+    </div>
+
+{% endblock %}

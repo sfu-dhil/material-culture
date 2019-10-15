@@ -39,4 +39,76 @@ class Reference extends AbstractEntity {
     public function __toString() {
         // TODO: Implement __toString() method.
     }
+
+    /**
+     * Set description.
+     *
+     * @param string|null $description
+     *
+     * @return Reference
+     */
+    public function setDescription($description = null)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description.
+     *
+     * @return string|null
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set publication.
+     *
+     * @param \AppBundle\Entity\Publication|null $publication
+     *
+     * @return Reference
+     */
+    public function setPublication(\AppBundle\Entity\Publication $publication = null)
+    {
+        $this->publication = $publication;
+
+        return $this;
+    }
+
+    /**
+     * Get publication.
+     *
+     * @return \AppBundle\Entity\Publication|null
+     */
+    public function getPublication()
+    {
+        return $this->publication;
+    }
+
+    /**
+     * Set artefact.
+     *
+     * @param \AppBundle\Entity\Artefact|null $artefact
+     *
+     * @return Reference
+     */
+    public function setArtefact(\AppBundle\Entity\Artefact $artefact = null)
+    {
+        $this->artefact = $artefact;
+
+        return $this;
+    }
+
+    /**
+     * Get artefact.
+     *
+     * @return \AppBundle\Entity\Artefact|null
+     */
+    public function getArtefact()
+    {
+        return $this->artefact;
+    }
 }

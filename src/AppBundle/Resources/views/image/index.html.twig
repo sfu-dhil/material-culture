@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Image List{% endblock %}
+
+{% block pageheader %}
+    <h1>Image List</h1>
+    <p class="count">
+        Displaying {{ images|length }} images of {{ images.getTotalItemCount }} total.
+    </p>
+ {% endblock %} 
+
+{% block body %}
+
+    <div class='btn-toolbar pull-right'>
+        <div class='btn-group'>
+                        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('image_new') }}" class="btn btn-default">
+                <span class="glyphicon glyphicon-plus"></span> New
+            </a>
+            {% endif %}
+                        <a href="{{ path('image_search') }}" class="btn btn-default">
+                <span class="glyphicon glyphicon-search"></span> Search
+            </a>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-condensed table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Original Name</th>
+                <th>Image File Path</th>
+                <th>Thumbnail Path</th>
+                <th>Image Size</th>
+                <th>Image Width</th>
+                <th>Image Height</th>
+                </tr>
+        </thead>
+        <tbody>
+        {% for image in images %}
+            <tr>
+                <td>
+                    <a href="{{ path('image_show', { 'id': image.id }) }}">
+                        {{ image.description }}
+                    </a>
+                </td>
+                <td>{{ image.originalName }}</td>
+                <td>{{ image.imageFilePath }}</td>
+                <td>{{ image.thumbnailPath }}</td>
+                <td>{{ image.imageSize }}</td>
+                <td>{{ image.imageWidth }}</td>
+                <td>{{ image.imageHeight }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="navigation">
+        {{ knp_pagination_render(images) }}
+    </div>
+
+{% endblock %}
