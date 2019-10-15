@@ -18,10 +18,12 @@ use Nines\UtilBundle\Entity\AbstractEntity;
  *   "ceramic" = "Ceramic"
  * })
  */
-abstract class Artefact extends AbstractEntity
-{
+abstract class Artefact extends AbstractEntity {
+
     const BOTTLE = "bottle";
+
     const CAN = "can";
+
     const CERAMIC = "ceramic";
 
     private $recoveryLocation;
