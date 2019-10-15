@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Nines\UtilBundle\Entity\AbstractEntity;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -24,7 +25,8 @@ class Institution extends AbstractEntity {
      * @var string
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Url(
-     *     normalizer='trim',
+     *     checkDNS = "ANY",
+     *     dnsMessage = "The domain name '{{ value }}' does not exist.",
      *     protocols = {"http", "https"}
      * )
      */
@@ -41,6 +43,12 @@ class Institution extends AbstractEntity {
      * @ORM\Column(type="text", nullable=true)
      */
     private $contact;
+
+    /**
+     * @var Collection|Artefact[]
+     * @ORM\OneToMany(targetEntity="Artefact", mappedBy="institution")
+     */
+    private $artefacts;
 
     /**
      * Force all entities to provide a stringify function.

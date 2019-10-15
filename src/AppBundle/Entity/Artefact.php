@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Nines\UtilBundle\Entity\AbstractEntity;
 
@@ -81,8 +82,8 @@ abstract class Artefact extends AbstractEntity {
     private $note;
 
     /**
-     * @var string
-     * @ORM\Column(type="text", nullable=true)
+     * @var Collection|Reference[]
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Reference", mappedBy="artefact")
      */
     private $references;
 

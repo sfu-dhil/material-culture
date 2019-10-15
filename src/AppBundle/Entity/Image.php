@@ -15,6 +15,12 @@ class Image extends AbstractEntity {
 
     use ImageTrait;
 
+    /**
+     * @var string
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
+
     public function __construct() {
         parent::__construct();
     }

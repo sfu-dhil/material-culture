@@ -25,8 +25,8 @@ class Bottle extends Artefact {
     private $brand;
 
     /**
-     * @var string
-     * @ORM\Column(type="string", nullable=true)
+     * @var Manufacturer
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Manufacturer", inversedBy="bottles")
      */
     private $manufacturer;
 
