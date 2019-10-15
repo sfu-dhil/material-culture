@@ -43,3 +43,21 @@ services:
             $allowLogins: '%dhil.allow_logins%'
         tags:
             - { name: kernel.event_listener, event: kernel.request }
+
+    AppBundle\Services\FileUploader:
+        arguments:
+            $imageDir: '%mc.img.dir%'
+
+    AppBundle\Services\Thumbnailer:
+        calls:
+            - [ setThumbWidth, [ '%mc.thumb.width%'] ]
+            - [ setThumbHeight, [ '%mc.thumb.height%'] ]
+
+    AppBundle\EventListener\ImageListener:
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+            - { name: doctrine.event_listener, event: preUpdate }
+            - { name: doctrine.event_listener, event: postLoad }
+        calls:
+            - [ setThumbWidth, [ '%mc.thumb.width%'] ]
+            - [ setThumbHeight, [ '%mc.thumb.height%'] ]

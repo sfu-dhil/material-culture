@@ -56,3 +56,9 @@ parameters:
 
     # image upload in text editors
     nines.editor.upload_dir: web/tinymce
+
+    # where to store uploaded images
+    mc.img.dir: '%kernel.project_dir%/web/images/upload'
+    mc.img.prefix: images/upload
+    mc.thumb.width: 320
+    mc.thumb.height: 240

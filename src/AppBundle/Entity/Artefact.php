@@ -26,30 +26,56 @@ abstract class Artefact extends AbstractEntity {
 
     const CERAMIC = "ceramic";
 
+    /**
+     * @var Location
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Location", inversedBy="artefactsRecovered")
+     */
     private $recoveryLocation;
 
     private $recoveryDate;
 
+    /**
+     * @var Location
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Location", inversedBy="artefactsManufactured")
+     */
     private $manufactureLocation;
 
     private $manufactureDate;
 
+    /**
+     * @var Institution
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Institution", inversedBy="artefacts")
+     */
     private $institution;
 
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=true)
+     */
     private $catalogNumber;
 
     /**
-     * public notes
+     * @var string
+     * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 
+    /**
+     * @var string
+     * @ORM\Column(type="text", nullable=true)
+     */
     private $furtherReading;
 
     /**
-     * private notes
+     * @var string
+     * @ORM\Column(type="text", nullable=true)
      */
     private $note;
 
+    /**
+     * @var string
+     * @ORM\Column(type="text", nullable=true)
+     */
     private $references;
 
     public function __construct() {

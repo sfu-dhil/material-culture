@@ -8,12 +8,10 @@ use Nines\UtilBundle\Entity\AbstractEntity;
 /**
  * Image
  *
- * @ORM\Table(name="image")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ImageRepository")
+ * @ORM\Table(name="scan")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ScanRepository")
  */
-class Image extends AbstractEntity {
-
-    use ImageTrait;
+class Scan extends AbstractEntity {
 
     public function __construct() {
         parent::__construct();
