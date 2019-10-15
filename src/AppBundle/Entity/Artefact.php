@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Nines\UtilBundle\Entity\AbstractEntity;
 
 /**
- * Artefact
+ * Artefact.
  *
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ArtefactRepository")
  * @ORM\Table(name="artefact")
@@ -20,12 +20,11 @@ use Nines\UtilBundle\Entity\AbstractEntity;
  * })
  */
 abstract class Artefact extends AbstractEntity {
+    const BOTTLE = 'bottle';
 
-    const BOTTLE = "bottle";
+    const CAN = 'can';
 
-    const CAN = "can";
-
-    const CERAMIC = "ceramic";
+    const CERAMIC = 'ceramic';
 
     /**
      * @var Location
@@ -96,12 +95,11 @@ abstract class Artefact extends AbstractEntity {
     /**
      * Set catalogNumber.
      *
-     * @param string|null $catalogNumber
+     * @param null|string $catalogNumber
      *
      * @return Artefact
      */
-    public function setCatalogNumber($catalogNumber = null)
-    {
+    public function setCatalogNumber($catalogNumber = null) {
         $this->catalogNumber = $catalogNumber;
 
         return $this;
@@ -110,22 +108,20 @@ abstract class Artefact extends AbstractEntity {
     /**
      * Get catalogNumber.
      *
-     * @return string|null
+     * @return null|string
      */
-    public function getCatalogNumber()
-    {
+    public function getCatalogNumber() {
         return $this->catalogNumber;
     }
 
     /**
      * Set description.
      *
-     * @param string|null $description
+     * @param null|string $description
      *
      * @return Artefact
      */
-    public function setDescription($description = null)
-    {
+    public function setDescription($description = null) {
         $this->description = $description;
 
         return $this;
@@ -134,22 +130,20 @@ abstract class Artefact extends AbstractEntity {
     /**
      * Get description.
      *
-     * @return string|null
+     * @return null|string
      */
-    public function getDescription()
-    {
+    public function getDescription() {
         return $this->description;
     }
 
     /**
      * Set furtherReading.
      *
-     * @param string|null $furtherReading
+     * @param null|string $furtherReading
      *
      * @return Artefact
      */
-    public function setFurtherReading($furtherReading = null)
-    {
+    public function setFurtherReading($furtherReading = null) {
         $this->furtherReading = $furtherReading;
 
         return $this;
@@ -158,22 +152,20 @@ abstract class Artefact extends AbstractEntity {
     /**
      * Get furtherReading.
      *
-     * @return string|null
+     * @return null|string
      */
-    public function getFurtherReading()
-    {
+    public function getFurtherReading() {
         return $this->furtherReading;
     }
 
     /**
      * Set note.
      *
-     * @param string|null $note
+     * @param null|string $note
      *
      * @return Artefact
      */
-    public function setNote($note = null)
-    {
+    public function setNote($note = null) {
         $this->note = $note;
 
         return $this;
@@ -182,22 +174,20 @@ abstract class Artefact extends AbstractEntity {
     /**
      * Get note.
      *
-     * @return string|null
+     * @return null|string
      */
-    public function getNote()
-    {
+    public function getNote() {
         return $this->note;
     }
 
     /**
      * Set recoveryLocation.
      *
-     * @param \AppBundle\Entity\Location|null $recoveryLocation
+     * @param null|\AppBundle\Entity\Location $recoveryLocation
      *
      * @return Artefact
      */
-    public function setRecoveryLocation(\AppBundle\Entity\Location $recoveryLocation = null)
-    {
+    public function setRecoveryLocation(Location $recoveryLocation = null) {
         $this->recoveryLocation = $recoveryLocation;
 
         return $this;
@@ -206,22 +196,20 @@ abstract class Artefact extends AbstractEntity {
     /**
      * Get recoveryLocation.
      *
-     * @return \AppBundle\Entity\Location|null
+     * @return null|\AppBundle\Entity\Location
      */
-    public function getRecoveryLocation()
-    {
+    public function getRecoveryLocation() {
         return $this->recoveryLocation;
     }
 
     /**
      * Set recoveryDate.
      *
-     * @param \AppBundle\Entity\CircaDate|null $recoveryDate
+     * @param null|\AppBundle\Entity\CircaDate $recoveryDate
      *
      * @return Artefact
      */
-    public function setRecoveryDate(\AppBundle\Entity\CircaDate $recoveryDate = null)
-    {
+    public function setRecoveryDate(CircaDate $recoveryDate = null) {
         $this->recoveryDate = $recoveryDate;
 
         return $this;
@@ -230,22 +218,20 @@ abstract class Artefact extends AbstractEntity {
     /**
      * Get recoveryDate.
      *
-     * @return \AppBundle\Entity\CircaDate|null
+     * @return null|\AppBundle\Entity\CircaDate
      */
-    public function getRecoveryDate()
-    {
+    public function getRecoveryDate() {
         return $this->recoveryDate;
     }
 
     /**
      * Set manufactureLocation.
      *
-     * @param \AppBundle\Entity\Location|null $manufactureLocation
+     * @param null|\AppBundle\Entity\Location $manufactureLocation
      *
      * @return Artefact
      */
-    public function setManufactureLocation(\AppBundle\Entity\Location $manufactureLocation = null)
-    {
+    public function setManufactureLocation(Location $manufactureLocation = null) {
         $this->manufactureLocation = $manufactureLocation;
 
         return $this;
@@ -254,22 +240,20 @@ abstract class Artefact extends AbstractEntity {
     /**
      * Get manufactureLocation.
      *
-     * @return \AppBundle\Entity\Location|null
+     * @return null|\AppBundle\Entity\Location
      */
-    public function getManufactureLocation()
-    {
+    public function getManufactureLocation() {
         return $this->manufactureLocation;
     }
 
     /**
      * Set manufactureDate.
      *
-     * @param \AppBundle\Entity\CircaDate|null $manufactureDate
+     * @param null|\AppBundle\Entity\CircaDate $manufactureDate
      *
      * @return Artefact
      */
-    public function setManufactureDate(\AppBundle\Entity\CircaDate $manufactureDate = null)
-    {
+    public function setManufactureDate(CircaDate $manufactureDate = null) {
         $this->manufactureDate = $manufactureDate;
 
         return $this;
@@ -278,22 +262,20 @@ abstract class Artefact extends AbstractEntity {
     /**
      * Get manufactureDate.
      *
-     * @return \AppBundle\Entity\CircaDate|null
+     * @return null|\AppBundle\Entity\CircaDate
      */
-    public function getManufactureDate()
-    {
+    public function getManufactureDate() {
         return $this->manufactureDate;
     }
 
     /**
      * Set institution.
      *
-     * @param \AppBundle\Entity\Institution|null $institution
+     * @param null|\AppBundle\Entity\Institution $institution
      *
      * @return Artefact
      */
-    public function setInstitution(\AppBundle\Entity\Institution $institution = null)
-    {
+    public function setInstitution(Institution $institution = null) {
         $this->institution = $institution;
 
         return $this;
@@ -302,10 +284,9 @@ abstract class Artefact extends AbstractEntity {
     /**
      * Get institution.
      *
-     * @return \AppBundle\Entity\Institution|null
+     * @return null|\AppBundle\Entity\Institution
      */
-    public function getInstitution()
-    {
+    public function getInstitution() {
         return $this->institution;
     }
 
@@ -316,8 +297,7 @@ abstract class Artefact extends AbstractEntity {
      *
      * @return Artefact
      */
-    public function addReference(\AppBundle\Entity\Reference $reference)
-    {
+    public function addReference(Reference $reference) {
         $this->references[] = $reference;
 
         return $this;
@@ -328,10 +308,9 @@ abstract class Artefact extends AbstractEntity {
      *
      * @param \AppBundle\Entity\Reference $reference
      *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     * @return bool TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeReference(\AppBundle\Entity\Reference $reference)
-    {
+    public function removeReference(Reference $reference) {
         return $this->references->removeElement($reference);
     }
 
@@ -340,8 +319,7 @@ abstract class Artefact extends AbstractEntity {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getReferences()
-    {
+    public function getReferences() {
         return $this->references;
     }
 }

@@ -5,13 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Ceramic
+ * Ceramic.
  *
  * @ORM\Table(name="artefact_ceramic")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CeramicRepository")
  */
 class Ceramic extends Artefact {
-
     /**
      * @var Shape
      * @ORM\ManyToOne(targetEntity="Shape", inversedBy="ceramics")
@@ -31,7 +30,7 @@ class Ceramic extends Artefact {
     private $paste;
 
     /**
-     * see https://en.wikipedia.org/wiki/Munsell_color_system
+     * see https://en.wikipedia.org/wiki/Munsell_color_system.
      *
      * @var string
      * @ORM\Column(type="string", nullable=true)
@@ -54,12 +53,11 @@ class Ceramic extends Artefact {
     /**
      * Set paste.
      *
-     * @param string|null $paste
+     * @param null|string $paste
      *
      * @return Ceramic
      */
-    public function setPaste($paste = null)
-    {
+    public function setPaste($paste = null) {
         $this->paste = $paste;
 
         return $this;
@@ -68,22 +66,20 @@ class Ceramic extends Artefact {
     /**
      * Get paste.
      *
-     * @return string|null
+     * @return null|string
      */
-    public function getPaste()
-    {
+    public function getPaste() {
         return $this->paste;
     }
 
     /**
      * Set munsell.
      *
-     * @param string|null $munsell
+     * @param null|string $munsell
      *
      * @return Ceramic
      */
-    public function setMunsell($munsell = null)
-    {
+    public function setMunsell($munsell = null) {
         $this->munsell = $munsell;
 
         return $this;
@@ -92,22 +88,20 @@ class Ceramic extends Artefact {
     /**
      * Get munsell.
      *
-     * @return string|null
+     * @return null|string
      */
-    public function getMunsell()
-    {
+    public function getMunsell() {
         return $this->munsell;
     }
 
     /**
      * Set shape.
      *
-     * @param \AppBundle\Entity\Shape|null $shape
+     * @param null|\AppBundle\Entity\Shape $shape
      *
      * @return Ceramic
      */
-    public function setShape(\AppBundle\Entity\Shape $shape = null)
-    {
+    public function setShape(Shape $shape = null) {
         $this->shape = $shape;
 
         return $this;
@@ -116,22 +110,20 @@ class Ceramic extends Artefact {
     /**
      * Get shape.
      *
-     * @return \AppBundle\Entity\Shape|null
+     * @return null|\AppBundle\Entity\Shape
      */
-    public function getShape()
-    {
+    public function getShape() {
         return $this->shape;
     }
 
     /**
      * Set glaze.
      *
-     * @param \AppBundle\Entity\Glaze|null $glaze
+     * @param null|\AppBundle\Entity\Glaze $glaze
      *
      * @return Ceramic
      */
-    public function setGlaze(\AppBundle\Entity\Glaze $glaze = null)
-    {
+    public function setGlaze(Glaze $glaze = null) {
         $this->glaze = $glaze;
 
         return $this;
@@ -140,10 +132,9 @@ class Ceramic extends Artefact {
     /**
      * Get glaze.
      *
-     * @return \AppBundle\Entity\Glaze|null
+     * @return null|\AppBundle\Entity\Glaze
      */
-    public function getGlaze()
-    {
+    public function getGlaze() {
         return $this->glaze;
     }
 }

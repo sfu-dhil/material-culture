@@ -4,23 +4,20 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Nines\UtilBundle\Entity\AbstractEntity;
 use Nines\UtilBundle\Entity\AbstractTerm;
 
 /**
- * Form
+ * Form.
  *
  * @ORM\Table(name="form")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ShapeRepository")
  */
 class Shape extends AbstractTerm {
-
     /**
-     * @var Collection|Ceramic[]
+     * @var Ceramic[]|Collection
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Ceramic", mappedBy="shape")
      */
     private $ceramics;
-
 
     /**
      * Add ceramic.
@@ -29,8 +26,7 @@ class Shape extends AbstractTerm {
      *
      * @return Shape
      */
-    public function addCeramic(\AppBundle\Entity\Ceramic $ceramic)
-    {
+    public function addCeramic(Ceramic $ceramic) {
         $this->ceramics[] = $ceramic;
 
         return $this;
@@ -41,10 +37,9 @@ class Shape extends AbstractTerm {
      *
      * @param \AppBundle\Entity\Ceramic $ceramic
      *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     * @return bool TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeCeramic(\AppBundle\Entity\Ceramic $ceramic)
-    {
+    public function removeCeramic(Ceramic $ceramic) {
         return $this->ceramics->removeElement($ceramic);
     }
 
@@ -53,8 +48,7 @@ class Shape extends AbstractTerm {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getCeramics()
-    {
+    public function getCeramics() {
         return $this->ceramics;
     }
 }

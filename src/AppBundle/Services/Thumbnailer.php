@@ -8,7 +8,6 @@
 
 namespace AppBundle\Services;
 
-use AppBundle\Entity\Clipping;
 use AppBundle\Entity\Image;
 use Exception;
 use Imagick;
@@ -17,13 +16,13 @@ use ImagickPixel;
 use Psr\Log\LoggerInterface;
 
 /**
- * Description of Thumbnailer
+ * Description of Thumbnailer.
  *
  * @author mjoyce
  */
 class Thumbnailer {
     private $thumbWidth;
-    
+
     private $thumbHeight;
 
     /**
@@ -38,14 +37,15 @@ class Thumbnailer {
     public function setThumbWidth($width) {
         $this->thumbWidth = $width;
     }
-    
+
     public function setThumbHeight($height) {
         $this->thumbHeight = $height;
     }
-    
+
     public function thumbnail(Image $clipping) {
         $file = $clipping->getImageFile();
         $thumbname = $file->getBasename('.' . $file->getExtension()) . '_tn.png';
+
         try {
             $magick = new Imagick($file->getPathname());
             $magick->setBackgroundColor(new ImagickPixel('white'));
@@ -54,17 +54,18 @@ class Thumbnailer {
             $path = $file->getPath() . '/' . $thumbname;
 
             $handle = fopen($path, 'wb');
-            if( ! $handle) {
+            if ( ! $handle) {
                 $error = error_get_last();
+
                 throw new Exception("Cannot open {$path} for write. " . $error['message']);
             }
             fwrite($handle, $magick->getimageblob());
 
             return $thumbname;
         } catch (ImagickException $e) {
-            $this->logger->critical("Thumbnailer Imagick exception: " . $e);
+            $this->logger->critical('Thumbnailer Imagick exception: ' . $e);
         } catch (\Exception $e) {
-            $this->logger->critical("Thumbnailer unknown exception: " . $e);
+            $this->logger->critical('Thumbnailer unknown exception: ' . $e);
         }
     }
 }

@@ -4,29 +4,26 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Nines\UtilBundle\Entity\AbstractEntity;
 use Nines\UtilBundle\Entity\AbstractTerm;
 
 /**
- * Manufacturer
+ * Manufacturer.
  *
  * @ORM\Table(name="manufacturer")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ManufacturerRepository")
  */
 class Manufacturer extends AbstractTerm {
-
     /**
-     * @var Collection|Bottle[]
+     * @var Bottle[]|Collection
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Bottle", mappedBy="manufacturer")
      */
     private $bottles;
 
     /**
-     * @var Collection|Can[]
+     * @var Can[]|Collection
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Can", mappedBy="manufacturer")
      */
     private $cans;
-
 
     /**
      * Add bottle.
@@ -35,8 +32,7 @@ class Manufacturer extends AbstractTerm {
      *
      * @return Manufacturer
      */
-    public function addBottle(\AppBundle\Entity\Bottle $bottle)
-    {
+    public function addBottle(Bottle $bottle) {
         $this->bottles[] = $bottle;
 
         return $this;
@@ -47,10 +43,9 @@ class Manufacturer extends AbstractTerm {
      *
      * @param \AppBundle\Entity\Bottle $bottle
      *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     * @return bool TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeBottle(\AppBundle\Entity\Bottle $bottle)
-    {
+    public function removeBottle(Bottle $bottle) {
         return $this->bottles->removeElement($bottle);
     }
 
@@ -59,8 +54,7 @@ class Manufacturer extends AbstractTerm {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getBottles()
-    {
+    public function getBottles() {
         return $this->bottles;
     }
 
@@ -71,8 +65,7 @@ class Manufacturer extends AbstractTerm {
      *
      * @return Manufacturer
      */
-    public function addCan(\AppBundle\Entity\Can $can)
-    {
+    public function addCan(Can $can) {
         $this->cans[] = $can;
 
         return $this;
@@ -83,10 +76,9 @@ class Manufacturer extends AbstractTerm {
      *
      * @param \AppBundle\Entity\Can $can
      *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     * @return bool TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeCan(\AppBundle\Entity\Can $can)
-    {
+    public function removeCan(Can $can) {
         return $this->cans->removeElement($can);
     }
 
@@ -95,8 +87,7 @@ class Manufacturer extends AbstractTerm {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getCans()
-    {
+    public function getCans() {
         return $this->cans;
     }
 }

@@ -3,23 +3,20 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Nines\UtilBundle\Entity\AbstractEntity;
 use Nines\UtilBundle\Entity\AbstractTerm;
 
 /**
- * Glaze
+ * Glaze.
  *
  * @ORM\Table(name="glaze")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\GlazeRepository")
  */
 class Glaze extends AbstractTerm {
-
     /**
-     * @var Collection|Ceramic[]
+     * @var Ceramic[]|Collection
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Ceramic", mappedBy="glaze")
      */
     private $ceramics;
-
 
     /**
      * Add ceramic.
@@ -28,8 +25,7 @@ class Glaze extends AbstractTerm {
      *
      * @return Glaze
      */
-    public function addCeramic(\AppBundle\Entity\Ceramic $ceramic)
-    {
+    public function addCeramic(Ceramic $ceramic) {
         $this->ceramics[] = $ceramic;
 
         return $this;
@@ -40,10 +36,9 @@ class Glaze extends AbstractTerm {
      *
      * @param \AppBundle\Entity\Ceramic $ceramic
      *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     * @return bool TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeCeramic(\AppBundle\Entity\Ceramic $ceramic)
-    {
+    public function removeCeramic(Ceramic $ceramic) {
         return $this->ceramics->removeElement($ceramic);
     }
 
@@ -52,8 +47,7 @@ class Glaze extends AbstractTerm {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getCeramics()
-    {
+    public function getCeramics() {
         return $this->ceramics;
     }
 }

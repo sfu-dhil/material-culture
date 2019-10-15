@@ -2,11 +2,8 @@
 
 namespace AppBundle\Menu;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
-use Nines\BlogBundle\Entity\Post;
-use Nines\BlogBundle\Entity\PostCategory;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -15,8 +12,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 /**
  * Menu builder for the navigation and search menus.
  */
-class Builder implements ContainerAwareInterface
-{
+class Builder implements ContainerAwareInterface {
     use ContainerAwareTrait;
 
     // U+25BE, black down-pointing small triangle.
@@ -44,8 +40,7 @@ class Builder implements ContainerAwareInterface
      * @param AuthorizationCheckerInterface $authChecker
      * @param TokenStorageInterface $tokenStorage
      */
-    public function __construct(FactoryInterface $factory, AuthorizationCheckerInterface $authChecker, TokenStorageInterface $tokenStorage)
-    {
+    public function __construct(FactoryInterface $factory, AuthorizationCheckerInterface $authChecker, TokenStorageInterface $tokenStorage) {
         $this->factory = $factory;
         $this->authChecker = $authChecker;
         $this->tokenStorage = $tokenStorage;
@@ -58,11 +53,11 @@ class Builder implements ContainerAwareInterface
      *
      * @return bool
      */
-    private function hasRole($role)
-    {
-        if (!$this->tokenStorage->getToken()) {
+    private function hasRole($role) {
+        if ( ! $this->tokenStorage->getToken()) {
             return false;
         }
+
         return $this->authChecker->isGranted($role);
     }
 
@@ -70,10 +65,10 @@ class Builder implements ContainerAwareInterface
      * Build the navigation menu and return it.
      *
      * @param array $options
+     *
      * @return ItemInterface
      */
-    public function mainMenu(array $options)
-    {
+    public function mainMenu(array $options) {
         $menu = $this->factory->createItem('root');
         $menu->setChildrenAttributes(array(
             'class' => 'nav navbar-nav',
@@ -107,5 +102,4 @@ class Builder implements ContainerAwareInterface
 
         return $menu;
     }
-
 }

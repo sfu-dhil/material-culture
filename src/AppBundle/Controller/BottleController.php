@@ -2,16 +2,16 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Knp\Bundle\PaginatorBundle\Definition\PaginatorAwareInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use AppBundle\Entity\Bottle;
 use AppBundle\Form\BottleType;
+use Knp\Bundle\PaginatorBundle\Definition\PaginatorAwareInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Bottle controller.
@@ -19,8 +19,7 @@ use AppBundle\Form\BottleType;
  * @IsGranted("ROLE_USER")
  * @Route("/bottle")
  */
-class BottleController extends Controller implements PaginatorAwareInterface
-{
+class BottleController extends Controller implements PaginatorAwareInterface {
     use PaginatorTrait;
 
     /**
@@ -33,8 +32,7 @@ class BottleController extends Controller implements PaginatorAwareInterface
      * @Route("/", name="bottle_index", methods={"GET"})
      * @Template()
      */
-    public function indexAction(Request $request)
-    {
+    public function indexAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
         $qb = $em->createQueryBuilder();
         $qb->select('e')->from(Bottle::class, 'e')->orderBy('e.id', 'ASC');
@@ -47,40 +45,35 @@ class BottleController extends Controller implements PaginatorAwareInterface
         );
     }
 
-/**
+    /**
      * Typeahead API endpoint for Bottle entities.
      *
      * To make this work, add something like this to BottleRepository:
-        //    public function typeaheadQuery($q) {
-        //        $qb = $this->createQueryBuilder('e');
-        //        $qb->andWhere("e.name LIKE :q");
-        //        $qb->orderBy('e.name');
-        //        $qb->setParameter('q', "{$q}%");
-        //        return $qb->getQuery()->execute();
-        //    }
      *
      * @param Request $request
      *
      * @Route("/typeahead", name="bottle_typeahead", methods={"GET"})
+     *
      * @return JsonResponse
      */
-    public function typeahead(Request $request)
-    {
+    public function typeahead(Request $request) {
         $q = $request->query->get('q');
-        if( ! $q) {
-            return new JsonResponse([]);
+        if ( ! $q) {
+            return new JsonResponse(array());
         }
         $em = $this->getDoctrine()->getManager();
-	    $repo = $em->getRepository(Bottle::class);
-        $data = [];
-        foreach($repo->typeaheadQuery($q) as $result) {
-            $data[] = [
+        $repo = $em->getRepository(Bottle::class);
+        $data = array();
+        foreach ($repo->typeaheadQuery($q) as $result) {
+            $data[] = array(
                 'id' => $result->getId(),
-                'text' => (string)$result,
-            ];
+                'text' => (string) $result,
+            );
         }
+
         return new JsonResponse($data);
     }
+
     /**
      * Search for Bottle entities.
      *
@@ -103,20 +96,20 @@ class BottleController extends Controller implements PaginatorAwareInterface
      *
      * @Route("/search", name="bottle_search", methods={"GET"})
      * @Template()
-    * @return array
-    */
-    public function searchAction(Request $request)
-    {
+     *
+     * @return array
+     */
+    public function searchAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
-	$repo = $em->getRepository('AppBundle:Bottle');
-	$q = $request->query->get('q');
-	if($q) {
-	    $query = $repo->searchQuery($q);
+        $repo = $em->getRepository('AppBundle:Bottle');
+        $q = $request->query->get('q');
+        if ($q) {
+            $query = $repo->searchQuery($q);
             $paginator = $this->get('knp_paginator');
             $bottles = $paginator->paginate($query, $request->query->getInt('page', 1), 25);
-	} else {
+        } else {
             $bottles = array();
-	}
+        }
 
         return array(
             'bottles' => $bottles,
@@ -135,8 +128,7 @@ class BottleController extends Controller implements PaginatorAwareInterface
      * @Route("/new", name="bottle_new", methods={"GET","POST"})
      * @Template()
      */
-    public function newAction(Request $request)
-    {
+    public function newAction(Request $request) {
         $bottle = new Bottle();
         $form = $this->createForm(BottleType::class, $bottle);
         $form->handleRequest($request);
@@ -147,6 +139,7 @@ class BottleController extends Controller implements PaginatorAwareInterface
             $em->flush();
 
             $this->addFlash('success', 'The new bottle was created.');
+
             return $this->redirectToRoute('bottle_show', array('id' => $bottle->getId()));
         }
 
@@ -167,8 +160,7 @@ class BottleController extends Controller implements PaginatorAwareInterface
      * @Route("/new_popup", name="bottle_new_popup", methods={"GET","POST"})
      * @Template()
      */
-    public function newPopupAction(Request $request)
-    {
+    public function newPopupAction(Request $request) {
         return $this->newAction($request);
     }
 
@@ -182,9 +174,7 @@ class BottleController extends Controller implements PaginatorAwareInterface
      * @Route("/{id}", name="bottle_show", methods={"GET"})
      * @Template()
      */
-    public function showAction(Bottle $bottle)
-    {
-
+    public function showAction(Bottle $bottle) {
         return array(
             'bottle' => $bottle,
         );
@@ -192,7 +182,6 @@ class BottleController extends Controller implements PaginatorAwareInterface
 
     /**
      * Displays a form to edit an existing Bottle entity.
-     *
      *
      * @param Request $request
      * @param Bottle $bottle
@@ -203,8 +192,7 @@ class BottleController extends Controller implements PaginatorAwareInterface
      * @Route("/{id}/edit", name="bottle_edit", methods={"GET","POST"})
      * @Template()
      */
-    public function editAction(Request $request, Bottle $bottle)
-    {
+    public function editAction(Request $request, Bottle $bottle) {
         $editForm = $this->createForm(BottleType::class, $bottle);
         $editForm->handleRequest($request);
 
@@ -212,6 +200,7 @@ class BottleController extends Controller implements PaginatorAwareInterface
             $em = $this->getDoctrine()->getManager();
             $em->flush();
             $this->addFlash('success', 'The bottle has been updated.');
+
             return $this->redirectToRoute('bottle_show', array('id' => $bottle->getId()));
         }
 
@@ -224,7 +213,6 @@ class BottleController extends Controller implements PaginatorAwareInterface
     /**
      * Deletes a Bottle entity.
      *
-     *
      * @param Request $request
      * @param Bottle $bottle
      *
@@ -233,8 +221,7 @@ class BottleController extends Controller implements PaginatorAwareInterface
      * @IsGranted("ROLE_CONTENT_ADMIN")
      * @Route("/{id}/delete", name="bottle_delete", methods={"GET"})
      */
-    public function deleteAction(Request $request, Bottle $bottle)
-    {
+    public function deleteAction(Request $request, Bottle $bottle) {
         $em = $this->getDoctrine()->getManager();
         $em->remove($bottle);
         $em->flush();

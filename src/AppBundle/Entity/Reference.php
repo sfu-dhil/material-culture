@@ -6,13 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Nines\UtilBundle\Entity\AbstractEntity;
 
 /**
- * Reference
+ * Reference.
  *
  * @ORM\Table(name="reference")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ReferenceRepository")
  */
 class Reference extends AbstractEntity {
-
     /**
      * @var Publication
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Publication", inversedBy="references")
@@ -43,12 +42,11 @@ class Reference extends AbstractEntity {
     /**
      * Set description.
      *
-     * @param string|null $description
+     * @param null|string $description
      *
      * @return Reference
      */
-    public function setDescription($description = null)
-    {
+    public function setDescription($description = null) {
         $this->description = $description;
 
         return $this;
@@ -57,22 +55,20 @@ class Reference extends AbstractEntity {
     /**
      * Get description.
      *
-     * @return string|null
+     * @return null|string
      */
-    public function getDescription()
-    {
+    public function getDescription() {
         return $this->description;
     }
 
     /**
      * Set publication.
      *
-     * @param \AppBundle\Entity\Publication|null $publication
+     * @param null|\AppBundle\Entity\Publication $publication
      *
      * @return Reference
      */
-    public function setPublication(\AppBundle\Entity\Publication $publication = null)
-    {
+    public function setPublication(Publication $publication = null) {
         $this->publication = $publication;
 
         return $this;
@@ -81,22 +77,20 @@ class Reference extends AbstractEntity {
     /**
      * Get publication.
      *
-     * @return \AppBundle\Entity\Publication|null
+     * @return null|\AppBundle\Entity\Publication
      */
-    public function getPublication()
-    {
+    public function getPublication() {
         return $this->publication;
     }
 
     /**
      * Set artefact.
      *
-     * @param \AppBundle\Entity\Artefact|null $artefact
+     * @param null|\AppBundle\Entity\Artefact $artefact
      *
      * @return Reference
      */
-    public function setArtefact(\AppBundle\Entity\Artefact $artefact = null)
-    {
+    public function setArtefact(Artefact $artefact = null) {
         $this->artefact = $artefact;
 
         return $this;
@@ -105,10 +99,9 @@ class Reference extends AbstractEntity {
     /**
      * Get artefact.
      *
-     * @return \AppBundle\Entity\Artefact|null
+     * @return null|\AppBundle\Entity\Artefact
      */
-    public function getArtefact()
-    {
+    public function getArtefact() {
         return $this->artefact;
     }
 }

@@ -7,13 +7,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Nines\UtilBundle\Entity\AbstractEntity;
 
 /**
- * Publication
+ * Publication.
  *
  * @ORM\Table(name="publication")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PublicationRepository")
  */
 class Publication extends AbstractEntity {
-
     /**
      * @var string
      * @ORM\Column(type="string", nullable=false)
@@ -54,8 +53,7 @@ class Publication extends AbstractEntity {
      *
      * @return Publication
      */
-    public function setTitle($title)
-    {
+    public function setTitle($title) {
         $this->title = $title;
 
         return $this;
@@ -66,8 +64,7 @@ class Publication extends AbstractEntity {
      *
      * @return string
      */
-    public function getTitle()
-    {
+    public function getTitle() {
         return $this->title;
     }
 
@@ -78,8 +75,7 @@ class Publication extends AbstractEntity {
      *
      * @return Publication
      */
-    public function setCitation($citation)
-    {
+    public function setCitation($citation) {
         $this->citation = $citation;
 
         return $this;
@@ -90,20 +86,18 @@ class Publication extends AbstractEntity {
      *
      * @return string
      */
-    public function getCitation()
-    {
+    public function getCitation() {
         return $this->citation;
     }
 
     /**
      * Set doi.
      *
-     * @param string|null $doi
+     * @param null|string $doi
      *
      * @return Publication
      */
-    public function setDoi($doi = null)
-    {
+    public function setDoi($doi = null) {
         $this->doi = $doi;
 
         return $this;
@@ -112,10 +106,9 @@ class Publication extends AbstractEntity {
     /**
      * Get doi.
      *
-     * @return string|null
+     * @return null|string
      */
-    public function getDoi()
-    {
+    public function getDoi() {
         return $this->doi;
     }
 
@@ -126,8 +119,7 @@ class Publication extends AbstractEntity {
      *
      * @return Publication
      */
-    public function addReference(\AppBundle\Entity\Reference $reference)
-    {
+    public function addReference(Reference $reference) {
         $this->references[] = $reference;
 
         return $this;
@@ -138,10 +130,9 @@ class Publication extends AbstractEntity {
      *
      * @param \AppBundle\Entity\Reference $reference
      *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     * @return bool TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeReference(\AppBundle\Entity\Reference $reference)
-    {
+    public function removeReference(Reference $reference) {
         return $this->references->removeElement($reference);
     }
 
@@ -150,8 +141,7 @@ class Publication extends AbstractEntity {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getReferences()
-    {
+    public function getReferences() {
         return $this->references;
     }
 }

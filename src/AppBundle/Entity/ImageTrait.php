@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 
 trait ImageTrait {
-
     /**
      * @var string
      * @ORM\Column(type="string", length=64, nullable=false)
@@ -175,5 +174,4 @@ trait ImageTrait {
 
         return $this;
     }
-
 }

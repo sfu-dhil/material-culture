@@ -6,13 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Nines\UtilBundle\Entity\AbstractEntity;
 
 /**
- * Image
+ * Image.
  *
  * @ORM\Table(name="image")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ImageRepository")
  */
 class Image extends AbstractEntity {
-
     use ImageTrait;
 
     /**
@@ -37,12 +36,11 @@ class Image extends AbstractEntity {
     /**
      * Set description.
      *
-     * @param string|null $description
+     * @param null|string $description
      *
      * @return Image
      */
-    public function setDescription($description = null)
-    {
+    public function setDescription($description = null) {
         $this->description = $description;
 
         return $this;
@@ -51,10 +49,9 @@ class Image extends AbstractEntity {
     /**
      * Get description.
      *
-     * @return string|null
+     * @return null|string
      */
-    public function getDescription()
-    {
+    public function getDescription() {
         return $this->description;
     }
 }

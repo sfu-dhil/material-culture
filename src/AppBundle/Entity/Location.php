@@ -4,17 +4,15 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Nines\UtilBundle\Entity\AbstractEntity;
 use Nines\UtilBundle\Entity\AbstractTerm;
 
 /**
- * Location
+ * Location.
  *
  * @ORM\Table(name="location")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\LocationRepository")
  */
 class Location extends AbstractTerm {
-
     /**
      * @var string
      * @ORM\Column(type="string", length=16, nullable=true)
@@ -22,25 +20,25 @@ class Location extends AbstractTerm {
     private $geonameId;
 
     /**
-     * @var double
+     * @var float
      * @ORM\Column(type="decimal", precision=10, scale=8, nullable=true)
      */
     private $latitude;
 
     /**
-     * @var double
+     * @var float
      * @ORM\Column(type="decimal", precision=10, scale=8, nullable=true)
      */
     private $longitude;
 
     /**
-     * @var Collection|Artefact[]
+     * @var Artefact[]|Collection
      * @ORM\OneToMany(targetEntity="Artefact", mappedBy="recoveryLocation")
      */
     private $artefactsRecovered;
 
     /**
-     * @var Collection|Artefact[]
+     * @var Artefact[]|Collection
      * @ORM\OneToMany(targetEntity="Artefact", mappedBy="manufactureLocation")
      */
     private $artefactsManufactured;
@@ -48,12 +46,11 @@ class Location extends AbstractTerm {
     /**
      * Set geonameId.
      *
-     * @param string|null $geonameId
+     * @param null|string $geonameId
      *
      * @return Location
      */
-    public function setGeonameId($geonameId = null)
-    {
+    public function setGeonameId($geonameId = null) {
         $this->geonameId = $geonameId;
 
         return $this;
@@ -62,22 +59,20 @@ class Location extends AbstractTerm {
     /**
      * Get geonameId.
      *
-     * @return string|null
+     * @return null|string
      */
-    public function getGeonameId()
-    {
+    public function getGeonameId() {
         return $this->geonameId;
     }
 
     /**
      * Set latitude.
      *
-     * @param string|null $latitude
+     * @param null|string $latitude
      *
      * @return Location
      */
-    public function setLatitude($latitude = null)
-    {
+    public function setLatitude($latitude = null) {
         $this->latitude = $latitude;
 
         return $this;
@@ -86,22 +81,20 @@ class Location extends AbstractTerm {
     /**
      * Get latitude.
      *
-     * @return string|null
+     * @return null|string
      */
-    public function getLatitude()
-    {
+    public function getLatitude() {
         return $this->latitude;
     }
 
     /**
      * Set longitude.
      *
-     * @param string|null $longitude
+     * @param null|string $longitude
      *
      * @return Location
      */
-    public function setLongitude($longitude = null)
-    {
+    public function setLongitude($longitude = null) {
         $this->longitude = $longitude;
 
         return $this;
@@ -110,10 +103,9 @@ class Location extends AbstractTerm {
     /**
      * Get longitude.
      *
-     * @return string|null
+     * @return null|string
      */
-    public function getLongitude()
-    {
+    public function getLongitude() {
         return $this->longitude;
     }
 
@@ -124,8 +116,7 @@ class Location extends AbstractTerm {
      *
      * @return Location
      */
-    public function addArtefactsRecovered(\AppBundle\Entity\Artefact $artefactsRecovered)
-    {
+    public function addArtefactsRecovered(Artefact $artefactsRecovered) {
         $this->artefactsRecovered[] = $artefactsRecovered;
 
         return $this;
@@ -136,10 +127,9 @@ class Location extends AbstractTerm {
      *
      * @param \AppBundle\Entity\Artefact $artefactsRecovered
      *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     * @return bool TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeArtefactsRecovered(\AppBundle\Entity\Artefact $artefactsRecovered)
-    {
+    public function removeArtefactsRecovered(Artefact $artefactsRecovered) {
         return $this->artefactsRecovered->removeElement($artefactsRecovered);
     }
 
@@ -148,8 +138,7 @@ class Location extends AbstractTerm {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getArtefactsRecovered()
-    {
+    public function getArtefactsRecovered() {
         return $this->artefactsRecovered;
     }
 
@@ -160,8 +149,7 @@ class Location extends AbstractTerm {
      *
      * @return Location
      */
-    public function addArtefactsManufactured(\AppBundle\Entity\Artefact $artefactsManufactured)
-    {
+    public function addArtefactsManufactured(Artefact $artefactsManufactured) {
         $this->artefactsManufactured[] = $artefactsManufactured;
 
         return $this;
@@ -172,10 +160,9 @@ class Location extends AbstractTerm {
      *
      * @param \AppBundle\Entity\Artefact $artefactsManufactured
      *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     * @return bool TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeArtefactsManufactured(\AppBundle\Entity\Artefact $artefactsManufactured)
-    {
+    public function removeArtefactsManufactured(Artefact $artefactsManufactured) {
         return $this->artefactsManufactured->removeElement($artefactsManufactured);
     }
 
@@ -184,8 +171,7 @@ class Location extends AbstractTerm {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getArtefactsManufactured()
-    {
+    public function getArtefactsManufactured() {
         return $this->artefactsManufactured;
     }
 }

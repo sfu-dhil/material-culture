@@ -2,16 +2,16 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Knp\Bundle\PaginatorBundle\Definition\PaginatorAwareInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use AppBundle\Entity\Institution;
 use AppBundle\Form\InstitutionType;
+use Knp\Bundle\PaginatorBundle\Definition\PaginatorAwareInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Institution controller.
@@ -19,8 +19,7 @@ use AppBundle\Form\InstitutionType;
  * @IsGranted("ROLE_USER")
  * @Route("/institution")
  */
-class InstitutionController extends Controller implements PaginatorAwareInterface
-{
+class InstitutionController extends Controller implements PaginatorAwareInterface {
     use PaginatorTrait;
 
     /**
@@ -33,8 +32,7 @@ class InstitutionController extends Controller implements PaginatorAwareInterfac
      * @Route("/", name="institution_index", methods={"GET"})
      * @Template()
      */
-    public function indexAction(Request $request)
-    {
+    public function indexAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
         $qb = $em->createQueryBuilder();
         $qb->select('e')->from(Institution::class, 'e')->orderBy('e.id', 'ASC');
@@ -47,40 +45,35 @@ class InstitutionController extends Controller implements PaginatorAwareInterfac
         );
     }
 
-/**
+    /**
      * Typeahead API endpoint for Institution entities.
      *
      * To make this work, add something like this to InstitutionRepository:
-        //    public function typeaheadQuery($q) {
-        //        $qb = $this->createQueryBuilder('e');
-        //        $qb->andWhere("e.name LIKE :q");
-        //        $qb->orderBy('e.name');
-        //        $qb->setParameter('q', "{$q}%");
-        //        return $qb->getQuery()->execute();
-        //    }
      *
      * @param Request $request
      *
      * @Route("/typeahead", name="institution_typeahead", methods={"GET"})
+     *
      * @return JsonResponse
      */
-    public function typeahead(Request $request)
-    {
+    public function typeahead(Request $request) {
         $q = $request->query->get('q');
-        if( ! $q) {
-            return new JsonResponse([]);
+        if ( ! $q) {
+            return new JsonResponse(array());
         }
         $em = $this->getDoctrine()->getManager();
-	    $repo = $em->getRepository(Institution::class);
-        $data = [];
-        foreach($repo->typeaheadQuery($q) as $result) {
-            $data[] = [
+        $repo = $em->getRepository(Institution::class);
+        $data = array();
+        foreach ($repo->typeaheadQuery($q) as $result) {
+            $data[] = array(
                 'id' => $result->getId(),
-                'text' => (string)$result,
-            ];
+                'text' => (string) $result,
+            );
         }
+
         return new JsonResponse($data);
     }
+
     /**
      * Search for Institution entities.
      *
@@ -103,20 +96,20 @@ class InstitutionController extends Controller implements PaginatorAwareInterfac
      *
      * @Route("/search", name="institution_search", methods={"GET"})
      * @Template()
-    * @return array
-    */
-    public function searchAction(Request $request)
-    {
+     *
+     * @return array
+     */
+    public function searchAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
-	$repo = $em->getRepository('AppBundle:Institution');
-	$q = $request->query->get('q');
-	if($q) {
-	    $query = $repo->searchQuery($q);
+        $repo = $em->getRepository('AppBundle:Institution');
+        $q = $request->query->get('q');
+        if ($q) {
+            $query = $repo->searchQuery($q);
             $paginator = $this->get('knp_paginator');
             $institutions = $paginator->paginate($query, $request->query->getInt('page', 1), 25);
-	} else {
+        } else {
             $institutions = array();
-	}
+        }
 
         return array(
             'institutions' => $institutions,
@@ -135,8 +128,7 @@ class InstitutionController extends Controller implements PaginatorAwareInterfac
      * @Route("/new", name="institution_new", methods={"GET","POST"})
      * @Template()
      */
-    public function newAction(Request $request)
-    {
+    public function newAction(Request $request) {
         $institution = new Institution();
         $form = $this->createForm(InstitutionType::class, $institution);
         $form->handleRequest($request);
@@ -147,6 +139,7 @@ class InstitutionController extends Controller implements PaginatorAwareInterfac
             $em->flush();
 
             $this->addFlash('success', 'The new institution was created.');
+
             return $this->redirectToRoute('institution_show', array('id' => $institution->getId()));
         }
 
@@ -167,8 +160,7 @@ class InstitutionController extends Controller implements PaginatorAwareInterfac
      * @Route("/new_popup", name="institution_new_popup", methods={"GET","POST"})
      * @Template()
      */
-    public function newPopupAction(Request $request)
-    {
+    public function newPopupAction(Request $request) {
         return $this->newAction($request);
     }
 
@@ -182,9 +174,7 @@ class InstitutionController extends Controller implements PaginatorAwareInterfac
      * @Route("/{id}", name="institution_show", methods={"GET"})
      * @Template()
      */
-    public function showAction(Institution $institution)
-    {
-
+    public function showAction(Institution $institution) {
         return array(
             'institution' => $institution,
         );
@@ -192,7 +182,6 @@ class InstitutionController extends Controller implements PaginatorAwareInterfac
 
     /**
      * Displays a form to edit an existing Institution entity.
-     *
      *
      * @param Request $request
      * @param Institution $institution
@@ -203,8 +192,7 @@ class InstitutionController extends Controller implements PaginatorAwareInterfac
      * @Route("/{id}/edit", name="institution_edit", methods={"GET","POST"})
      * @Template()
      */
-    public function editAction(Request $request, Institution $institution)
-    {
+    public function editAction(Request $request, Institution $institution) {
         $editForm = $this->createForm(InstitutionType::class, $institution);
         $editForm->handleRequest($request);
 
@@ -212,6 +200,7 @@ class InstitutionController extends Controller implements PaginatorAwareInterfac
             $em = $this->getDoctrine()->getManager();
             $em->flush();
             $this->addFlash('success', 'The institution has been updated.');
+
             return $this->redirectToRoute('institution_show', array('id' => $institution->getId()));
         }
 
@@ -224,7 +213,6 @@ class InstitutionController extends Controller implements PaginatorAwareInterfac
     /**
      * Deletes a Institution entity.
      *
-     *
      * @param Request $request
      * @param Institution $institution
      *
@@ -233,8 +221,7 @@ class InstitutionController extends Controller implements PaginatorAwareInterfac
      * @IsGranted("ROLE_CONTENT_ADMIN")
      * @Route("/{id}/delete", name="institution_delete", methods={"GET"})
      */
-    public function deleteAction(Request $request, Institution $institution)
-    {
+    public function deleteAction(Request $request, Institution $institution) {
         $em = $this->getDoctrine()->getManager();
         $em->remove($institution);
         $em->flush();

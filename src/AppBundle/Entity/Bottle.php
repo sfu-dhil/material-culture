@@ -5,13 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Bottle
+ * Bottle.
  *
  * @ORM\Table(name="artefact_bottle")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\BottleRepository")
  */
 class Bottle extends Artefact {
-
     /**
      * @var string
      * @ORM\Column(type="string", nullable=true)
@@ -42,7 +41,7 @@ class Bottle extends Artefact {
      * @return string
      */
     public function __toString() {
-        return $this->company . " " . $this->brand;
+        return $this->company . ' ' . $this->brand;
     }
 
     public function getCategory() {
@@ -52,12 +51,11 @@ class Bottle extends Artefact {
     /**
      * Set company.
      *
-     * @param string|null $company
+     * @param null|string $company
      *
      * @return Bottle
      */
-    public function setCompany($company = null)
-    {
+    public function setCompany($company = null) {
         $this->company = $company;
 
         return $this;
@@ -66,22 +64,20 @@ class Bottle extends Artefact {
     /**
      * Get company.
      *
-     * @return string|null
+     * @return null|string
      */
-    public function getCompany()
-    {
+    public function getCompany() {
         return $this->company;
     }
 
     /**
      * Set brand.
      *
-     * @param string|null $brand
+     * @param null|string $brand
      *
      * @return Bottle
      */
-    public function setBrand($brand = null)
-    {
+    public function setBrand($brand = null) {
         $this->brand = $brand;
 
         return $this;
@@ -90,22 +86,20 @@ class Bottle extends Artefact {
     /**
      * Get brand.
      *
-     * @return string|null
+     * @return null|string
      */
-    public function getBrand()
-    {
+    public function getBrand() {
         return $this->brand;
     }
 
     /**
      * Set manufacturer.
      *
-     * @param \AppBundle\Entity\Manufacturer|null $manufacturer
+     * @param null|\AppBundle\Entity\Manufacturer $manufacturer
      *
      * @return Bottle
      */
-    public function setManufacturer(\AppBundle\Entity\Manufacturer $manufacturer = null)
-    {
+    public function setManufacturer(Manufacturer $manufacturer = null) {
         $this->manufacturer = $manufacturer;
 
         return $this;
@@ -114,22 +108,20 @@ class Bottle extends Artefact {
     /**
      * Get manufacturer.
      *
-     * @return \AppBundle\Entity\Manufacturer|null
+     * @return null|\AppBundle\Entity\Manufacturer
      */
-    public function getManufacturer()
-    {
+    public function getManufacturer() {
         return $this->manufacturer;
     }
 
     /**
      * Set content.
      *
-     * @param \AppBundle\Entity\Content|null $content
+     * @param null|\AppBundle\Entity\Content $content
      *
      * @return Bottle
      */
-    public function setContent(\AppBundle\Entity\Content $content = null)
-    {
+    public function setContent(Content $content = null) {
         $this->content = $content;
 
         return $this;
@@ -138,10 +130,9 @@ class Bottle extends Artefact {
     /**
      * Get content.
      *
-     * @return \AppBundle\Entity\Content|null
+     * @return null|\AppBundle\Entity\Content
      */
-    public function getContent()
-    {
+    public function getContent() {
         return $this->content;
     }
 }

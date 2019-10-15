@@ -4,34 +4,30 @@ namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * ReferenceType form.
  */
-class ReferenceType extends AbstractType
-{
+class ReferenceType extends AbstractType {
     /**
      * Add form fields to $builder.
      *
      * @param FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {        $builder->add('description', null, array(
+    public function buildForm(FormBuilderInterface $builder, array $options) {
+        $builder->add('description', null, array(
             'label' => 'Description',
             'required' => false,
             'attr' => array(
                 'help_block' => '',
             ),
         ));
-                        $builder->add('publication');
-                        $builder->add('artefact');
-        
+        $builder->add('publication');
+        $builder->add('artefact');
     }
-    
+
     /**
      * Define options for the form.
      *
@@ -40,11 +36,9 @@ class ReferenceType extends AbstractType
      *
      * @param OptionsResolver $resolver
      */
-    public function configureOptions(OptionsResolver $resolver)
-    {
+    public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Reference'
+            'data_class' => 'AppBundle\Entity\Reference',
         ));
     }
-
 }

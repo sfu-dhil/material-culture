@@ -2,16 +2,16 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Knp\Bundle\PaginatorBundle\Definition\PaginatorAwareInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use AppBundle\Entity\Can;
 use AppBundle\Form\CanType;
+use Knp\Bundle\PaginatorBundle\Definition\PaginatorAwareInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Can controller.
@@ -19,8 +19,7 @@ use AppBundle\Form\CanType;
  * @IsGranted("ROLE_USER")
  * @Route("/can")
  */
-class CanController extends Controller implements PaginatorAwareInterface
-{
+class CanController extends Controller implements PaginatorAwareInterface {
     use PaginatorTrait;
 
     /**
@@ -33,8 +32,7 @@ class CanController extends Controller implements PaginatorAwareInterface
      * @Route("/", name="can_index", methods={"GET"})
      * @Template()
      */
-    public function indexAction(Request $request)
-    {
+    public function indexAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
         $qb = $em->createQueryBuilder();
         $qb->select('e')->from(Can::class, 'e')->orderBy('e.id', 'ASC');
@@ -47,40 +45,35 @@ class CanController extends Controller implements PaginatorAwareInterface
         );
     }
 
-/**
+    /**
      * Typeahead API endpoint for Can entities.
      *
      * To make this work, add something like this to CanRepository:
-        //    public function typeaheadQuery($q) {
-        //        $qb = $this->createQueryBuilder('e');
-        //        $qb->andWhere("e.name LIKE :q");
-        //        $qb->orderBy('e.name');
-        //        $qb->setParameter('q', "{$q}%");
-        //        return $qb->getQuery()->execute();
-        //    }
      *
      * @param Request $request
      *
      * @Route("/typeahead", name="can_typeahead", methods={"GET"})
+     *
      * @return JsonResponse
      */
-    public function typeahead(Request $request)
-    {
+    public function typeahead(Request $request) {
         $q = $request->query->get('q');
-        if( ! $q) {
-            return new JsonResponse([]);
+        if ( ! $q) {
+            return new JsonResponse(array());
         }
         $em = $this->getDoctrine()->getManager();
-	    $repo = $em->getRepository(Can::class);
-        $data = [];
-        foreach($repo->typeaheadQuery($q) as $result) {
-            $data[] = [
+        $repo = $em->getRepository(Can::class);
+        $data = array();
+        foreach ($repo->typeaheadQuery($q) as $result) {
+            $data[] = array(
                 'id' => $result->getId(),
-                'text' => (string)$result,
-            ];
+                'text' => (string) $result,
+            );
         }
+
         return new JsonResponse($data);
     }
+
     /**
      * Search for Can entities.
      *
@@ -103,20 +96,20 @@ class CanController extends Controller implements PaginatorAwareInterface
      *
      * @Route("/search", name="can_search", methods={"GET"})
      * @Template()
-    * @return array
-    */
-    public function searchAction(Request $request)
-    {
+     *
+     * @return array
+     */
+    public function searchAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
-	$repo = $em->getRepository('AppBundle:Can');
-	$q = $request->query->get('q');
-	if($q) {
-	    $query = $repo->searchQuery($q);
+        $repo = $em->getRepository('AppBundle:Can');
+        $q = $request->query->get('q');
+        if ($q) {
+            $query = $repo->searchQuery($q);
             $paginator = $this->get('knp_paginator');
             $cans = $paginator->paginate($query, $request->query->getInt('page', 1), 25);
-	} else {
+        } else {
             $cans = array();
-	}
+        }
 
         return array(
             'cans' => $cans,
@@ -135,8 +128,7 @@ class CanController extends Controller implements PaginatorAwareInterface
      * @Route("/new", name="can_new", methods={"GET","POST"})
      * @Template()
      */
-    public function newAction(Request $request)
-    {
+    public function newAction(Request $request) {
         $can = new Can();
         $form = $this->createForm(CanType::class, $can);
         $form->handleRequest($request);
@@ -147,6 +139,7 @@ class CanController extends Controller implements PaginatorAwareInterface
             $em->flush();
 
             $this->addFlash('success', 'The new can was created.');
+
             return $this->redirectToRoute('can_show', array('id' => $can->getId()));
         }
 
@@ -167,8 +160,7 @@ class CanController extends Controller implements PaginatorAwareInterface
      * @Route("/new_popup", name="can_new_popup", methods={"GET","POST"})
      * @Template()
      */
-    public function newPopupAction(Request $request)
-    {
+    public function newPopupAction(Request $request) {
         return $this->newAction($request);
     }
 
@@ -182,9 +174,7 @@ class CanController extends Controller implements PaginatorAwareInterface
      * @Route("/{id}", name="can_show", methods={"GET"})
      * @Template()
      */
-    public function showAction(Can $can)
-    {
-
+    public function showAction(Can $can) {
         return array(
             'can' => $can,
         );
@@ -192,7 +182,6 @@ class CanController extends Controller implements PaginatorAwareInterface
 
     /**
      * Displays a form to edit an existing Can entity.
-     *
      *
      * @param Request $request
      * @param Can $can
@@ -203,8 +192,7 @@ class CanController extends Controller implements PaginatorAwareInterface
      * @Route("/{id}/edit", name="can_edit", methods={"GET","POST"})
      * @Template()
      */
-    public function editAction(Request $request, Can $can)
-    {
+    public function editAction(Request $request, Can $can) {
         $editForm = $this->createForm(CanType::class, $can);
         $editForm->handleRequest($request);
 
@@ -212,6 +200,7 @@ class CanController extends Controller implements PaginatorAwareInterface
             $em = $this->getDoctrine()->getManager();
             $em->flush();
             $this->addFlash('success', 'The can has been updated.');
+
             return $this->redirectToRoute('can_show', array('id' => $can->getId()));
         }
 
@@ -224,7 +213,6 @@ class CanController extends Controller implements PaginatorAwareInterface
     /**
      * Deletes a Can entity.
      *
-     *
      * @param Request $request
      * @param Can $can
      *
@@ -233,8 +221,7 @@ class CanController extends Controller implements PaginatorAwareInterface
      * @IsGranted("ROLE_CONTENT_ADMIN")
      * @Route("/{id}/delete", name="can_delete", methods={"GET"})
      */
-    public function deleteAction(Request $request, Can $can)
-    {
+    public function deleteAction(Request $request, Can $can) {
         $em = $this->getDoctrine()->getManager();
         $em->remove($can);
         $em->flush();

@@ -2,16 +2,16 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Knp\Bundle\PaginatorBundle\Definition\PaginatorAwareInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use AppBundle\Entity\Manufacturer;
 use AppBundle\Form\ManufacturerType;
+use Knp\Bundle\PaginatorBundle\Definition\PaginatorAwareInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Manufacturer controller.
@@ -19,8 +19,7 @@ use AppBundle\Form\ManufacturerType;
  * @IsGranted("ROLE_USER")
  * @Route("/manufacturer")
  */
-class ManufacturerController extends Controller implements PaginatorAwareInterface
-{
+class ManufacturerController extends Controller implements PaginatorAwareInterface {
     use PaginatorTrait;
 
     /**
@@ -33,8 +32,7 @@ class ManufacturerController extends Controller implements PaginatorAwareInterfa
      * @Route("/", name="manufacturer_index", methods={"GET"})
      * @Template()
      */
-    public function indexAction(Request $request)
-    {
+    public function indexAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
         $qb = $em->createQueryBuilder();
         $qb->select('e')->from(Manufacturer::class, 'e')->orderBy('e.id', 'ASC');
@@ -47,40 +45,35 @@ class ManufacturerController extends Controller implements PaginatorAwareInterfa
         );
     }
 
-/**
+    /**
      * Typeahead API endpoint for Manufacturer entities.
      *
      * To make this work, add something like this to ManufacturerRepository:
-        //    public function typeaheadQuery($q) {
-        //        $qb = $this->createQueryBuilder('e');
-        //        $qb->andWhere("e.name LIKE :q");
-        //        $qb->orderBy('e.name');
-        //        $qb->setParameter('q', "{$q}%");
-        //        return $qb->getQuery()->execute();
-        //    }
      *
      * @param Request $request
      *
      * @Route("/typeahead", name="manufacturer_typeahead", methods={"GET"})
+     *
      * @return JsonResponse
      */
-    public function typeahead(Request $request)
-    {
+    public function typeahead(Request $request) {
         $q = $request->query->get('q');
-        if( ! $q) {
-            return new JsonResponse([]);
+        if ( ! $q) {
+            return new JsonResponse(array());
         }
         $em = $this->getDoctrine()->getManager();
-	    $repo = $em->getRepository(Manufacturer::class);
-        $data = [];
-        foreach($repo->typeaheadQuery($q) as $result) {
-            $data[] = [
+        $repo = $em->getRepository(Manufacturer::class);
+        $data = array();
+        foreach ($repo->typeaheadQuery($q) as $result) {
+            $data[] = array(
                 'id' => $result->getId(),
-                'text' => (string)$result,
-            ];
+                'text' => (string) $result,
+            );
         }
+
         return new JsonResponse($data);
     }
+
     /**
      * Search for Manufacturer entities.
      *
@@ -103,20 +96,20 @@ class ManufacturerController extends Controller implements PaginatorAwareInterfa
      *
      * @Route("/search", name="manufacturer_search", methods={"GET"})
      * @Template()
-    * @return array
-    */
-    public function searchAction(Request $request)
-    {
+     *
+     * @return array
+     */
+    public function searchAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
-	$repo = $em->getRepository('AppBundle:Manufacturer');
-	$q = $request->query->get('q');
-	if($q) {
-	    $query = $repo->searchQuery($q);
+        $repo = $em->getRepository('AppBundle:Manufacturer');
+        $q = $request->query->get('q');
+        if ($q) {
+            $query = $repo->searchQuery($q);
             $paginator = $this->get('knp_paginator');
             $manufacturers = $paginator->paginate($query, $request->query->getInt('page', 1), 25);
-	} else {
+        } else {
             $manufacturers = array();
-	}
+        }
 
         return array(
             'manufacturers' => $manufacturers,
@@ -135,8 +128,7 @@ class ManufacturerController extends Controller implements PaginatorAwareInterfa
      * @Route("/new", name="manufacturer_new", methods={"GET","POST"})
      * @Template()
      */
-    public function newAction(Request $request)
-    {
+    public function newAction(Request $request) {
         $manufacturer = new Manufacturer();
         $form = $this->createForm(ManufacturerType::class, $manufacturer);
         $form->handleRequest($request);
@@ -147,6 +139,7 @@ class ManufacturerController extends Controller implements PaginatorAwareInterfa
             $em->flush();
 
             $this->addFlash('success', 'The new manufacturer was created.');
+
             return $this->redirectToRoute('manufacturer_show', array('id' => $manufacturer->getId()));
         }
 
@@ -167,8 +160,7 @@ class ManufacturerController extends Controller implements PaginatorAwareInterfa
      * @Route("/new_popup", name="manufacturer_new_popup", methods={"GET","POST"})
      * @Template()
      */
-    public function newPopupAction(Request $request)
-    {
+    public function newPopupAction(Request $request) {
         return $this->newAction($request);
     }
 
@@ -182,9 +174,7 @@ class ManufacturerController extends Controller implements PaginatorAwareInterfa
      * @Route("/{id}", name="manufacturer_show", methods={"GET"})
      * @Template()
      */
-    public function showAction(Manufacturer $manufacturer)
-    {
-
+    public function showAction(Manufacturer $manufacturer) {
         return array(
             'manufacturer' => $manufacturer,
         );
@@ -192,7 +182,6 @@ class ManufacturerController extends Controller implements PaginatorAwareInterfa
 
     /**
      * Displays a form to edit an existing Manufacturer entity.
-     *
      *
      * @param Request $request
      * @param Manufacturer $manufacturer
@@ -203,8 +192,7 @@ class ManufacturerController extends Controller implements PaginatorAwareInterfa
      * @Route("/{id}/edit", name="manufacturer_edit", methods={"GET","POST"})
      * @Template()
      */
-    public function editAction(Request $request, Manufacturer $manufacturer)
-    {
+    public function editAction(Request $request, Manufacturer $manufacturer) {
         $editForm = $this->createForm(ManufacturerType::class, $manufacturer);
         $editForm->handleRequest($request);
 
@@ -212,6 +200,7 @@ class ManufacturerController extends Controller implements PaginatorAwareInterfa
             $em = $this->getDoctrine()->getManager();
             $em->flush();
             $this->addFlash('success', 'The manufacturer has been updated.');
+
             return $this->redirectToRoute('manufacturer_show', array('id' => $manufacturer->getId()));
         }
 
@@ -224,7 +213,6 @@ class ManufacturerController extends Controller implements PaginatorAwareInterfa
     /**
      * Deletes a Manufacturer entity.
      *
-     *
      * @param Request $request
      * @param Manufacturer $manufacturer
      *
@@ -233,8 +221,7 @@ class ManufacturerController extends Controller implements PaginatorAwareInterfa
      * @IsGranted("ROLE_CONTENT_ADMIN")
      * @Route("/{id}/delete", name="manufacturer_delete", methods={"GET"})
      */
-    public function deleteAction(Request $request, Manufacturer $manufacturer)
-    {
+    public function deleteAction(Request $request, Manufacturer $manufacturer) {
         $em = $this->getDoctrine()->getManager();
         $em->remove($manufacturer);
         $em->flush();

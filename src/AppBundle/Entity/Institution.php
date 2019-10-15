@@ -8,13 +8,12 @@ use Nines\UtilBundle\Entity\AbstractEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Institution
+ * Institution.
  *
  * @ORM\Table(name="institution")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\InstitutionRepository")
  */
 class Institution extends AbstractEntity {
-
     /**
      * @var string
      * @ORM\Column(type="string", nullable=false)
@@ -45,7 +44,7 @@ class Institution extends AbstractEntity {
     private $contact;
 
     /**
-     * @var Collection|Artefact[]
+     * @var Artefact[]|Collection
      * @ORM\OneToMany(targetEntity="Artefact", mappedBy="institution")
      */
     private $artefacts;
@@ -66,8 +65,7 @@ class Institution extends AbstractEntity {
      *
      * @return Institution
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
 
         return $this;
@@ -78,20 +76,18 @@ class Institution extends AbstractEntity {
      *
      * @return string
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
     /**
      * Set url.
      *
-     * @param string|null $url
+     * @param null|string $url
      *
      * @return Institution
      */
-    public function setUrl($url = null)
-    {
+    public function setUrl($url = null) {
         $this->url = $url;
 
         return $this;
@@ -100,22 +96,20 @@ class Institution extends AbstractEntity {
     /**
      * Get url.
      *
-     * @return string|null
+     * @return null|string
      */
-    public function getUrl()
-    {
+    public function getUrl() {
         return $this->url;
     }
 
     /**
      * Set address.
      *
-     * @param string|null $address
+     * @param null|string $address
      *
      * @return Institution
      */
-    public function setAddress($address = null)
-    {
+    public function setAddress($address = null) {
         $this->address = $address;
 
         return $this;
@@ -124,22 +118,20 @@ class Institution extends AbstractEntity {
     /**
      * Get address.
      *
-     * @return string|null
+     * @return null|string
      */
-    public function getAddress()
-    {
+    public function getAddress() {
         return $this->address;
     }
 
     /**
      * Set contact.
      *
-     * @param string|null $contact
+     * @param null|string $contact
      *
      * @return Institution
      */
-    public function setContact($contact = null)
-    {
+    public function setContact($contact = null) {
         $this->contact = $contact;
 
         return $this;
@@ -148,10 +140,9 @@ class Institution extends AbstractEntity {
     /**
      * Get contact.
      *
-     * @return string|null
+     * @return null|string
      */
-    public function getContact()
-    {
+    public function getContact() {
         return $this->contact;
     }
 
@@ -162,8 +153,7 @@ class Institution extends AbstractEntity {
      *
      * @return Institution
      */
-    public function addArtefact(\AppBundle\Entity\Artefact $artefact)
-    {
+    public function addArtefact(Artefact $artefact) {
         $this->artefacts[] = $artefact;
 
         return $this;
@@ -174,10 +164,9 @@ class Institution extends AbstractEntity {
      *
      * @param \AppBundle\Entity\Artefact $artefact
      *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     * @return bool TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeArtefact(\AppBundle\Entity\Artefact $artefact)
-    {
+    public function removeArtefact(Artefact $artefact) {
         return $this->artefacts->removeElement($artefact);
     }
 
@@ -186,8 +175,7 @@ class Institution extends AbstractEntity {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getArtefacts()
-    {
+    public function getArtefacts() {
         return $this->artefacts;
     }
 }
