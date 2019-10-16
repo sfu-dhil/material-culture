@@ -2,6 +2,8 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Content;
+use Nines\UtilBundle\Form\TermType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -9,7 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * ContentType form.
  */
-class ContentType extends AbstractType {
+class ContentType extends TermType {
     /**
      * Add form fields to $builder.
      *
@@ -17,6 +19,7 @@ class ContentType extends AbstractType {
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
+        parent::buildForm($builder, $options);
     }
 
     /**
@@ -29,7 +32,7 @@ class ContentType extends AbstractType {
      */
     public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Content',
+            'data_class' => Content::class,
         ));
     }
 }

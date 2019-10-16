@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Ceramic;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -9,7 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * CeramicType form.
  */
-class CeramicType extends AbstractType {
+class CeramicType extends ArtefactType {
     /**
      * Add form fields to $builder.
      *
@@ -17,6 +18,8 @@ class CeramicType extends AbstractType {
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
+        parent::buildForm($builder, $options);
+
         $builder->add('paste', null, array(
             'label' => 'Paste',
             'required' => false,
@@ -45,7 +48,7 @@ class CeramicType extends AbstractType {
      */
     public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Ceramic',
+            'data_class' => Ceramic::class,
         ));
     }
 }

@@ -2,6 +2,8 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Glaze;
+use Nines\UtilBundle\Form\TermType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -9,7 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * GlazeType form.
  */
-class GlazeType extends AbstractType {
+class GlazeType extends TermTypeType {
     /**
      * Add form fields to $builder.
      *
@@ -17,6 +19,7 @@ class GlazeType extends AbstractType {
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
+        parent::buildForm($builder, $options);
     }
 
     /**
@@ -29,7 +32,7 @@ class GlazeType extends AbstractType {
      */
     public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Glaze',
+            'data_class' => Glaze::class,
         ));
     }
 }

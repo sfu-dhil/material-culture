@@ -2,6 +2,8 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Location;
+use Nines\UtilBundle\Form\TermType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -9,7 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * LocationType form.
  */
-class LocationType extends AbstractType {
+class LocationType extends TermType {
     /**
      * Add form fields to $builder.
      *
@@ -17,6 +19,7 @@ class LocationType extends AbstractType {
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
+        parent::buildForm($builder, $options);
         $builder->add('geonameId', null, array(
             'label' => 'Geoname Id',
             'required' => false,
@@ -50,7 +53,7 @@ class LocationType extends AbstractType {
      */
     public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Location',
+            'data_class' => Location::class,
         ));
     }
 }

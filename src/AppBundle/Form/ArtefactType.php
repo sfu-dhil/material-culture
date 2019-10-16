@@ -2,15 +2,15 @@
 
 namespace AppBundle\Form;
 
-use AppBundle\Entity\Institution;
+use AppBundle\Entity\Bottle;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * InstitutionType form.
+ * BottleType form.
  */
-class InstitutionType extends AbstractType {
+abstract class ArtefactType extends AbstractType {
     /**
      * Add form fields to $builder.
      *
@@ -18,47 +18,43 @@ class InstitutionType extends AbstractType {
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder->add('name', null, array(
-            'label' => 'Name',
-            'required' => true,
-            'attr' => array(
-                'help_block' => '',
-            ),
-        ));
-        $builder->add('url', null, array(
-            'label' => 'Url',
+        $builder->add('catalogNumber', null, array(
+            'label' => 'Catalog Number',
             'required' => false,
             'attr' => array(
                 'help_block' => '',
             ),
         ));
-        $builder->add('address', null, array(
-            'label' => 'Address',
+
+        $builder->add('description', null, array(
+            'label' => 'Catalog Number',
             'required' => false,
             'attr' => array(
                 'help_block' => '',
             ),
         ));
-        $builder->add('contact', null, array(
-            'label' => 'Contact',
+
+        $builder->add('furtherReading', null, array(
+            'label' => 'Further Reading',
             'required' => false,
             'attr' => array(
                 'help_block' => '',
             ),
         ));
+
+        $builder->add('note', null, array(
+            'label' => 'Note',
+            'required' => false,
+            'attr' => array(
+                'help_block' => '',
+            ),
+        ));
+
+        $builder->add('recoveryLocation');
+        $builder->add('manufactureLocation');
+        $builder->add('recoveryDate');
+        $builder->add('manufactureDate');
+        $builder->add('institution');
     }
 
-    /**
-     * Define options for the form.
-     *
-     * Set default, optional, and required options passed to the
-     * buildForm() method via the $options parameter.
-     *
-     * @param OptionsResolver $resolver
-     */
-    public function configureOptions(OptionsResolver $resolver) {
-        $resolver->setDefaults(array(
-            'data_class' => Institution::class,
-        ));
-    }
 }

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Manufacturer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -9,7 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * ManufacturerType form.
  */
-class ManufacturerType extends AbstractType {
+class ManufacturerType extends TermType {
     /**
      * Add form fields to $builder.
      *
@@ -17,6 +18,7 @@ class ManufacturerType extends AbstractType {
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
+        parent::buildForm($builder, $options);
     }
 
     /**
@@ -29,7 +31,7 @@ class ManufacturerType extends AbstractType {
      */
     public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Manufacturer',
+            'data_class' => Manufacturer::class,
         ));
     }
 }

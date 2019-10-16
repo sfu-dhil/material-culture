@@ -12,6 +12,9 @@ $config = array(
     'build_dir'            => $dir . '/web/docs/api',
     'cache_dir'            => $dir . '/var/cache/sami',
     'default_opened_level' => 2,
+    'include_parent_data' => true,
+    'insert_todos' => true,
+
 );
 
 $iterator = Finder::create()
