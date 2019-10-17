@@ -135,6 +135,7 @@ class CeramicController extends Controller implements PaginatorAwareInterface {
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
             $em->persist($ceramic);
             $em->flush();
 

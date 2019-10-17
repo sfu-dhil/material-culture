@@ -5,22 +5,19 @@
 {% block pageheader %}
     <h1>Institution List</h1>
     <p class="count">
-        Displaying {{ institutions|length }} institutions of {{ institutions.getTotalItemCount }} total.
-    </p>
- {% endblock %} 
+        Displaying {{ institutions|length }} institutions of {{ institutions.getTotalItemCount }} total. </p>
+{% endblock %}
 
 {% block body %}
 
     <div class='btn-toolbar pull-right'>
         <div class='btn-group'>
-                        {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ path('institution_new') }}" class="btn btn-default">
-                <span class="glyphicon glyphicon-plus"></span> New
-            </a>
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('institution_new') }}" class="btn btn-default">
+                    <span class="glyphicon glyphicon-plus"></span> New </a>
             {% endif %}
-                        <a href="{{ path('institution_search') }}" class="btn btn-default">
-                <span class="glyphicon glyphicon-search"></span> Search
-            </a>
+            <a href="{{ path('institution_search') }}" class="btn btn-default">
+                <span class="glyphicon glyphicon-search"></span> Search </a>
         </div>
     </div>
 
@@ -29,23 +26,25 @@
             <tr>
                 <th>Name</th>
                 <th>Url</th>
-                <th>Address</th>
-                <th>Contact</th>
-                </tr>
+            </tr>
         </thead>
         <tbody>
-        {% for institution in institutions %}
-            <tr>
-                <td>
-                    <a href="{{ path('institution_show', { 'id': institution.id }) }}">
-                        {{ institution.name }}
-                    </a>
-                </td>
-                <td>{{ institution.url }}</td>
-                <td>{{ institution.address }}</td>
-                <td>{{ institution.contact }}</td>
-            </tr>
-        {% endfor %}
+            {% for institution in institutions %}
+                <tr>
+                    <td>
+                        <a href="{{ path('institution_show', { 'id': institution.id }) }}">
+                            {{ institution.name }}
+                        </a>
+                    </td>
+                    <td>
+                        {% if institution.url %}
+                            <a href="{{ institution.url }}">
+                                {{ institution.url }}
+                            </a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 

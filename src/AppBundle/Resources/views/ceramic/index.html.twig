@@ -5,22 +5,19 @@
 {% block pageheader %}
     <h1>Ceramic List</h1>
     <p class="count">
-        Displaying {{ ceramics|length }} ceramics of {{ ceramics.getTotalItemCount }} total.
-    </p>
- {% endblock %} 
+        Displaying {{ ceramics|length }} ceramics of {{ ceramics.getTotalItemCount }} total. </p>
+{% endblock %}
 
 {% block body %}
 
     <div class='btn-toolbar pull-right'>
         <div class='btn-group'>
-                        {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ path('ceramic_new') }}" class="btn btn-default">
-                <span class="glyphicon glyphicon-plus"></span> New
-            </a>
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('ceramic_new') }}" class="btn btn-default">
+                    <span class="glyphicon glyphicon-plus"></span> New </a>
             {% endif %}
-                        <a href="{{ path('ceramic_search') }}" class="btn btn-default">
-                <span class="glyphicon glyphicon-search"></span> Search
-            </a>
+            <a href="{{ path('ceramic_search') }}" class="btn btn-default">
+                <span class="glyphicon glyphicon-search"></span> Search </a>
         </div>
     </div>
 
@@ -29,19 +26,19 @@
             <tr>
                 <th>Paste</th>
                 <th>Munsell</th>
-                </tr>
+            </tr>
         </thead>
         <tbody>
-        {% for ceramic in ceramics %}
-            <tr>
-                <td>
-                    <a href="{{ path('ceramic_show', { 'id': ceramic.id }) }}">
-                        {{ ceramic.paste }}
-                    </a>
-                </td>
-                <td>{{ ceramic.munsell }}</td>
-            </tr>
-        {% endfor %}
+            {% for ceramic in ceramics %}
+                <tr>
+                    <td>
+                        <a href="{{ path('ceramic_show', { 'id': ceramic.id }) }}">
+                            {{ ceramic.paste }}
+                        </a>
+                    </td>
+                    <td>{{ ceramic.munsell }}</td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 

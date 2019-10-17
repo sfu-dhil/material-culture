@@ -23,13 +23,13 @@ class Location extends AbstractTerm {
 
     /**
      * @var float
-     * @ORM\Column(type="decimal", precision=10, scale=8, nullable=true)
+     * @ORM\Column(type="decimal", precision=11, scale=8, nullable=true)
      */
     private $latitude;
 
     /**
      * @var float
-     * @ORM\Column(type="decimal", precision=10, scale=8, nullable=true)
+     * @ORM\Column(type="decimal", precision=11, scale=8, nullable=true)
      */
     private $longitude;
 
@@ -172,4 +172,254 @@ class Location extends AbstractTerm {
         return $this;
     }
 
+    /**
+     * Get longitude.
+     *
+     * @return null|string
+     */
+    public function getLongitude() {
+        return $this->longitude;
+    }
+
+    /**
+     * Set alternateNames.
+     *
+     * @param null|array $alternateNames
+     *
+     * @return Location
+     */
+    public function setAlternateNames($alternateNames = null) {
+        $this->alternateNames = $alternateNames;
+
+        return $this;
+    }
+
+    /**
+     * Get alternateNames.
+     *
+     * @return null|array
+     */
+    public function getAlternateNames() {
+        return $this->alternateNames;
+    }
+
+    /**
+     * Set countryCode.
+     *
+     * @param null|string $countryCode
+     *
+     * @return Location
+     */
+    public function setCountryCode($countryCode = null) {
+        $this->countryCode = $countryCode;
+
+        return $this;
+    }
+
+    /**
+     * Get countryCode.
+     *
+     * @return null|string
+     */
+    public function getCountryCode() {
+        return $this->countryCode;
+    }
+
+    /**
+     * Set admin1.
+     *
+     * @param null|string $admin1
+     *
+     * @return Location
+     */
+    public function setAdmin1($admin1 = null) {
+        $this->admin1 = $admin1;
+
+        return $this;
+    }
+
+    /**
+     * Get admin1.
+     *
+     * @return null|string
+     */
+    public function getAdmin1() {
+        return $this->admin1;
+    }
+
+    /**
+     * Set admin2.
+     *
+     * @param null|string $admin2
+     *
+     * @return Location
+     */
+    public function setAdmin2($admin2 = null) {
+        $this->admin2 = $admin2;
+
+        return $this;
+    }
+
+    /**
+     * Get admin2.
+     *
+     * @return null|string
+     */
+    public function getAdmin2() {
+        return $this->admin2;
+    }
+
+    /**
+     * Set admin3.
+     *
+     * @param null|string $admin3
+     *
+     * @return Location
+     */
+    public function setAdmin3($admin3 = null) {
+        $this->admin3 = $admin3;
+
+        return $this;
+    }
+
+    /**
+     * Get admin3.
+     *
+     * @return null|string
+     */
+    public function getAdmin3() {
+        return $this->admin3;
+    }
+
+    /**
+     * Set admin4.
+     *
+     * @param null|string $admin4
+     *
+     * @return Location
+     */
+    public function setAdmin4($admin4 = null) {
+        $this->admin4 = $admin4;
+
+        return $this;
+    }
+
+    /**
+     * Get admin4.
+     *
+     * @return null|string
+     */
+    public function getAdmin4() {
+        return $this->admin4;
+    }
+
+    /**
+     * Set timezone.
+     *
+     * @param null|string $timezone
+     *
+     * @return Location
+     */
+    public function setTimezone($timezone = null) {
+        $this->timezone = $timezone;
+
+        return $this;
+    }
+
+    /**
+     * Get timezone.
+     *
+     * @return null|string
+     */
+    public function getTimezone() {
+        return $this->timezone;
+    }
+
+    /**
+     * Set elevation.
+     *
+     * @param null|int $elevation
+     *
+     * @return Location
+     */
+    public function setElevation($elevation = null) {
+        $this->elevation = $elevation;
+
+        return $this;
+    }
+
+    /**
+     * Get elevation.
+     *
+     * @return null|int
+     */
+    public function getElevation() {
+        return $this->elevation;
+    }
+
+    /**
+     * Add artefactsRecovered.
+     *
+     * @param \AppBundle\Entity\Artefact $artefactsRecovered
+     *
+     * @return Location
+     */
+    public function addArtefactsRecovered(Artefact $artefactsRecovered) {
+        $this->artefactsRecovered[] = $artefactsRecovered;
+
+        return $this;
+    }
+
+    /**
+     * Remove artefactsRecovered.
+     *
+     * @param \AppBundle\Entity\Artefact $artefactsRecovered
+     *
+     * @return bool TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeArtefactsRecovered(Artefact $artefactsRecovered) {
+        return $this->artefactsRecovered->removeElement($artefactsRecovered);
+    }
+
+    /**
+     * Get artefactsRecovered.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getArtefactsRecovered() {
+        return $this->artefactsRecovered;
+    }
+
+    /**
+     * Add artefactsManufactured.
+     *
+     * @param \AppBundle\Entity\Artefact $artefactsManufactured
+     *
+     * @return Location
+     */
+    public function addArtefactsManufactured(Artefact $artefactsManufactured) {
+        $this->artefactsManufactured[] = $artefactsManufactured;
+
+        return $this;
+    }
+
+    /**
+     * Remove artefactsManufactured.
+     *
+     * @param \AppBundle\Entity\Artefact $artefactsManufactured
+     *
+     * @return bool TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeArtefactsManufactured(Artefact $artefactsManufactured) {
+        return $this->artefactsManufactured->removeElement($artefactsManufactured);
+    }
+
+    /**
+     * Get artefactsManufactured.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getArtefactsManufactured() {
+        return $this->artefactsManufactured;
+    }
 }

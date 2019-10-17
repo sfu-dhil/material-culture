@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Exception;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Nines\UtilBundle\Entity\AbstractEntity;
@@ -34,7 +35,7 @@ abstract class Artefact extends AbstractEntity {
 
     /**
      * @var CircaDate
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\CircaDate")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\CircaDate", cascade={"persist", "remove"})
      */
     private $recoveryDate;
 
@@ -46,7 +47,7 @@ abstract class Artefact extends AbstractEntity {
 
     /**
      * @var CircaDate
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\CircaDate")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\CircaDate", cascade={"persist", "remove"})
      */
     private $manufactureDate;
 
@@ -205,12 +206,14 @@ abstract class Artefact extends AbstractEntity {
     /**
      * Set recoveryDate.
      *
-     * @param null|\AppBundle\Entity\CircaDate $recoveryDate
+     * @param null|CircaDate|string $recoveryDate
+     *
+     * @throws Exception
      *
      * @return Artefact
      */
-    public function setRecoveryDate(CircaDate $recoveryDate = null) {
-        $this->recoveryDate = $recoveryDate;
+    public function setRecoveryDate($recoveryDate = null) {
+        $this->recoveryDate = CircaDate::build($recoveryDate);
 
         return $this;
     }
@@ -252,9 +255,10 @@ abstract class Artefact extends AbstractEntity {
      * @param null|\AppBundle\Entity\CircaDate $manufactureDate
      *
      * @return Artefact
+     * @throws Exception
      */
-    public function setManufactureDate(CircaDate $manufactureDate = null) {
-        $this->manufactureDate = $manufactureDate;
+    public function setManufactureDate($manufactureDate = null) {
+        $this->manufactureDate = CircaDate::build($manufactureDate);
 
         return $this;
     }

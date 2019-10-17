@@ -4,6 +4,7 @@ namespace AppBundle\Form;
 
 use AppBundle\Entity\Institution;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -25,7 +26,7 @@ class InstitutionType extends AbstractType {
                 'help_block' => '',
             ),
         ));
-        $builder->add('url', null, array(
+        $builder->add('url', UrlType::class, array(
             'label' => 'Url',
             'required' => false,
             'attr' => array(

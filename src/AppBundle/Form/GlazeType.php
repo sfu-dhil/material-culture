@@ -3,13 +3,14 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\Glaze;
+use Nines\UtilBundle\Form\TermType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * GlazeType form.
  */
-class GlazeType extends TermTypeType {
+class GlazeType extends TermType {
     /**
      * Add form fields to $builder.
      *

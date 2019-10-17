@@ -5,22 +5,19 @@
 {% block pageheader %}
     <h1>Can List</h1>
     <p class="count">
-        Displaying {{ cans|length }} cans of {{ cans.getTotalItemCount }} total.
-    </p>
- {% endblock %} 
+        Displaying {{ cans|length }} cans of {{ cans.getTotalItemCount }} total. </p>
+{% endblock %}
 
 {% block body %}
 
     <div class='btn-toolbar pull-right'>
         <div class='btn-group'>
-                        {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ path('can_new') }}" class="btn btn-default">
-                <span class="glyphicon glyphicon-plus"></span> New
-            </a>
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('can_new') }}" class="btn btn-default"> <span class="glyphicon glyphicon-plus"></span>
+                    New </a>
             {% endif %}
-                        <a href="{{ path('can_search') }}" class="btn btn-default">
-                <span class="glyphicon glyphicon-search"></span> Search
-            </a>
+            <a href="{{ path('can_search') }}" class="btn btn-default"> <span class="glyphicon glyphicon-search"></span>
+                Search </a>
         </div>
     </div>
 
@@ -30,20 +27,20 @@
                 <th>Company</th>
                 <th>Brand</th>
                 <th>Label</th>
-                </tr>
+            </tr>
         </thead>
         <tbody>
-        {% for can in cans %}
-            <tr>
-                <td>
-                    <a href="{{ path('can_show', { 'id': can.id }) }}">
-                        {{ can.company }}
-                    </a>
-                </td>
-                <td>{{ can.brand }}</td>
-                <td>{{ can.label }}</td>
-            </tr>
-        {% endfor %}
+            {% for can in cans %}
+                <tr>
+                    <td>
+                        <a href="{{ path('can_show', { 'id': can.id }) }}">
+                            {{ can.company }}
+                        </a>
+                    </td>
+                    <td>{{ can.brand }}</td>
+                    <td>{{ can.label }}</td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 

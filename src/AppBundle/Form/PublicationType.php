@@ -4,6 +4,8 @@ namespace AppBundle\Form;
 
 use AppBundle\Entity\Publication;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -25,7 +27,7 @@ class PublicationType extends AbstractType {
                 'help_block' => '',
             ),
         ));
-        $builder->add('citation', null, array(
+        $builder->add('citation', TextareaType::class, array(
             'label' => 'Citation',
             'required' => true,
             'attr' => array(

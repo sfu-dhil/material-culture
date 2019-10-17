@@ -5,22 +5,19 @@
 {% block pageheader %}
     <h1>Reference List</h1>
     <p class="count">
-        Displaying {{ references|length }} references of {{ references.getTotalItemCount }} total.
-    </p>
- {% endblock %} 
+        Displaying {{ references|length }} references of {{ references.getTotalItemCount }} total. </p>
+{% endblock %}
 
 {% block body %}
 
     <div class='btn-toolbar pull-right'>
         <div class='btn-group'>
-                        {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ path('reference_new') }}" class="btn btn-default">
-                <span class="glyphicon glyphicon-plus"></span> New
-            </a>
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('reference_new') }}" class="btn btn-default">
+                    <span class="glyphicon glyphicon-plus"></span> New </a>
             {% endif %}
-                        <a href="{{ path('reference_search') }}" class="btn btn-default">
-                <span class="glyphicon glyphicon-search"></span> Search
-            </a>
+            <a href="{{ path('reference_search') }}" class="btn btn-default">
+                <span class="glyphicon glyphicon-search"></span> Search </a>
         </div>
     </div>
 
@@ -28,18 +25,18 @@
         <thead>
             <tr>
                 <th>Description</th>
-                </tr>
+            </tr>
         </thead>
         <tbody>
-        {% for reference in references %}
-            <tr>
-                <td>
-                    <a href="{{ path('reference_show', { 'id': reference.id }) }}">
-                        {{ reference.description }}
-                    </a>
-                </td>
-            </tr>
-        {% endfor %}
+            {% for reference in references %}
+                <tr>
+                    <td>
+                        <a href="{{ path('reference_show', { 'id': reference.id }) }}">
+                            {{ reference.description }}
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 
