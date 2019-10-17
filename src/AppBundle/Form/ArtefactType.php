@@ -2,10 +2,8 @@
 
 namespace AppBundle\Form;
 
-use AppBundle\Entity\Bottle;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * BottleType form.
@@ -56,5 +54,4 @@ abstract class ArtefactType extends AbstractType {
         $builder->add('manufactureDate');
         $builder->add('institution');
     }
-
 }

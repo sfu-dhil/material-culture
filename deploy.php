@@ -15,40 +15,41 @@ foreach ($settings['.settings'] as $key => $value) {
 }
 
 $app = get('application');
-if(file_exists("deploy.{$app}.php")) {
+if (file_exists("deploy.{$app}.php")) {
     require "deploy.{$app}.php";
 }
 
-task('dhil:precheck', function(){
+task('dhil:precheck', function () {
     $out = runLocally('git cherry -v');
-    if ($out !== '') {
+    if ('' !== $out) {
         $commits = count(explode("\n", $out));
         writeln("<error>Warning: {$commits} unpublished commits will not be included in the deployment.</error>");
     }
 });
 
-task('dhil:deploy:quick', function() {
+task('dhil:deploy:quick', function () {
     writeln(run('cd {{ current_path }} && git pull origin master'));
     writeln(run('cd {{ current_path }} && git submodule foreach git pull origin master'));
     writeln(run('{{bin/php}} {{bin/console}} cache:clear --env=prod'));
 });
 
 option('skip-tests', null, InputOption::VALUE_NONE, 'Skip testing. Probably a bad idea.');
-task('dhil:phpunit', function() {
+task('dhil:phpunit', function () {
     if (input()->getOption('skip-tests')) {
         writeln('Skipped');
+
         return;
     }
-    $output = run('cd {{ release_path }} && ./vendor/bin/phpunit', ['timeout' => null]);
+    $output = run('cd {{ release_path }} && ./vendor/bin/phpunit', array('timeout' => null));
     writeln($output);
 })->desc('Run phpunit.');
 
-task('dhil:clear:test-cache', function() {
+task('dhil:clear:test-cache', function () {
     $output = run('{{bin/php}} {{bin/console}} cache:clear --env=test');
     writeln($output);
 });
 
-task('dhil:test', [
+task('dhil:test', array(
     'deploy:info',
     'deploy:prepare',
     'deploy:lock',
@@ -59,30 +60,30 @@ task('dhil:test', [
     'deploy:vendors',
     'dhil:clear:test-cache',
     'dhil:phpunit',
-])->desc('Run test suite on server in a clean environment.');
+))->desc('Run test suite on server in a clean environment.');
 after('dhil:test', 'deploy:unlock');
 
-task('dhil:bower', function() {
+task('dhil:bower', function () {
     $output = run('cd {{ release_path }} && bower -q install');
     writeln($output);
-    if(file_exists('package.json')) {
+    if (file_exists('package.json')) {
         $output = run('cd {{ release_path }} && npm -q install --prefix web/npm');
         writeln($output);
     }
 })->desc('Install bower dependencies.');
 
-task('dhil:sphinx', function() {
+task('dhil:sphinx', function () {
     if (file_exists('docs')) {
         $user = get('user');
         $host = get('hostname');
         $become = get('become');
 
         runLocally('/usr/local/bin/sphinx-build docs/source web/docs/sphinx');
-        runLocally("rsync -av -e 'ssh' --rsync-path='sudo -u $become rsync' ./web/docs/ $user@$host:{{release_path}}/web/docs", ['timeout' => null]);
+        runLocally("rsync -av -e 'ssh' --rsync-path='sudo -u {$become} rsync' ./web/docs/ {$user}@{$host}:{{release_path}}/web/docs", array('timeout' => null));
     }
 })->desc('Build sphinx docs locally and upload to server.');
 
-task('dhil:db:backup', function() {
+task('dhil:db:backup', function () {
     $user = get('user');
     $become = get('become');
     $app = get('application');
@@ -96,12 +97,12 @@ task('dhil:db:backup', function() {
     set('become', $become);
 })->desc('Backup the mysql database.');
 
-task('dhil:db:migrate', function(){
+task('dhil:db:migrate', function () {
     $output = run('cd {{ release_path }} && ./bin/console doctrine:migrations:migrate --no-interaction');
     writeln($output);
 });
 
-task('dhil:db:fetch', function() {
+task('dhil:db:fetch', function () {
     $user = get('user');
     $become = get('become');
     $app = get('application');
@@ -117,10 +118,10 @@ task('dhil:db:fetch', function() {
     // set('become', $become);
 
     download($file, basename($file));
-    writeln("Downloaded database dump to " . basename($file));
+    writeln('Downloaded database dump to ' . basename($file));
 })->desc('Make a database backup and download it.');
 
-task('success', function() {
+task('success', function () {
     $target = get('target');
     $release = get('release_name');
     $host = get('hostname');
@@ -130,7 +131,7 @@ task('success', function() {
     writeln("Visit http://{$host}{$path} to check.");
 });
 
-task('deploy', [
+task('deploy', array(
     'deploy:info',
     'dhil:precheck',
     'deploy:prepare',
@@ -153,6 +154,6 @@ task('deploy', [
     'deploy:symlink',
     'deploy:unlock',
     'cleanup',
-])->desc('Deploy your project');
+))->desc('Deploy your project');
 after('deploy:failed', 'deploy:unlock');
 after('deploy', 'success');

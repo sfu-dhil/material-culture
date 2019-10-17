@@ -3,7 +3,6 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\Bottle;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -18,7 +17,6 @@ class BottleType extends ArtefactType {
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
-
         parent::buildForm($builder, $options);
 
         $builder->add('company', null, array(
