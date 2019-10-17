@@ -3,8 +3,12 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\Ceramic;
+use AppBundle\Entity\Glaze;
+use AppBundle\Entity\Location;
+use AppBundle\Entity\Shape;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
 
 /**
  * CeramicType form.
@@ -33,8 +37,32 @@ class CeramicType extends ArtefactType {
                 'help_block' => '',
             ),
         ));
-        $builder->add('shape');
-        $builder->add('glaze');
+        $builder->add('shape', Select2EntityType::class, array(
+            'label' => 'Shape',
+            'multiple' => false,
+            'remote_route' => 'shape_typeahead',
+            'class' => Shape::class,
+            'required' => false,
+            'allow_clear' => true,
+            'attr' => array(
+                'add_path' => 'shape_new_popup',
+                'add_label' => 'New Shape',
+                'help_block' => '',
+            ),
+        ));
+        $builder->add('glaze', Select2EntityType::class, array(
+            'label' => 'Glaze',
+            'multiple' => false,
+            'remote_route' => 'glaze_typeahead',
+            'class' => Glaze::class,
+            'required' => false,
+            'allow_clear' => true,
+            'attr' => array(
+                'add_path' => 'glaze_new_popup',
+                'add_label' => 'New Glaze',
+                'help_block' => '',
+            ),
+        ));
     }
 
     /**

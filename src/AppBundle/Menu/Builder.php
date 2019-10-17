@@ -83,22 +83,68 @@ class Builder implements ContainerAwareInterface {
         $browse->setLinkAttribute('data-toggle', 'dropdown');
         $browse->setChildrenAttribute('class', 'dropdown-menu');
 
-        $browse->addChild('Objects', array(
-            'uri' => '#',
+        $browse->addChild('bottle', array(
+            'label' => 'Bottles',
+            'route' => 'bottle_index',
         ));
 
-        if ($this->hasRole('ROLE_USER')) {
-            $divider = $browse->addChild('divider', array(
-                'label' => '',
-            ));
-            $divider->setAttributes(array(
-                'role' => 'separator',
-                'class' => 'divider',
-            ));
-            $browse->addChild('Admin', array(
-                'uri' => '#',
-            ));
-        }
+        $browse->addChild('can', array(
+            'label' => 'Cans',
+            'route' => 'can_index',
+        ));
+
+        $browse->addChild('ceramic', array(
+            'label' => 'Ceramic',
+            'route' => 'ceramic_index',
+        ));
+
+        $browse->addChild('content', array(
+            'label' => 'Content',
+            'route' => 'content_index',
+        ));
+
+        $browse->addChild('glaze', array(
+            'label' => 'Glaze',
+            'route' => 'glaze_index',
+        ));
+
+        $browse->addChild('institution', array(
+            'label' => 'Institutions',
+            'route' => 'institution_index',
+        ));
+
+        $browse->addChild('location', array(
+            'label' => 'Location',
+            'route' => 'location_index',
+        ));
+
+        $browse->addChild('manufacturer', array(
+            'label' => 'Manufacturers',
+            'route' => 'manufacturer_index',
+        ));
+
+        $browse->addChild('publication', array(
+            'label' => 'Publications',
+            'route' => 'publication_index',
+        ));
+
+        $browse->addChild('shape', array(
+            'label' => 'Ceramic Shapes',
+            'route' => 'shape_index',
+        ));
+
+//        if ($this->hasRole('ROLE_USER')) {
+//            $divider = $browse->addChild('divider', array(
+//                'label' => '',
+//            ));
+//            $divider->setAttributes(array(
+//                'role' => 'separator',
+//                'class' => 'divider',
+//            ));
+//            $browse->addChild('Admin', array(
+//                'uri' => '#',
+//            ));
+//        }
 
         return $menu;
     }

@@ -3,13 +3,14 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\Shape;
+use Nines\UtilBundle\Form\TermType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * ShapeType form.
  */
-class ShapeType extends TermTypeType {
+class ShapeType extends TermType {
     /**
      * Add form fields to $builder.
      *

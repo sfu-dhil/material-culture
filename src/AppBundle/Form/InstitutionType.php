@@ -37,6 +37,7 @@ class InstitutionType extends AbstractType {
             'required' => false,
             'attr' => array(
                 'help_block' => '',
+                'class' => 'tinymce',
             ),
         ));
         $builder->add('contact', null, array(
@@ -44,6 +45,7 @@ class InstitutionType extends AbstractType {
             'required' => false,
             'attr' => array(
                 'help_block' => '',
+                'class' => 'tinymce',
             ),
         ));
     }

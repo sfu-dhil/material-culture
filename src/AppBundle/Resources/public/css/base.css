@@ -39,6 +39,11 @@ a[href^="https://"]::after {
   content: "";
 }
 
+/* Align the select2 typeahead to the left. */
+span.select2 {
+  margin-left: -15px;
+}
+
 /* make the search form checkboxes less bad. */
 div.checkbox, div.radio {
   width: 30%;

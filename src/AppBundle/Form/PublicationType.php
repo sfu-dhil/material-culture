@@ -30,6 +30,7 @@ class PublicationType extends AbstractType {
             'required' => true,
             'attr' => array(
                 'help_block' => '',
+                'class' => 'tinymce',
             ),
         ));
         $builder->add('doi', null, array(

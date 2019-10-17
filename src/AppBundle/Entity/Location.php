@@ -9,6 +9,8 @@ use Nines\UtilBundle\Entity\AbstractTerm;
 /**
  * Location.
  *
+ * See http://download.geonames.org/export/dump/readme.txt
+ *
  * @ORM\Table(name="location")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\LocationRepository")
  */
@@ -30,6 +32,76 @@ class Location extends AbstractTerm {
      * @ORM\Column(type="decimal", precision=10, scale=8, nullable=true)
      */
     private $longitude;
+
+    /**
+     * Comma separated, ascii names, automatically transliterated.
+     *
+     * @var string
+     *
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $alternateNames;
+
+    /**
+     * ISO-3166 2-letter country code, 2 characters.
+     *
+     * @var string
+     *
+     * @ORM\Column(type="string", length=2, nullable=true)
+     */
+    private $countryCode;
+
+    /**
+     * Fipscode.
+     *
+     * @var string
+     *
+     * @ORM\Column(name="admin1", type="string", length=20, nullable=true)
+     */
+    private $admin1;
+
+    /**
+     * Code for the second administrative division, a county in the US.
+     *
+     * @var string
+     *
+     * @ORM\Column(name="admin2", type="string", length=80, nullable=true)
+     */
+    private $admin2;
+
+    /**
+     * Code for third level administrative division.
+     *
+     * @var string
+     *
+     * @ORM\Column(name="admin3", type="string", length=20, nullable=true)
+     */
+    private $admin3;
+
+    /**
+     * Code for fourth level administrative division.
+     *
+     * @var string
+     *
+     * @ORM\Column(name="admin4", type="string", length=20, nullable=true)
+     */
+    private $admin4;
+
+    /**
+     * The iana timezone id.
+     *
+     * @var string
+     *
+     * @ORM\Column(name="timezone", type="string", length=40, nullable=true)
+     */
+    private $timezone;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="elevation", type="integer", nullable=true)
+     */
+    private $elevation;
 
     /**
      * @var Artefact[]|Collection
@@ -100,78 +172,4 @@ class Location extends AbstractTerm {
         return $this;
     }
 
-    /**
-     * Get longitude.
-     *
-     * @return null|string
-     */
-    public function getLongitude() {
-        return $this->longitude;
-    }
-
-    /**
-     * Add artefactsRecovered.
-     *
-     * @param \AppBundle\Entity\Artefact $artefactsRecovered
-     *
-     * @return Location
-     */
-    public function addArtefactsRecovered(Artefact $artefactsRecovered) {
-        $this->artefactsRecovered[] = $artefactsRecovered;
-
-        return $this;
-    }
-
-    /**
-     * Remove artefactsRecovered.
-     *
-     * @param \AppBundle\Entity\Artefact $artefactsRecovered
-     *
-     * @return bool TRUE if this collection contained the specified element, FALSE otherwise.
-     */
-    public function removeArtefactsRecovered(Artefact $artefactsRecovered) {
-        return $this->artefactsRecovered->removeElement($artefactsRecovered);
-    }
-
-    /**
-     * Get artefactsRecovered.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getArtefactsRecovered() {
-        return $this->artefactsRecovered;
-    }
-
-    /**
-     * Add artefactsManufactured.
-     *
-     * @param \AppBundle\Entity\Artefact $artefactsManufactured
-     *
-     * @return Location
-     */
-    public function addArtefactsManufactured(Artefact $artefactsManufactured) {
-        $this->artefactsManufactured[] = $artefactsManufactured;
-
-        return $this;
-    }
-
-    /**
-     * Remove artefactsManufactured.
-     *
-     * @param \AppBundle\Entity\Artefact $artefactsManufactured
-     *
-     * @return bool TRUE if this collection contained the specified element, FALSE otherwise.
-     */
-    public function removeArtefactsManufactured(Artefact $artefactsManufactured) {
-        return $this->artefactsManufactured->removeElement($artefactsManufactured);
-    }
-
-    /**
-     * Get artefactsManufactured.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getArtefactsManufactured() {
-        return $this->artefactsManufactured;
-    }
 }

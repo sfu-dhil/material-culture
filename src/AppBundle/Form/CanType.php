@@ -3,8 +3,11 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\Can;
+use AppBundle\Entity\Content;
+use AppBundle\Entity\Manufacturer;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
 
 /**
  * CanType form.
@@ -40,8 +43,32 @@ class CanType extends ArtefactType {
                 'help_block' => '',
             ),
         ));
-        $builder->add('manufacturer');
-        $builder->add('content');
+        $builder->add('manufacturer', Select2EntityType::class, array(
+            'label' => 'Manufacturer',
+            'multiple' => false,
+            'remote_route' => 'manufacturer_typeahead',
+            'class' => Manufacturer::class,
+            'required' => false,
+            'allow_clear' => true,
+            'attr' => array(
+                'add_path' => 'manufacturer_new',
+                'add_label' => 'New Manufacturer',
+                'help_block' => '',
+            ),
+        ));
+        $builder->add('content', Select2EntityType::class, array(
+            'label' => 'Content',
+            'multiple' => false,
+            'remote_route' => 'content_typeahead',
+            'class' => Content::class,
+            'required' => false,
+            'allow_clear' => true,
+            'attr' => array(
+                'add_path' => 'content_new',
+                'add_label' => 'New Content',
+                'help_block' => '',
+            ),
+        ));
     }
 
     /**

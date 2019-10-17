@@ -23,6 +23,7 @@ class ImageType extends AbstractType {
             'required' => false,
             'attr' => array(
                 'help_block' => '',
+                'class' => 'tinymce',
             ),
         ));
         $builder->add('originalName', null, array(
