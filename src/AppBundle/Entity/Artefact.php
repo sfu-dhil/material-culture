@@ -336,4 +336,40 @@ abstract class Artefact extends AbstractEntity {
     public function getReferences() {
         return $this->references;
     }
+
+    /**
+     * Add image.
+     *
+     * @param \AppBundle\Entity\Image $image
+     *
+     * @return Artefact
+     */
+    public function addImage(\AppBundle\Entity\Image $image)
+    {
+        $this->images[] = $image;
+
+        return $this;
+    }
+
+    /**
+     * Remove image.
+     *
+     * @param \AppBundle\Entity\Image $image
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeImage(\AppBundle\Entity\Image $image)
+    {
+        return $this->images->removeElement($image);
+    }
+
+    /**
+     * Get images.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
 }

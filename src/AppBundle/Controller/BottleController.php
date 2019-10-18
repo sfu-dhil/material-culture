@@ -46,35 +46,6 @@ class BottleController extends Controller implements PaginatorAwareInterface {
     }
 
     /**
-     * Typeahead API endpoint for Bottle entities.
-     *
-     * To make this work, add something like this to BottleRepository:
-     *
-     * @param Request $request
-     *
-     * @Route("/typeahead", name="bottle_typeahead", methods={"GET"})
-     *
-     * @return JsonResponse
-     */
-    public function typeahead(Request $request) {
-        $q = $request->query->get('q');
-        if ( ! $q) {
-            return new JsonResponse(array());
-        }
-        $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository(Bottle::class);
-        $data = array();
-        foreach ($repo->typeaheadQuery($q) as $result) {
-            $data[] = array(
-                'id' => $result->getId(),
-                'text' => (string) $result,
-            );
-        }
-
-        return new JsonResponse($data);
-    }
-
-    /**
      * Search for Bottle entities.
      *
      * To make this work, add a method like this one to the
@@ -147,21 +118,6 @@ class BottleController extends Controller implements PaginatorAwareInterface {
             'bottle' => $bottle,
             'form' => $form->createView(),
         );
-    }
-
-    /**
-     * Creates a new Bottle entity in a popup.
-     *
-     * @param Request $request
-     *
-     * @return array|RedirectResponse
-     *
-     * @IsGranted("ROLE_CONTENT_ADMIN")
-     * @Route("/new_popup", name="bottle_new_popup", methods={"GET","POST"})
-     * @Template()
-     */
-    public function newPopupAction(Request $request) {
-        return $this->newAction($request);
     }
 
     /**

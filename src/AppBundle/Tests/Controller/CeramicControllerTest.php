@@ -86,57 +86,6 @@ class CeramicControllerTest extends BaseTestCase {
 
     /**
      * @group anon
-     * @group typeahead
-     */
-    public function testAnonTypeahead() {
-        $client = $this->makeClient();
-        $client->request('GET', '/ceramic/typeahead?q=STUFF');
-        $response = $client->getResponse();
-        $this->assertStatusCode(302, $client);
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-        $this->assertEquals('application/json', $response->headers->get('content-type'));
-        $json = json_decode($response->getContent());
-        $this->assertEquals(4, count($json));
-    }
-
-    /**
-     * @group user
-     * @group typeahead
-     */
-    public function testUserTypeahead() {
-        $client = $this->makeClient(LoadUser::USER);
-        $client->request('GET', '/ceramic/typeahead?q=STUFF');
-        $response = $client->getResponse();
-        $this->assertStatusCode(200, $client);
-        $this->assertEquals('application/json', $response->headers->get('content-type'));
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-        $json = json_decode($response->getContent());
-        $this->assertEquals(4, count($json));
-    }
-
-    /**
-     * @group admin
-     * @group typeahead
-     */
-    public function testAdminTypeahead() {
-        $client = $this->makeClient(LoadUser::ADMIN);
-        $client->request('GET', '/ceramic/typeahead?q=STUFF');
-        $response = $client->getResponse();
-        $this->assertStatusCode(200, $client);
-        $this->assertEquals('application/json', $response->headers->get('content-type'));
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-        $json = json_decode($response->getContent());
-        $this->assertEquals(4, count($json));
-    }
-
-    /**
-     * @group anon
      * @group edit
      */
     public function testAnonEdit() {
@@ -192,17 +141,6 @@ class CeramicControllerTest extends BaseTestCase {
     }
 
     /**
-     * @group anon
-     * @group new
-     */
-    public function testAnonNewPopup() {
-        $client = $this->makeClient();
-        $crawler = $client->request('GET', '/ceramic/new_popup');
-        $this->assertStatusCode(302, $client);
-        $this->assertTrue($client->getResponse()->isRedirect());
-    }
-
-    /**
      * @group user
      * @group new
      */
@@ -213,46 +151,12 @@ class CeramicControllerTest extends BaseTestCase {
     }
 
     /**
-     * @group user
-     * @group new
-     */
-    public function testUserNewPopup() {
-        $client = $this->makeClient(LoadUser::USER);
-        $crawler = $client->request('GET', '/ceramic/new_popup');
-        $this->assertStatusCode(403, $client);
-    }
-
-    /**
      * @group admin
      * @group new
      */
     public function testAdminNew() {
         $client = $this->makeClient(LoadUser::ADMIN);
         $formCrawler = $client->request('GET', '/ceramic/new');
-        $this->assertStatusCode(200, $client);
-
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-        $form = $formCrawler->selectButton('Create')->form(array(
-            // DO STUFF HERE.
-            // 'ceramics[FIELDNAME]' => 'FIELDVALUE',
-        ));
-
-        $client->submit($form);
-        $this->assertTrue($client->getResponse()->isRedirect());
-        $responseCrawler = $client->followRedirect();
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        // $this->assertEquals(1, $responseCrawler->filter('td:contains("FIELDVALUE")')->count());
-    }
-
-    /**
-     * @group admin
-     * @group new
-     */
-    public function testAdminNewPopup() {
-        $client = $this->makeClient(LoadUser::ADMIN);
-        $formCrawler = $client->request('GET', '/ceramic/new_popup');
         $this->assertStatusCode(200, $client);
 
         $this->markTestIncomplete(

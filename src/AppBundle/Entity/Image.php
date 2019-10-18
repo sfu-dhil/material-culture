@@ -60,4 +60,28 @@ class Image extends AbstractEntity {
     public function getDescription() {
         return $this->description;
     }
+
+    /**
+     * Set artefact.
+     *
+     * @param \AppBundle\Entity\Artefact|null $artefact
+     *
+     * @return Image
+     */
+    public function setArtefact(\AppBundle\Entity\Artefact $artefact = null)
+    {
+        $this->artefact = $artefact;
+
+        return $this;
+    }
+
+    /**
+     * Get artefact.
+     *
+     * @return \AppBundle\Entity\Artefact|null
+     */
+    public function getArtefact()
+    {
+        return $this->artefact;
+    }
 }

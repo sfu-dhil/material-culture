@@ -46,35 +46,6 @@ class CeramicController extends Controller implements PaginatorAwareInterface {
     }
 
     /**
-     * Typeahead API endpoint for Ceramic entities.
-     *
-     * To make this work, add something like this to CeramicRepository:
-     *
-     * @param Request $request
-     *
-     * @Route("/typeahead", name="ceramic_typeahead", methods={"GET"})
-     *
-     * @return JsonResponse
-     */
-    public function typeahead(Request $request) {
-        $q = $request->query->get('q');
-        if ( ! $q) {
-            return new JsonResponse(array());
-        }
-        $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository(Ceramic::class);
-        $data = array();
-        foreach ($repo->typeaheadQuery($q) as $result) {
-            $data[] = array(
-                'id' => $result->getId(),
-                'text' => (string) $result,
-            );
-        }
-
-        return new JsonResponse($data);
-    }
-
-    /**
      * Search for Ceramic entities.
      *
      * To make this work, add a method like this one to the
@@ -148,21 +119,6 @@ class CeramicController extends Controller implements PaginatorAwareInterface {
             'ceramic' => $ceramic,
             'form' => $form->createView(),
         );
-    }
-
-    /**
-     * Creates a new Ceramic entity in a popup.
-     *
-     * @param Request $request
-     *
-     * @return array|RedirectResponse
-     *
-     * @IsGranted("ROLE_CONTENT_ADMIN")
-     * @Route("/new_popup", name="ceramic_new_popup", methods={"GET","POST"})
-     * @Template()
-     */
-    public function newPopupAction(Request $request) {
-        return $this->newAction($request);
     }
 
     /**
