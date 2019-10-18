@@ -19,8 +19,9 @@
             {% endif %}
         </div>
     </div>
-    <table class="table table-bordered table-condensed table-hover table-striped">
-        <tbody>
+
+    {% embed 'AppBundle:artefact/partial:show.html.twig' with {'artefact': ceramic} %}
+        {% block callback %}
             <tr>
                 <th>Paste</th>
                 <td>{{ ceramic.paste }}</td>
@@ -45,14 +46,7 @@
                     </a>
                 </td>
             </tr>
-            <tr>
-                <th>Created</th>
-                <td>{% if ceramic.created %}{{ ceramic.created|date }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Updated</th>
-                <td>{% if ceramic.updated %}{{ ceramic.updated|date }}{% endif %}</td>
-            </tr>
-        </tbody>
-    </table>
+        {% endblock %}
+    {% endembed %}
+
 {% endblock %}

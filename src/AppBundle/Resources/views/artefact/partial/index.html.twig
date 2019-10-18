@@ -1,0 +1,21 @@
+<table class="table table-bordered table-condensed table-hover table-striped">
+    <thead>
+        <tr>
+            <th>Catalog Number</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for artefact in artefacts %}
+            <tr>
+                <td>
+                    <a href="{{ path('artefact_show', { 'id': artefact.id }) }}">
+                        {{ artefact.catalogNumber }}
+                    </a>
+                </td>
+                <td>{{ artefact.description }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+

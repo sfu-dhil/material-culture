@@ -16,12 +16,14 @@ class PublicationRepository extends EntityRepository {
      * Do a typeahead-style query and return the results.
      *
      * @param string $q
+     *
      * @return Collection|Publication[]
      */
     public function typeaheadQuery($q) {
         $qb = $this->createQueryBuilder('v');
         $qb->where('v.title like :q');
         $qb->setParameter('q', '%' . $q . '%');
+
         return $qb->getQuery()->execute();
     }
 }

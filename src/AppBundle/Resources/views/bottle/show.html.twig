@@ -20,7 +20,34 @@
         </div>
     </div>
 
-    {% embed 'NinesUtilBundle:term/partial:index.html.twig' with {'terms': shapes, 'path': 'shape_show'} %}
+
+    {% embed 'AppBundle:artefact/partial:show.html.twig' with {'artefact': bottle} %}
+        {% block callback %}
+            <tr>
+                <th>Company</th>
+                <td>{{ bottle.company }}</td>
+            </tr>
+            <tr>
+                <th>Brand</th>
+                <td>{{ bottle.brand }}</td>
+            </tr>
+            <tr>
+                <th>Manufacturer</th>
+                <td>
+                    <a href="{{ path('manufacturer_show', { 'id': bottle.manufacturer.id}) }}">
+                        {{ bottle.manufacturer }}
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <th>Content</th>
+                <td>
+                    <a href="{{ path('content_show', { 'id': bottle.content.id}) }}">
+                        {{ bottle.content }}
+                    </a>
+                </td>
+            </tr>
+        {% endblock %}
     {% endembed %}
 
 {% endblock %}

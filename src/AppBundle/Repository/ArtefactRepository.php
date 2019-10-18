@@ -12,18 +12,18 @@ use Doctrine\ORM\EntityRepository;
  * repository methods below.
  */
 class ArtefactRepository extends EntityRepository {
-
     /**
      * Do a typeahead-style query and return the results.
      *
      * @param string $q
-     * @return Collection|Artefact[]
+     *
+     * @return Artefact[]|Collection
      */
     public function typeaheadQuery($q) {
         $qb = $this->createQueryBuilder('v');
         $qb->where('v.catalogNumber like :q');
         $qb->setParameter('q', '%' . $q . '%');
+
         return $qb->getQuery()->execute();
     }
-
 }

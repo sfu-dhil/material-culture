@@ -4,7 +4,6 @@ namespace AppBundle\Form;
 
 use AppBundle\Entity\Ceramic;
 use AppBundle\Entity\Glaze;
-use AppBundle\Entity\Location;
 use AppBundle\Entity\Shape;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

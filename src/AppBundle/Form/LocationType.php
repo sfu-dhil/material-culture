@@ -40,7 +40,6 @@ class LocationType extends TermType {
                 'help_block' => '',
             ),
         ));
-
     }
 
     /**

@@ -2,7 +2,6 @@
 
 namespace AppBundle\Form;
 
-use AppBundle\Entity\Location;
 use AppBundle\Entity\Publication;
 use AppBundle\Entity\Reference;
 use Symfony\Component\Form\AbstractType;

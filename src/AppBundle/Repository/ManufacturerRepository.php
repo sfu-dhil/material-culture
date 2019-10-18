@@ -16,12 +16,14 @@ class ManufacturerRepository extends EntityRepository {
      * Do a typeahead-style query and return the results.
      *
      * @param string $q
+     *
      * @return Collection|Manufacturer[]
      */
     public function typeaheadQuery($q) {
         $qb = $this->createQueryBuilder('v');
         $qb->where('v.name like :q');
         $qb->setParameter('q', '%' . $q . '%');
+
         return $qb->getQuery()->execute();
     }
 }

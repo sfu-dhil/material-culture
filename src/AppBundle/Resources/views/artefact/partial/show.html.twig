@@ -1,0 +1,75 @@
+<table class="table table-bordered table-condensed table-hover table-striped">
+    <tbody>
+        <tr>
+            <th>Catalog Number</th>
+            <td>{{ artefact.catalogNumber }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ artefact.description|raw }}</td>
+        </tr>
+        <tr>
+            <th>Further Reading</th>
+            <td>{{ artefact.furtherReading|raw }}</td>
+        </tr>
+        <tr>
+            <th>Note</th>
+            <td>{{ artefact.note|raw }}</td>
+        </tr>
+        <tr>
+            <th>Recoverylocation</th>
+            <td>
+                <a href="{{ path('location_show', { 'id': artefact.recoveryLocation.id}) }}">
+                    {{ artefact.recoveryLocation }}
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <th>Recoverydate</th>
+            <td>
+                {{ artefact.recoveryDate }}
+            </td>
+        </tr>
+        <tr>
+            <th>Manufacturelocation</th>
+            <td>
+                <a href="{{ path('location_show', { 'id': artefact.manufactureLocation.id}) }}">
+                    {{ artefact.manufactureLocation }}
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <th>Manufacturedate</th>
+            <td>
+                {{ artefact.manufactureDate }}
+            </td>
+        </tr>
+        <tr>
+            <th>Institution</th>
+            <td>
+                {{ artefact.institution }}
+            </td>
+        </tr>
+        {% block callback %}{% endblock %}
+        <tr>
+            <th>Created</th>
+            <td>{% if artefact.created %}{{ artefact.created|date }}{% endif %}</td>
+        </tr>
+        <tr>
+            <th>Updated</th>
+            <td>{% if artefact.updated %}{{ artefact.updated|date }}{% endif %}</td>
+        </tr>
+    </tbody>
+</table>
+{% if artefact.references | length > 0 %}
+    <h2>References</h2>
+    <ul>
+        {% for references in artefact.references %}
+            <li>
+                <a href="{{ path("references_show", {"id":references.id}) }}">
+                    {{ references }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}

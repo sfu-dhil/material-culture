@@ -2,9 +2,9 @@
 
 namespace AppBundle\Entity;
 
-use Exception;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Exception;
 use Nines\UtilBundle\Entity\AbstractEntity;
 
 /**
@@ -254,8 +254,9 @@ abstract class Artefact extends AbstractEntity {
      *
      * @param null|\AppBundle\Entity\CircaDate $manufactureDate
      *
-     * @return Artefact
      * @throws Exception
+     *
+     * @return Artefact
      */
     public function setManufactureDate($manufactureDate = null) {
         $this->manufactureDate = CircaDate::build($manufactureDate);
