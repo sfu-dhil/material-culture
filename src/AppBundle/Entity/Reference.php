@@ -36,7 +36,7 @@ class Reference extends AbstractEntity {
      * @return string
      */
     public function __toString() {
-        // TODO: Implement __toString() method.
+        return $this->publication . ' ' . $this->artefact;
     }
 
     /**

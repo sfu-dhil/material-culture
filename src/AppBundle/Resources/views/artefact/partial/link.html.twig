@@ -1,0 +1,20 @@
+{% spaceless %}
+    {% if artefact.category == constant('AppBundle\\Entity\\Artefact::BOTTLE') %}
+        {% set route='bottle_show' %}
+    {% elseif artefact.category == constant('AppBundle\\Entity\\Artefact::CAN') %}
+        {% set route='can_show' %}
+    {% elseif artefact.category == constant('AppBundle\\Entity\\Artefact::CERAMIC') %}
+        {% set route='can_show' %}
+    {% endif %}
+    {% if route is defined %}
+        <a href="{{ path(route, {'id': artefact.id}) }}">
+            {% if text is defined %}
+                {{ text }}
+            {% else %}
+                {{ artefact }}
+            {% endif %}
+        </a>
+    {% else %}
+        <span>Cannot link to {{ artefact.category }}.</span>
+    {% endif %}
+{% endspaceless %}

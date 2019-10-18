@@ -11,19 +11,13 @@
         <div class="btn-group pull-right">
             <a href="{{ path('reference_index') }}" class="btn btn-default">
                 <span class="glyphicon glyphicon-arrow-left"></span> Back </a>
-            {% if is_granted('ROLE_ADMIN') %}
-                <a href="{{ path('reference_edit', { 'id': reference.id }) }}" class="btn btn-default">
-                    <span class='glyphicon glyphicon-edit'></span> Edit </a>
-                <a href="{{ path('reference_delete', { 'id': reference.id }) }}" class="btn btn-default" data-confirm="Are you sure you want to delete this Reference?">
-                    <span class='glyphicon glyphicon-remove'></span> Delete </a>
-            {% endif %}
         </div>
     </div>
     <table class="table table-bordered table-condensed table-hover table-striped">
         <tbody>
             <tr>
                 <th>Description</th>
-                <td>{{ reference.description }}</td>
+                <td>{{ reference.description|raw }}</td>
             </tr>
             <tr>
                 <th>Publication</th>
@@ -36,9 +30,8 @@
             <tr>
                 <th>Artefact</th>
                 <td>
-                    <a href="{{ path('artefact_show', { 'id': reference.artefact.id}) }}">
-                        {{ reference.artefact }}
-                    </a>
+                    {% embed 'AppBundle:artefact/partial:link.html.twig' with {'artefact': reference.artefact } %}
+                    {% endembed %}
                 </td>
             </tr>
             <tr>

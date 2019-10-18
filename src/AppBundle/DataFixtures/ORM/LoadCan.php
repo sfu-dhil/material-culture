@@ -48,6 +48,8 @@ class LoadCan extends Fixture implements DependentFixtureInterface {
             LoadLocation::class,
             LoadLocation::class,
             LoadInstitution::class,
+            LoadManufacturer::class,
+            LoadContent::class,
         );
     }
 }

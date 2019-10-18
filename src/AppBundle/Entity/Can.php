@@ -47,7 +47,7 @@ class Can extends Artefact {
      * @return string
      */
     public function __toString() {
-        // TODO: Implement __toString() method.
+        return $this->company . ' ' . $this->brand;
     }
 
     public function getCategory() {
