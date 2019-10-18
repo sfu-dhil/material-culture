@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Nines\UtilBundle\Entity\AbstractTerm;
@@ -18,6 +19,11 @@ class Shape extends AbstractTerm {
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Ceramic", mappedBy="shape")
      */
     private $ceramics;
+
+    public function __construct() {
+        parent::__construct();
+        $this->ceramics = new ArrayCollection();
+    }
 
     /**
      * Add ceramic.

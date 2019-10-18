@@ -20,6 +20,12 @@ class Image extends AbstractEntity {
      */
     private $description;
 
+    /**
+     * @var Artefact
+     * @ORM\ManyToOne(targetEntity="Artefact", inversedBy="images")
+     */
+    private $artefact;
+
     public function __construct() {
         parent::__construct();
     }

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Nines\UtilBundle\Entity\AbstractEntity;
@@ -36,6 +37,11 @@ class Publication extends AbstractEntity {
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Reference", mappedBy="publication")
      */
     private $references;
+
+    public function __construct() {
+        parent::__construct();
+        $this->references = new ArrayCollection();
+    }
 
     /**
      * Force all entities to provide a stringify function.

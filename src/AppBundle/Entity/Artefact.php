@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Exception;
@@ -87,8 +88,16 @@ abstract class Artefact extends AbstractEntity {
      */
     private $references;
 
+    /**
+     * @var Collection|Image[]
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Image", mappedBy="artefact")
+     */
+    private $images;
+
     public function __construct() {
         parent::__construct();
+        $this->references = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     abstract public function getCategory();

@@ -61,14 +61,16 @@
         </tr>
     </tbody>
 </table>
+
 {% if artefact.references | length > 0 %}
     <h2>References</h2>
-    <ul>
-        {% for references in artefact.references %}
+    <ul class="list-unstyled">
+        {% for reference in artefact.references %}
             <li>
-                <a href="{{ path("references_show", {"id":references.id}) }}">
-                    {{ references }}
+                <a href="{{ path("publication_show", {"id":reference.publication.id}) }}">
+                    {{ reference.publication }}
                 </a>
+                {{ reference.description|raw }}
             </li>
         {% endfor %}
     </ul>
