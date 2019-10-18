@@ -30,6 +30,9 @@ class FileUploader {
      */
     public function upload(UploadedFile $file) {
         $filename = md5(uniqid()) . '.' . $file->guessExtension();
+        if ( ! file_exists($this->imageDir)) {
+            mkdir($this->imageDir, 0777, true);
+        }
         $file->move($this->imageDir, $filename);
 
         return $filename;

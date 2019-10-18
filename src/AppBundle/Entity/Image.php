@@ -3,7 +3,6 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Nines\UtilBundle\Entity\AbstractEntity;
 
 /**
  * Image.
@@ -11,9 +10,7 @@ use Nines\UtilBundle\Entity\AbstractEntity;
  * @ORM\Table(name="image")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ImageRepository")
  */
-class Image extends AbstractEntity {
-    use ImageTrait;
-
+class Image extends ImageEntity {
     /**
      * @var string
      * @ORM\Column(type="text", nullable=true)
@@ -64,12 +61,11 @@ class Image extends AbstractEntity {
     /**
      * Set artefact.
      *
-     * @param \AppBundle\Entity\Artefact|null $artefact
+     * @param null|\AppBundle\Entity\Artefact $artefact
      *
      * @return Image
      */
-    public function setArtefact(\AppBundle\Entity\Artefact $artefact = null)
-    {
+    public function setArtefact(Artefact $artefact = null) {
         $this->artefact = $artefact;
 
         return $this;
@@ -78,10 +74,9 @@ class Image extends AbstractEntity {
     /**
      * Get artefact.
      *
-     * @return \AppBundle\Entity\Artefact|null
+     * @return null|\AppBundle\Entity\Artefact
      */
-    public function getArtefact()
-    {
+    public function getArtefact() {
         return $this->artefact;
     }
 }

@@ -2,8 +2,12 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Artefact;
 use AppBundle\Entity\Image;
+use AppBundle\Services\FileUploader;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -11,6 +15,16 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * ImageType form.
  */
 class ImageType extends AbstractType {
+
+    /**
+     * @var FileUploader
+     */
+    private $fileUploader;
+
+    public function __construct(FileUploader $fileUploader) {
+        $this->fileUploader = $fileUploader;
+    }
+
     /**
      * Add form fields to $builder.
      *
@@ -18,6 +32,20 @@ class ImageType extends AbstractType {
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
+        $builder->add('artefact', EntityType::class, array(
+            'class' => Artefact::class,
+            'disabled' => true,
+        ));
+
+        $builder->add('imageFile', FileType::class, array(
+            'label' => 'Image',
+            'required' => true,
+            'attr' => array(
+                'help_block' => "Select a file to upload which is less than {$this->fileUploader->getMaxUploadSize(false)} in size.",
+                'data-maxsize' => $this->fileUploader->getMaxUploadSize(),
+            ),
+        ));
+
         $builder->add('description', null, array(
             'label' => 'Description',
             'required' => false,
@@ -26,48 +54,7 @@ class ImageType extends AbstractType {
                 'class' => 'tinymce',
             ),
         ));
-        $builder->add('originalName', null, array(
-            'label' => 'Original Name',
-            'required' => true,
-            'attr' => array(
-                'help_block' => '',
-            ),
-        ));
-        $builder->add('imageFilePath', null, array(
-            'label' => 'Image File Path',
-            'required' => true,
-            'attr' => array(
-                'help_block' => '',
-            ),
-        ));
-        $builder->add('thumbnailPath', null, array(
-            'label' => 'Thumbnail Path',
-            'required' => true,
-            'attr' => array(
-                'help_block' => '',
-            ),
-        ));
-        $builder->add('imageSize', null, array(
-            'label' => 'Image Size',
-            'required' => true,
-            'attr' => array(
-                'help_block' => '',
-            ),
-        ));
-        $builder->add('imageWidth', null, array(
-            'label' => 'Image Width',
-            'required' => false,
-            'attr' => array(
-                'help_block' => '',
-            ),
-        ));
-        $builder->add('imageHeight', null, array(
-            'label' => 'Image Height',
-            'required' => false,
-            'attr' => array(
-                'help_block' => '',
-            ),
-        ));
+
     }
 
     /**

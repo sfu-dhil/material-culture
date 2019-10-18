@@ -9,6 +9,7 @@
 namespace AppBundle\Services;
 
 use AppBundle\Entity\Image;
+use AppBundle\Entity\ImageEntity;
 use Exception;
 use Imagick;
 use ImagickException;
@@ -42,8 +43,8 @@ class Thumbnailer {
         $this->thumbHeight = $height;
     }
 
-    public function thumbnail(Image $clipping) {
-        $file = $clipping->getImageFile();
+    public function thumbnail(ImageEntity $imageEntity) {
+        $file = $imageEntity->getImageFile();
         $thumbname = $file->getBasename('.' . $file->getExtension()) . '_tn.png';
 
         try {

@@ -8,6 +8,7 @@
 
 namespace AppBundle\EventListener;
 
+use AppBundle\Entity\ImageEntity;
 use AppBundle\Entity\ImageTrait;
 use AppBundle\Services\FileUploader;
 use AppBundle\Services\Thumbnailer;
@@ -46,7 +47,7 @@ class ImageListener {
         $this->thumbnailer = $thumbnailer;
     }
 
-    private function uploadFile(ImageTrait $image) {
+    private function uploadFile(ImageEntity $image) {
         $file = $image->getImageFile();
         if ( ! $file instanceof UploadedFile) {
             return;
@@ -74,21 +75,21 @@ class ImageListener {
 
     public function prePersist(LifecycleEventArgs $args) {
         $entity = $args->getEntity();
-        if ($entity instanceof ImageTrait) {
+        if ($entity instanceof ImageEntity) {
             $this->uploadFile($entity);
         }
     }
 
     public function preUpdate(LifecycleEventArgs $args) {
         $entity = $args->getEntity();
-        if ($entity instanceof ImageTrait) {
+        if ($entity instanceof ImageEntity) {
             $this->uploadFile($entity);
         }
     }
 
     public function postLoad(LifecycleEventArgs $args) {
         $entity = $args->getEntity();
-        if ($entity instanceof ImageTrait) {
+        if ($entity instanceof ImageEntity) {
             $filename = $entity->getImageFilePath();
             if (file_exists($this->uploader->getImageDir() . '/' . $filename)) {
                 $file = new File($this->uploader->getImageDir() . '/' . $filename);

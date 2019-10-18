@@ -3,9 +3,15 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Nines\UtilBundle\Entity\AbstractEntity;
 use Symfony\Component\HttpFoundation\File\File;
 
-trait ImageTrait {
+/**
+ * Class ImageEntity.
+ *
+ * @ORM\MappedSuperclass()
+ */
+abstract class ImageEntity extends AbstractEntity {
     /**
      * @var string
      * @ORM\Column(type="string", length=64, nullable=false)
@@ -49,10 +55,14 @@ trait ImageTrait {
      */
     private $imageHeight;
 
+    public function __construct() {
+        parent::__construct();
+    }
+
     /**
      * @return string
      */
-    public function getOriginalName() : string {
+    public function getOriginalName() : ?string {
         return $this->originalName;
     }
 
@@ -61,7 +71,7 @@ trait ImageTrait {
      *
      * @return ImageTrait
      */
-    public function setOriginalName(string $originalName) : ImageTrait {
+    public function setOriginalName(string $originalName) : ImageEntity {
         $this->originalName = $originalName;
 
         return $this;
@@ -70,7 +80,7 @@ trait ImageTrait {
     /**
      * @return File
      */
-    public function getImageFile() : File {
+    public function getImageFile() : ?File {
         return $this->imageFile;
     }
 
@@ -79,7 +89,7 @@ trait ImageTrait {
      *
      * @return ImageTrait
      */
-    public function setImageFile(File $imageFile) : ImageTrait {
+    public function setImageFile(File $imageFile) : ImageEntity {
         $this->imageFile = $imageFile;
 
         return $this;
@@ -88,7 +98,7 @@ trait ImageTrait {
     /**
      * @return string
      */
-    public function getImageFilePath() : string {
+    public function getImageFilePath() : ?string {
         return $this->imageFilePath;
     }
 
@@ -97,7 +107,7 @@ trait ImageTrait {
      *
      * @return ImageTrait
      */
-    public function setImageFilePath(string $imageFilePath) : ImageTrait {
+    public function setImageFilePath(string $imageFilePath) : ImageEntity {
         $this->imageFilePath = $imageFilePath;
 
         return $this;
@@ -106,7 +116,7 @@ trait ImageTrait {
     /**
      * @return string
      */
-    public function getThumbnailPath() : string {
+    public function getThumbnailPath() : ?string {
         return $this->thumbnailPath;
     }
 
@@ -115,7 +125,7 @@ trait ImageTrait {
      *
      * @return ImageTrait
      */
-    public function setThumbnailPath(string $thumbnailPath) : ImageTrait {
+    public function setThumbnailPath(string $thumbnailPath) : ImageEntity {
         $this->thumbnailPath = $thumbnailPath;
 
         return $this;
@@ -124,7 +134,7 @@ trait ImageTrait {
     /**
      * @return int
      */
-    public function getImageSize() : int {
+    public function getImageSize() : ?int {
         return $this->imageSize;
     }
 
@@ -133,7 +143,7 @@ trait ImageTrait {
      *
      * @return ImageTrait
      */
-    public function setImageSize(int $imageSize) : ImageTrait {
+    public function setImageSize(int $imageSize) : ImageEntity {
         $this->imageSize = $imageSize;
 
         return $this;
@@ -142,7 +152,7 @@ trait ImageTrait {
     /**
      * @return int
      */
-    public function getImageWidth() : int {
+    public function getImageWidth() : ?int {
         return $this->imageWidth;
     }
 
@@ -151,7 +161,7 @@ trait ImageTrait {
      *
      * @return ImageTrait
      */
-    public function setImageWidth(int $imageWidth) : ImageTrait {
+    public function setImageWidth(int $imageWidth) : ImageEntity {
         $this->imageWidth = $imageWidth;
 
         return $this;
@@ -160,7 +170,7 @@ trait ImageTrait {
     /**
      * @return int
      */
-    public function getImageHeight() : int {
+    public function getImageHeight() : ?int {
         return $this->imageHeight;
     }
 
@@ -169,7 +179,7 @@ trait ImageTrait {
      *
      * @return ImageTrait
      */
-    public function setImageHeight(int $imageHeight) : ImageTrait {
+    public function setImageHeight(int $imageHeight) : ImageEntity {
         $this->imageHeight = $imageHeight;
 
         return $this;

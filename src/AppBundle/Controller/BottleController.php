@@ -3,12 +3,14 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Bottle;
+use AppBundle\Entity\Image;
 use AppBundle\Form\BottleType;
+use AppBundle\Form\ImageType;
 use Knp\Bundle\PaginatorBundle\Definition\PaginatorAwareInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -184,5 +186,66 @@ class BottleController extends Controller implements PaginatorAwareInterface {
         $this->addFlash('success', 'The bottle was deleted.');
 
         return $this->redirectToRoute('bottle_index');
+    }
+
+    /**
+     * Add an image to a bottle.
+     *
+     * @param Request $request
+     * @param Bottle $bottle
+     *
+     * @return array|RedirectResponse
+     *
+     * @IsGranted("ROLE_CONTENT_ADMIN")
+     * @Route("/{id}/add_image", name="bottle_add_image", methods={"GET", "POST"})
+     * @Template()
+     */
+    public function addImage(Request $request, Bottle $bottle) {
+        $image = new Image();
+        $image->setArtefact($bottle);
+        $form = $this->createForm(ImageType::class, $image);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($image);
+            $em->flush();
+            $this->addFlash('success', 'Image has been added.');
+
+            return $this->redirectToRoute('bottle_show', array('id' => $bottle->getId()));
+        }
+
+        return array(
+            'bottle' => $bottle,
+            'image' => $image,
+            'form' => $form->createView(),
+        );
+    }
+
+    /**
+     * Add an image to a bottle.
+     *
+     * @param Request $request
+     * @param Bottle $bottle
+     * @param Image $image
+     *
+     * @return RedirectResponse
+     *
+     * @IsGranted("ROLE_CONTENT_ADMIN")
+     * @Route("/{id}/remove_image/{image_id}", name="bottle_remove_image", methods={"POST"})
+     * @ParamConverter("image", options={"id" = "image_id"})
+     */
+    public function removeImage(Request $request, Bottle $bottle, Image $image) {
+        $em = $this->getDoctrine()->getManager();
+        if ($bottle->hasImage($image)) {
+            $bottle->removeImage($image);
+            $em->remove($image);
+            $em->flush();
+            $this->addFlash('success', 'The image has been removed.');
+        } else {
+            $this->addFlash('warning', 'The image was not removed.');
+        }
+
+        return $this->redirectToRoute('bottle_show', array('id' => $bottle->getId()));
     }
 }

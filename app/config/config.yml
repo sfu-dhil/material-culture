@@ -61,6 +61,7 @@ twig:
         '%kernel.project_dir%/vendor/ninsuo/symfony-collection': NinsuoSymfonyCollection
     globals:
         nines_editor_config: bundles/app/js/editor-config.js
+        image_prefix: '%mc.img.prefix%'
         comment_service: '@Nines\FeedbackBundle\Services\CommentService'
         text_service: '@Nines\UtilBundle\Services\Text'
         piwik_enabled: '%dhil.piwik_enabled%'

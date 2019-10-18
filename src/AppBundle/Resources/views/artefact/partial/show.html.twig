@@ -61,7 +61,6 @@
         </tr>
     </tbody>
 </table>
-
 {% if artefact.references | length > 0 %}
     <h2>References</h2>
     <ul class="list-unstyled">
@@ -74,4 +73,12 @@
             </li>
         {% endfor %}
     </ul>
+{% endif %}
+
+{% if artefact.images | length > 0 %}
+    <h2>Images</h2>
+    {% for image in artefact.images %}
+        <img src="{{ asset(image_prefix ~ '/' ~ image.thumbnailPath) }}" class="img-thumbnail" />
+        <br>{{ image.originalName }}
+    {% endfor %}
 {% endif %}

@@ -338,15 +338,27 @@ abstract class Artefact extends AbstractEntity {
     }
 
     /**
+     * Check if the artefact record contains an image.
+     *
+     * @param Image $image
+     *
+     * @return bool true if the collection of images contains the image.
+     */
+    public function hasImage(Image $image) {
+        return $this->images->contains($image);
+    }
+
+    /**
      * Add image.
      *
      * @param \AppBundle\Entity\Image $image
      *
      * @return Artefact
      */
-    public function addImage(\AppBundle\Entity\Image $image)
-    {
-        $this->images[] = $image;
+    public function addImage(Image $image) {
+        if ( ! $this->hasImage($image)) {
+            $this->images[] = $image;
+        }
 
         return $this;
     }
@@ -356,10 +368,9 @@ abstract class Artefact extends AbstractEntity {
      *
      * @param \AppBundle\Entity\Image $image
      *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     * @return bool true if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeImage(\AppBundle\Entity\Image $image)
-    {
+    public function removeImage(Image $image) {
         return $this->images->removeElement($image);
     }
 
@@ -368,8 +379,7 @@ abstract class Artefact extends AbstractEntity {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getImages()
-    {
+    public function getImages() {
         return $this->images;
     }
 }
