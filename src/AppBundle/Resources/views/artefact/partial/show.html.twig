@@ -61,8 +61,11 @@
         </tr>
     </tbody>
 </table>
-{% if artefact.references | length > 0 %}
-    <h2>References</h2>
+
+<h2>References</h2>
+{% if artefact.references | length == 0 %}
+    <p>No references for this artefact yet.</p>
+{% else %}
     <ul class="list-unstyled">
         {% for reference in artefact.references %}
             <li>
@@ -74,16 +77,17 @@
         {% endfor %}
     </ul>
 {% endif %}
+
 <h2>Images</h2>
-{% if artefact.images | length == 0 %}
-    {% if is_granted('ROLE_ADMIN') %}
-        <div class="btn-toolbar">
-            <div class="btn-group pull-right">
-                <a href="{{ path('bottle_add_image', {'id': artefact.id}) }}" class="btn btn-default">
-                    <span class='glyphicon glyphicon-plus'></span> Add Image</a>
-            </div>
+{% if is_granted('ROLE_ADMIN') %}
+    <div class="btn-toolbar">
+        <div class="btn-group pull-right">
+            <a href="{{ path('artefact_add_image', {'id': artefact.id}) }}" class="btn btn-default">
+                <span class='glyphicon glyphicon-plus'></span> Add Image</a>
         </div>
-    {% endif %}
+    </div>
+{% endif %}
+{% if artefact.images | length == 0 %}
     <p>No images yet.</p>
 {% else %}
 
