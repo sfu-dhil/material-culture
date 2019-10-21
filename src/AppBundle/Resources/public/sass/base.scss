@@ -63,3 +63,42 @@ div.collection-complex > div:not(:last-child) {
   height: $footer-height;
   background-color: $footer-bg;
 }
+
+/* Image gallery styles. */
+.img-container {
+  height: 160px;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.thumbnail {
+
+  & .caption {
+    margin-top: 15px;
+  }
+  & .title {
+    margin-bottom: 15px;
+  }
+  & .img-thumbnail {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+}
+
+.modal {
+  top: 50px;
+  margin-bottom: 15px;
+}
+
+#modalImage {
+  max-width: 100%;
+  display: block;
+  margin: 0 auto 0 auto;
+}
+
+.modal-dialog {
+  width: auto;
+  max-width: 75vw;
+  max-height: 75vh;
+}

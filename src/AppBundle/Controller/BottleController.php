@@ -6,11 +6,13 @@ use AppBundle\Entity\Bottle;
 use AppBundle\Entity\Image;
 use AppBundle\Form\BottleType;
 use AppBundle\Form\ImageType;
+use AppBundle\Services\FileUploader;
 use Knp\Bundle\PaginatorBundle\Definition\PaginatorAwareInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -229,10 +231,60 @@ class BottleController extends Controller implements PaginatorAwareInterface {
      * @param Bottle $bottle
      * @param Image $image
      *
+     * @return array|RedirectResponse
+     *
+     * @IsGranted("ROLE_CONTENT_ADMIN")
+     * @Route("/{id}/edit_image/{image_id}", name="bottle_edit_image", methods={"GET","POST"})
+     * @ParamConverter("image", options={"id" = "image_id"})
+     * @Template()
+     */
+    public function editImage(Request $request, FileUploader $fileUploader, Bottle $bottle, Image $image) {
+        $form = $this->createForm(ImageType::class, $image);
+        $form->remove('imageFile');
+        $form->add('newImageFile', FileType::class, array(
+            'label' => 'Replacement Image',
+            'required' => true,
+            'attr' => array(
+                'help_block' => "Select a file to upload which is less than {$fileUploader->getMaxUploadSize(false)} in size.",
+                'data-maxsize' => $fileUploader->getMaxUploadSize(),
+            ),
+            'mapped' => false,
+        ));
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            if(($upload = $form->get('newImageFile')->getData())) {
+                $image->setImageFile($upload);
+                $image->preUpdate(); // force doctrine to update.
+            }
+
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            $this->addFlash('success', 'Image has been updated.');
+
+            return $this->redirectToRoute('bottle_show', array('id' => $bottle->getId()));
+        }
+
+        return array(
+            'bottle' => $bottle,
+            'image' => $image,
+            'form' => $form->createView(),
+        );
+    }
+
+    /**
+     * Add an image to a bottle.
+     *
+     * @param Request $request
+     * @param Bottle $bottle
+     * @param Image $image
+     *
      * @return RedirectResponse
      *
      * @IsGranted("ROLE_CONTENT_ADMIN")
-     * @Route("/{id}/remove_image/{image_id}", name="bottle_remove_image", methods={"POST"})
+     * @Route("/{id}/remove_image/{image_id}", name="bottle_remove_image", methods={"GET"})
      * @ParamConverter("image", options={"id" = "image_id"})
      */
     public function removeImage(Request $request, Bottle $bottle, Image $image) {
