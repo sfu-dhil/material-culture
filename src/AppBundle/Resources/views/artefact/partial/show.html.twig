@@ -63,21 +63,28 @@
 </table>
 
 <h2>References</h2>
+{% if is_granted('ROLE_ADMIN') %}
+    <div class="btn-toolbar">
+        <div class="btn-group pull-right">
+            <a href="{{ path('artefact_references', {'id': artefact.id}) }}" class="btn btn-default">
+                <span class='glyphicon glyphicon-plus'></span> Edit References</a>
+        </div>
+    </div>
+{% endif %}
 {% if artefact.references | length == 0 %}
     <p>No references for this artefact yet.</p>
 {% else %}
-    <ul class="list-unstyled">
-        {% for reference in artefact.references %}
-            <li>
-                <a href="{{ path("publication_show", {"id":reference.publication.id}) }}">
-                    {{ reference.publication }}
-                </a>
-                {{ reference.description|raw }}
-            </li>
-        {% endfor %}
-    </ul>
-{% endif %}
 
+    {% for reference in artefact.references %}
+        <a href="{{ path("publication_show", {"id":reference.publication.id}) }}">
+            {{ reference.publication.citation|raw }}
+        </a>
+        <a href="{{ reference.publication.doi }}">{{ reference.publication.doi }}</a></p>
+        {{ reference.description|raw }}
+
+    {% endfor %}
+
+{% endif %}
 <h2>Images</h2>
 {% if is_granted('ROLE_ADMIN') %}
     <div class="btn-toolbar">

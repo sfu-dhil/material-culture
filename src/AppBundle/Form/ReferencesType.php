@@ -2,9 +2,12 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Artefact;
 use AppBundle\Entity\Publication;
 use AppBundle\Entity\Reference;
+use phpDocumentor\Reflection\Types\Collection;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
@@ -12,7 +15,7 @@ use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
 /**
  * ReferenceType form.
  */
-class ReferenceType extends AbstractType {
+class ReferencesType extends AbstractType {
     /**
      * Add form fields to $builder.
      *
@@ -20,26 +23,20 @@ class ReferenceType extends AbstractType {
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder->add('description', null, array(
-            'label' => 'Description',
+        $builder->add('references', CollectionType::class, array(
+            'label' => 'References',
+            'allow_add' => true,
+            'allow_delete' => true,
+            'prototype' => true,
+            'entry_type' => ReferenceType::class,
+            'entry_options' => array(
+                'label' => false,
+            ),
             'required' => false,
             'attr' => array(
                 'help_block' => '',
-                'class' => 'tinymce',
-            ),
-        ));
-        $builder->add('publication', Select2EntityType::class, array(
-            'label' => 'Publication',
-            'multiple' => false,
-            'remote_route' => 'publication_typeahead',
-            'class' => Publication::class,
-            'required' => false,
-            'allow_clear' => true,
-            'attr' => array(
-                'add_path' => 'publication_new_popup',
-                'add_label' => 'New Publication',
-                'help_block' => '',
-            ),
+                'class' => 'collection collection-complex',
+            )
         ));
     }
 
@@ -53,7 +50,7 @@ class ReferenceType extends AbstractType {
      */
     public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefaults(array(
-            'data_class' => Reference::class,
+            'data_class' => Artefact::class,
         ));
     }
 }

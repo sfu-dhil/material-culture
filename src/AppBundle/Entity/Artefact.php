@@ -84,7 +84,7 @@ abstract class Artefact extends AbstractEntity {
 
     /**
      * @var Collection|Reference[]
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Reference", mappedBy="artefact")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Reference", mappedBy="artefact", cascade={"persist"})
      */
     private $references;
 

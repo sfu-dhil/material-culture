@@ -3,7 +3,7 @@ function getTinyMceConfig(editorUploadPath) {
     return {
         branding: false,
         selector: '.tinymce',
-        plugins: 'hr image imagetools link lists paste wordcount',
+        plugins: 'hr image imagetools link lists paste wordcount code advlist charmap preview searchreplace',
         relative_urls: false,
         convert_urls: false,
         height: 240,
@@ -11,7 +11,7 @@ function getTinyMceConfig(editorUploadPath) {
 
         toolbar: "undo redo | styleselect | paste | bold italic | alignleft "
             + "aligncenter alignright alignjustify | "
-            + "bullist numlist outdent indent | link",
+            + "bullist numlist outdent indent | link | code",
 
         image_caption: true,
         images_upload_url: editorUploadPath,

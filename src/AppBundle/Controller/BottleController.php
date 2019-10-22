@@ -109,6 +109,9 @@ class BottleController extends Controller implements PaginatorAwareInterface {
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            foreach($bottle->getReferences() as $reference) {
+                $reference->setArtefact($bottle);
+            }
             $em = $this->getDoctrine()->getManager();
             $em->persist($bottle);
             $em->flush();
@@ -188,116 +191,5 @@ class BottleController extends Controller implements PaginatorAwareInterface {
         $this->addFlash('success', 'The bottle was deleted.');
 
         return $this->redirectToRoute('bottle_index');
-    }
-
-    /**
-     * Add an image to a bottle.
-     *
-     * @param Request $request
-     * @param Bottle $bottle
-     *
-     * @return array|RedirectResponse
-     *
-     * @IsGranted("ROLE_CONTENT_ADMIN")
-     * @Route("/{id}/add_image", name="bottle_add_image", methods={"GET", "POST"})
-     * @Template()
-     */
-    public function addImage(Request $request, Bottle $bottle) {
-        $image = new Image();
-        $image->setArtefact($bottle);
-        $form = $this->createForm(ImageType::class, $image);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($image);
-            $em->flush();
-            $this->addFlash('success', 'Image has been added.');
-
-            return $this->redirectToRoute('bottle_show', array('id' => $bottle->getId()));
-        }
-
-        return array(
-            'bottle' => $bottle,
-            'image' => $image,
-            'form' => $form->createView(),
-        );
-    }
-
-    /**
-     * Add an image to a bottle.
-     *
-     * @param Request $request
-     * @param Bottle $bottle
-     * @param Image $image
-     *
-     * @return array|RedirectResponse
-     *
-     * @IsGranted("ROLE_CONTENT_ADMIN")
-     * @Route("/{id}/edit_image/{image_id}", name="bottle_edit_image", methods={"GET","POST"})
-     * @ParamConverter("image", options={"id" = "image_id"})
-     * @Template()
-     */
-    public function editImage(Request $request, FileUploader $fileUploader, Bottle $bottle, Image $image) {
-        $form = $this->createForm(ImageType::class, $image);
-        $form->remove('imageFile');
-        $form->add('newImageFile', FileType::class, array(
-            'label' => 'Replacement Image',
-            'required' => true,
-            'attr' => array(
-                'help_block' => "Select a file to upload which is less than {$fileUploader->getMaxUploadSize(false)} in size.",
-                'data-maxsize' => $fileUploader->getMaxUploadSize(),
-            ),
-            'mapped' => false,
-        ));
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            if(($upload = $form->get('newImageFile')->getData())) {
-                $image->setImageFile($upload);
-                $image->preUpdate(); // force doctrine to update.
-            }
-
-            $em = $this->getDoctrine()->getManager();
-            $em->flush();
-            $this->addFlash('success', 'Image has been updated.');
-
-            return $this->redirectToRoute('bottle_show', array('id' => $bottle->getId()));
-        }
-
-        return array(
-            'bottle' => $bottle,
-            'image' => $image,
-            'form' => $form->createView(),
-        );
-    }
-
-    /**
-     * Add an image to a bottle.
-     *
-     * @param Request $request
-     * @param Bottle $bottle
-     * @param Image $image
-     *
-     * @return RedirectResponse
-     *
-     * @IsGranted("ROLE_CONTENT_ADMIN")
-     * @Route("/{id}/remove_image/{image_id}", name="bottle_remove_image", methods={"GET"})
-     * @ParamConverter("image", options={"id" = "image_id"})
-     */
-    public function removeImage(Request $request, Bottle $bottle, Image $image) {
-        $em = $this->getDoctrine()->getManager();
-        if ($bottle->hasImage($image)) {
-            $bottle->removeImage($image);
-            $em->remove($image);
-            $em->flush();
-            $this->addFlash('success', 'The image has been removed.');
-        } else {
-            $this->addFlash('warning', 'The image was not removed.');
-        }
-
-        return $this->redirectToRoute('bottle_show', array('id' => $bottle->getId()));
     }
 }

@@ -69,7 +69,7 @@ twig:
         piwik_siteid: '%dhil.piwik_siteid%'
         piwik_domain: '%dhil.piwik_domain%'
     date:
-        format: d.m.Y, H:i:s
+        format: M j Y, g:i:s A
         interval_format: '%%d days'
 
 # Doctrine Configuration

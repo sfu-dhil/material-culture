@@ -4,7 +4,9 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Artefact;
 use AppBundle\Entity\Image;
+use AppBundle\Entity\Reference;
 use AppBundle\Form\ImageType;
+use AppBundle\Form\ReferencesType;
 use AppBundle\Services\FileUploader;
 use Knp\Bundle\PaginatorBundle\Definition\PaginatorAwareInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -36,7 +38,6 @@ class ArtefactController extends Controller implements PaginatorAwareInterface {
      *
      * @return RedirectResponse
      *
-     *
      * @IsGranted("ROLE_CONTENT_ADMIN")
      * @Route("/{id}", name="artefact_show", methods={"GET"})
      * @Template()
@@ -52,6 +53,50 @@ class ArtefactController extends Controller implements PaginatorAwareInterface {
             default:
                 throw new HttpException(500, 'Cannot generate URL for artefact of type ' . $artefact->getCategory());
         }
+    }
+
+    /**
+     * Edit the references associated with an artefact.
+     *
+     * @param Request $request
+     * @param Artefact $artefact
+     *
+     * @return array|RedirectResponse
+     *
+     * @IsGranted("ROLE_CONTENT_ADMIN")
+     * @Route("/{id}/references", name="artefact_references", methods={"GET","POST"})
+     * @Template()
+     */
+    public function referencesAction(Request $request, Artefact $artefact) {
+        $oldReferences = $artefact->getReferences()->getValues();
+
+        $form = $this->createForm(ReferencesType::class, $artefact);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            dump($artefact);
+            foreach ($artefact->getReferences() as $reference) {
+                if( ! $reference->getId()) {
+                    $reference->setArtefact($artefact);
+                }
+            }
+            $newReferences = $artefact->getReferences();
+            foreach($oldReferences as $reference) {
+                if( ! $newReferences->contains($reference)) {
+                    $em->remove($reference);
+                }
+            }
+            $em->flush();
+            $this->addFlash('success', 'The artefact has been updated.');
+
+            return $this->redirectToRoute('artefact_show', array('id' => $artefact->getId()));
+        }
+
+        return array(
+            'artefact' => $artefact,
+            'form' => $form->createView(),
+        );
     }
 
     /**
