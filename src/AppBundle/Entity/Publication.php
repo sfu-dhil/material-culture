@@ -28,6 +28,12 @@ class Publication extends AbstractEntity {
 
     /**
      * @var string
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $abstract;
+
+    /**
+     * @var string
      * @ORM\Column(type="string", nullable=true)
      */
     private $doi;
@@ -149,5 +155,29 @@ class Publication extends AbstractEntity {
      */
     public function getReferences() {
         return $this->references;
+    }
+
+    /**
+     * Set abstract.
+     *
+     * @param string|null $abstract
+     *
+     * @return Publication
+     */
+    public function setAbstract($abstract = null)
+    {
+        $this->abstract = $abstract;
+
+        return $this;
+    }
+
+    /**
+     * Get abstract.
+     *
+     * @return string|null
+     */
+    public function getAbstract()
+    {
+        return $this->abstract;
     }
 }

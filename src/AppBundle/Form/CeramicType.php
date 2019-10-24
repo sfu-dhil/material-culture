@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use AppBundle\Entity\Ceramic;
 use AppBundle\Entity\Glaze;
 use AppBundle\Entity\Shape;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
@@ -61,6 +62,20 @@ class CeramicType extends ArtefactType {
                 'add_label' => 'New Glaze',
                 'help_block' => '',
             ),
+        ));
+        $builder->add('references', CollectionType::class, array(
+            'label' => 'Bibliographic References',
+            'allow_add' => true,
+            'allow_delete' => true,
+            'allow_delete' => true,
+            'prototype' => true,
+            'entry_type' => ReferenceType::class,
+            'entry_options' => array('label' => false),
+            'required' => false,
+            'attr' => array(
+                'help_block' => '',
+                'class' => 'collection collection-complex',
+            )
         ));
     }
 

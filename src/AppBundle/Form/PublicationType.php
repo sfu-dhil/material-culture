@@ -34,6 +34,14 @@ class PublicationType extends AbstractType {
                 'class' => 'tinymce',
             ),
         ));
+        $builder->add('abstract', TextareaType::class, array(
+            'label' => 'Abstract',
+            'required' => false,
+            'attr' => array(
+                'help_block' => '',
+                'class' => 'tinymce',
+            ),
+        ));
         $builder->add('doi', null, array(
             'label' => 'Doi',
             'required' => false,
