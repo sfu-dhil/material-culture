@@ -25,7 +25,7 @@ class LoadBottle extends Fixture implements DependentFixtureInterface {
         $item3->setManufactureLocation($this->getReference('_reference_Location1'));
         $item3->setManufactureDate('1796');
         $item3->setInstitution($this->getReference('_reference_Institution4'));
-        $item3->setCatalogNumber('c01');
+        $item3->addCatalogNumber('c01');
         $item3->setDescription('<p>Coca Cola bottle with discolored label</p>');
         $this->addReference('_reference_Bottle3', $item3);
         $manager->persist($item3);

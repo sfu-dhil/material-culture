@@ -25,7 +25,7 @@ class LoadCeramic extends Fixture implements DependentFixtureInterface {
         $item1->setManufactureLocation($this->getReference('_reference_Location3'));
         $item1->setManufactureDate('1790-1795');
         $item1->setInstitution($this->getReference('_reference_Institution2'));
-        $item1->setCatalogNumber('abc-123');
+        $item1->addCatalogNumber('abc-123');
         $item1->setDescription('A piece of pottery');
         $this->addReference('_reference_Ceramic1', $item1);
         $manager->persist($item1);

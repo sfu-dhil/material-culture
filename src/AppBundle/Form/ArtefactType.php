@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use AppBundle\Entity\Institution;
 use AppBundle\Entity\Location;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,11 +22,17 @@ abstract class ArtefactType extends AbstractType {
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder->add('catalogNumber', null, array(
-            'label' => 'Catalog Number',
+        $builder->add('catalogNumbers', CollectionType::class, array(
+            'label' => 'Catalog Numbers',
+            'allow_add' => true,
+            'allow_delete' => true,
+            'prototype' => true,
+            'entry_type' => TextType::class,
+            'entry_options' => array('label' => false),
             'required' => false,
             'attr' => array(
                 'help_block' => '',
+                'class' => 'collection collection-simple',
             ),
         ));
 

@@ -60,9 +60,9 @@ abstract class Artefact extends AbstractEntity {
 
     /**
      * @var string
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="array", nullable=false)
      */
-    private $catalogNumber;
+    private $catalogNumbers;
 
     /**
      * @var string
@@ -96,6 +96,7 @@ abstract class Artefact extends AbstractEntity {
 
     public function __construct() {
         parent::__construct();
+        $this->catalogNumbers = array();
         $this->references = new ArrayCollection();
         $this->images = new ArrayCollection();
     }
@@ -105,12 +106,44 @@ abstract class Artefact extends AbstractEntity {
     /**
      * Set catalogNumber.
      *
-     * @param null|string $catalogNumber
+     * @param array $catalogNumbers
      *
      * @return Artefact
      */
-    public function setCatalogNumber($catalogNumber = null) {
-        $this->catalogNumber = $catalogNumber;
+    public function setCatalogNumbers($catalogNumbers) {
+        $this->catalogNumbers = array_unique($catalogNumbers);
+        sort($this->catalogNumbers);
+
+        return $this;
+    }
+
+    /**
+     * Add a catalog number.
+     *
+     * @param $catalogNumber
+     *
+     * @return $this
+     */
+    public function addCatalogNumber($catalogNumber) {
+        if ( ! in_array($catalogNumber, $this->catalogNumbers)) {
+            $this->catalogNumbers[] = $catalogNumber;
+            sort($this->catalogNumbers);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remove a catalog number.
+     *
+     * @param $catalogNumber
+     *
+     * @return $this
+     */
+    public function removeCatalogNumber($catalogNumber) {
+        if (($key = array_search($catalogNumber, $this->catalogNumbers))) {
+            array_splice($this->catalogNumbers, $key, 1);
+        }
 
         return $this;
     }
@@ -118,10 +151,12 @@ abstract class Artefact extends AbstractEntity {
     /**
      * Get catalogNumber.
      *
-     * @return null|string
+     * @param mixed $sort
+     *
+     * @return array
      */
-    public function getCatalogNumber() {
-        return $this->catalogNumber;
+    public function getCatalogNumbers() {
+        return $this->catalogNumbers;
     }
 
     /**

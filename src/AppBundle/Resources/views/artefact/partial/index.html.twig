@@ -10,7 +10,7 @@
             <tr>
                 <td>
                     <a href="{{ path('artefact_show', { 'id': artefact.id }) }}">
-                        {{ artefact.catalogNumber }}
+                        {{ artefact.catalogNumbers|join('; ') }}
                     </a>
                 </td>
                 <td>{{ artefact.description }}</td>
