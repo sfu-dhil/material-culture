@@ -1,8 +1,10 @@
 <table class="table table-bordered table-condensed table-hover table-striped">
     <tbody>
         <tr>
-            <th>Catalog Number</th>
-            <td>{{ artefact.catalogNumber }}</td>
+            <th>Catalog Numbers</th>
+            <td>
+                {{ artefact.catalogNumbers|join('; ') }}
+            </td>
         </tr>
         <tr>
             <th>Description</th>
@@ -19,9 +21,11 @@
         <tr>
             <th>Recovery Location</th>
             <td>
+                {% if artefact.recoveryLocation %}
                 <a href="{{ path('location_show', { 'id': artefact.recoveryLocation.id}) }}">
                     {{ artefact.recoveryLocation }}
                 </a>
+                {% endif %}
             </td>
         </tr>
         <tr>
@@ -33,9 +37,11 @@
         <tr>
             <th>Manufacture Location</th>
             <td>
-                <a href="{{ path('location_show', { 'id': artefact.manufactureLocation.id}) }}">
-                    {{ artefact.manufactureLocation }}
-                </a>
+                {% if artefact.manufactureLocation %}
+                    <a href="{{ path('location_show', { 'id': artefact.manufactureLocation.id}) }}">
+                        {{ artefact.manufactureLocation }}
+                    </a>
+                {% endif %}
             </td>
         </tr>
         <tr>

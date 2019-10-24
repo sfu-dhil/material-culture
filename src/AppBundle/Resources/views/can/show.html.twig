@@ -37,17 +37,21 @@
             <tr>
                 <th>Manufacturer</th>
                 <td>
-                    <a href="{{ path('manufacturer_show', { 'id': can.manufacturer.id}) }}">
-                        {{ can.manufacturer }}
-                    </a>
+                    {% if can.manufacturer %}
+                        <a href="{{ path('manufacturer_show', { 'id': can.manufacturer.id}) }}">
+                            {{ can.manufacturer }}
+                        </a>
+                    {% endif %}
                 </td>
             </tr>
             <tr>
                 <th>Content</th>
                 <td>
-                    <a href="{{ path('content_show', { 'id': can.content.id}) }}">
-                        {{ can.content }}
-                    </a>
+                    {% if can.content %}
+                        <a href="{{ path('content_show', { 'id': can.content.id}) }}">
+                            {{ can.content }}
+                        </a>
+                    {% endif %}
                 </td>
             </tr>
         {% endblock %}
