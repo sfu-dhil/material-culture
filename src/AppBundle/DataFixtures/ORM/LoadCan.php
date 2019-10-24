@@ -24,6 +24,7 @@ class LoadCan extends Fixture implements DependentFixtureInterface {
         $item2->setRecoveryLocation($this->getReference('_reference_Location5'));
         $item2->setRecoveryDate('1980');
         $item2->setManufactureLocation($this->getReference('_reference_Location6'));
+        $item2->setPackagingLocation($this->getReference('_reference_Location4'));
         $item2->setManufactureDate('c1780');
         $item2->setInstitution($this->getReference('_reference_Institution3'));
         $item2->setCatalogNumbers(array('askdjfhk'));

@@ -30,6 +30,12 @@ class Bottle extends Artefact {
     private $manufacturer;
 
     /**
+     * @var Location
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Location", inversedBy="bottlesPacked")
+     */
+    private $packagingLocation;
+
+    /**
      * @var Content
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Content", inversedBy="bottles")
      */
@@ -138,5 +144,29 @@ class Bottle extends Artefact {
      */
     public function getContent() {
         return $this->content;
+    }
+
+    /**
+     * Set packagingLocation.
+     *
+     * @param \AppBundle\Entity\Location|null $packagingLocation
+     *
+     * @return Bottle
+     */
+    public function setPackagingLocation(\AppBundle\Entity\Location $packagingLocation = null)
+    {
+        $this->packagingLocation = $packagingLocation;
+
+        return $this;
+    }
+
+    /**
+     * Get packagingLocation.
+     *
+     * @return \AppBundle\Entity\Location|null
+     */
+    public function getPackagingLocation()
+    {
+        return $this->packagingLocation;
     }
 }
