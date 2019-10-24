@@ -34,6 +34,17 @@
                 <td>{{ publication.abstract|raw }}</td>
             </tr>
             <tr>
+                <td>
+                    {% if publication.urls | length > 0 %}
+                        <ul>
+                            {% for url in publication.urls %}
+                                <li><a href="{{ url }}">{{ url }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
                 <th>Doi</th>
                 <td>
                     {% if publication.doi %}

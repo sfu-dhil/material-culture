@@ -4,7 +4,9 @@ namespace AppBundle\Form;
 
 use AppBundle\Entity\Publication;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -40,6 +42,19 @@ class PublicationType extends AbstractType {
             'attr' => array(
                 'help_block' => '',
                 'class' => 'tinymce',
+            ),
+        ));
+        $builder->add('urls', CollectionType::class, array(
+            'label' => 'URLs',
+            'allow_add' => true,
+            'allow_delete' => true,
+            'prototype' => true,
+            'entry_type' => TextType::class,
+            'entry_options' => array('label' => false),
+            'required' => false,
+            'attr' => array(
+                'help_block' => '',
+                'class' => 'collection collection-simple',
             ),
         ));
         $builder->add('doi', null, array(

@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Nines\UtilBundle\Entity\AbstractEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Publication.
@@ -33,7 +34,20 @@ class Publication extends AbstractEntity {
     private $abstract;
 
     /**
+     * @var array
+     *
+     * @Assert\All({
+     *     @Assert\NotBlank,
+     *     @Assert\Url
+     * })
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $urls;
+
+    /**
      * @var string
+     *
+     * @Assert\Url
      * @ORM\Column(type="string", nullable=true)
      */
     private $doi;
@@ -46,6 +60,7 @@ class Publication extends AbstractEntity {
 
     public function __construct() {
         parent::__construct();
+        $this->urls = array();
         $this->references = new ArrayCollection();
     }
 
@@ -160,12 +175,11 @@ class Publication extends AbstractEntity {
     /**
      * Set abstract.
      *
-     * @param string|null $abstract
+     * @param null|string $abstract
      *
      * @return Publication
      */
-    public function setAbstract($abstract = null)
-    {
+    public function setAbstract($abstract = null) {
         $this->abstract = $abstract;
 
         return $this;
@@ -174,10 +188,61 @@ class Publication extends AbstractEntity {
     /**
      * Get abstract.
      *
-     * @return string|null
+     * @return null|string
      */
-    public function getAbstract()
-    {
+    public function getAbstract() {
         return $this->abstract;
+    }
+
+    /**
+     * Set urls.
+     *
+     * @param null|array $urls
+     *
+     * @return Publication
+     */
+    public function setUrls($urls = null) {
+        $this->urls = array_unique($urls);
+
+        return $this;
+    }
+
+    /**
+     * Add a URL.
+     *
+     * @param string $url
+     *
+     * @return $this
+     */
+    public function addUrl($url) {
+        if ( ! in_array($url, $this->urls)) {
+            $this->urls[] = $url;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remove a URL.
+     *
+     * @param string $url
+     *
+     * @return $this
+     */
+    public function removeUrl($url) {
+        if (($key = array_search($url, $this->urls))) {
+            array_splice($this->urls, $key, 1);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get urls.
+     *
+     * @return null|array
+     */
+    public function getUrls() {
+        return $this->urls;
     }
 }
