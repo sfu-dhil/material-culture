@@ -30,6 +30,12 @@ class Can extends Artefact {
     private $manufacturer;
 
     /**
+     * @var Location
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Location", inversedBy="cansPacked")
+     */
+    private $packagingLocation;
+
+    /**
      * @var string
      * @ORM\Column(type="string", nullable=true)
      */
@@ -166,5 +172,29 @@ class Can extends Artefact {
      */
     public function getContent() {
         return $this->content;
+    }
+
+    /**
+     * Set packagingLocation.
+     *
+     * @param \AppBundle\Entity\Location|null $packagingLocation
+     *
+     * @return Can
+     */
+    public function setPackagingLocation(\AppBundle\Entity\Location $packagingLocation = null)
+    {
+        $this->packagingLocation = $packagingLocation;
+
+        return $this;
+    }
+
+    /**
+     * Get packagingLocation.
+     *
+     * @return \AppBundle\Entity\Location|null
+     */
+    public function getPackagingLocation()
+    {
+        return $this->packagingLocation;
     }
 }

@@ -116,11 +116,25 @@ class Location extends AbstractTerm {
      */
     private $artefactsManufactured;
 
+    /**
+     * @var Artefact[]|Collection
+     * @ORM\OneToMany(targetEntity="Artefact", mappedBy="packagingLocation")
+     */
+    private $bottlesPacked;
+
+    /**
+     * @var Artefact[]|Collection
+     * @ORM\OneToMany(targetEntity="Artefact", mappedBy="packagingLocation")
+     */
+    private $cansPacked;
+
     public function __construct() {
         parent::__construct();
         $this->alternateNames = array();
         $this->artefactsManufactured = new ArrayCollection();
         $this->artefactsRecovered = new ArrayCollection();
+        $this->bottlesPacked = new ArrayCollection();
+        $this->cansPacked = new ArrayCollection();
     }
 
     /**
@@ -429,5 +443,77 @@ class Location extends AbstractTerm {
      */
     public function getArtefactsManufactured() {
         return $this->artefactsManufactured;
+    }
+
+    /**
+     * Add bottlesPacked.
+     *
+     * @param \AppBundle\Entity\Artefact $bottlesPacked
+     *
+     * @return Location
+     */
+    public function addBottlesPacked(\AppBundle\Entity\Artefact $bottlesPacked)
+    {
+        $this->bottlesPacked[] = $bottlesPacked;
+
+        return $this;
+    }
+
+    /**
+     * Remove bottlesPacked.
+     *
+     * @param \AppBundle\Entity\Artefact $bottlesPacked
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeBottlesPacked(\AppBundle\Entity\Artefact $bottlesPacked)
+    {
+        return $this->bottlesPacked->removeElement($bottlesPacked);
+    }
+
+    /**
+     * Get bottlesPacked.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBottlesPacked()
+    {
+        return $this->bottlesPacked;
+    }
+
+    /**
+     * Add cansPacked.
+     *
+     * @param \AppBundle\Entity\Artefact $cansPacked
+     *
+     * @return Location
+     */
+    public function addCansPacked(\AppBundle\Entity\Artefact $cansPacked)
+    {
+        $this->cansPacked[] = $cansPacked;
+
+        return $this;
+    }
+
+    /**
+     * Remove cansPacked.
+     *
+     * @param \AppBundle\Entity\Artefact $cansPacked
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeCansPacked(\AppBundle\Entity\Artefact $cansPacked)
+    {
+        return $this->cansPacked->removeElement($cansPacked);
+    }
+
+    /**
+     * Get cansPacked.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCansPacked()
+    {
+        return $this->cansPacked;
     }
 }

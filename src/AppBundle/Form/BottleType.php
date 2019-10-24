@@ -4,6 +4,7 @@ namespace AppBundle\Form;
 
 use AppBundle\Entity\Bottle;
 use AppBundle\Entity\Content;
+use AppBundle\Entity\Location;
 use AppBundle\Entity\Manufacturer;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -50,6 +51,20 @@ class BottleType extends ArtefactType {
                 'help_block' => '',
             ),
         ));
+        $builder->add('packagingLocation', Select2EntityType::class, array(
+            'label' => 'Packaging Location',
+            'multiple' => false,
+            'remote_route' => 'location_typeahead',
+            'class' => Location::class,
+            'required' => false,
+            'allow_clear' => true,
+            'attr' => array(
+                'add_path' => 'location_new_popup',
+                'add_label' => 'New Location',
+                'help_block' => '',
+            ),
+        ));
+
         $builder->add('content', Select2EntityType::class, array(
             'label' => 'Content',
             'multiple' => false,

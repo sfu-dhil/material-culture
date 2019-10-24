@@ -41,6 +41,16 @@
                 </td>
             </tr>
             <tr>
+                <th>Packaging Location</th>
+                <td>
+                    {% if bottle.packagingLocation %}
+                        <a href="{{ path('location_show', { 'id': bottle.packagingLocation.id}) }}">
+                            {{ bottle.packagingLocation }}
+                        </a>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
                 <th>Content</th>
                 <td>
                     {% if bottle.content %}
