@@ -47,7 +47,7 @@ class Ceramic extends Artefact {
      * @return string
      */
     public function __toString() {
-        return $this->getCatalogNumber() . ' ' . $this->shape;
+        return 'Ceramic #' . $this->getId();
     }
 
     public function getCategory() {

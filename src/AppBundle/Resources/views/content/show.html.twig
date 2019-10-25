@@ -26,10 +26,10 @@
     {% if content.bottles | length > 0 %}
         <h2>Bottles</h2>
         <ul>
-            {% for bottles in content.bottles %}
+            {% for bottle in content.bottles %}
                 <li>
-                    <a href="{{ path("bottle_show", {"id":bottles.id}) }}">
-                        {{ bottles }}
+                    <a href="{{ path("bottle_show", {"id":bottle.id}) }}">
+                        {{ bottle }}
                     </a>
                 </li>
             {% endfor %}
@@ -38,10 +38,10 @@
     {% if content.cans | length > 0 %}
         <h2>Cans</h2>
         <ul>
-            {% for cans in content.cans %}
+            {% for can in content.cans %}
                 <li>
-                    <a href="{{ path("can_show", {"id":cans.id}) }}">
-                        {{ cans }}
+                    <a href="{{ path("can_show", {"id":can.id}) }}">
+                        {{ can }}
                     </a>
                 </li>
             {% endfor %}

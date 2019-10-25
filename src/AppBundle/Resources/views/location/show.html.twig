@@ -81,6 +81,7 @@
             {% endfor %}
         </ul>
     {% endif %}
+
     {% if location.artefactsManufactured | length > 0 %}
         <h2>Artefacts Manufactured</h2>
         <ul>
@@ -93,4 +94,31 @@
             {% endfor %}
         </ul>
     {% endif %}
+
+    {% if location.bottlesPacked | length > 0 %}
+        <h2>Bottles Filled</h2>
+        <ul>
+            {% for artefact in location.bottlesPacked %}
+                <li>
+                    <a href="{{ path("artefact_show", {"id":artefact.id}) }}">
+                        {{ artefact }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if location.cansPacked | length > 0 %}
+        <h2>Cans Filled</h2>
+        <ul>
+            {% for artefact in location.cansPacked %}
+                <li>
+                    <a href="{{ path("artefact_show", {"id":artefact.id}) }}">
+                        {{ artefact }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
 {% endblock %}

@@ -26,10 +26,10 @@
     {% if glaze.ceramics | length > 0 %}
         <h2>Ceramics</h2>
         <ul>
-            {% for ceramics in glaze.ceramics %}
+            {% for ceramic in glaze.ceramics %}
                 <li>
-                    <a href="{{ path("ceramic_show", {"id":ceramics.id}) }}">
-                        {{ ceramics }}
+                    <a href="{{ path("ceramic_show", {"id":ceramic.id}) }}">
+                        {{ ceramic }}
                     </a>
                 </li>
             {% endfor %}
