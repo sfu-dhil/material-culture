@@ -28,7 +28,7 @@
         <ul>
             {% for bottles in content.bottles %}
                 <li>
-                    <a href="{{ path("bottles_show", {"id":bottles.id}) }}">
+                    <a href="{{ path("bottle_show", {"id":bottles.id}) }}">
                         {{ bottles }}
                     </a>
                 </li>
@@ -40,7 +40,7 @@
         <ul>
             {% for cans in content.cans %}
                 <li>
-                    <a href="{{ path("cans_show", {"id":cans.id}) }}">
+                    <a href="{{ path("can_show", {"id":cans.id}) }}">
                         {{ cans }}
                     </a>
                 </li>
