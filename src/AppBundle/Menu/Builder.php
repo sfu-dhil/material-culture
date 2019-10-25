@@ -128,9 +128,9 @@ class Builder implements ContainerAwareInterface {
             'route' => 'publication_index',
         ));
 
-        $browse->addChild('shape', array(
-            'label' => 'Ceramic Shapes',
-            'route' => 'shape_index',
+        $browse->addChild('vessel', array(
+            'label' => 'Ceramic Vessels',
+            'route' => 'vessel_index',
         ));
 
 //        if ($this->hasRole('ROLE_USER')) {

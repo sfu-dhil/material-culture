@@ -10,7 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * ShapeType form.
  */
-class ShapeType extends TermType {
+class VesselType extends TermType {
     /**
      * Add form fields to $builder.
      *

@@ -44,7 +44,7 @@ class LoadCan extends Fixture implements DependentFixtureInterface {
      */
     public function getDependencies() {
         return array(
-            LoadShape::class,
+            LoadVessel::class,
             LoadGlaze::class,
             LoadLocation::class,
             LoadLocation::class,

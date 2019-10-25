@@ -4,7 +4,7 @@ namespace AppBundle\Form;
 
 use AppBundle\Entity\Ceramic;
 use AppBundle\Entity\Glaze;
-use AppBundle\Entity\Shape;
+use AppBundle\Entity\Vessel;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -37,16 +37,16 @@ class CeramicType extends ArtefactType {
                 'help_block' => '',
             ),
         ));
-        $builder->add('shape', Select2EntityType::class, array(
-            'label' => 'Shape',
+        $builder->add('vessel', Select2EntityType::class, array(
+            'label' => 'Vessel',
             'multiple' => false,
-            'remote_route' => 'shape_typeahead',
-            'class' => Shape::class,
+            'remote_route' => 'vessel_typeahead',
+            'class' => Vessel::class,
             'required' => false,
             'allow_clear' => true,
             'attr' => array(
-                'add_path' => 'shape_new_popup',
-                'add_label' => 'New Shape',
+                'add_path' => 'vessel_new_popup',
+                'add_label' => 'New Vessel',
                 'help_block' => '',
             ),
         ));

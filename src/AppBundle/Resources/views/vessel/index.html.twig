@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Shape List{% endblock %}
+{% block title %}Vessel List{% endblock %}
 
 {% block pageheader %}
-    <h1>Shape List</h1>
+    <h1>Vessel List</h1>
     <p class="count">
-        Displaying {{ shapes|length }} shapes of {{ shapes.getTotalItemCount }} total. </p>
+        Displaying {{ vessels|length }} vessels of {{ vessels.getTotalItemCount }} total. </p>
 {% endblock %}
 
 {% block body %}
@@ -13,19 +13,19 @@
     <div class='btn-toolbar pull-right'>
         <div class='btn-group'>
             {% if is_granted('ROLE_ADMIN') %}
-                <a href="{{ path('shape_new') }}" class="btn btn-default">
+                <a href="{{ path('vessel_new') }}" class="btn btn-default">
                     <span class="glyphicon glyphicon-plus"></span> New </a>
             {% endif %}
-            <a href="{{ path('shape_search') }}" class="btn btn-default">
+            <a href="{{ path('vessel_search') }}" class="btn btn-default">
                 <span class="glyphicon glyphicon-search"></span> Search </a>
         </div>
     </div>
 
-    {% embed 'NinesUtilBundle:term/partial:index.html.twig' with {'terms': shapes, 'path': 'shape_show'} %}
+    {% embed 'NinesUtilBundle:term/partial:index.html.twig' with {'terms': vessels, 'path': 'vessel_show'} %}
     {% endembed %}
 
     <div class="navigation">
-        {{ knp_pagination_render(shapes) }}
+        {{ knp_pagination_render(vessels) }}
     </div>
 
 {% endblock %}
