@@ -118,13 +118,13 @@ class Location extends AbstractTerm {
 
     /**
      * @var Artefact[]|Collection
-     * @ORM\OneToMany(targetEntity="Artefact", mappedBy="packagingLocation")
+     * @ORM\OneToMany(targetEntity="Bottle", mappedBy="packagingLocation")
      */
     private $bottlesPacked;
 
     /**
      * @var Artefact[]|Collection
-     * @ORM\OneToMany(targetEntity="Artefact", mappedBy="packagingLocation")
+     * @ORM\OneToMany(targetEntity="Can", mappedBy="packagingLocation")
      */
     private $cansPacked;
 
