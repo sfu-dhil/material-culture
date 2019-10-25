@@ -16,7 +16,7 @@ env:
 
 before_script:
     - echo 'date.timezone = America/Vancouver' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
-    - pecl install imagick
+    - echo | pecl install imagick
     - composer install -n -o
 
 script:
