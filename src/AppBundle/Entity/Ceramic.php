@@ -12,10 +12,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Ceramic extends Artefact {
     /**
-     * @var Shape
-     * @ORM\ManyToOne(targetEntity="Shape", inversedBy="ceramics")
+     * @var Vessel
+     * @ORM\ManyToOne(targetEntity="Vessel", inversedBy="ceramics")
      */
-    private $shape;
+    private $vessel;
 
     /**
      * @var Glaze
@@ -99,25 +99,25 @@ class Ceramic extends Artefact {
     }
 
     /**
-     * Set shape.
+     * Set vessel.
      *
-     * @param null|\AppBundle\Entity\Shape $shape
+     * @param null|\AppBundle\Entity\Vessel $vessel
      *
      * @return Ceramic
      */
-    public function setShape(Shape $shape = null) {
-        $this->shape = $shape;
+    public function setVessel(Vessel $vessel = null) {
+        $this->vessel = $vessel;
 
         return $this;
     }
 
     /**
-     * Get shape.
+     * Get vessel.
      *
-     * @return null|\AppBundle\Entity\Shape
+     * @return null|\AppBundle\Entity\Vessel
      */
-    public function getShape() {
-        return $this->shape;
+    public function getVessel() {
+        return $this->vessel;
     }
 
     /**

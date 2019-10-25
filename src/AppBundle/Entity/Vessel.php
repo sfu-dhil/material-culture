@@ -11,12 +11,12 @@ use Nines\UtilBundle\Entity\AbstractTerm;
  * Form.
  *
  * @ORM\Table(name="form")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ShapeRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\VesselRepository")
  */
-class Shape extends AbstractTerm {
+class Vessel extends AbstractTerm {
     /**
      * @var Ceramic[]|Collection
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Ceramic", mappedBy="shape")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Ceramic", mappedBy="vessel")
      */
     private $ceramics;
 
@@ -30,7 +30,7 @@ class Shape extends AbstractTerm {
      *
      * @param \AppBundle\Entity\Ceramic $ceramic
      *
-     * @return Shape
+     * @return Vessel
      */
     public function addCeramic(Ceramic $ceramic) {
         $this->ceramics[] = $ceramic;

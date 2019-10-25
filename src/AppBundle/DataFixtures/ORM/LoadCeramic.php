@@ -16,7 +16,7 @@ class LoadCeramic extends Fixture implements DependentFixtureInterface {
      */
     public function load(ObjectManager $manager) {
         $item1 = new Ceramic();
-        $item1->setShape($this->getReference('_reference_Shape4'));
+        $item1->setVessel($this->getReference('_reference_Vessel4'));
         $item1->setGlaze($this->getReference('_reference_Glaze1'));
         $item1->setPaste('brown');
         $item1->setMunsell('YA-10-1');
@@ -41,7 +41,7 @@ class LoadCeramic extends Fixture implements DependentFixtureInterface {
      */
     public function getDependencies() {
         return array(
-            LoadShape::class,
+            LoadVessel::class,
             LoadGlaze::class,
             LoadLocation::class,
             LoadLocation::class,
