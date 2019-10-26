@@ -10,7 +10,7 @@ use Nines\UtilBundle\Entity\AbstractTerm;
 /**
  * Form.
  *
- * @ORM\Table(name="form")
+ * @ORM\Table(name="vessel")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\VesselRepository")
  */
 class Vessel extends AbstractTerm {
