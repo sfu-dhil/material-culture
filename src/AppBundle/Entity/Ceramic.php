@@ -24,6 +24,12 @@ class Ceramic extends Artefact {
     private $glaze;
 
     /**
+     * @var Typology
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Typology", inversedBy="ceramics")
+     */
+    private $typology;
+
+    /**
      * @var string
      * @ORM\Column(type="string", nullable=true)
      */
@@ -140,5 +146,29 @@ class Ceramic extends Artefact {
      */
     public function getGlaze() {
         return $this->glaze;
+    }
+
+    /**
+     * Set typology.
+     *
+     * @param \AppBundle\Entity\Typology|null $typology
+     *
+     * @return Ceramic
+     */
+    public function setTypology(\AppBundle\Entity\Typology $typology = null)
+    {
+        $this->typology = $typology;
+
+        return $this;
+    }
+
+    /**
+     * Get typology.
+     *
+     * @return \AppBundle\Entity\Typology|null
+     */
+    public function getTypology()
+    {
+        return $this->typology;
     }
 }

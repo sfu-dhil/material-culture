@@ -4,6 +4,7 @@ namespace AppBundle\Form;
 
 use AppBundle\Entity\Ceramic;
 use AppBundle\Entity\Glaze;
+use AppBundle\Entity\Typology;
 use AppBundle\Entity\Vessel;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -60,6 +61,19 @@ class CeramicType extends ArtefactType {
             'attr' => array(
                 'add_path' => 'glaze_new_popup',
                 'add_label' => 'New Glaze',
+                'help_block' => '',
+            ),
+        ));
+        $builder->add('typology', Select2EntityType::class, array(
+            'label' => 'Typology',
+            'multiple' => false,
+            'remote_route' => 'typology_typeahead',
+            'class' => Typology::class,
+            'required' => false,
+            'allow_clear' => true,
+            'attr' => array(
+                'add_path' => 'typology_new_popup',
+                'add_label' => 'New Typology',
                 'help_block' => '',
             ),
         ));
