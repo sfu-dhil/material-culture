@@ -7,6 +7,7 @@ use AppBundle\Entity\Image;
 use AppBundle\Services\FileUploader;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -48,6 +49,29 @@ class ImageType extends AbstractType {
 
         $builder->add('description', null, array(
             'label' => 'Description',
+            'required' => false,
+            'attr' => array(
+                'help_block' => '',
+                'class' => 'tinymce',
+            ),
+        ));
+
+        $builder->add('public', ChoiceType::class, array(
+            'label' => 'Public',
+            'expanded' => true,
+            'multiple' => false,
+            'required' => true,
+            'choices' => array(
+                'No' => 0,
+                'Yes' => 1,
+            ),
+            'attr' => array(
+                'help_block' => '',
+            ),
+        ));
+
+        $builder->add('copyright', null, array(
+            'label' => 'Copyright statement',
             'required' => false,
             'attr' => array(
                 'help_block' => '',
