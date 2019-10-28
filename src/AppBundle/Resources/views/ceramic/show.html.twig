@@ -46,6 +46,16 @@
                     </a>
                 </td>
             </tr>
+            <tr>
+                <th>Typology</th>
+                <td>
+                    {% if ceramic.typology %}
+                        <a href="{{ path('typology_show', {'id': ceramic.typology.id}) }}">
+                            {{ ceramic.typology }}
+                        </a>
+                    {% endif %}
+                </td>
+            </tr>
         {% endblock %}
     {% endembed %}
 

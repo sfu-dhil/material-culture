@@ -27,6 +27,7 @@ class LoadCeramic extends Fixture implements DependentFixtureInterface {
         $item1->setInstitution($this->getReference('_reference_Institution2'));
         $item1->addCatalogNumber('abc-123');
         $item1->setDescription('A piece of pottery');
+        $item1->setTypology($this->getReference('_reference_Typology1'));
         $this->addReference('_reference_Ceramic1', $item1);
         $manager->persist($item1);
 
@@ -43,6 +44,7 @@ class LoadCeramic extends Fixture implements DependentFixtureInterface {
         return array(
             LoadVessel::class,
             LoadGlaze::class,
+            LoadTypology::class,
             LoadLocation::class,
             LoadLocation::class,
             LoadInstitution::class,

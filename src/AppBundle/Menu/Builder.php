@@ -128,6 +128,11 @@ class Builder implements ContainerAwareInterface {
             'route' => 'publication_index',
         ));
 
+        $browse->addChild('typology', array(
+            'label' => 'Typology',
+            'route' => 'typology_index',
+        ));
+
         $browse->addChild('vessel', array(
             'label' => 'Ceramic Vessels',
             'route' => 'vessel_index',
