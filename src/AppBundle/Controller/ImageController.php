@@ -5,12 +5,15 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Image;
 use AppBundle\Form\ImageType;
 use Knp\Bundle\PaginatorBundle\Definition\PaginatorAwareInterface;
+use Nines\UserBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -43,35 +46,6 @@ class ImageController extends Controller implements PaginatorAwareInterface {
         return array(
             'images' => $images,
         );
-    }
-
-    /**
-     * Typeahead API endpoint for Image entities.
-     *
-     * To make this work, add something like this to ImageRepository:
-     *
-     * @param Request $request
-     *
-     * @Route("/typeahead", name="image_typeahead", methods={"GET"})
-     *
-     * @return JsonResponse
-     */
-    public function typeahead(Request $request) {
-        $q = $request->query->get('q');
-        if ( ! $q) {
-            return new JsonResponse(array());
-        }
-        $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository(Image::class);
-        $data = array();
-        foreach ($repo->typeaheadQuery($q) as $result) {
-            $data[] = array(
-                'id' => $result->getId(),
-                'text' => (string) $result,
-            );
-        }
-
-        return new JsonResponse($data);
     }
 
     /**
@@ -118,53 +92,6 @@ class ImageController extends Controller implements PaginatorAwareInterface {
     }
 
     /**
-     * Creates a new Image entity.
-     *
-     * @param Request $request
-     *
-     * @return array|RedirectResponse
-     *
-     * @IsGranted("ROLE_CONTENT_ADMIN")
-     * @Route("/new", name="image_new", methods={"GET","POST"})
-     * @Template()
-     */
-    public function newAction(Request $request) {
-        $image = new Image();
-        $form = $this->createForm(ImageType::class, $image);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($image);
-            $em->flush();
-
-            $this->addFlash('success', 'The new image was created.');
-
-            return $this->redirectToRoute('image_show', array('id' => $image->getId()));
-        }
-
-        return array(
-            'image' => $image,
-            'form' => $form->createView(),
-        );
-    }
-
-    /**
-     * Creates a new Image entity in a popup.
-     *
-     * @param Request $request
-     *
-     * @return array|RedirectResponse
-     *
-     * @IsGranted("ROLE_CONTENT_ADMIN")
-     * @Route("/new_popup", name="image_new_popup", methods={"GET","POST"})
-     * @Template()
-     */
-    public function newPopupAction(Request $request) {
-        return $this->newAction($request);
-    }
-
-    /**
      * Finds and displays a Image entity.
      *
      * @param Image $image
@@ -181,52 +108,36 @@ class ImageController extends Controller implements PaginatorAwareInterface {
     }
 
     /**
-     * Displays a form to edit an existing Image entity.
+     * Finds and returns a raw image file.
      *
-     * @param Request $request
      * @param Image $image
      *
-     * @return array|RedirectResponse
+     * @Route("/{id}/view", name="image_view", methods={"GET"})
      *
-     * @IsGranted("ROLE_CONTENT_ADMIN")
-     * @Route("/{id}/edit", name="image_edit", methods={"GET","POST"})
-     * @Template()
+     * @return BinaryFileResponse
      */
-    public function editAction(Request $request, Image $image) {
-        $editForm = $this->createForm(ImageType::class, $image);
-        $editForm->handleRequest($request);
-
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->flush();
-            $this->addFlash('success', 'The image has been updated.');
-
-            return $this->redirectToRoute('image_show', array('id' => $image->getId()));
+    public function imageAction(Image $image) {
+        if ( ! $image->getPublic() && ! $this->getUser()) {
+            throw new AccessDeniedHttpException();
         }
 
-        return array(
-            'image' => $image,
-            'edit_form' => $editForm->createView(),
-        );
+        return new BinaryFileResponse($image->getImageFile());
     }
 
     /**
-     * Deletes a Image entity.
+     * Finds and returns a raw image file.
      *
-     * @param Request $request
      * @param Image $image
      *
-     * @return array|RedirectResponse
+     * @Route("/{id}/thumbnail", name="image_thumbnail", methods={"GET"})
      *
-     * @IsGranted("ROLE_CONTENT_ADMIN")
-     * @Route("/{id}/delete", name="image_delete", methods={"GET"})
+     * @return BinaryFileResponse
      */
-    public function deleteAction(Request $request, Image $image) {
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($image);
-        $em->flush();
-        $this->addFlash('success', 'The image was deleted.');
+    public function thumbnailAction(Image $image) {
+        if ( ! $image->getPublic() && ! $this->getUser()) {
+            throw new AccessDeniedHttpException();
+        }
 
-        return $this->redirectToRoute('image_index');
+        return new BinaryFileResponse($image->getThumbnailPath());
     }
 }

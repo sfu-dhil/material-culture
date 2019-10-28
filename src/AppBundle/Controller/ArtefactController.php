@@ -49,7 +49,7 @@ class ArtefactController extends Controller implements PaginatorAwareInterface {
             case Artefact::CAN:
                 return $this->redirectToRoute('can_show', array('id' => $artefact->getId()));
             case Artefact::CERAMIC:
-                return $this->redirectToRoute('ceramic_show_show', array('id' => $artefact->getId()));
+                return $this->redirectToRoute('ceramic_show', array('id' => $artefact->getId()));
             default:
                 throw new HttpException(500, 'Cannot generate URL for artefact of type ' . $artefact->getCategory());
         }
