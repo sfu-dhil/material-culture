@@ -94,17 +94,17 @@ class Builder implements ContainerAwareInterface {
         ));
 
         $browse->addChild('ceramic', array(
-            'label' => 'Ceramic',
+            'label' => 'Ceramics',
             'route' => 'ceramic_index',
         ));
 
         $browse->addChild('content', array(
-            'label' => 'Content',
+            'label' => 'Contents',
             'route' => 'content_index',
         ));
 
         $browse->addChild('glaze', array(
-            'label' => 'Glaze',
+            'label' => 'Glazes',
             'route' => 'glaze_index',
         ));
 
@@ -114,7 +114,7 @@ class Builder implements ContainerAwareInterface {
         ));
 
         $browse->addChild('location', array(
-            'label' => 'Location',
+            'label' => 'Locations',
             'route' => 'location_index',
         ));
 
