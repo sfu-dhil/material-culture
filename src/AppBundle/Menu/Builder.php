@@ -98,6 +98,11 @@ class Builder implements ContainerAwareInterface {
             'route' => 'ceramic_index',
         ));
 
+        $browse->addChild('image', array(
+            'label' => 'Images',
+            'route' => 'image_index',
+        ));
+
         $browse->addChild('content', array(
             'label' => 'Contents',
             'route' => 'content_index',

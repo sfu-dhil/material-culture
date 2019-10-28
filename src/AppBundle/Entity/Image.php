@@ -12,10 +12,22 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Image extends ImageEntity {
     /**
+     * @var boolean
+     * @ORM\Column(type="boolean", nullable=false, options={"default": false})
+     */
+    private $public;
+
+    /**
      * @var string
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
+
+    /**
+     * @var string
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $copyright;
 
     /**
      * @var Artefact
@@ -25,6 +37,7 @@ class Image extends ImageEntity {
 
     public function __construct() {
         parent::__construct();
+        $this->public = false;
     }
 
     /**
@@ -78,5 +91,53 @@ class Image extends ImageEntity {
      */
     public function getArtefact() {
         return $this->artefact;
+    }
+
+    /**
+     * Set public.
+     *
+     * @param bool $public
+     *
+     * @return Image
+     */
+    public function setPublic($public)
+    {
+        $this->public = $public;
+
+        return $this;
+    }
+
+    /**
+     * Get public.
+     *
+     * @return bool
+     */
+    public function getPublic()
+    {
+        return $this->public;
+    }
+
+    /**
+     * Set copyright.
+     *
+     * @param string|null $copyright
+     *
+     * @return Image
+     */
+    public function setCopyright($copyright = null)
+    {
+        $this->copyright = $copyright;
+
+        return $this;
+    }
+
+    /**
+     * Get copyright.
+     *
+     * @return string|null
+     */
+    public function getCopyright()
+    {
+        return $this->copyright;
     }
 }

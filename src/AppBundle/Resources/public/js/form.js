@@ -76,6 +76,19 @@
             },
         });
     }
+
+    function imageModals() {
+        $('#imgModal').on('show.bs.modal', function (event) {
+            var $button = $(event.relatedTarget);
+            // Button that triggered the modal
+            var $modal = $(this);
+
+            $modal.find('#modalTitle').text($button.data('title'));
+            $modal.find('figcaption').html($button.parent().parent().find('.caption').clone());
+            $modal.find("#modalImage").attr('src', $button.data('img'));
+        });
+    }
+
     $(document).ready(function () {
         $(window).bind('beforeunload', windowBeforeUnload);
         $('form').each(formDirty);
@@ -91,6 +104,7 @@
             simpleCollection();
             complexCollection();
         }
+        imageModals();
     });
 
 })(jQuery, window);

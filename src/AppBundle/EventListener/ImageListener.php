@@ -90,10 +90,13 @@ class ImageListener {
     public function postLoad(LifecycleEventArgs $args) {
         $entity = $args->getEntity();
         if ($entity instanceof ImageEntity) {
-            $filename = $entity->getImageFilePath();
-            if (file_exists($this->uploader->getImageDir() . '/' . $filename)) {
-                $file = new File($this->uploader->getImageDir() . '/' . $filename);
-                $entity->setImageFile($file);
+            $filePath = $this->uploader->getImageDir() . '/' . $entity->getImageFilePath();
+            $thumbnailPath = $this->uploader->getImageDir() . '/' . $entity->getThumbnailPath();
+            if (file_exists($filePath)) {
+                $entity->setImageFile(new File($filePath));
+            }
+            if(file_exists($thumbnailPath)) {
+                $entity->setThumbnailFile(new File($thumbnailPath));
             }
         }
     }
