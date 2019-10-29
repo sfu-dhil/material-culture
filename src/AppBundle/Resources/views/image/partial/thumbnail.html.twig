@@ -12,8 +12,8 @@
     {% endif %}
 
     <div class="img-container">
-        <a href="#imgModal" data-toggle="modal" data-title="{{ image.originalName }}" data-date="{{ image.created|date }}" data-target="#imgModal" data-img="{{ asset(image_prefix ~ '/' ~ image.imageFilePath) }}">
-            <img src="{{ asset(image_prefix ~ '/' ~ image.thumbnailPath) }}" class="img-thumbnail" />
+        <a href="#imgModal" data-toggle="modal" data-title="{{ image.originalName }}" data-date="{{ image.created|date }}" data-target="#imgModal" data-img="{{ path('image_view', {'id': image.id}) }}">
+            <img src="{{ path('image_thumbnail', {'id': image.id}) }}" class="img-thumbnail" />
         </a>
     </div>
 
