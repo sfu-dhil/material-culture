@@ -20,6 +20,7 @@
 /web/bundles/
 /web/bower/
 /web/js/
-data
-web/docs
-web/images
+/data
+/web/docs
+/web/images/upload
+
