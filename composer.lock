@@ -4180,12 +4180,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ubermichael/nines-bundles.git",
-                "reference": "c2a3a07fb9af65df90432568dcbbdbf59670d3eb"
+                "reference": "6609d9e0625cbb72686da65171302f95cb279b6f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ubermichael/nines-bundles/zipball/c2a3a07fb9af65df90432568dcbbdbf59670d3eb",
-                "reference": "c2a3a07fb9af65df90432568dcbbdbf59670d3eb",
+                "url": "https://api.github.com/repos/ubermichael/nines-bundles/zipball/6609d9e0625cbb72686da65171302f95cb279b6f",
+                "reference": "6609d9e0625cbb72686da65171302f95cb279b6f",
                 "shasum": ""
             },
             "require": {
@@ -4219,7 +4219,7 @@
                 "source": "https://github.com/ubermichael/nines-bundles/tree/2.x",
                 "issues": "https://github.com/ubermichael/nines-bundles/issues"
             },
-            "time": "2019-10-25T18:09:37+00:00"
+            "time": "2019-11-15T23:03:19+00:00"
         },
         {
             "name": "zendframework/zend-code",
