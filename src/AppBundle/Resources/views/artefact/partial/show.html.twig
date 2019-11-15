@@ -69,7 +69,7 @@
 </table>
 
 <h2>References</h2>
-{% if is_granted('ROLE_ADMIN') %}
+{% if is_granted('ROLE_CONTENT_ADMIN') %}
     <div class="btn-toolbar">
         <div class="btn-group pull-right">
             <a href="{{ path('artefact_references', {'id': artefact.id}) }}" class="btn btn-default">
@@ -92,7 +92,7 @@
 
 {% endif %}
 <h2>Images</h2>
-{% if is_granted('ROLE_ADMIN') %}
+{% if is_granted('ROLE_CONTENT_ADMIN') %}
     <div class="btn-toolbar">
         <div class="btn-group pull-right">
             <a href="{{ path('artefact_add_image', {'id': artefact.id}) }}" class="btn btn-default">
