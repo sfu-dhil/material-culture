@@ -6,11 +6,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="google" content="notranslate" />        
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">        
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
         <link rel="stylesheet" href="{{ asset('bower/bootstrap/dist/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('bower/bootstrap/dist/css/bootstrap-theme.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('bundles/app/css/base.css') }}">        
-        <script src="{{ asset('bower/jquery/dist/jquery.min.js') }}"></script>        
+        <link rel="stylesheet" href="{{ asset('bundles/app/css/base.css') }}">
+        <link rel="stylesheet" href="{{ asset('bower/select2/dist/css/select2.min.css') }}">
+        <script src="{{ asset('bower/jquery/dist/jquery.min.js') }}"></script>
         {% block styles %}
         {% endblock %}
     </head>
@@ -57,6 +58,9 @@
 
         <script src="{{ asset('bower/bootstrap/dist/js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('bundles/app/js/form.js') }}"></script>
+        <script src="{{ asset('bower/select2/dist/js/select2.full.min.js') }}"></script>
+        <script src="{{ asset('bundles/tetranzselect2entity/js/select2entity.js') }}"></script>
+        <script src="{{ asset('bower/symfony-collection/jquery.collection.js') }}"></script>
         {% block javascripts %}
         {% endblock %}
     </body>
