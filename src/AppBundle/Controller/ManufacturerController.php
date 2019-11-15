@@ -16,7 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Manufacturer controller.
  *
- * @IsGranted("ROLE_USER")
  * @Route("/manufacturer")
  */
 class ManufacturerController extends Controller implements PaginatorAwareInterface {
@@ -52,6 +51,7 @@ class ManufacturerController extends Controller implements PaginatorAwareInterfa
      *
      * @param Request $request
      *
+     * @IsGranted("ROLE_CONTENT_ADMIN")
      * @Route("/typeahead", name="manufacturer_typeahead", methods={"GET"})
      *
      * @return JsonResponse

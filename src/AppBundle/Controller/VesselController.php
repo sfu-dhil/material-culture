@@ -16,7 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Vessel controller.
  *
- * @IsGranted("ROLE_USER")
  * @Route("/vessel")
  */
 class VesselController extends Controller implements PaginatorAwareInterface {
@@ -52,6 +51,7 @@ class VesselController extends Controller implements PaginatorAwareInterface {
      *
      * @param Request $request
      *
+     * @IsGranted("ROLE_CONTENT_ADMIN")
      * @Route("/typeahead", name="vessel_typeahead", methods={"GET"})
      *
      * @return JsonResponse

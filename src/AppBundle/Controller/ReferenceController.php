@@ -16,7 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Reference controller.
  *
- * @IsGranted("ROLE_USER")
  * @Route("/reference")
  */
 class ReferenceController extends Controller implements PaginatorAwareInterface {

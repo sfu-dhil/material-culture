@@ -22,7 +22,7 @@ class ReferenceControllerTest extends BaseTestCase {
     public function testAnonIndex() {
         $client = $this->makeClient();
         $crawler = $client->request('GET', '/reference/');
-        $this->assertStatusCode(302, $client);
+        $this->assertStatusCode(200, $client);
         $this->assertEquals(0, $crawler->selectLink('New')->count());
     }
 
@@ -54,7 +54,7 @@ class ReferenceControllerTest extends BaseTestCase {
     public function testAnonShow() {
         $client = $this->makeClient();
         $crawler = $client->request('GET', '/reference/1');
-        $this->assertStatusCode(302, $client);
+        $this->assertStatusCode(200, $client);
     }
 
     /**

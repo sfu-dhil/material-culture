@@ -16,7 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Can controller.
  *
- * @IsGranted("ROLE_USER")
  * @Route("/can")
  */
 class CanController extends Controller implements PaginatorAwareInterface {

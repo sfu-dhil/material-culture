@@ -16,7 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Glaze controller.
  *
- * @IsGranted("ROLE_USER")
  * @Route("/glaze")
  */
 class GlazeController extends Controller implements PaginatorAwareInterface {
@@ -52,6 +51,7 @@ class GlazeController extends Controller implements PaginatorAwareInterface {
      *
      * @param Request $request
      *
+     * @IsGranted("ROLE_CONTENT_ADMIN")
      * @Route("/typeahead", name="glaze_typeahead", methods={"GET"})
      *
      * @return JsonResponse

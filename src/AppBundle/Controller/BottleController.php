@@ -3,16 +3,11 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Bottle;
-use AppBundle\Entity\Image;
 use AppBundle\Form\BottleType;
-use AppBundle\Form\ImageType;
-use AppBundle\Services\FileUploader;
 use Knp\Bundle\PaginatorBundle\Definition\PaginatorAwareInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,7 +15,6 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Bottle controller.
  *
- * @IsGranted("ROLE_USER")
  * @Route("/bottle")
  */
 class BottleController extends Controller implements PaginatorAwareInterface {
@@ -109,7 +103,7 @@ class BottleController extends Controller implements PaginatorAwareInterface {
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            foreach($bottle->getReferences() as $reference) {
+            foreach ($bottle->getReferences() as $reference) {
                 $reference->setArtefact($bottle);
             }
             $em = $this->getDoctrine()->getManager();
