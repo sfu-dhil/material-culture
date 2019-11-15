@@ -94,13 +94,21 @@ class Builder implements ContainerAwareInterface {
         ));
 
         $browse->addChild('ceramic', array(
-            'label' => 'Ceramics',
+            'label' => 'Majolicas',
             'route' => 'ceramic_index',
         ));
 
         $browse->addChild('image', array(
             'label' => 'Images',
             'route' => 'image_index',
+        ));
+
+        $divider1 = $browse->addChild('divider1', array(
+            'label' => '',
+        ));
+        $divider1->setAttributes(array(
+            'role' => 'separator',
+            'class' => 'divider',
         ));
 
         $browse->addChild('content', array(

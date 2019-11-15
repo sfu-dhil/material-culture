@@ -16,7 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Publication controller.
  *
- * @IsGranted("ROLE_USER")
  * @Route("/publication")
  */
 class PublicationController extends Controller implements PaginatorAwareInterface {
@@ -52,6 +51,7 @@ class PublicationController extends Controller implements PaginatorAwareInterfac
      *
      * @param Request $request
      *
+     * @IsGranted("ROLE_CONTENT_ADMIN")
      * @Route("/typeahead", name="publication_typeahead", methods={"GET"})
      *
      * @return JsonResponse

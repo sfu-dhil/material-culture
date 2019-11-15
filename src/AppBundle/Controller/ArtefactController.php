@@ -4,7 +4,6 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Artefact;
 use AppBundle\Entity\Image;
-use AppBundle\Entity\Reference;
 use AppBundle\Form\ImageType;
 use AppBundle\Form\ReferencesType;
 use AppBundle\Services\FileUploader;
@@ -22,7 +21,6 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Artefact controller.
  *
- * @IsGranted("ROLE_USER")
  * @Route("/artefact")
  */
 class ArtefactController extends Controller implements PaginatorAwareInterface {
@@ -77,13 +75,13 @@ class ArtefactController extends Controller implements PaginatorAwareInterface {
             $em = $this->getDoctrine()->getManager();
             dump($artefact);
             foreach ($artefact->getReferences() as $reference) {
-                if( ! $reference->getId()) {
+                if ( ! $reference->getId()) {
                     $reference->setArtefact($artefact);
                 }
             }
             $newReferences = $artefact->getReferences();
-            foreach($oldReferences as $reference) {
-                if( ! $newReferences->contains($reference)) {
+            foreach ($oldReferences as $reference) {
+                if ( ! $newReferences->contains($reference)) {
                     $em->remove($reference);
                 }
             }

@@ -16,7 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Location controller.
  *
- * @IsGranted("ROLE_USER")
  * @Route("/location")
  */
 class LocationController extends Controller implements PaginatorAwareInterface {
@@ -52,6 +51,7 @@ class LocationController extends Controller implements PaginatorAwareInterface {
      *
      * @param Request $request
      *
+     * @IsGranted("ROLE_CONTENT_ADMIN")
      * @Route("/typeahead", name="location_typeahead", methods={"GET"})
      *
      * @return JsonResponse

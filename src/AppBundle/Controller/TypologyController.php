@@ -16,7 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Typology controller.
  *
- * @IsGranted("ROLE_USER")
  * @Route("/typology")
  */
 class TypologyController extends Controller implements PaginatorAwareInterface {
@@ -52,6 +51,7 @@ class TypologyController extends Controller implements PaginatorAwareInterface {
      *
      * @param Request $request
      *
+     * @IsGranted("ROLE_CONTENT_ADMIN")
      * @Route("/typeahead", name="typology_typeahead", methods={"GET"})
      *
      * @return JsonResponse

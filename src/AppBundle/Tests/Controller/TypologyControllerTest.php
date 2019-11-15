@@ -24,7 +24,7 @@ class TypologyControllerTest extends BaseTestCase
     public function testAnonIndex() {
         $client = $this->makeClient();
         $crawler = $client->request('GET', '/typology/');
-        $this->assertStatusCode(302, $client);
+        $this->assertStatusCode(200, $client);
         $this->assertEquals(0, $crawler->selectLink('New')->count());
     }
 
@@ -57,7 +57,7 @@ class TypologyControllerTest extends BaseTestCase
     public function testAnonShow() {
         $client = $this->makeClient();
         $crawler = $client->request('GET', '/typology/1');
-        $this->assertStatusCode(302, $client);
+        $this->assertStatusCode(200, $client);
         $this->assertEquals(0, $crawler->selectLink('Edit')->count());
         $this->assertEquals(0, $crawler->selectLink('Delete')->count());
     }
@@ -111,10 +111,9 @@ class TypologyControllerTest extends BaseTestCase
         $client = $this->makeClient(LoadUser::USER);
         $client->request('GET', '/typology/typeahead?q=STUFF');
         $response = $client->getResponse();
-        $this->assertStatusCode(200, $client);
-        $this->assertEquals('application/json', $response->headers->get('content-type'));
+        $this->assertStatusCode(403, $client);
         $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+            'This test has not been implemented yet.'
         );
         $json = json_decode($response->getContent());
         $this->assertEquals(4, count($json));

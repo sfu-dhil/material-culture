@@ -16,7 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Ceramic controller.
  *
- * @IsGranted("ROLE_USER")
  * @Route("/ceramic")
  */
 class CeramicController extends Controller implements PaginatorAwareInterface {

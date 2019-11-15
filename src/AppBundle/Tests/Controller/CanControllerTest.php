@@ -22,7 +22,7 @@ class CanControllerTest extends BaseTestCase {
     public function testAnonIndex() {
         $client = $this->makeClient();
         $crawler = $client->request('GET', '/can/');
-        $this->assertStatusCode(302, $client);
+        $this->assertStatusCode(200, $client);
         $this->assertEquals(0, $crawler->selectLink('New')->count());
     }
 
@@ -55,7 +55,7 @@ class CanControllerTest extends BaseTestCase {
     public function testAnonShow() {
         $client = $this->makeClient();
         $crawler = $client->request('GET', '/can/1');
-        $this->assertStatusCode(302, $client);
+        $this->assertStatusCode(200, $client);
         $this->assertEquals(0, $crawler->selectLink('Edit')->count());
         $this->assertEquals(0, $crawler->selectLink('Delete')->count());
     }

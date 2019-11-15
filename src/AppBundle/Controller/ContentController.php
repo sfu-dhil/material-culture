@@ -16,7 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Content controller.
  *
- * @IsGranted("ROLE_USER")
  * @Route("/content")
  */
 class ContentController extends Controller implements PaginatorAwareInterface {
@@ -52,6 +51,7 @@ class ContentController extends Controller implements PaginatorAwareInterface {
      *
      * @param Request $request
      *
+     * @IsGranted("ROLE_CONTENT_ADMIN")
      * @Route("/typeahead", name="content_typeahead", methods={"GET"})
      *
      * @return JsonResponse
