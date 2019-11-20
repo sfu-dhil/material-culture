@@ -66,7 +66,7 @@ class BottleType extends ArtefactType {
         ));
 
         $builder->add('content', Select2EntityType::class, array(
-            'label' => 'Content',
+            'label' => 'Contents',
             'multiple' => false,
             'remote_route' => 'content_typeahead',
             'class' => Content::class,
