@@ -13,6 +13,7 @@ use AppBundle\Entity\ImageTrait;
 use AppBundle\Services\FileUploader;
 use AppBundle\Services\Thumbnailer;
 use Doctrine\ORM\Event\LifecycleEventArgs;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -42,9 +43,15 @@ class ImageListener {
      */
     private $thumbHeight;
 
-    public function __construct(FileUploader $uploader, Thumbnailer $thumbnailer) {
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    public function __construct(FileUploader $uploader, Thumbnailer $thumbnailer, LoggerInterface $logger) {
         $this->uploader = $uploader;
         $this->thumbnailer = $thumbnailer;
+        $this->logger = $logger;
     }
 
     private function uploadFile(ImageEntity $image) {
