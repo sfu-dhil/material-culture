@@ -37,7 +37,6 @@ class Publication extends AbstractEntity {
      * @var array
      *
      * @Assert\All({
-     *     @Assert\NotBlank,
      *     @Assert\Url
      * })
      * @ORM\Column(type="array", nullable=true)
@@ -197,13 +196,12 @@ class Publication extends AbstractEntity {
     /**
      * Set urls.
      *
-     * @param null|array $urls
+     * @param array $urls
      *
      * @return Publication
      */
-    public function setUrls($urls = null) {
-        $this->urls = array_unique($urls);
-
+    public function setUrls($urls = array()) {
+        $this->urls = array_filter(array_unique($urls));
         return $this;
     }
 
@@ -215,7 +213,7 @@ class Publication extends AbstractEntity {
      * @return $this
      */
     public function addUrl($url) {
-        if ( ! in_array($url, $this->urls)) {
+        if ( $url && ! in_array($url, $this->urls)) {
             $this->urls[] = $url;
         }
 
@@ -243,6 +241,6 @@ class Publication extends AbstractEntity {
      * @return null|array
      */
     public function getUrls() {
-        return $this->urls;
+        return array_filter($this->urls);
     }
 }

@@ -134,6 +134,7 @@ class PublicationController extends Controller implements PaginatorAwareInterfac
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $publication->setUrls(array_filter($form->get('urls')->getData()));
             $em = $this->getDoctrine()->getManager();
             $em->persist($publication);
             $em->flush();
@@ -197,6 +198,7 @@ class PublicationController extends Controller implements PaginatorAwareInterfac
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $publication->setUrls(array_filter($editForm->get('urls')->getData()));
             $em = $this->getDoctrine()->getManager();
             $em->flush();
             $this->addFlash('success', 'The publication has been updated.');
