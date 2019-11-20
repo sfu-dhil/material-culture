@@ -122,6 +122,7 @@ class CanController extends Controller implements PaginatorAwareInterface {
     /**
      * Finds and displays a Can entity.
      *
+     * @param Request $request
      * @param Can $can
      *
      * @return array
@@ -129,9 +130,12 @@ class CanController extends Controller implements PaginatorAwareInterface {
      * @Route("/{id}", name="can_show", methods={"GET"})
      * @Template()
      */
-    public function showAction(Can $can) {
+    public function showAction(Request $request, Can $can) {
+        $images = $this->paginator->paginate($can->getImages(), $request->query->getint('page', 1), 25);
+
         return array(
             'can' => $can,
+            'images' => $images,
         );
     }
 

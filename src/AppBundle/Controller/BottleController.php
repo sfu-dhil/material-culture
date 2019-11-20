@@ -124,6 +124,7 @@ class BottleController extends Controller implements PaginatorAwareInterface {
     /**
      * Finds and displays a Bottle entity.
      *
+     * @param Request $request
      * @param Bottle $bottle
      *
      * @return array
@@ -131,9 +132,12 @@ class BottleController extends Controller implements PaginatorAwareInterface {
      * @Route("/{id}", name="bottle_show", methods={"GET"})
      * @Template()
      */
-    public function showAction(Bottle $bottle) {
+    public function showAction(Request $request, Bottle $bottle) {
+        $images = $this->paginator->paginate($bottle->getImages(), $request->query->getint('page', 1), 25);
+
         return array(
             'bottle' => $bottle,
+            'images' => $images,
         );
     }
 
