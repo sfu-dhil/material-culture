@@ -104,7 +104,7 @@
     <p>No images yet.</p>
 {% else %}
 
-    {% embed 'AppBundle:image/partial:list.html.twig' with {'images': artefact.images } %}
+    {% embed 'AppBundle:image/partial:list.html.twig' with {'images': images } %}
     {% endembed %}
 
     {% embed 'AppBundle:image:partial/image_modal.html.twig' %}

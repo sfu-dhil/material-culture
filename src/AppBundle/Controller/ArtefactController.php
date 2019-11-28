@@ -36,7 +36,6 @@ class ArtefactController extends Controller implements PaginatorAwareInterface {
      *
      * @return RedirectResponse
      *
-     * @IsGranted("ROLE_CONTENT_ADMIN")
      * @Route("/{id}", name="artefact_show", methods={"GET"})
      * @Template()
      */

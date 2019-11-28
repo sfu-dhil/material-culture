@@ -1,14 +1,15 @@
 {% set cols = 3 %}
 {% set colspan = 'col-sm-' ~ (12 // cols) %}
 {% set rows = (images|length / cols)|round(0, 'ceil') %}
-
+{% set items = images.getItems() %}
 
 {% for row in 0 .. (rows - 1) %}
     <div class="row">
         {% for col in 0 .. (cols - 1) %}
             {% set index = row * cols + col %}
-            {% if images[index] is defined %}
-                {% set image = images[index] %}
+
+            {% if items[index] is defined %}
+                {% set image = items[index] %}
                 <div class="col-xs-12 {{ colspan }}">
                     {% embed 'AppBundle:image:partial/thumbnail.html.twig' with {'image': image, 'link_artefacts': link_artefacts|default(false)} %}
                     {% endembed %}
@@ -17,3 +18,7 @@
         {% endfor %}
     </div>
 {% endfor %}
+
+<div class="navigation">
+    {{ knp_pagination_render(images) }}
+</div>

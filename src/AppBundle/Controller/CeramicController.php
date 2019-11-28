@@ -123,6 +123,7 @@ class CeramicController extends Controller implements PaginatorAwareInterface {
     /**
      * Finds and displays a Ceramic entity.
      *
+     * @param Request $request
      * @param Ceramic $ceramic
      *
      * @return array
@@ -130,9 +131,12 @@ class CeramicController extends Controller implements PaginatorAwareInterface {
      * @Route("/{id}", name="ceramic_show", methods={"GET"})
      * @Template()
      */
-    public function showAction(Ceramic $ceramic) {
+    public function showAction(Request $request, Ceramic $ceramic) {
+        $images = $this->paginator->paginate($ceramic->getImages(), $request->query->getint('page', 1), 25);
+
         return array(
             'ceramic' => $ceramic,
+            'images' => $images,
         );
     }
 

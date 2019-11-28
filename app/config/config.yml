@@ -138,7 +138,16 @@ nines_blog:
 nines_feedback:
     default_status: submitted
     public_status: published
-    commenting: ~
+    commenting:
+        bottle:
+            class: AppBundle\Entity\Bottle
+            route: bottle_show
+        can:
+            class: AppBundle\Entity\Can
+            route: can_show
+        ceramic:
+            class: AppBundle\Entity\Ceramic
+            route: ceramic_show
 
 nines_user:
     permission_levels: [ ROLE_ADMIN, ROLE_BLOG_ADMIN, ROLE_COMMENT_ADMIN, ROLE_CONTENT_ADMIN ]

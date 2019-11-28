@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fb9310609874742247065ed906de6f25",
+    "content-hash": "8fa5c42db582987772fd3029743d6ad9",
     "packages": [
         {
             "name": "aternus/geonames-client",
@@ -4180,12 +4180,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ubermichael/nines-bundles.git",
-                "reference": "6609d9e0625cbb72686da65171302f95cb279b6f"
+                "reference": "45e7b0f3a7a3bc5ad08531a07025352a52c61d7e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ubermichael/nines-bundles/zipball/6609d9e0625cbb72686da65171302f95cb279b6f",
-                "reference": "6609d9e0625cbb72686da65171302f95cb279b6f",
+                "url": "https://api.github.com/repos/ubermichael/nines-bundles/zipball/45e7b0f3a7a3bc5ad08531a07025352a52c61d7e",
+                "reference": "45e7b0f3a7a3bc5ad08531a07025352a52c61d7e",
                 "shasum": ""
             },
             "require": {
@@ -4219,7 +4219,7 @@
                 "source": "https://github.com/ubermichael/nines-bundles/tree/2.x",
                 "issues": "https://github.com/ubermichael/nines-bundles/issues"
             },
-            "time": "2019-11-15T23:03:19+00:00"
+            "time": "2019-11-28T23:38:21+00:00"
         },
         {
             "name": "zendframework/zend-code",
