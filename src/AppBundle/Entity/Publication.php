@@ -39,7 +39,7 @@ class Publication extends AbstractEntity {
      * @Assert\All({
      *     @Assert\Url
      * })
-     * @ORM\Column(type="array", nullable=true)
+     * @ORM\Column(type="array", nullable=false)
      */
     private $urls;
 
