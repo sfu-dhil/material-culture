@@ -112,7 +112,7 @@ class VesselController extends Controller implements PaginatorAwareInterface {
         }
 
         return array(
-            'vessels' => $vessels,
+            'results' => $vessels,
             'q' => $q,
         );
     }

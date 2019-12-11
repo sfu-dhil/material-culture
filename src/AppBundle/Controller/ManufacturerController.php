@@ -112,7 +112,7 @@ class ManufacturerController extends Controller implements PaginatorAwareInterfa
         }
 
         return array(
-            'manufacturers' => $manufacturers,
+            'results' => $manufacturers,
             'q' => $q,
         );
     }
