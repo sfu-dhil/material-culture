@@ -112,7 +112,7 @@ class TypologyController extends Controller implements PaginatorAwareInterface {
         }
 
         return array(
-            'typologies' => $typologies,
+            'results' => $typologies,
             'q' => $q,
         );
     }

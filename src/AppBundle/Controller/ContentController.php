@@ -112,7 +112,7 @@ class ContentController extends Controller implements PaginatorAwareInterface {
         }
 
         return array(
-            'contents' => $contents,
+            'results' => $contents,
             'q' => $q,
         );
     }

@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Glaze Search{% endblock %}
+
+{% block pageheader %}
+    <h1>Glaze Search</h1>
+    {% embed 'AppBundle:misc:search-header.html.twig' %}
+    {% endembed %}
+{% endblock %}
+
+{% block body %}
+
+    {% embed 'AppBundle:misc:search-form.html.twig' %}
+    {% endembed %}
+
+    {% if q %}
+    {% embed 'NinesUtilBundle:term/partial:index.html.twig' with {'terms': results, 'path': 'content_show'} %}
+    {% endembed %}
+    {% endif %}
+
+    {% embed 'AppBundle:misc:search-footer.html.twig' %}
+    {% endembed %}
+
+{% endblock %}

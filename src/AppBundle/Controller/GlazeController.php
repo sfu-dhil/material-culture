@@ -112,7 +112,7 @@ class GlazeController extends Controller implements PaginatorAwareInterface {
         }
 
         return array(
-            'glazes' => $glazes,
+            'results' => $glazes,
             'q' => $q,
         );
     }

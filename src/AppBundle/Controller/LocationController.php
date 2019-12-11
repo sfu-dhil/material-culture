@@ -112,7 +112,7 @@ class LocationController extends Controller implements PaginatorAwareInterface {
         }
 
         return array(
-            'locations' => $locations,
+            'results' => $locations,
             'q' => $q,
         );
     }
