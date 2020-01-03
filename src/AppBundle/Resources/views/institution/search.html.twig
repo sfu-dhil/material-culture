@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Institution Search{% endblock %}
+
+{% block pageheader %}
+    <h1>Institution Search</h1>
+    {% embed 'AppBundle:misc:search-header.html.twig' %}
+    {% endembed %}
+{% endblock %}
+
+{% block body %}
+
+    {% embed 'AppBundle:misc:search-form.html.twig' %}
+    {% endembed %}
+
+    {% if q %}
+        <table class="table table-bordered table-condensed table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Url</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for institution in results %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('institution_show', { 'id': institution.id }) }}">
+                                {{ institution.name }}
+                            </a>
+                        </td>
+                        <td>
+                            {% if institution.url %}
+                                <a href="{{ institution.url }}">
+                                    {{ institution.url }}
+                                </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+    {% embed 'AppBundle:misc:search-footer.html.twig' %}
+    {% endembed %}
+
+{% endblock %}
