@@ -112,7 +112,7 @@ class InstitutionController extends Controller implements PaginatorAwareInterfac
         }
 
         return array(
-            'institutions' => $institutions,
+            'results' => $institutions,
             'q' => $q,
         );
     }

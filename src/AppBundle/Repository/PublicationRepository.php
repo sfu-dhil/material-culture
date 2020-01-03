@@ -26,4 +26,12 @@ class PublicationRepository extends EntityRepository {
 
         return $qb->getQuery()->execute();
     }
+
+    public function searchQuery($q) {
+        $qb = $this->createQueryBuilder('v');
+        $qb->where('MATCH(v.title, v.abstract) AGAINST (:q BOOLEAN) > 0');
+        $qb->setParameter('q', $q);
+
+        return $qb->getQuery();
+    }
 }
