@@ -11,7 +11,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Publication.
  *
- * @ORM\Table(name="publication")
+ * @ORM\Table(name="publication", indexes={
+ *   @ORM\Index(columns={"title","abstract"}, flags={"fulltext"})
+ * })
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PublicationRepository")
  */
 class Publication extends AbstractEntity {

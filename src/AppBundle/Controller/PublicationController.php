@@ -112,7 +112,7 @@ class PublicationController extends Controller implements PaginatorAwareInterfac
         }
 
         return array(
-            'publications' => $publications,
+            'results' => $publications,
             'q' => $q,
         );
     }
