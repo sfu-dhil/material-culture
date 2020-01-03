@@ -14,10 +14,12 @@
             <th>Further Reading</th>
             <td>{{ artefact.furtherReading|raw }}</td>
         </tr>
-        <tr>
-            <th>Note</th>
-            <td>{{ artefact.note|raw }}</td>
-        </tr>
+        {% if is_granted('ROLE_USER') %}
+            <tr>
+                <th>Note</th>
+                <td>{{ artefact.note|raw }}</td>
+            </tr>
+        {% endif %}
         <tr>
             <th>Recovery Location</th>
             <td>
