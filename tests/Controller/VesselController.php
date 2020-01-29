@@ -1,17 +1,17 @@
 <?php
 
-namespace AppBundle\Tests\Controller;
+namespace App\Tests\Controller;
 
-use AppBundle\DataFixtures\ORM\LoadVessel;
-use AppBundle\Entity\Vessel;
-use Nines\UserBundle\DataFixtures\ORM\LoadUser;
-use Nines\UtilBundle\Tests\Util\BaseTestCase;
+use App\DataFixtures\VesselFixtures;
+use App\Entity\Vessel;
+use Nines\UserBundle\DataFixtures\UserFixtures;
+use Nines\UtilBundle\Tests\ControllerBaseCase;
 
-class VesselController extends BaseTestCase {
-    protected function getFixtures() {
+class VesselController extends ControllerBaseCase {
+    protected function fixtures() : array {
         return array(
-            LoadUser::class,
-            LoadVessel::class,
+            UserFixtures::class,
+            VesselFixtures::class,
         );
     }
 
@@ -20,9 +20,9 @@ class VesselController extends BaseTestCase {
      * @group index
      */
     public function testAnonIndex() {
-        $client = $this->makeClient();
-        $crawler = $client->request('GET', '/vessel/');
-        $this->assertStatusCode(200, $client);
+
+        $crawler = $this->client->request('GET', '/vessel/');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertEquals(0, $crawler->selectLink('New')->count());
     }
 
@@ -31,9 +31,9 @@ class VesselController extends BaseTestCase {
      * @group index
      */
     public function testUserIndex() {
-        $client = $this->makeClient(LoadUser::USER);
-        $crawler = $client->request('GET', '/vessel/');
-        $this->assertStatusCode(200, $client);
+        $this->login('user.user');
+        $crawler = $this->client->request('GET', '/vessel/');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertEquals(0, $crawler->selectLink('New')->count());
     }
 
@@ -42,9 +42,9 @@ class VesselController extends BaseTestCase {
      * @group index
      */
     public function testAdminIndex() {
-        $client = $this->makeClient(LoadUser::ADMIN);
-        $crawler = $client->request('GET', '/vessel/');
-        $this->assertStatusCode(200, $client);
+        $this->login('user.admin');
+        $crawler = $this->client->request('GET', '/vessel/');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertEquals(1, $crawler->selectLink('New')->count());
     }
 
@@ -53,9 +53,9 @@ class VesselController extends BaseTestCase {
      * @group show
      */
     public function testAnonShow() {
-        $client = $this->makeClient();
-        $crawler = $client->request('GET', '/vessel/1');
-        $this->assertStatusCode(200, $client);
+
+        $crawler = $this->client->request('GET', '/vessel/1');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertEquals(0, $crawler->selectLink('Edit')->count());
         $this->assertEquals(0, $crawler->selectLink('Delete')->count());
     }
@@ -65,9 +65,9 @@ class VesselController extends BaseTestCase {
      * @group show
      */
     public function testUserShow() {
-        $client = $this->makeClient(LoadUser::USER);
-        $crawler = $client->request('GET', '/vessel/1');
-        $this->assertStatusCode(200, $client);
+        $this->login('user.user');
+        $crawler = $this->client->request('GET', '/vessel/1');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertEquals(0, $crawler->selectLink('Edit')->count());
         $this->assertEquals(0, $crawler->selectLink('Delete')->count());
     }
@@ -77,9 +77,9 @@ class VesselController extends BaseTestCase {
      * @group show
      */
     public function testAdminShow() {
-        $client = $this->makeClient(LoadUser::ADMIN);
-        $crawler = $client->request('GET', '/vessel/1');
-        $this->assertStatusCode(200, $client);
+        $this->login('user.admin');
+        $crawler = $this->client->request('GET', '/vessel/1');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertEquals(1, $crawler->selectLink('Edit')->count());
         $this->assertEquals(1, $crawler->selectLink('Delete')->count());
     }
@@ -89,10 +89,10 @@ class VesselController extends BaseTestCase {
      * @group typeahead
      */
     public function testAnonTypeahead() {
-        $client = $this->makeClient();
-        $client->request('GET', '/vessel/typeahead?q=STUFF');
-        $response = $client->getResponse();
-        $this->assertStatusCode(302, $client);
+
+        $this->client->request('GET', '/vessel/typeahead?q=STUFF');
+        $response = $this->client->getResponse();
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
         $this->markTestIncomplete(
             'This test has not been implemented yet.'
         );
@@ -106,10 +106,10 @@ class VesselController extends BaseTestCase {
      * @group typeahead
      */
     public function testUserTypeahead() {
-        $client = $this->makeClient(LoadUser::USER);
-        $client->request('GET', '/vessel/typeahead?q=STUFF');
-        $response = $client->getResponse();
-        $this->assertStatusCode(403, $client);
+        $this->login('user.user');
+        $this->client->request('GET', '/vessel/typeahead?q=STUFF');
+        $response = $this->client->getResponse();
+        $this->assertEquals(403, $this->client->getResponse()->getStatusCode());
         $this->markTestIncomplete(
             'This test has not been implemented yet.'
         );
@@ -122,10 +122,10 @@ class VesselController extends BaseTestCase {
      * @group typeahead
      */
     public function testAdminTypeahead() {
-        $client = $this->makeClient(LoadUser::ADMIN);
-        $client->request('GET', '/vessel/typeahead?q=STUFF');
-        $response = $client->getResponse();
-        $this->assertStatusCode(200, $client);
+        $this->login('user.admin');
+        $this->client->request('GET', '/vessel/typeahead?q=STUFF');
+        $response = $this->client->getResponse();
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertEquals('application/json', $response->headers->get('content-type'));
         $this->markTestIncomplete(
             'This test has not been implemented yet.'
@@ -139,10 +139,10 @@ class VesselController extends BaseTestCase {
      * @group edit
      */
     public function testAnonEdit() {
-        $client = $this->makeClient();
-        $crawler = $client->request('GET', '/vessel/1/edit');
-        $this->assertStatusCode(302, $client);
-        $this->assertTrue($client->getResponse()->isRedirect());
+
+        $crawler = $this->client->request('GET', '/vessel/1/edit');
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        $this->assertTrue($this->client->getResponse()->isRedirect());
     }
 
     /**
@@ -150,9 +150,9 @@ class VesselController extends BaseTestCase {
      * @group edit
      */
     public function testUserEdit() {
-        $client = $this->makeClient(LoadUser::USER);
-        $crawler = $client->request('GET', '/vessel/1/edit');
-        $this->assertStatusCode(403, $client);
+        $this->login('user.user');
+        $crawler = $this->client->request('GET', '/vessel/1/edit');
+        $this->assertEquals(403, $this->client->getResponse()->getStatusCode());
     }
 
     /**
@@ -160,9 +160,9 @@ class VesselController extends BaseTestCase {
      * @group edit
      */
     public function testAdminEdit() {
-        $client = $this->makeClient(LoadUser::ADMIN);
-        $formCrawler = $client->request('GET', '/vessel/1/edit');
-        $this->assertStatusCode(200, $client);
+        $this->login('user.admin');
+        $formCrawler = $this->client->request('GET', '/vessel/1/edit');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
         $this->markTestIncomplete(
             'This test has not been implemented yet.'
@@ -172,10 +172,10 @@ class VesselController extends BaseTestCase {
             // 'vessels[FIELDNAME]' => 'FIELDVALUE',
         ));
 
-        $client->submit($form);
-        $this->assertTrue($client->getResponse()->isRedirect('/vessel/1'));
-        $responseCrawler = $client->followRedirect();
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->client->submit($form);
+        $this->assertTrue($this->client->getResponse()->isRedirect('/vessel/1'));
+        $responseCrawler = $this->client->followRedirect();
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         // $this->assertEquals(1, $responseCrawler->filter('td:contains("FIELDVALUE")')->count());
     }
 
@@ -184,10 +184,10 @@ class VesselController extends BaseTestCase {
      * @group new
      */
     public function testAnonNew() {
-        $client = $this->makeClient();
-        $crawler = $client->request('GET', '/vessel/new');
-        $this->assertStatusCode(302, $client);
-        $this->assertTrue($client->getResponse()->isRedirect());
+
+        $crawler = $this->client->request('GET', '/vessel/new');
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        $this->assertTrue($this->client->getResponse()->isRedirect());
     }
 
     /**
@@ -195,10 +195,10 @@ class VesselController extends BaseTestCase {
      * @group new
      */
     public function testAnonNewPopup() {
-        $client = $this->makeClient();
-        $crawler = $client->request('GET', '/vessel/new_popup');
-        $this->assertStatusCode(302, $client);
-        $this->assertTrue($client->getResponse()->isRedirect());
+
+        $crawler = $this->client->request('GET', '/vessel/new_popup');
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        $this->assertTrue($this->client->getResponse()->isRedirect());
     }
 
     /**
@@ -206,9 +206,9 @@ class VesselController extends BaseTestCase {
      * @group new
      */
     public function testUserNew() {
-        $client = $this->makeClient(LoadUser::USER);
-        $crawler = $client->request('GET', '/vessel/new');
-        $this->assertStatusCode(403, $client);
+        $this->login('user.user');
+        $crawler = $this->client->request('GET', '/vessel/new');
+        $this->assertEquals(403, $this->client->getResponse()->getStatusCode());
     }
 
     /**
@@ -216,9 +216,9 @@ class VesselController extends BaseTestCase {
      * @group new
      */
     public function testUserNewPopup() {
-        $client = $this->makeClient(LoadUser::USER);
-        $crawler = $client->request('GET', '/vessel/new_popup');
-        $this->assertStatusCode(403, $client);
+        $this->login('user.user');
+        $crawler = $this->client->request('GET', '/vessel/new_popup');
+        $this->assertEquals(403, $this->client->getResponse()->getStatusCode());
     }
 
     /**
@@ -226,9 +226,9 @@ class VesselController extends BaseTestCase {
      * @group new
      */
     public function testAdminNew() {
-        $client = $this->makeClient(LoadUser::ADMIN);
-        $formCrawler = $client->request('GET', '/vessel/new');
-        $this->assertStatusCode(200, $client);
+        $this->login('user.admin');
+        $formCrawler = $this->client->request('GET', '/vessel/new');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
         $this->markTestIncomplete(
             'This test has not been implemented yet.'
@@ -238,10 +238,10 @@ class VesselController extends BaseTestCase {
             // 'vessels[FIELDNAME]' => 'FIELDVALUE',
         ));
 
-        $client->submit($form);
-        $this->assertTrue($client->getResponse()->isRedirect());
-        $responseCrawler = $client->followRedirect();
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->client->submit($form);
+        $this->assertTrue($this->client->getResponse()->isRedirect());
+        $responseCrawler = $this->client->followRedirect();
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         // $this->assertEquals(1, $responseCrawler->filter('td:contains("FIELDVALUE")')->count());
     }
 
@@ -250,9 +250,9 @@ class VesselController extends BaseTestCase {
      * @group new
      */
     public function testAdminNewPopup() {
-        $client = $this->makeClient(LoadUser::ADMIN);
-        $formCrawler = $client->request('GET', '/vessel/new_popup');
-        $this->assertStatusCode(200, $client);
+        $this->login('user.admin');
+        $formCrawler = $this->client->request('GET', '/vessel/new_popup');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
         $this->markTestIncomplete(
             'This test has not been implemented yet.'
@@ -262,10 +262,10 @@ class VesselController extends BaseTestCase {
             // 'vessels[FIELDNAME]' => 'FIELDVALUE',
         ));
 
-        $client->submit($form);
-        $this->assertTrue($client->getResponse()->isRedirect());
-        $responseCrawler = $client->followRedirect();
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->client->submit($form);
+        $this->assertTrue($this->client->getResponse()->isRedirect());
+        $responseCrawler = $this->client->followRedirect();
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         // $this->assertEquals(1, $responseCrawler->filter('td:contains("FIELDVALUE")')->count());
     }
 
@@ -274,10 +274,10 @@ class VesselController extends BaseTestCase {
      * @group delete
      */
     public function testAnonDelete() {
-        $client = $this->makeClient();
-        $crawler = $client->request('GET', '/vessel/1/delete');
-        $this->assertStatusCode(302, $client);
-        $this->assertTrue($client->getResponse()->isRedirect());
+
+        $crawler = $this->client->request('GET', '/vessel/1/delete');
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        $this->assertTrue($this->client->getResponse()->isRedirect());
     }
 
     /**
@@ -285,9 +285,9 @@ class VesselController extends BaseTestCase {
      * @group delete
      */
     public function testUserDelete() {
-        $client = $this->makeClient(LoadUser::USER);
-        $crawler = $client->request('GET', '/vessel/1/delete');
-        $this->assertStatusCode(403, $client);
+        $this->login('user.user');
+        $crawler = $this->client->request('GET', '/vessel/1/delete');
+        $this->assertEquals(403, $this->client->getResponse()->getStatusCode());
     }
 
     /**
@@ -295,16 +295,16 @@ class VesselController extends BaseTestCase {
      * @group delete
      */
     public function testAdminDelete() {
-        $preCount = count($this->em->getRepository(Vessel::class)->findAll());
-        $client = $this->makeClient(LoadUser::ADMIN);
-        $crawler = $client->request('GET', '/vessel/1/delete');
-        $this->assertStatusCode(302, $client);
-        $this->assertTrue($client->getResponse()->isRedirect());
-        $responseCrawler = $client->followRedirect();
-        $this->assertStatusCode(200, $client);
+        $preCount = count($this->entityManager->getRepository(Vessel::class)->findAll());
+        $this->login('user.admin');
+        $crawler = $this->client->request('GET', '/vessel/1/delete');
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        $this->assertTrue($this->client->getResponse()->isRedirect());
+        $responseCrawler = $this->client->followRedirect();
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
-        $this->em->clear();
-        $postCount = count($this->em->getRepository(Vessel::class)->findAll());
+        $this->entityManager->clear();
+        $postCount = count($this->entityManager->getRepository(Vessel::class)->findAll());
         $this->assertEquals($preCount - 1, $postCount);
     }
 }

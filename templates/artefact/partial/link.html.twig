@@ -1,4 +1,4 @@
-{% spaceless %}
+{% apply spaceless %}
     {% if artefact.category == constant('App\\Entity\\Artefact::BOTTLE') %}
         {% set route='bottle_show' %}
     {% elseif artefact.category == constant('App\\Entity\\Artefact::CAN') %}
@@ -17,4 +17,4 @@
     {% else %}
         <span>Cannot link to {{ artefact.category }}.</span>
     {% endif %}
-{% endspaceless %}
+{% endapply %}

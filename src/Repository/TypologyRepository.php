@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Artefact;
+use App\Entity\Typology;
 use Doctrine\Persistence\ManagerRegistry;
 use Nines\UtilBundle\Repository\TermRepository;
 
@@ -14,7 +15,7 @@ use Nines\UtilBundle\Repository\TermRepository;
  */
 class TypologyRepository extends TermRepository {
     public function __construct(ManagerRegistry $registry) {
-        parent::__construct($registry, TypologyRepository::class);
+        parent::__construct($registry, Typology::class);
     }
 
 }

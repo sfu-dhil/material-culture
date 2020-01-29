@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Reference;
 use App\Form\ReferenceType;
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Bundle\PaginatorBundle\Definition\PaginatorAwareInterface;
 use Nines\UtilBundle\Controller\PaginatorTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -32,8 +33,7 @@ class ReferenceController extends AbstractController implements PaginatorAwareIn
      * @Route("/", name="reference_index", methods={"GET"})
      * @Template()
      */
-    public function indexAction(Request $request) {
-        $em = $this->getDoctrine()->getManager();
+    public function indexAction(Request $request, EntityManagerInterface $em) {
         $qb = $em->createQueryBuilder();
         $qb->select('e')->from(Reference::class, 'e')->orderBy('e.id', 'ASC');
         $query = $qb->getQuery();

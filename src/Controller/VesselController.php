@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Vessel;
 use App\Form\VesselType;
 use App\Repository\VesselRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Bundle\PaginatorBundle\Definition\PaginatorAwareInterface;
 use Nines\UtilBundle\Controller\PaginatorTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -157,8 +158,8 @@ class VesselController extends AbstractController implements PaginatorAwareInter
      * @Route("/new_popup", name="vessel_new_popup", methods={"GET","POST"})
      * @Template()
      */
-    public function newPopupAction(Request $request) {
-        return $this->newAction($request);
+    public function newPopupAction(Request $request, EntityManagerInterface $em) {
+        return $this->newAction($request, $em);
     }
 
     /**

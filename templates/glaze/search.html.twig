@@ -4,13 +4,13 @@
 
 {% block pageheader %}
     <h1>Glaze Search</h1>
-    {% embed '@App/misc/search-header.html.twigg' %}
+    {% embed 'misc/search-header.html.twig' %}
     {% endembed %}
 {% endblock %}
 
 {% block body %}
 
-    {% embed '@App/misc/search-form.html.twigg' %}
+    {% embed 'misc/search-form.html.twig' %}
     {% endembed %}
 
     {% if q %}
@@ -18,7 +18,7 @@
     {% endembed %}
     {% endif %}
 
-    {% embed '@App/misc/search-footer.html.twigg' %}
+    {% embed 'misc/search-footer.html.twig' %}
     {% endembed %}
 
 {% endblock %}

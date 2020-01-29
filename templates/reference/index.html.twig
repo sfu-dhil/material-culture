@@ -21,7 +21,7 @@
                 <tr>
                     <td>
                         <a href="{{ path('reference_show', { 'id': reference.id }) }}">
-                            {{ reference.description }}
+                            {{ reference.description|raw }}
                         </a>
                     </td>
                 </tr>

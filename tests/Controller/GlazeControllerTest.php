@@ -1,17 +1,17 @@
 <?php
 
-namespace AppBundle\Tests\Controller;
+namespace App\Tests\Controller;
 
-use AppBundle\DataFixtures\ORM\LoadGlaze;
-use AppBundle\Entity\Glaze;
-use Nines\UserBundle\DataFixtures\ORM\LoadUser;
-use Nines\UtilBundle\Tests\Util\BaseTestCase;
+use App\DataFixtures\GlazeFixtures;
+use App\Entity\Glaze;
+use Nines\UserBundle\DataFixtures\UserFixtures;
+use Nines\UtilBundle\Tests\ControllerBaseCase;
 
-class GlazeControllerTest extends BaseTestCase {
-    protected function getFixtures() {
+class GlazeControllerTest extends ControllerBaseCase {
+    protected function fixtures() : array {
         return array(
-            LoadUser::class,
-            LoadGlaze::class,
+            UserFixtures::class,
+            GlazeFixtures::class,
         );
     }
 
@@ -20,9 +20,9 @@ class GlazeControllerTest extends BaseTestCase {
      * @group index
      */
     public function testAnonIndex() {
-        $client = $this->makeClient();
-        $crawler = $client->request('GET', '/glaze/');
-        $this->assertStatusCode(200, $client);
+
+        $crawler = $this->client->request('GET', '/glaze/');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertEquals(0, $crawler->selectLink('New')->count());
     }
 
@@ -31,9 +31,9 @@ class GlazeControllerTest extends BaseTestCase {
      * @group index
      */
     public function testUserIndex() {
-        $client = $this->makeClient(LoadUser::USER);
-        $crawler = $client->request('GET', '/glaze/');
-        $this->assertStatusCode(200, $client);
+        $this->login('user.user');
+        $crawler = $this->client->request('GET', '/glaze/');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertEquals(0, $crawler->selectLink('New')->count());
     }
 
@@ -42,9 +42,9 @@ class GlazeControllerTest extends BaseTestCase {
      * @group index
      */
     public function testAdminIndex() {
-        $client = $this->makeClient(LoadUser::ADMIN);
-        $crawler = $client->request('GET', '/glaze/');
-        $this->assertStatusCode(200, $client);
+        $this->login('user.admin');
+        $crawler = $this->client->request('GET', '/glaze/');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertEquals(1, $crawler->selectLink('New')->count());
     }
 
@@ -53,9 +53,9 @@ class GlazeControllerTest extends BaseTestCase {
      * @group show
      */
     public function testAnonShow() {
-        $client = $this->makeClient();
-        $crawler = $client->request('GET', '/glaze/1');
-        $this->assertStatusCode(200, $client);
+
+        $crawler = $this->client->request('GET', '/glaze/1');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertEquals(0, $crawler->selectLink('Edit')->count());
         $this->assertEquals(0, $crawler->selectLink('Delete')->count());
     }
@@ -65,9 +65,9 @@ class GlazeControllerTest extends BaseTestCase {
      * @group show
      */
     public function testUserShow() {
-        $client = $this->makeClient(LoadUser::USER);
-        $crawler = $client->request('GET', '/glaze/1');
-        $this->assertStatusCode(200, $client);
+        $this->login('user.user');
+        $crawler = $this->client->request('GET', '/glaze/1');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertEquals(0, $crawler->selectLink('Edit')->count());
         $this->assertEquals(0, $crawler->selectLink('Delete')->count());
     }
@@ -77,9 +77,9 @@ class GlazeControllerTest extends BaseTestCase {
      * @group show
      */
     public function testAdminShow() {
-        $client = $this->makeClient(LoadUser::ADMIN);
-        $crawler = $client->request('GET', '/glaze/1');
-        $this->assertStatusCode(200, $client);
+        $this->login('user.admin');
+        $crawler = $this->client->request('GET', '/glaze/1');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertEquals(1, $crawler->selectLink('Edit')->count());
         $this->assertEquals(1, $crawler->selectLink('Delete')->count());
     }
@@ -89,10 +89,10 @@ class GlazeControllerTest extends BaseTestCase {
      * @group typeahead
      */
     public function testAnonTypeahead() {
-        $client = $this->makeClient();
-        $client->request('GET', '/glaze/typeahead?q=STUFF');
-        $response = $client->getResponse();
-        $this->assertStatusCode(302, $client);
+
+        $this->client->request('GET', '/glaze/typeahead?q=STUFF');
+        $response = $this->client->getResponse();
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
         $this->markTestIncomplete(
             'This test has not been implemented yet.'
         );
@@ -106,10 +106,10 @@ class GlazeControllerTest extends BaseTestCase {
      * @group typeahead
      */
     public function testUserTypeahead() {
-        $client = $this->makeClient(LoadUser::USER);
-        $client->request('GET', '/glaze/typeahead?q=STUFF');
-        $response = $client->getResponse();
-        $this->assertStatusCode(403, $client);
+        $this->login('user.user');
+        $this->client->request('GET', '/glaze/typeahead?q=STUFF');
+        $response = $this->client->getResponse();
+        $this->assertEquals(403, $this->client->getResponse()->getStatusCode());
         $this->markTestIncomplete(
             'This test has not been implemented yet.'
         );
@@ -123,10 +123,10 @@ class GlazeControllerTest extends BaseTestCase {
      * @group typeahead
      */
     public function testAdminTypeahead() {
-        $client = $this->makeClient(LoadUser::ADMIN);
-        $client->request('GET', '/glaze/typeahead?q=STUFF');
-        $response = $client->getResponse();
-        $this->assertStatusCode(200, $client);
+        $this->login('user.admin');
+        $this->client->request('GET', '/glaze/typeahead?q=STUFF');
+        $response = $this->client->getResponse();
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertEquals('application/json', $response->headers->get('content-type'));
         $this->markTestIncomplete(
             'This test has not been implemented yet.'
@@ -140,10 +140,10 @@ class GlazeControllerTest extends BaseTestCase {
      * @group edit
      */
     public function testAnonEdit() {
-        $client = $this->makeClient();
-        $crawler = $client->request('GET', '/glaze/1/edit');
-        $this->assertStatusCode(302, $client);
-        $this->assertTrue($client->getResponse()->isRedirect());
+
+        $crawler = $this->client->request('GET', '/glaze/1/edit');
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        $this->assertTrue($this->client->getResponse()->isRedirect());
     }
 
     /**
@@ -151,9 +151,9 @@ class GlazeControllerTest extends BaseTestCase {
      * @group edit
      */
     public function testUserEdit() {
-        $client = $this->makeClient(LoadUser::USER);
-        $crawler = $client->request('GET', '/glaze/1/edit');
-        $this->assertStatusCode(403, $client);
+        $this->login('user.user');
+        $crawler = $this->client->request('GET', '/glaze/1/edit');
+        $this->assertEquals(403, $this->client->getResponse()->getStatusCode());
     }
 
     /**
@@ -161,9 +161,9 @@ class GlazeControllerTest extends BaseTestCase {
      * @group edit
      */
     public function testAdminEdit() {
-        $client = $this->makeClient(LoadUser::ADMIN);
-        $formCrawler = $client->request('GET', '/glaze/1/edit');
-        $this->assertStatusCode(200, $client);
+        $this->login('user.admin');
+        $formCrawler = $this->client->request('GET', '/glaze/1/edit');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
         $this->markTestIncomplete(
             'This test has not been implemented yet.'
@@ -173,10 +173,10 @@ class GlazeControllerTest extends BaseTestCase {
             // 'glazes[FIELDNAME]' => 'FIELDVALUE',
         ));
 
-        $client->submit($form);
-        $this->assertTrue($client->getResponse()->isRedirect('/glaze/1'));
-        $responseCrawler = $client->followRedirect();
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->client->submit($form);
+        $this->assertTrue($this->client->getResponse()->isRedirect('/glaze/1'));
+        $responseCrawler = $this->client->followRedirect();
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         // $this->assertEquals(1, $responseCrawler->filter('td:contains("FIELDVALUE")')->count());
     }
 
@@ -185,10 +185,10 @@ class GlazeControllerTest extends BaseTestCase {
      * @group new
      */
     public function testAnonNew() {
-        $client = $this->makeClient();
-        $crawler = $client->request('GET', '/glaze/new');
-        $this->assertStatusCode(302, $client);
-        $this->assertTrue($client->getResponse()->isRedirect());
+
+        $crawler = $this->client->request('GET', '/glaze/new');
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        $this->assertTrue($this->client->getResponse()->isRedirect());
     }
 
     /**
@@ -196,10 +196,10 @@ class GlazeControllerTest extends BaseTestCase {
      * @group new
      */
     public function testAnonNewPopup() {
-        $client = $this->makeClient();
-        $crawler = $client->request('GET', '/glaze/new_popup');
-        $this->assertStatusCode(302, $client);
-        $this->assertTrue($client->getResponse()->isRedirect());
+
+        $crawler = $this->client->request('GET', '/glaze/new_popup');
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        $this->assertTrue($this->client->getResponse()->isRedirect());
     }
 
     /**
@@ -207,9 +207,9 @@ class GlazeControllerTest extends BaseTestCase {
      * @group new
      */
     public function testUserNew() {
-        $client = $this->makeClient(LoadUser::USER);
-        $crawler = $client->request('GET', '/glaze/new');
-        $this->assertStatusCode(403, $client);
+        $this->login('user.user');
+        $crawler = $this->client->request('GET', '/glaze/new');
+        $this->assertEquals(403, $this->client->getResponse()->getStatusCode());
     }
 
     /**
@@ -217,9 +217,9 @@ class GlazeControllerTest extends BaseTestCase {
      * @group new
      */
     public function testUserNewPopup() {
-        $client = $this->makeClient(LoadUser::USER);
-        $crawler = $client->request('GET', '/glaze/new_popup');
-        $this->assertStatusCode(403, $client);
+        $this->login('user.user');
+        $crawler = $this->client->request('GET', '/glaze/new_popup');
+        $this->assertEquals(403, $this->client->getResponse()->getStatusCode());
     }
 
     /**
@@ -227,9 +227,9 @@ class GlazeControllerTest extends BaseTestCase {
      * @group new
      */
     public function testAdminNew() {
-        $client = $this->makeClient(LoadUser::ADMIN);
-        $formCrawler = $client->request('GET', '/glaze/new');
-        $this->assertStatusCode(200, $client);
+        $this->login('user.admin');
+        $formCrawler = $this->client->request('GET', '/glaze/new');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
         $this->markTestIncomplete(
             'This test has not been implemented yet.'
@@ -239,10 +239,10 @@ class GlazeControllerTest extends BaseTestCase {
             // 'glazes[FIELDNAME]' => 'FIELDVALUE',
         ));
 
-        $client->submit($form);
-        $this->assertTrue($client->getResponse()->isRedirect());
-        $responseCrawler = $client->followRedirect();
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->client->submit($form);
+        $this->assertTrue($this->client->getResponse()->isRedirect());
+        $responseCrawler = $this->client->followRedirect();
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         // $this->assertEquals(1, $responseCrawler->filter('td:contains("FIELDVALUE")')->count());
     }
 
@@ -251,9 +251,9 @@ class GlazeControllerTest extends BaseTestCase {
      * @group new
      */
     public function testAdminNewPopup() {
-        $client = $this->makeClient(LoadUser::ADMIN);
-        $formCrawler = $client->request('GET', '/glaze/new_popup');
-        $this->assertStatusCode(200, $client);
+        $this->login('user.admin');
+        $formCrawler = $this->client->request('GET', '/glaze/new_popup');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
         $this->markTestIncomplete(
             'This test has not been implemented yet.'
@@ -263,10 +263,10 @@ class GlazeControllerTest extends BaseTestCase {
             // 'glazes[FIELDNAME]' => 'FIELDVALUE',
         ));
 
-        $client->submit($form);
-        $this->assertTrue($client->getResponse()->isRedirect());
-        $responseCrawler = $client->followRedirect();
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->client->submit($form);
+        $this->assertTrue($this->client->getResponse()->isRedirect());
+        $responseCrawler = $this->client->followRedirect();
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         // $this->assertEquals(1, $responseCrawler->filter('td:contains("FIELDVALUE")')->count());
     }
 
@@ -275,10 +275,10 @@ class GlazeControllerTest extends BaseTestCase {
      * @group delete
      */
     public function testAnonDelete() {
-        $client = $this->makeClient();
-        $crawler = $client->request('GET', '/glaze/1/delete');
-        $this->assertStatusCode(302, $client);
-        $this->assertTrue($client->getResponse()->isRedirect());
+
+        $crawler = $this->client->request('GET', '/glaze/1/delete');
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        $this->assertTrue($this->client->getResponse()->isRedirect());
     }
 
     /**
@@ -286,9 +286,9 @@ class GlazeControllerTest extends BaseTestCase {
      * @group delete
      */
     public function testUserDelete() {
-        $client = $this->makeClient(LoadUser::USER);
-        $crawler = $client->request('GET', '/glaze/1/delete');
-        $this->assertStatusCode(403, $client);
+        $this->login('user.user');
+        $crawler = $this->client->request('GET', '/glaze/1/delete');
+        $this->assertEquals(403, $this->client->getResponse()->getStatusCode());
     }
 
     /**
@@ -296,16 +296,16 @@ class GlazeControllerTest extends BaseTestCase {
      * @group delete
      */
     public function testAdminDelete() {
-        $preCount = count($this->em->getRepository(Glaze::class)->findAll());
-        $client = $this->makeClient(LoadUser::ADMIN);
-        $crawler = $client->request('GET', '/glaze/1/delete');
-        $this->assertStatusCode(302, $client);
-        $this->assertTrue($client->getResponse()->isRedirect());
-        $responseCrawler = $client->followRedirect();
-        $this->assertStatusCode(200, $client);
+        $preCount = count($this->entityManager->getRepository(Glaze::class)->findAll());
+        $this->login('user.admin');
+        $crawler = $this->client->request('GET', '/glaze/1/delete');
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        $this->assertTrue($this->client->getResponse()->isRedirect());
+        $responseCrawler = $this->client->followRedirect();
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
-        $this->em->clear();
-        $postCount = count($this->em->getRepository(Glaze::class)->findAll());
+        $this->entityManager->clear();
+        $postCount = count($this->entityManager->getRepository(Glaze::class)->findAll());
         $this->assertEquals($preCount - 1, $postCount);
     }
 }

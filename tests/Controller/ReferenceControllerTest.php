@@ -1,17 +1,17 @@
 <?php
 
-namespace AppBundle\Tests\Controller;
+namespace App\Tests\Controller;
 
-use AppBundle\DataFixtures\ORM\LoadReference;
-use AppBundle\Entity\Reference;
-use Nines\UserBundle\DataFixtures\ORM\LoadUser;
-use Nines\UtilBundle\Tests\Util\BaseTestCase;
+use App\DataFixtures\ReferenceFixtures;
+use App\Entity\Reference;
+use Nines\UserBundle\DataFixtures\UserFixtures;
+use Nines\UtilBundle\Tests\ControllerBaseCase;
 
-class ReferenceControllerTest extends BaseTestCase {
-    protected function getFixtures() {
+class ReferenceControllerTest extends ControllerBaseCase {
+    protected function fixtures() : array {
         return array(
-            LoadUser::class,
-            LoadReference::class,
+            UserFixtures::class,
+            ReferenceFixtures::class,
         );
     }
 
@@ -20,9 +20,9 @@ class ReferenceControllerTest extends BaseTestCase {
      * @group index
      */
     public function testAnonIndex() {
-        $client = $this->makeClient();
-        $crawler = $client->request('GET', '/reference/');
-        $this->assertStatusCode(200, $client);
+
+        $crawler = $this->client->request('GET', '/reference/');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertEquals(0, $crawler->selectLink('New')->count());
     }
 
@@ -31,9 +31,9 @@ class ReferenceControllerTest extends BaseTestCase {
      * @group index
      */
     public function testUserIndex() {
-        $client = $this->makeClient(LoadUser::USER);
-        $crawler = $client->request('GET', '/reference/');
-        $this->assertStatusCode(200, $client);
+        $this->login('user.user');
+        $crawler = $this->client->request('GET', '/reference/');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
         $this->assertEquals(0, $crawler->selectLink('New')->count());
     }
 
@@ -42,9 +42,9 @@ class ReferenceControllerTest extends BaseTestCase {
      * @group index
      */
     public function testAdminIndex() {
-        $client = $this->makeClient(LoadUser::ADMIN);
-        $crawler = $client->request('GET', '/reference/');
-        $this->assertStatusCode(200, $client);
+        $this->login('user.admin');
+        $crawler = $this->client->request('GET', '/reference/');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 
     /**
@@ -52,9 +52,9 @@ class ReferenceControllerTest extends BaseTestCase {
      * @group show
      */
     public function testAnonShow() {
-        $client = $this->makeClient();
-        $crawler = $client->request('GET', '/reference/1');
-        $this->assertStatusCode(200, $client);
+
+        $crawler = $this->client->request('GET', '/reference/1');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 
     /**
@@ -62,9 +62,9 @@ class ReferenceControllerTest extends BaseTestCase {
      * @group show
      */
     public function testUserShow() {
-        $client = $this->makeClient(LoadUser::USER);
-        $crawler = $client->request('GET', '/reference/1');
-        $this->assertStatusCode(200, $client);
+        $this->login('user.user');
+        $crawler = $this->client->request('GET', '/reference/1');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 
     /**
@@ -72,8 +72,8 @@ class ReferenceControllerTest extends BaseTestCase {
      * @group show
      */
     public function testAdminShow() {
-        $client = $this->makeClient(LoadUser::ADMIN);
-        $crawler = $client->request('GET', '/reference/1');
-        $this->assertStatusCode(200, $client);
+        $this->login('user.admin');
+        $crawler = $this->client->request('GET', '/reference/1');
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 }

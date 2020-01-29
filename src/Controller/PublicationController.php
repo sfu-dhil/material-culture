@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Publication;
 use App\Form\PublicationType;
 use App\Repository\PublicationRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Bundle\PaginatorBundle\Definition\PaginatorAwareInterface;
 use Nines\UtilBundle\Controller\PaginatorTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -158,8 +159,8 @@ class PublicationController extends AbstractController implements PaginatorAware
      * @Route("/new_popup", name="publication_new_popup", methods={"GET","POST"})
      * @Template()
      */
-    public function newPopupAction(Request $request) {
-        return $this->newAction($request);
+    public function newPopupAction(Request $request, EntityManagerInterface $em) {
+        return $this->newAction($request, $em);
     }
 
     /**

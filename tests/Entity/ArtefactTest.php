@@ -1,8 +1,8 @@
 <?php
 
-namespace AppBundle\Tests\Entity;
+namespace App\Tests\Entity;
 
-use AppBundle\Entity\Artefact;
+use App\Entity\Artefact;
 use PHPUnit\Framework\TestCase;
 
 class ArtefactTest extends TestCase {

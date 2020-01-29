@@ -156,8 +156,8 @@ class InstitutionController extends AbstractController implements PaginatorAware
      * @Route("/new_popup", name="institution_new_popup", methods={"GET","POST"})
      * @Template()
      */
-    public function newPopupAction(Request $request) {
-        return $this->newAction($request);
+    public function newPopupAction(Request $request, EntityManagerInterface $em) {
+        return $this->newAction($request, $em);
     }
 
     /**

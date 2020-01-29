@@ -30,3 +30,5 @@
 public/yarn
 config/deploy.yml
 *.sql
+public/js/jquery.collection.js
+templates/jquery.collection.html.twig

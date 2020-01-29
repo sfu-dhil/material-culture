@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Typology;
 use App\Form\TypologyType;
 use App\Repository\TypologyRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Bundle\PaginatorBundle\Definition\PaginatorAwareInterface;
 use Nines\UtilBundle\Controller\PaginatorTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -157,8 +158,8 @@ class TypologyController extends AbstractController implements PaginatorAwareInt
      * @Route("/new_popup", name="typology_new_popup", methods={"GET","POST"})
      * @Template()
      */
-    public function newPopupAction(Request $request) {
-        return $this->newAction($request);
+    public function newPopupAction(Request $request, EntityManagerInterface $em) {
+        return $this->newAction($request, $em);
     }
 
     /**

@@ -1,9 +1,9 @@
 <?php
 
-namespace AppBundle\Tests\Entity;
+namespace App\Tests\Entity;
 
-use AppBundle\Entity\Artefact;
-use AppBundle\Entity\Publication;
+use App\Entity\Artefact;
+use App\Entity\Publication;
 use PHPUnit\Framework\TestCase;
 
 class PublicationTest extends TestCase {
