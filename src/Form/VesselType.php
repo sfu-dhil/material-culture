@@ -1,9 +1,9 @@
 <?php
 
-namespace AppBundle\Form;
+namespace App\Form;
 
-use AppBundle\Entity\Shape;
-use AppBundle\Entity\Vessel;
+use App\Entity\Shape;
+use App\Entity\Vessel;
 use Nines\UtilBundle\Form\TermType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,7 +18,7 @@ class VesselType extends TermType {
      * @param FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options) : void {
         parent::buildForm($builder, $options);
     }
 

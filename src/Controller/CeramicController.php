@@ -1,13 +1,16 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace App\Controller;
 
-use AppBundle\Entity\Ceramic;
-use AppBundle\Form\CeramicType;
+use App\Entity\Ceramic;
+use App\Form\CeramicType;
+use App\Repository\CeramicRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Bundle\PaginatorBundle\Definition\PaginatorAwareInterface;
+use Nines\UtilBundle\Controller\PaginatorTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route("/ceramic")
  */
-class CeramicController extends Controller implements PaginatorAwareInterface {
+class CeramicController extends AbstractController implements PaginatorAwareInterface {
     use PaginatorTrait;
 
     /**
@@ -31,13 +34,12 @@ class CeramicController extends Controller implements PaginatorAwareInterface {
      * @Route("/", name="ceramic_index", methods={"GET"})
      * @Template()
      */
-    public function indexAction(Request $request) {
-        $em = $this->getDoctrine()->getManager();
+    public function indexAction(Request $request, EntityManagerInterface $em) {
         $qb = $em->createQueryBuilder();
         $qb->select('e')->from(Ceramic::class, 'e')->orderBy('e.id', 'ASC');
         $query = $qb->getQuery();
-        $paginator = $this->get('knp_paginator');
-        $ceramics = $paginator->paginate($query, $request->query->getint('page', 1), 25);
+
+        $ceramics = $this->paginator->paginate($query, $request->query->getint('page', 1), 25);
 
         return array(
             'ceramics' => $ceramics,
@@ -48,7 +50,7 @@ class CeramicController extends Controller implements PaginatorAwareInterface {
      * Search for Ceramic entities.
      *
      * To make this work, add a method like this one to the
-     * AppBundle:Ceramic repository. Replace the fieldName with
+     * App:Ceramic repository. Replace the fieldName with
      * something appropriate, and adjust the generated search.html.twig
      * template.
      *
@@ -69,14 +71,11 @@ class CeramicController extends Controller implements PaginatorAwareInterface {
      *
      * @return array
      */
-    public function searchAction(Request $request) {
-        $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository('AppBundle:Ceramic');
+    public function searchAction(Request $request, CeramicRepository $repo) {
         $q = $request->query->get('q');
         if ($q) {
             $query = $repo->searchQuery($q);
-            $paginator = $this->get('knp_paginator');
-            $ceramics = $paginator->paginate($query, $request->query->getInt('page', 1), 25);
+            $ceramics = $this->paginator->paginate($query, $request->query->getInt('page', 1), 25);
         } else {
             $ceramics = array();
         }
@@ -98,14 +97,12 @@ class CeramicController extends Controller implements PaginatorAwareInterface {
      * @Route("/new", name="ceramic_new", methods={"GET","POST"})
      * @Template()
      */
-    public function newAction(Request $request) {
+    public function newAction(Request $request, EntityManagerInterface $em) {
         $ceramic = new Ceramic();
         $form = $this->createForm(CeramicType::class, $ceramic);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-
             $em->persist($ceramic);
             $em->flush();
 
@@ -152,12 +149,11 @@ class CeramicController extends Controller implements PaginatorAwareInterface {
      * @Route("/{id}/edit", name="ceramic_edit", methods={"GET","POST"})
      * @Template()
      */
-    public function editAction(Request $request, Ceramic $ceramic) {
+    public function editAction(Request $request, Ceramic $ceramic, EntityManagerInterface $em) {
         $editForm = $this->createForm(CeramicType::class, $ceramic);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->flush();
             $this->addFlash('success', 'The ceramic has been updated.');
 
@@ -181,8 +177,7 @@ class CeramicController extends Controller implements PaginatorAwareInterface {
      * @IsGranted("ROLE_CONTENT_ADMIN")
      * @Route("/{id}/delete", name="ceramic_delete", methods={"GET"})
      */
-    public function deleteAction(Request $request, Ceramic $ceramic) {
-        $em = $this->getDoctrine()->getManager();
+    public function deleteAction(Request $request, Ceramic $ceramic, EntityManagerInterface $em) {
         $em->remove($ceramic);
         $em->flush();
         $this->addFlash('success', 'The ceramic was deleted.');

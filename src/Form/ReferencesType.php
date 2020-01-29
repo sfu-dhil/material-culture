@@ -1,10 +1,10 @@
 <?php
 
-namespace AppBundle\Form;
+namespace App\Form;
 
-use AppBundle\Entity\Artefact;
-use AppBundle\Entity\Publication;
-use AppBundle\Entity\Reference;
+use App\Entity\Artefact;
+use App\Entity\Publication;
+use App\Entity\Reference;
 use phpDocumentor\Reflection\Types\Collection;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -22,7 +22,7 @@ class ReferencesType extends AbstractType {
      * @param FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options) : void {
         $builder->add('references', CollectionType::class, array(
             'label' => 'References',
             'allow_add' => true,

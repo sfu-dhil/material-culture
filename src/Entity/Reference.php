@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Nines\UtilBundle\Entity\AbstractEntity;
@@ -9,18 +9,18 @@ use Nines\UtilBundle\Entity\AbstractEntity;
  * Reference.
  *
  * @ORM\Table(name="reference")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ReferenceRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ReferenceRepository")
  */
 class Reference extends AbstractEntity {
     /**
      * @var Publication
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Publication", inversedBy="references")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Publication", inversedBy="references")
      */
     private $publication;
 
     /**
      * @var Artefact
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Artefact", inversedBy="references")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Artefact", inversedBy="references")
      */
     private $artefact;
 
@@ -64,7 +64,7 @@ class Reference extends AbstractEntity {
     /**
      * Set publication.
      *
-     * @param null|\AppBundle\Entity\Publication $publication
+     * @param null|\App\Entity\Publication $publication
      *
      * @return Reference
      */
@@ -77,7 +77,7 @@ class Reference extends AbstractEntity {
     /**
      * Get publication.
      *
-     * @return null|\AppBundle\Entity\Publication
+     * @return null|\App\Entity\Publication
      */
     public function getPublication() {
         return $this->publication;
@@ -86,7 +86,7 @@ class Reference extends AbstractEntity {
     /**
      * Set artefact.
      *
-     * @param null|\AppBundle\Entity\Artefact $artefact
+     * @param null|\App\Entity\Artefact $artefact
      *
      * @return Reference
      */
@@ -99,7 +99,7 @@ class Reference extends AbstractEntity {
     /**
      * Get artefact.
      *
-     * @return null|\AppBundle\Entity\Artefact
+     * @return null|\App\Entity\Artefact
      */
     public function getArtefact() {
         return $this->artefact;

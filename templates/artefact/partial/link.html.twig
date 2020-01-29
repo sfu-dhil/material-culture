@@ -1,9 +1,9 @@
 {% spaceless %}
-    {% if artefact.category == constant('AppBundle\\Entity\\Artefact::BOTTLE') %}
+    {% if artefact.category == constant('App\\Entity\\Artefact::BOTTLE') %}
         {% set route='bottle_show' %}
-    {% elseif artefact.category == constant('AppBundle\\Entity\\Artefact::CAN') %}
+    {% elseif artefact.category == constant('App\\Entity\\Artefact::CAN') %}
         {% set route='can_show' %}
-    {% elseif artefact.category == constant('AppBundle\\Entity\\Artefact::CERAMIC') %}
+    {% elseif artefact.category == constant('App\\Entity\\Artefact::CERAMIC') %}
         {% set route='can_show' %}
     {% endif %}
     {% if route is defined %}

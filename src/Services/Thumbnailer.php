@@ -6,10 +6,10 @@
  * and open the template in the editor.
  */
 
-namespace AppBundle\Services;
+namespace App\Services;
 
-use AppBundle\Entity\Image;
-use AppBundle\Entity\ImageEntity;
+use App\Entity\Image;
+use App\Entity\ImageEntity;
 use Exception;
 use Imagick;
 use ImagickException;

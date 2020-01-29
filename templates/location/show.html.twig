@@ -20,7 +20,7 @@
         </div>
     </div>
 
-    {% embed 'NinesUtilBundle:term/partial:show.html.twig' with {'term': location} %}
+    {% embed '@NinesUtil/term/partial/show.html.twig' with {'term': location} %}
         {% block callback %}
             <tr>
                 <th>Geoname Id</th>

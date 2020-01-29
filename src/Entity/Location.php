@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -13,7 +13,7 @@ use Nines\UtilBundle\Entity\AbstractTerm;
  * See http://download.geonames.org/export/dump/readme.txt
  *
  * @ORM\Table(name="location")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\LocationRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\LocationRepository")
  */
 class Location extends AbstractTerm {
     /**
@@ -382,7 +382,7 @@ class Location extends AbstractTerm {
     /**
      * Add artefactsRecovered.
      *
-     * @param \AppBundle\Entity\Artefact $artefactsRecovered
+     * @param \App\Entity\Artefact $artefactsRecovered
      *
      * @return Location
      */
@@ -395,7 +395,7 @@ class Location extends AbstractTerm {
     /**
      * Remove artefactsRecovered.
      *
-     * @param \AppBundle\Entity\Artefact $artefactsRecovered
+     * @param \App\Entity\Artefact $artefactsRecovered
      *
      * @return bool TRUE if this collection contained the specified element, FALSE otherwise.
      */
@@ -415,7 +415,7 @@ class Location extends AbstractTerm {
     /**
      * Add artefactsManufactured.
      *
-     * @param \AppBundle\Entity\Artefact $artefactsManufactured
+     * @param \App\Entity\Artefact $artefactsManufactured
      *
      * @return Location
      */
@@ -428,7 +428,7 @@ class Location extends AbstractTerm {
     /**
      * Remove artefactsManufactured.
      *
-     * @param \AppBundle\Entity\Artefact $artefactsManufactured
+     * @param \App\Entity\Artefact $artefactsManufactured
      *
      * @return bool TRUE if this collection contained the specified element, FALSE otherwise.
      */
@@ -448,11 +448,11 @@ class Location extends AbstractTerm {
     /**
      * Add bottlesPacked.
      *
-     * @param \AppBundle\Entity\Artefact $bottlesPacked
+     * @param \App\Entity\Artefact $bottlesPacked
      *
      * @return Location
      */
-    public function addBottlesPacked(\AppBundle\Entity\Artefact $bottlesPacked)
+    public function addBottlesPacked(\App\Entity\Artefact $bottlesPacked)
     {
         $this->bottlesPacked[] = $bottlesPacked;
 
@@ -462,11 +462,11 @@ class Location extends AbstractTerm {
     /**
      * Remove bottlesPacked.
      *
-     * @param \AppBundle\Entity\Artefact $bottlesPacked
+     * @param \App\Entity\Artefact $bottlesPacked
      *
      * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeBottlesPacked(\AppBundle\Entity\Artefact $bottlesPacked)
+    public function removeBottlesPacked(\App\Entity\Artefact $bottlesPacked)
     {
         return $this->bottlesPacked->removeElement($bottlesPacked);
     }
@@ -484,11 +484,11 @@ class Location extends AbstractTerm {
     /**
      * Add cansPacked.
      *
-     * @param \AppBundle\Entity\Artefact $cansPacked
+     * @param \App\Entity\Artefact $cansPacked
      *
      * @return Location
      */
-    public function addCansPacked(\AppBundle\Entity\Artefact $cansPacked)
+    public function addCansPacked(\App\Entity\Artefact $cansPacked)
     {
         $this->cansPacked[] = $cansPacked;
 
@@ -498,11 +498,11 @@ class Location extends AbstractTerm {
     /**
      * Remove cansPacked.
      *
-     * @param \AppBundle\Entity\Artefact $cansPacked
+     * @param \App\Entity\Artefact $cansPacked
      *
      * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeCansPacked(\AppBundle\Entity\Artefact $cansPacked)
+    public function removeCansPacked(\App\Entity\Artefact $cansPacked)
     {
         return $this->cansPacked->removeElement($cansPacked);
     }

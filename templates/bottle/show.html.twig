@@ -20,7 +20,7 @@
         </div>
     </div>
 
-    {% embed 'AppBundle:artefact/partial:show.html.twig' with {'artefact': bottle} %}
+    {% embed '@App/artefact/partial/show.html.twigg' with {'artefact': bottle} %}
         {% block callback %}
             <tr>
                 <th>Company</th>

@@ -1,11 +1,11 @@
 <?php
 
-namespace AppBundle\Form;
+namespace App\Form;
 
-use AppBundle\Entity\Bottle;
-use AppBundle\Entity\Content;
-use AppBundle\Entity\Location;
-use AppBundle\Entity\Manufacturer;
+use App\Entity\Bottle;
+use App\Entity\Content;
+use App\Entity\Location;
+use App\Entity\Manufacturer;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,7 +21,7 @@ class BottleType extends ArtefactType {
      * @param FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options) : void {
         parent::buildForm($builder, $options);
 
         $builder->add('company', null, array(

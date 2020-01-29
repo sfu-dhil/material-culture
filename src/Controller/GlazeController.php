@@ -1,13 +1,16 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace App\Controller;
 
-use AppBundle\Entity\Glaze;
-use AppBundle\Form\GlazeType;
+use App\Entity\Glaze;
+use App\Form\GlazeType;
+use App\Repository\GlazeRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Bundle\PaginatorBundle\Definition\PaginatorAwareInterface;
+use Nines\UtilBundle\Controller\PaginatorTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route("/glaze")
  */
-class GlazeController extends Controller implements PaginatorAwareInterface {
+class GlazeController extends AbstractController implements PaginatorAwareInterface {
     use PaginatorTrait;
 
     /**
@@ -31,13 +34,12 @@ class GlazeController extends Controller implements PaginatorAwareInterface {
      * @Route("/", name="glaze_index", methods={"GET"})
      * @Template()
      */
-    public function indexAction(Request $request) {
-        $em = $this->getDoctrine()->getManager();
+    public function indexAction(Request $request, EntityManagerInterface $em) {
         $qb = $em->createQueryBuilder();
         $qb->select('e')->from(Glaze::class, 'e')->orderBy('e.id', 'ASC');
         $query = $qb->getQuery();
-        $paginator = $this->get('knp_paginator');
-        $glazes = $paginator->paginate($query, $request->query->getint('page', 1), 25);
+
+        $glazes = $this->paginator->paginate($query, $request->query->getint('page', 1), 25);
 
         return array(
             'glazes' => $glazes,
@@ -56,13 +58,11 @@ class GlazeController extends Controller implements PaginatorAwareInterface {
      *
      * @return JsonResponse
      */
-    public function typeahead(Request $request) {
+    public function typeahead(Request $request, GlazeRepository $repo) {
         $q = $request->query->get('q');
         if ( ! $q) {
             return new JsonResponse(array());
         }
-        $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository(Glaze::class);
         $data = array();
         foreach ($repo->typeaheadQuery($q) as $result) {
             $data[] = array(
@@ -78,7 +78,7 @@ class GlazeController extends Controller implements PaginatorAwareInterface {
      * Search for Glaze entities.
      *
      * To make this work, add a method like this one to the
-     * AppBundle:Glaze repository. Replace the fieldName with
+     * App:Glaze repository. Replace the fieldName with
      * something appropriate, and adjust the generated search.html.twig
      * template.
      *
@@ -99,14 +99,11 @@ class GlazeController extends Controller implements PaginatorAwareInterface {
      *
      * @return array
      */
-    public function searchAction(Request $request) {
-        $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository('AppBundle:Glaze');
+    public function searchAction(Request $request, GlazeRepository $repo) {
         $q = $request->query->get('q');
         if ($q) {
             $query = $repo->searchQuery($q);
-            $paginator = $this->get('knp_paginator');
-            $glazes = $paginator->paginate($query, $request->query->getInt('page', 1), 25);
+            $glazes = $this->paginator->paginate($query, $request->query->getInt('page', 1), 25);
         } else {
             $glazes = array();
         }
@@ -128,13 +125,12 @@ class GlazeController extends Controller implements PaginatorAwareInterface {
      * @Route("/new", name="glaze_new", methods={"GET","POST"})
      * @Template()
      */
-    public function newAction(Request $request) {
+    public function newAction(Request $request, EntityManagerInterface $em) {
         $glaze = new Glaze();
         $form = $this->createForm(GlazeType::class, $glaze);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->persist($glaze);
             $em->flush();
 
@@ -192,12 +188,11 @@ class GlazeController extends Controller implements PaginatorAwareInterface {
      * @Route("/{id}/edit", name="glaze_edit", methods={"GET","POST"})
      * @Template()
      */
-    public function editAction(Request $request, Glaze $glaze) {
+    public function editAction(Request $request, Glaze $glaze, EntityManagerInterface $em) {
         $editForm = $this->createForm(GlazeType::class, $glaze);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->flush();
             $this->addFlash('success', 'The glaze has been updated.');
 
@@ -221,8 +216,7 @@ class GlazeController extends Controller implements PaginatorAwareInterface {
      * @IsGranted("ROLE_CONTENT_ADMIN")
      * @Route("/{id}/delete", name="glaze_delete", methods={"GET"})
      */
-    public function deleteAction(Request $request, Glaze $glaze) {
-        $em = $this->getDoctrine()->getManager();
+    public function deleteAction(Request $request, Glaze $glaze, EntityManagerInterface $em) {
         $em->remove($glaze);
         $em->flush();
         $this->addFlash('success', 'The glaze was deleted.');

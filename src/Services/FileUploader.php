@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace AppBundle\Services;
+namespace App\Services;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 

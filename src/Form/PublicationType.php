@@ -1,8 +1,8 @@
 <?php
 
-namespace AppBundle\Form;
+namespace App\Form;
 
-use AppBundle\Entity\Publication;
+use App\Entity\Publication;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -20,7 +20,7 @@ class PublicationType extends AbstractType {
      * @param FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options) : void {
         $builder->add('title', null, array(
             'label' => 'Title',
             'required' => true,

@@ -20,7 +20,7 @@
         </div>
     </div>
 
-    {% embed 'NinesUtilBundle:term/partial:show.html.twig' with {'term': manufacturer} %}
+    {% embed '@NinesUtil/term/partial/show.html.twig' with {'term': manufacturer} %}
     {% endembed %}
 
     {% if manufacturer.bottles | length > 0 %}

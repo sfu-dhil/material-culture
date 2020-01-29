@@ -1,11 +1,14 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace App\Controller;
 
-use AppBundle\Entity\Image;
+use App\Entity\Image;
+use App\Repository\ImageRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Bundle\PaginatorBundle\Definition\PaginatorAwareInterface;
+use Nines\UtilBundle\Controller\PaginatorTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -16,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route("/image")
  */
-class ImageController extends Controller implements PaginatorAwareInterface {
+class ImageController extends AbstractController implements PaginatorAwareInterface {
     use PaginatorTrait;
 
     /**
@@ -29,13 +32,12 @@ class ImageController extends Controller implements PaginatorAwareInterface {
      * @Route("/", name="image_index", methods={"GET"})
      * @Template()
      */
-    public function indexAction(Request $request) {
-        $em = $this->getDoctrine()->getManager();
+    public function indexAction(Request $request, EntityManagerInterface $em) {
         $qb = $em->createQueryBuilder();
         $qb->select('e')->from(Image::class, 'e')->orderBy('e.id', 'ASC');
         $query = $qb->getQuery();
-        $paginator = $this->get('knp_paginator');
-        $images = $paginator->paginate($query, $request->query->getint('page', 1), 25);
+
+        $images = $this->paginator->paginate($query, $request->query->getint('page', 1), 25);
 
         return array(
             'images' => $images,
@@ -46,7 +48,7 @@ class ImageController extends Controller implements PaginatorAwareInterface {
      * Search for Image entities.
      *
      * To make this work, add a method like this one to the
-     * AppBundle:Image repository. Replace the fieldName with
+     * App:Image repository. Replace the fieldName with
      * something appropriate, and adjust the generated search.html.twig
      * template.
      *
@@ -67,14 +69,11 @@ class ImageController extends Controller implements PaginatorAwareInterface {
      *
      * @return array
      */
-    public function searchAction(Request $request) {
-        $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository('AppBundle:Image');
+    public function searchAction(Request $request, ImageRepository $repo) {
         $q = $request->query->get('q');
         if ($q) {
             $query = $repo->searchQuery($q);
-            $paginator = $this->get('knp_paginator');
-            $images = $paginator->paginate($query, $request->query->getInt('page', 1), 25);
+            $images = $this->paginator->paginate($query, $request->query->getInt('page', 1), 25);
         } else {
             $images = array();
         }

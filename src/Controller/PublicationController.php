@@ -1,13 +1,15 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace App\Controller;
 
-use AppBundle\Entity\Publication;
-use AppBundle\Form\PublicationType;
+use App\Entity\Publication;
+use App\Form\PublicationType;
+use App\Repository\PublicationRepository;
 use Knp\Bundle\PaginatorBundle\Definition\PaginatorAwareInterface;
+use Nines\UtilBundle\Controller\PaginatorTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route("/publication")
  */
-class PublicationController extends Controller implements PaginatorAwareInterface {
+class PublicationController extends AbstractController implements PaginatorAwareInterface {
     use PaginatorTrait;
 
     /**
@@ -36,8 +38,8 @@ class PublicationController extends Controller implements PaginatorAwareInterfac
         $qb = $em->createQueryBuilder();
         $qb->select('e')->from(Publication::class, 'e')->orderBy('e.title', 'ASC');
         $query = $qb->getQuery();
-        $paginator = $this->get('knp_paginator');
-        $publications = $paginator->paginate($query, $request->query->getint('page', 1), 25);
+
+        $publications = $this->paginator->paginate($query, $request->query->getint('page', 1), 25);
 
         return array(
             'publications' => $publications,
@@ -56,13 +58,11 @@ class PublicationController extends Controller implements PaginatorAwareInterfac
      *
      * @return JsonResponse
      */
-    public function typeahead(Request $request) {
+    public function typeahead(Request $request, PublicationRepository $repo) {
         $q = $request->query->get('q');
         if ( ! $q) {
             return new JsonResponse(array());
         }
-        $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository(Publication::class);
         $data = array();
         foreach ($repo->typeaheadQuery($q) as $result) {
             $data[] = array(
@@ -78,7 +78,7 @@ class PublicationController extends Controller implements PaginatorAwareInterfac
      * Search for Publication entities.
      *
      * To make this work, add a method like this one to the
-     * AppBundle:Publication repository. Replace the fieldName with
+     * App:Publication repository. Replace the fieldName with
      * something appropriate, and adjust the generated search.html.twig
      * template.
      *
@@ -99,14 +99,11 @@ class PublicationController extends Controller implements PaginatorAwareInterfac
      *
      * @return array
      */
-    public function searchAction(Request $request) {
-        $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository('AppBundle:Publication');
+    public function searchAction(Request $request, PublicationRepository $repo) {
         $q = $request->query->get('q');
         if ($q) {
             $query = $repo->searchQuery($q);
-            $paginator = $this->get('knp_paginator');
-            $publications = $paginator->paginate($query, $request->query->getInt('page', 1), 25);
+            $publications = $this->paginator->paginate($query, $request->query->getInt('page', 1), 25);
         } else {
             $publications = array();
         }

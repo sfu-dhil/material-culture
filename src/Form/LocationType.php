@@ -1,8 +1,8 @@
 <?php
 
-namespace AppBundle\Form;
+namespace App\Form;
 
-use AppBundle\Entity\Location;
+use App\Entity\Location;
 use Nines\UtilBundle\Form\TermType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,7 +17,7 @@ class LocationType extends TermType {
      * @param FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options) : void {
         parent::buildForm($builder, $options);
         $builder->add('geonameId', null, array(
             'label' => 'Geoname Id',

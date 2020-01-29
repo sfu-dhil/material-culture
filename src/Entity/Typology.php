@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,12 +10,12 @@ use Nines\UtilBundle\Entity\AbstractTerm;
  * Typology.
  *
  * @ORM\Table(name="typology")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\TypologyRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\TypologyRepository")
  */
 class Typology extends AbstractTerm {
     /**
      * @var ArrayCollection|Ceramic[]
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Ceramic", mappedBy="typology")
+     * @ORM\OneToMany(targetEntity="App\Entity\Ceramic", mappedBy="typology")
      */
     private $ceramics;
 
@@ -27,7 +27,7 @@ class Typology extends AbstractTerm {
     /**
      * Add ceramic.
      *
-     * @param \AppBundle\Entity\Ceramic $ceramic
+     * @param \App\Entity\Ceramic $ceramic
      *
      * @return Typology
      */
@@ -40,7 +40,7 @@ class Typology extends AbstractTerm {
     /**
      * Remove ceramic.
      *
-     * @param \AppBundle\Entity\Ceramic $ceramic
+     * @param \App\Entity\Ceramic $ceramic
      *
      * @return bool TRUE if this collection contained the specified element, FALSE otherwise.
      */

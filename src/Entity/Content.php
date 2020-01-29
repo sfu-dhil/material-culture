@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,18 +10,18 @@ use Nines\UtilBundle\Entity\AbstractTerm;
  * Content.
  *
  * @ORM\Table(name="content")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ContentRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ContentRepository")
  */
 class Content extends AbstractTerm {
     /**
      * @var Bottle[]|Collection
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Bottle", mappedBy="content")
+     * @ORM\OneToMany(targetEntity="App\Entity\Bottle", mappedBy="content")
      */
     private $bottles;
 
     /**
      * @var Can[]|Collection
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Can", mappedBy="content")
+     * @ORM\OneToMany(targetEntity="App\Entity\Can", mappedBy="content")
      */
     private $cans;
 
@@ -34,7 +34,7 @@ class Content extends AbstractTerm {
     /**
      * Add bottle.
      *
-     * @param \AppBundle\Entity\Bottle $bottle
+     * @param \App\Entity\Bottle $bottle
      *
      * @return Content
      */
@@ -47,7 +47,7 @@ class Content extends AbstractTerm {
     /**
      * Remove bottle.
      *
-     * @param \AppBundle\Entity\Bottle $bottle
+     * @param \App\Entity\Bottle $bottle
      *
      * @return bool TRUE if this collection contained the specified element, FALSE otherwise.
      */
@@ -67,7 +67,7 @@ class Content extends AbstractTerm {
     /**
      * Add can.
      *
-     * @param \AppBundle\Entity\Can $can
+     * @param \App\Entity\Can $can
      *
      * @return Content
      */
@@ -80,7 +80,7 @@ class Content extends AbstractTerm {
     /**
      * Remove can.
      *
-     * @param \AppBundle\Entity\Can $can
+     * @param \App\Entity\Can $can
      *
      * @return bool TRUE if this collection contained the specified element, FALSE otherwise.
      */

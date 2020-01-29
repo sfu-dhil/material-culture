@@ -106,10 +106,10 @@
     <p>No images yet.</p>
 {% else %}
 
-    {% embed 'AppBundle:image/partial:list.html.twig' with {'images': images } %}
+    {% embed '@App/image/partial/list.html.twigg' with {'images': images } %}
     {% endembed %}
 
-    {% embed 'AppBundle:image:partial/image_modal.html.twig' %}
+    {% embed '@App/image/partial/image_modal.html.twigg' %}
     {% endembed %}
 
 {% endif %}

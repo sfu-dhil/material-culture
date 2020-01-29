@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Image.
  *
  * @ORM\Table(name="image")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ImageRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ImageRepository")
  */
 class Image extends ImageEntity {
     /**
@@ -74,7 +74,7 @@ class Image extends ImageEntity {
     /**
      * Set artefact.
      *
-     * @param null|\AppBundle\Entity\Artefact $artefact
+     * @param null|\App\Entity\Artefact $artefact
      *
      * @return Image
      */
@@ -87,7 +87,7 @@ class Image extends ImageEntity {
     /**
      * Get artefact.
      *
-     * @return null|\AppBundle\Entity\Artefact
+     * @return null|\App\Entity\Artefact
      */
     public function getArtefact() {
         return $this->artefact;

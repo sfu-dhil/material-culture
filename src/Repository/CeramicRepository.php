@@ -1,6 +1,10 @@
 <?php
 
-namespace AppBundle\Repository;
+namespace App\Repository;
+
+use App\Entity\Artefact;
+use App\Entity\Ceramic;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * CeramicRepository.
@@ -9,4 +13,8 @@ namespace AppBundle\Repository;
  * repository methods below.
  */
 class CeramicRepository extends ArtefactRepository {
+    public function __construct(ManagerRegistry $registry) {
+        parent::__construct($registry, Ceramic::class);
+    }
+
 }

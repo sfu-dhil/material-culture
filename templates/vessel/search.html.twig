@@ -4,21 +4,21 @@
 
 {% block pageheader %}
     <h1>Vessel Search</h1>
-    {% embed 'AppBundle:misc:search-header.html.twig' %}
+    {% embed '@App/misc/search-header.html.twigg' %}
     {% endembed %}
 {% endblock %}
 
 {% block body %}
 
-    {% embed 'AppBundle:misc:search-form.html.twig' %}
+    {% embed '@App/misc/search-form.html.twigg' %}
     {% endembed %}
 
     {% if q %}
-    {% embed 'NinesUtilBundle:term/partial:index.html.twig' with {'terms': results, 'path': 'content_show'} %}
+    {% embed '@NinesUtil/term/partial/index.html.twig' with {'terms': results, 'path': 'content_show'} %}
     {% endembed %}
     {% endif %}
 
-    {% embed 'AppBundle:misc:search-footer.html.twig' %}
+    {% embed '@App/misc/search-footer.html.twigg' %}
     {% endembed %}
 
 {% endblock %}

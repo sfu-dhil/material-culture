@@ -20,7 +20,7 @@
         </div>
     </div>
 
-    {% embed 'NinesUtilBundle:term/partial:show.html.twig' with {'term': glaze} %}
+    {% embed '@NinesUtil/term/partial/show.html.twig' with {'term': glaze} %}
     {% endembed %}
 
     {% if glaze.ceramics | length > 0 %}

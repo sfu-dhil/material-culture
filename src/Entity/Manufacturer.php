@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -11,18 +11,18 @@ use Nines\UtilBundle\Entity\AbstractTerm;
  * Manufacturer.
  *
  * @ORM\Table(name="manufacturer")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ManufacturerRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ManufacturerRepository")
  */
 class Manufacturer extends AbstractTerm {
     /**
      * @var Bottle[]|Collection
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Bottle", mappedBy="manufacturer")
+     * @ORM\OneToMany(targetEntity="App\Entity\Bottle", mappedBy="manufacturer")
      */
     private $bottles;
 
     /**
      * @var Can[]|Collection
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Can", mappedBy="manufacturer")
+     * @ORM\OneToMany(targetEntity="App\Entity\Can", mappedBy="manufacturer")
      */
     private $cans;
 
@@ -35,7 +35,7 @@ class Manufacturer extends AbstractTerm {
     /**
      * Add bottle.
      *
-     * @param \AppBundle\Entity\Bottle $bottle
+     * @param \App\Entity\Bottle $bottle
      *
      * @return Manufacturer
      */
@@ -48,7 +48,7 @@ class Manufacturer extends AbstractTerm {
     /**
      * Remove bottle.
      *
-     * @param \AppBundle\Entity\Bottle $bottle
+     * @param \App\Entity\Bottle $bottle
      *
      * @return bool TRUE if this collection contained the specified element, FALSE otherwise.
      */
@@ -68,7 +68,7 @@ class Manufacturer extends AbstractTerm {
     /**
      * Add can.
      *
-     * @param \AppBundle\Entity\Can $can
+     * @param \App\Entity\Can $can
      *
      * @return Manufacturer
      */
@@ -81,7 +81,7 @@ class Manufacturer extends AbstractTerm {
     /**
      * Remove can.
      *
-     * @param \AppBundle\Entity\Can $can
+     * @param \App\Entity\Can $can
      *
      * @return bool TRUE if this collection contained the specified element, FALSE otherwise.
      */

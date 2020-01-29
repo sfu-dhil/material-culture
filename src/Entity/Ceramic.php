@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Ceramic.
  *
  * @ORM\Table(name="artefact_ceramic")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\CeramicRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CeramicRepository")
  */
 class Ceramic extends Artefact {
     /**
@@ -19,13 +19,13 @@ class Ceramic extends Artefact {
 
     /**
      * @var Glaze
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Glaze", inversedBy="ceramics")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Glaze", inversedBy="ceramics")
      */
     private $glaze;
 
     /**
      * @var Typology
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Typology", inversedBy="ceramics")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Typology", inversedBy="ceramics")
      */
     private $typology;
 
@@ -107,7 +107,7 @@ class Ceramic extends Artefact {
     /**
      * Set vessel.
      *
-     * @param null|\AppBundle\Entity\Vessel $vessel
+     * @param null|\App\Entity\Vessel $vessel
      *
      * @return Ceramic
      */
@@ -120,7 +120,7 @@ class Ceramic extends Artefact {
     /**
      * Get vessel.
      *
-     * @return null|\AppBundle\Entity\Vessel
+     * @return null|\App\Entity\Vessel
      */
     public function getVessel() {
         return $this->vessel;
@@ -129,7 +129,7 @@ class Ceramic extends Artefact {
     /**
      * Set glaze.
      *
-     * @param null|\AppBundle\Entity\Glaze $glaze
+     * @param null|\App\Entity\Glaze $glaze
      *
      * @return Ceramic
      */
@@ -142,7 +142,7 @@ class Ceramic extends Artefact {
     /**
      * Get glaze.
      *
-     * @return null|\AppBundle\Entity\Glaze
+     * @return null|\App\Entity\Glaze
      */
     public function getGlaze() {
         return $this->glaze;
@@ -151,11 +151,11 @@ class Ceramic extends Artefact {
     /**
      * Set typology.
      *
-     * @param \AppBundle\Entity\Typology|null $typology
+     * @param \App\Entity\Typology|null $typology
      *
      * @return Ceramic
      */
-    public function setTypology(\AppBundle\Entity\Typology $typology = null)
+    public function setTypology(\App\Entity\Typology $typology = null)
     {
         $this->typology = $typology;
 
@@ -165,7 +165,7 @@ class Ceramic extends Artefact {
     /**
      * Get typology.
      *
-     * @return \AppBundle\Entity\Typology|null
+     * @return \App\Entity\Typology|null
      */
     public function getTypology()
     {

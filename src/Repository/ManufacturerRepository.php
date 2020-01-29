@@ -1,8 +1,10 @@
 <?php
 
-namespace AppBundle\Repository;
+namespace App\Repository;
 
-use AppBundle\Entity\Manufacturer;
+use App\Entity\Artefact;
+use App\Entity\Manufacturer;
+use Doctrine\Persistence\ManagerRegistry;
 use Nines\UtilBundle\Repository\TermRepository;
 
 /**
@@ -12,5 +14,10 @@ use Nines\UtilBundle\Repository\TermRepository;
  * repository methods below.
  */
 class ManufacturerRepository extends TermRepository {
+
+    public function __construct(ManagerRegistry $registry) {
+        parent::__construct($registry, Manufacturer::class);
+    }
+
 
 }

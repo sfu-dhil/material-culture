@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Bottle.
  *
  * @ORM\Table(name="artefact_bottle")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\BottleRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\BottleRepository")
  */
 class Bottle extends Artefact {
     /**
@@ -25,19 +25,19 @@ class Bottle extends Artefact {
 
     /**
      * @var Manufacturer
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Manufacturer", inversedBy="bottles")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Manufacturer", inversedBy="bottles")
      */
     private $manufacturer;
 
     /**
      * @var Location
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Location", inversedBy="bottlesPacked")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Location", inversedBy="bottlesPacked")
      */
     private $packagingLocation;
 
     /**
      * @var Content
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Content", inversedBy="bottles")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Content", inversedBy="bottles")
      */
     private $content;
 
@@ -105,7 +105,7 @@ class Bottle extends Artefact {
     /**
      * Set manufacturer.
      *
-     * @param null|\AppBundle\Entity\Manufacturer $manufacturer
+     * @param null|\App\Entity\Manufacturer $manufacturer
      *
      * @return Bottle
      */
@@ -118,7 +118,7 @@ class Bottle extends Artefact {
     /**
      * Get manufacturer.
      *
-     * @return null|\AppBundle\Entity\Manufacturer
+     * @return null|\App\Entity\Manufacturer
      */
     public function getManufacturer() {
         return $this->manufacturer;
@@ -127,7 +127,7 @@ class Bottle extends Artefact {
     /**
      * Set content.
      *
-     * @param null|\AppBundle\Entity\Content $content
+     * @param null|\App\Entity\Content $content
      *
      * @return Bottle
      */
@@ -140,7 +140,7 @@ class Bottle extends Artefact {
     /**
      * Get content.
      *
-     * @return null|\AppBundle\Entity\Content
+     * @return null|\App\Entity\Content
      */
     public function getContent() {
         return $this->content;
@@ -149,11 +149,11 @@ class Bottle extends Artefact {
     /**
      * Set packagingLocation.
      *
-     * @param \AppBundle\Entity\Location|null $packagingLocation
+     * @param \App\Entity\Location|null $packagingLocation
      *
      * @return Bottle
      */
-    public function setPackagingLocation(\AppBundle\Entity\Location $packagingLocation = null)
+    public function setPackagingLocation(\App\Entity\Location $packagingLocation = null)
     {
         $this->packagingLocation = $packagingLocation;
 
@@ -163,7 +163,7 @@ class Bottle extends Artefact {
     /**
      * Get packagingLocation.
      *
-     * @return \AppBundle\Entity\Location|null
+     * @return \App\Entity\Location|null
      */
     public function getPackagingLocation()
     {

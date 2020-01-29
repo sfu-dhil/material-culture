@@ -1,13 +1,16 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace App\Controller;
 
-use AppBundle\Entity\Location;
-use AppBundle\Form\LocationType;
+use App\Entity\Location;
+use App\Form\LocationType;
+use App\Repository\LocationRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Bundle\PaginatorBundle\Definition\PaginatorAwareInterface;
+use Nines\UtilBundle\Controller\PaginatorTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route("/location")
  */
-class LocationController extends Controller implements PaginatorAwareInterface {
+class LocationController extends AbstractController implements PaginatorAwareInterface {
     use PaginatorTrait;
 
     /**
@@ -31,13 +34,13 @@ class LocationController extends Controller implements PaginatorAwareInterface {
      * @Route("/", name="location_index", methods={"GET"})
      * @Template()
      */
-    public function indexAction(Request $request) {
+    public function indexAction(Request $request, EntityManagerInterface $em) {
         $em = $this->getDoctrine()->getManager();
         $qb = $em->createQueryBuilder();
         $qb->select('e')->from(Location::class, 'e')->orderBy('e.id', 'ASC');
         $query = $qb->getQuery();
-        $paginator = $this->get('knp_paginator');
-        $locations = $paginator->paginate($query, $request->query->getint('page', 1), 25);
+
+        $locations = $this->paginator->paginate($query, $request->query->getint('page', 1), 25);
 
         return array(
             'locations' => $locations,
@@ -56,13 +59,11 @@ class LocationController extends Controller implements PaginatorAwareInterface {
      *
      * @return JsonResponse
      */
-    public function typeahead(Request $request) {
+    public function typeahead(Request $request, LocationRepository $repo) {
         $q = $request->query->get('q');
         if ( ! $q) {
             return new JsonResponse(array());
         }
-        $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository(Location::class);
         $data = array();
         foreach ($repo->typeaheadQuery($q) as $result) {
             $data[] = array(
@@ -78,7 +79,7 @@ class LocationController extends Controller implements PaginatorAwareInterface {
      * Search for Location entities.
      *
      * To make this work, add a method like this one to the
-     * AppBundle:Location repository. Replace the fieldName with
+     * App:Location repository. Replace the fieldName with
      * something appropriate, and adjust the generated search.html.twig
      * template.
      *
@@ -99,14 +100,13 @@ class LocationController extends Controller implements PaginatorAwareInterface {
      *
      * @return array
      */
-    public function searchAction(Request $request) {
-        $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository('AppBundle:Location');
+    public function searchAction(Request $request, EntityManagerInterface $em) {
+        $repo = $em->getRepository(Location::class);
         $q = $request->query->get('q');
         if ($q) {
             $query = $repo->searchQuery($q);
-            $paginator = $this->get('knp_paginator');
-            $locations = $paginator->paginate($query, $request->query->getInt('page', 1), 25);
+
+            $locations = $this->paginator->paginate($query, $request->query->getInt('page', 1), 25);
         } else {
             $locations = array();
         }
@@ -128,13 +128,12 @@ class LocationController extends Controller implements PaginatorAwareInterface {
      * @Route("/new", name="location_new", methods={"GET","POST"})
      * @Template()
      */
-    public function newAction(Request $request) {
+    public function newAction(Request $request, EntityManagerInterface $em) {
         $location = new Location();
         $form = $this->createForm(LocationType::class, $location);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->persist($location);
             $em->flush();
 
@@ -192,12 +191,11 @@ class LocationController extends Controller implements PaginatorAwareInterface {
      * @Route("/{id}/edit", name="location_edit", methods={"GET","POST"})
      * @Template()
      */
-    public function editAction(Request $request, Location $location) {
+    public function editAction(Request $request, Location $location, EntityManagerInterface $em) {
         $editForm = $this->createForm(LocationType::class, $location);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->flush();
             $this->addFlash('success', 'The location has been updated.');
 
@@ -221,8 +219,7 @@ class LocationController extends Controller implements PaginatorAwareInterface {
      * @IsGranted("ROLE_CONTENT_ADMIN")
      * @Route("/{id}/delete", name="location_delete", methods={"GET"})
      */
-    public function deleteAction(Request $request, Location $location) {
-        $em = $this->getDoctrine()->getManager();
+    public function deleteAction(Request $request, Location $location, EntityManagerInterface $em) {
         $em->remove($location);
         $em->flush();
         $this->addFlash('success', 'The location was deleted.');

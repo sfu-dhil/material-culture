@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="institution", indexes={
  *   @ORM\Index(columns={"name", "url"}, flags={"fulltext"})
  * })
- * @ORM\Entity(repositoryClass="AppBundle\Repository\InstitutionRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\InstitutionRepository")
  */
 class Institution extends AbstractEntity {
     /**
@@ -157,7 +157,7 @@ class Institution extends AbstractEntity {
     /**
      * Add artefact.
      *
-     * @param \AppBundle\Entity\Artefact $artefact
+     * @param \App\Entity\Artefact $artefact
      *
      * @return Institution
      */
@@ -170,7 +170,7 @@ class Institution extends AbstractEntity {
     /**
      * Remove artefact.
      *
-     * @param \AppBundle\Entity\Artefact $artefact
+     * @param \App\Entity\Artefact $artefact
      *
      * @return bool TRUE if this collection contained the specified element, FALSE otherwise.
      */

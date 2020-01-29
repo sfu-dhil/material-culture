@@ -1,10 +1,10 @@
 <?php
 
-namespace AppBundle\Form;
+namespace App\Form;
 
-use AppBundle\Entity\Artefact;
-use AppBundle\Entity\Image;
-use AppBundle\Services\FileUploader;
+use App\Entity\Artefact;
+use App\Entity\Image;
+use App\Services\FileUploader;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -32,7 +32,7 @@ class ImageType extends AbstractType {
      * @param FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options) : void {
         $builder->add('artefact', EntityType::class, array(
             'class' => Artefact::class,
             'disabled' => true,

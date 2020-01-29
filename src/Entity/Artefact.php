@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -11,7 +11,7 @@ use Nines\UtilBundle\Entity\AbstractEntity;
 /**
  * Artefact.
  *
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ArtefactRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ArtefactRepository")
  * @ORM\Table(name="artefact")
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="category", type="string")
@@ -30,31 +30,31 @@ abstract class Artefact extends AbstractEntity {
 
     /**
      * @var Location
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Location", inversedBy="artefactsRecovered")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Location", inversedBy="artefactsRecovered")
      */
     private $recoveryLocation;
 
     /**
      * @var CircaDate
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\CircaDate", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\CircaDate", cascade={"persist", "remove"})
      */
     private $recoveryDate;
 
     /**
      * @var Location
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Location", inversedBy="artefactsManufactured")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Location", inversedBy="artefactsManufactured")
      */
     private $manufactureLocation;
 
     /**
      * @var CircaDate
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\CircaDate", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\CircaDate", cascade={"persist", "remove"})
      */
     private $manufactureDate;
 
     /**
      * @var Institution
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Institution", inversedBy="artefacts")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Institution", inversedBy="artefacts")
      */
     private $institution;
 
@@ -84,13 +84,13 @@ abstract class Artefact extends AbstractEntity {
 
     /**
      * @var Collection|Reference[]
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Reference", mappedBy="artefact", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Reference", mappedBy="artefact", cascade={"persist"})
      */
     private $references;
 
     /**
      * @var Collection|Image[]
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Image", mappedBy="artefact")
+     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="artefact")
      */
     private $images;
 
@@ -228,7 +228,7 @@ abstract class Artefact extends AbstractEntity {
     /**
      * Set recoveryLocation.
      *
-     * @param null|\AppBundle\Entity\Location $recoveryLocation
+     * @param null|\App\Entity\Location $recoveryLocation
      *
      * @return Artefact
      */
@@ -241,7 +241,7 @@ abstract class Artefact extends AbstractEntity {
     /**
      * Get recoveryLocation.
      *
-     * @return null|\AppBundle\Entity\Location
+     * @return null|\App\Entity\Location
      */
     public function getRecoveryLocation() {
         return $this->recoveryLocation;
@@ -265,7 +265,7 @@ abstract class Artefact extends AbstractEntity {
     /**
      * Get recoveryDate.
      *
-     * @return null|\AppBundle\Entity\CircaDate
+     * @return null|\App\Entity\CircaDate
      */
     public function getRecoveryDate() {
         return $this->recoveryDate;
@@ -274,7 +274,7 @@ abstract class Artefact extends AbstractEntity {
     /**
      * Set manufactureLocation.
      *
-     * @param null|\AppBundle\Entity\Location $manufactureLocation
+     * @param null|\App\Entity\Location $manufactureLocation
      *
      * @return Artefact
      */
@@ -287,7 +287,7 @@ abstract class Artefact extends AbstractEntity {
     /**
      * Get manufactureLocation.
      *
-     * @return null|\AppBundle\Entity\Location
+     * @return null|\App\Entity\Location
      */
     public function getManufactureLocation() {
         return $this->manufactureLocation;
@@ -296,7 +296,7 @@ abstract class Artefact extends AbstractEntity {
     /**
      * Set manufactureDate.
      *
-     * @param null|\AppBundle\Entity\CircaDate $manufactureDate
+     * @param null|\App\Entity\CircaDate $manufactureDate
      *
      * @throws Exception
      *
@@ -311,7 +311,7 @@ abstract class Artefact extends AbstractEntity {
     /**
      * Get manufactureDate.
      *
-     * @return null|\AppBundle\Entity\CircaDate
+     * @return null|\App\Entity\CircaDate
      */
     public function getManufactureDate() {
         return $this->manufactureDate;
@@ -320,7 +320,7 @@ abstract class Artefact extends AbstractEntity {
     /**
      * Set institution.
      *
-     * @param null|\AppBundle\Entity\Institution $institution
+     * @param null|\App\Entity\Institution $institution
      *
      * @return Artefact
      */
@@ -333,7 +333,7 @@ abstract class Artefact extends AbstractEntity {
     /**
      * Get institution.
      *
-     * @return null|\AppBundle\Entity\Institution
+     * @return null|\App\Entity\Institution
      */
     public function getInstitution() {
         return $this->institution;
@@ -342,7 +342,7 @@ abstract class Artefact extends AbstractEntity {
     /**
      * Add reference.
      *
-     * @param \AppBundle\Entity\Reference $reference
+     * @param \App\Entity\Reference $reference
      *
      * @return Artefact
      */
@@ -355,7 +355,7 @@ abstract class Artefact extends AbstractEntity {
     /**
      * Remove reference.
      *
-     * @param \AppBundle\Entity\Reference $reference
+     * @param \App\Entity\Reference $reference
      *
      * @return bool TRUE if this collection contained the specified element, FALSE otherwise.
      */
@@ -386,7 +386,7 @@ abstract class Artefact extends AbstractEntity {
     /**
      * Add image.
      *
-     * @param \AppBundle\Entity\Image $image
+     * @param \App\Entity\Image $image
      *
      * @return Artefact
      */
@@ -401,7 +401,7 @@ abstract class Artefact extends AbstractEntity {
     /**
      * Remove image.
      *
-     * @param \AppBundle\Entity\Image $image
+     * @param \App\Entity\Image $image
      *
      * @return bool true if this collection contained the specified element, FALSE otherwise.
      */

@@ -1,6 +1,10 @@
 <?php
 
-namespace AppBundle\Repository;
+namespace App\Repository;
+
+use App\Entity\Artefact;
+use App\Entity\Bottle;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * BottleRepository.
@@ -9,4 +13,8 @@ namespace AppBundle\Repository;
  * repository methods below.
  */
 class BottleRepository extends ArtefactRepository {
+    public function __construct(ManagerRegistry $registry) {
+        parent::__construct($registry, Bottle::class);
+    }
+
 }

@@ -1,13 +1,15 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace App\Controller;
 
-use AppBundle\Entity\Typology;
-use AppBundle\Form\TypologyType;
+use App\Entity\Typology;
+use App\Form\TypologyType;
+use App\Repository\TypologyRepository;
 use Knp\Bundle\PaginatorBundle\Definition\PaginatorAwareInterface;
+use Nines\UtilBundle\Controller\PaginatorTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route("/typology")
  */
-class TypologyController extends Controller implements PaginatorAwareInterface {
+class TypologyController extends AbstractController implements PaginatorAwareInterface {
     use PaginatorTrait;
 
     /**
@@ -36,8 +38,8 @@ class TypologyController extends Controller implements PaginatorAwareInterface {
         $qb = $em->createQueryBuilder();
         $qb->select('e')->from(Typology::class, 'e')->orderBy('e.id', 'ASC');
         $query = $qb->getQuery();
-        $paginator = $this->get('knp_paginator');
-        $typologies = $paginator->paginate($query, $request->query->getint('page', 1), 25);
+
+        $typologies = $this->paginator->paginate($query, $request->query->getint('page', 1), 25);
 
         return array(
             'typologies' => $typologies,
@@ -56,13 +58,11 @@ class TypologyController extends Controller implements PaginatorAwareInterface {
      *
      * @return JsonResponse
      */
-    public function typeahead(Request $request) {
+    public function typeahead(Request $request, TypologyRepository $repo) {
         $q = $request->query->get('q');
         if ( ! $q) {
             return new JsonResponse(array());
         }
-        $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository(Typology::class);
         $data = array();
         foreach ($repo->typeaheadQuery($q) as $result) {
             $data[] = array(
@@ -78,7 +78,7 @@ class TypologyController extends Controller implements PaginatorAwareInterface {
      * Search for Typology entities.
      *
      * To make this work, add a method like this one to the
-     * AppBundle:Typology repository. Replace the fieldName with
+     * App:Typology repository. Replace the fieldName with
      * something appropriate, and adjust the generated search.html.twig
      * template.
      *
@@ -99,14 +99,11 @@ class TypologyController extends Controller implements PaginatorAwareInterface {
      *
      * @return array
      */
-    public function searchAction(Request $request) {
-        $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository('AppBundle:Typology');
+    public function searchAction(Request $request, TypologyRepository $repo) {
         $q = $request->query->get('q');
         if ($q) {
             $query = $repo->searchQuery($q);
-            $paginator = $this->get('knp_paginator');
-            $typologies = $paginator->paginate($query, $request->query->getInt('page', 1), 25);
+            $typologies = $this->paginator->paginate($query, $request->query->getInt('page', 1), 25);
         } else {
             $typologies = array();
         }

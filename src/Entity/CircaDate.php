@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Exception;
@@ -14,7 +14,7 @@ define('RANGE_RE', '/^(?:' . CIRCA_RE . ')?-(?:' . CIRCA_RE . ')?$/');
  * Date.
  *
  * @ORM\Table(name="circa_date")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\CircaDateRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CircaDateRepository")
  */
 class CircaDate extends AbstractEntity {
     /**

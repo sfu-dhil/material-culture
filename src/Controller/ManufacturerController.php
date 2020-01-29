@@ -1,13 +1,15 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace App\Controller;
 
-use AppBundle\Entity\Manufacturer;
-use AppBundle\Form\ManufacturerType;
+use App\Entity\Manufacturer;
+use App\Form\ManufacturerType;
+use App\Repository\ManufacturerRepository;
 use Knp\Bundle\PaginatorBundle\Definition\PaginatorAwareInterface;
+use Nines\UtilBundle\Controller\PaginatorTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route("/manufacturer")
  */
-class ManufacturerController extends Controller implements PaginatorAwareInterface {
+class ManufacturerController extends AbstractController implements PaginatorAwareInterface {
     use PaginatorTrait;
 
     /**
@@ -36,8 +38,8 @@ class ManufacturerController extends Controller implements PaginatorAwareInterfa
         $qb = $em->createQueryBuilder();
         $qb->select('e')->from(Manufacturer::class, 'e')->orderBy('e.id', 'ASC');
         $query = $qb->getQuery();
-        $paginator = $this->get('knp_paginator');
-        $manufacturers = $paginator->paginate($query, $request->query->getint('page', 1), 25);
+
+        $manufacturers = $this->paginator->paginate($query, $request->query->getint('page', 1), 25);
 
         return array(
             'manufacturers' => $manufacturers,
@@ -56,13 +58,11 @@ class ManufacturerController extends Controller implements PaginatorAwareInterfa
      *
      * @return JsonResponse
      */
-    public function typeahead(Request $request) {
+    public function typeahead(Request $request, ManufacturerRepository $repo) {
         $q = $request->query->get('q');
         if ( ! $q) {
             return new JsonResponse(array());
         }
-        $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository(Manufacturer::class);
         $data = array();
         foreach ($repo->typeaheadQuery($q) as $result) {
             $data[] = array(
@@ -78,7 +78,7 @@ class ManufacturerController extends Controller implements PaginatorAwareInterfa
      * Search for Manufacturer entities.
      *
      * To make this work, add a method like this one to the
-     * AppBundle:Manufacturer repository. Replace the fieldName with
+     * App:Manufacturer repository. Replace the fieldName with
      * something appropriate, and adjust the generated search.html.twig
      * template.
      *
@@ -99,14 +99,11 @@ class ManufacturerController extends Controller implements PaginatorAwareInterfa
      *
      * @return array
      */
-    public function searchAction(Request $request) {
-        $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository('AppBundle:Manufacturer');
+    public function searchAction(Request $request, ManufacturerRepository $repo) {
         $q = $request->query->get('q');
         if ($q) {
             $query = $repo->searchQuery($q);
-            $paginator = $this->get('knp_paginator');
-            $manufacturers = $paginator->paginate($query, $request->query->getInt('page', 1), 25);
+            $manufacturers = $this->paginator->paginate($query, $request->query->getInt('page', 1), 25);
         } else {
             $manufacturers = array();
         }

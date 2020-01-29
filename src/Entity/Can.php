@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Can.
  *
  * @ORM\Table(name="artefact_can")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\CanRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CanRepository")
  */
 class Can extends Artefact {
     /**
@@ -25,13 +25,13 @@ class Can extends Artefact {
 
     /**
      * @var Manufacturer
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Manufacturer", inversedBy="cans")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Manufacturer", inversedBy="cans")
      */
     private $manufacturer;
 
     /**
      * @var Location
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Location", inversedBy="cansPacked")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Location", inversedBy="cansPacked")
      */
     private $packagingLocation;
 
@@ -43,7 +43,7 @@ class Can extends Artefact {
 
     /**
      * @var Content
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Content", inversedBy="cans")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Content", inversedBy="cans")
      */
     private $content;
 
@@ -133,7 +133,7 @@ class Can extends Artefact {
     /**
      * Set manufacturer.
      *
-     * @param null|\AppBundle\Entity\Manufacturer $manufacturer
+     * @param null|\App\Entity\Manufacturer $manufacturer
      *
      * @return Can
      */
@@ -146,7 +146,7 @@ class Can extends Artefact {
     /**
      * Get manufacturer.
      *
-     * @return null|\AppBundle\Entity\Manufacturer
+     * @return null|\App\Entity\Manufacturer
      */
     public function getManufacturer() {
         return $this->manufacturer;
@@ -155,7 +155,7 @@ class Can extends Artefact {
     /**
      * Set content.
      *
-     * @param null|\AppBundle\Entity\Content $content
+     * @param null|\App\Entity\Content $content
      *
      * @return Can
      */
@@ -168,7 +168,7 @@ class Can extends Artefact {
     /**
      * Get content.
      *
-     * @return null|\AppBundle\Entity\Content
+     * @return null|\App\Entity\Content
      */
     public function getContent() {
         return $this->content;
@@ -177,11 +177,11 @@ class Can extends Artefact {
     /**
      * Set packagingLocation.
      *
-     * @param \AppBundle\Entity\Location|null $packagingLocation
+     * @param \App\Entity\Location|null $packagingLocation
      *
      * @return Can
      */
-    public function setPackagingLocation(\AppBundle\Entity\Location $packagingLocation = null)
+    public function setPackagingLocation(\App\Entity\Location $packagingLocation = null)
     {
         $this->packagingLocation = $packagingLocation;
 
@@ -191,7 +191,7 @@ class Can extends Artefact {
     /**
      * Get packagingLocation.
      *
-     * @return \AppBundle\Entity\Location|null
+     * @return \App\Entity\Location|null
      */
     public function getPackagingLocation()
     {

@@ -1,13 +1,16 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace App\Controller;
 
-use AppBundle\Entity\Content;
-use AppBundle\Form\ContentType;
+use App\Entity\Content;
+use App\Form\ContentType;
+use App\Repository\ContentRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Bundle\PaginatorBundle\Definition\PaginatorAwareInterface;
+use Nines\UtilBundle\Controller\PaginatorTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route("/content")
  */
-class ContentController extends Controller implements PaginatorAwareInterface {
+class ContentController extends AbstractController implements PaginatorAwareInterface {
     use PaginatorTrait;
 
     /**
@@ -31,13 +34,12 @@ class ContentController extends Controller implements PaginatorAwareInterface {
      * @Route("/", name="content_index", methods={"GET"})
      * @Template()
      */
-    public function indexAction(Request $request) {
-        $em = $this->getDoctrine()->getManager();
+    public function indexAction(Request $request, EntityManagerInterface $em) {
         $qb = $em->createQueryBuilder();
         $qb->select('e')->from(Content::class, 'e')->orderBy('e.id', 'ASC');
         $query = $qb->getQuery();
-        $paginator = $this->get('knp_paginator');
-        $contents = $paginator->paginate($query, $request->query->getint('page', 1), 25);
+
+        $contents = $this->paginator->paginate($query, $request->query->getint('page', 1), 25);
 
         return array(
             'contents' => $contents,
@@ -56,13 +58,11 @@ class ContentController extends Controller implements PaginatorAwareInterface {
      *
      * @return JsonResponse
      */
-    public function typeahead(Request $request) {
+    public function typeahead(Request $request, ContentRepository $repo) {
         $q = $request->query->get('q');
         if ( ! $q) {
             return new JsonResponse(array());
         }
-        $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository(Content::class);
         $data = array();
         foreach ($repo->typeaheadQuery($q) as $result) {
             $data[] = array(
@@ -78,7 +78,7 @@ class ContentController extends Controller implements PaginatorAwareInterface {
      * Search for Content entities.
      *
      * To make this work, add a method like this one to the
-     * AppBundle:Content repository. Replace the fieldName with
+     * App:Content repository. Replace the fieldName with
      * something appropriate, and adjust the generated search.html.twig
      * template.
      *
@@ -99,14 +99,11 @@ class ContentController extends Controller implements PaginatorAwareInterface {
      *
      * @return array
      */
-    public function searchAction(Request $request) {
-        $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository('AppBundle:Content');
+    public function searchAction(Request $request, ContentRepository $repo) {
         $q = $request->query->get('q');
         if ($q) {
             $query = $repo->searchQuery($q);
-            $paginator = $this->get('knp_paginator');
-            $contents = $paginator->paginate($query, $request->query->getInt('page', 1), 25);
+            $contents = $this->paginator->paginate($query, $request->query->getInt('page', 1), 25);
         } else {
             $contents = array();
         }
@@ -128,13 +125,12 @@ class ContentController extends Controller implements PaginatorAwareInterface {
      * @Route("/new", name="content_new", methods={"GET","POST"})
      * @Template()
      */
-    public function newAction(Request $request) {
+    public function newAction(Request $request, EntityManagerInterface $em) {
         $content = new Content();
         $form = $this->createForm(ContentType::class, $content);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->persist($content);
             $em->flush();
 
@@ -192,12 +188,11 @@ class ContentController extends Controller implements PaginatorAwareInterface {
      * @Route("/{id}/edit", name="content_edit", methods={"GET","POST"})
      * @Template()
      */
-    public function editAction(Request $request, Content $content) {
+    public function editAction(Request $request, Content $content, EntityManagerInterface $em) {
         $editForm = $this->createForm(ContentType::class, $content);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->flush();
             $this->addFlash('success', 'The content has been updated.');
 
@@ -221,8 +216,7 @@ class ContentController extends Controller implements PaginatorAwareInterface {
      * @IsGranted("ROLE_CONTENT_ADMIN")
      * @Route("/{id}/delete", name="content_delete", methods={"GET"})
      */
-    public function deleteAction(Request $request, Content $content) {
-        $em = $this->getDoctrine()->getManager();
+    public function deleteAction(Request $request, Content $content, EntityManagerInterface $em) {
         $em->remove($content);
         $em->flush();
         $this->addFlash('success', 'The content was deleted.');

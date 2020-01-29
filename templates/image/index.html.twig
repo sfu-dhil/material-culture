@@ -10,13 +10,13 @@
 
 {% block body %}
 
-    {% embed 'AppBundle:image/partial:list.html.twig' with {'images': images, 'link_artefacts': true} %}
+    {% embed '@App/image/partial/list.html.twigg' with {'images': images, 'link_artefacts': true} %}
     {% endembed %}
 
     <div class="navigation">
         {{ knp_pagination_render(images) }}
     </div>
 
-    {% embed 'AppBundle:image:partial/image_modal.html.twig' %}
+    {% embed '@App/image/partial/image_modal.html.twigg' %}
     {% endembed %}
 {% endblock %}

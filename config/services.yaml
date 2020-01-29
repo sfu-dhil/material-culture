@@ -4,10 +4,21 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    router.request_context.scheme: '%env(string:ROUTE_PROTOCOL)%'
+    router.request_context.host: '%env(string:ROUTE_HOST)%'
+    router.request_context.base_url: '%env(string:ROUTE_BASE)%'
+
+    asset.request_context.base_path: '%env(string:ROUTE_BASE)%'
+    asset.request_context.secure: auto
+
     mc.img.dir: '%kernel.project_dir%/public/upload/artefact'
     mc.img.prefix: images/upload
     mc.thumb.width: 320
     mc.thumb.height: 240
+    dhil.piwik_enabled: '%env(bool:PIWIK_ENABLED)%'
+    dhil.piwik_url: null
+    dhil.piwik_siteid: null
+    dhil.piwik_domain: null
 
 services:
     # default configuration for services in *this* file
@@ -30,20 +41,20 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    AppBundle\Menu\Builder:
+    App\Menu\Builder:
         tags:
             - { name: knp_menu.menu_builder, method: mainMenu, alias: main}
 
-    AppBundle\Services\FileUploader:
+    App\Services\FileUploader:
         arguments:
             $imageDir: '%mc.img.dir%'
 
-    AppBundle\Services\Thumbnailer:
+    App\Services\Thumbnailer:
         calls:
             - [ setThumbWidth, [ '%mc.thumb.width%'] ]
             - [ setThumbHeight, [ '%mc.thumb.height%'] ]
 
-    AppBundle\EventListener\ImageListener:
+    App\EventListener\ImageListener:
         tags:
             - { name: doctrine.event_listener, event: prePersist }
             - { name: doctrine.event_listener, event: preUpdate }

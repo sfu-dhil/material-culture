@@ -20,7 +20,7 @@
         </div>
     </div>
 
-    {% embed 'NinesUtilBundle:term/partial:show.html.twig' with {'term': content} %}
+    {% embed '@NinesUtil/term/partial/show.html.twig' with {'term': content} %}
     {% endembed %}
 
     {% if content.bottles | length > 0 %}

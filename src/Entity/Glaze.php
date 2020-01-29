@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,12 +10,12 @@ use Nines\UtilBundle\Entity\AbstractTerm;
  * Glaze.
  *
  * @ORM\Table(name="glaze")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\GlazeRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\GlazeRepository")
  */
 class Glaze extends AbstractTerm {
     /**
      * @var Ceramic[]|Collection
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Ceramic", mappedBy="glaze")
+     * @ORM\OneToMany(targetEntity="App\Entity\Ceramic", mappedBy="glaze")
      */
     private $ceramics;
 
@@ -27,7 +27,7 @@ class Glaze extends AbstractTerm {
     /**
      * Add ceramic.
      *
-     * @param \AppBundle\Entity\Ceramic $ceramic
+     * @param \App\Entity\Ceramic $ceramic
      *
      * @return Glaze
      */
@@ -40,7 +40,7 @@ class Glaze extends AbstractTerm {
     /**
      * Remove ceramic.
      *
-     * @param \AppBundle\Entity\Ceramic $ceramic
+     * @param \App\Entity\Ceramic $ceramic
      *
      * @return bool TRUE if this collection contained the specified element, FALSE otherwise.
      */

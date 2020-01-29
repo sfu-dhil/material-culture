@@ -1,7 +1,10 @@
 <?php
 
-namespace AppBundle\Repository;
+namespace App\Repository;
 
+use App\Entity\Artefact;
+use App\Entity\Content;
+use Doctrine\Persistence\ManagerRegistry;
 use Nines\UtilBundle\Repository\TermRepository;
 
 /**
@@ -11,4 +14,8 @@ use Nines\UtilBundle\Repository\TermRepository;
  * repository methods below.
  */
 class ContentRepository extends TermRepository {
+    public function __construct(ManagerRegistry $registry) {
+        parent::__construct($registry, Content::class);
+    }
+
 }

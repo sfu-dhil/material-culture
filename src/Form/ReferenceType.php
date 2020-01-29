@@ -1,9 +1,9 @@
 <?php
 
-namespace AppBundle\Form;
+namespace App\Form;
 
-use AppBundle\Entity\Publication;
-use AppBundle\Entity\Reference;
+use App\Entity\Publication;
+use App\Entity\Reference;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,7 +19,7 @@ class ReferenceType extends AbstractType {
      * @param FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options) : void {
         $builder->add('description', null, array(
             'label' => 'Description',
             'required' => false,

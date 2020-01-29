@@ -1,17 +1,19 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace App\Controller;
 
-use AppBundle\Entity\Artefact;
-use AppBundle\Entity\Image;
-use AppBundle\Form\ImageType;
-use AppBundle\Form\ReferencesType;
-use AppBundle\Services\FileUploader;
+use App\Entity\Artefact;
+use App\Entity\Image;
+use App\Form\ImageType;
+use App\Form\ReferencesType;
+use App\Services\FileUploader;
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Bundle\PaginatorBundle\Definition\PaginatorAwareInterface;
+use Nines\UtilBundle\Controller\PaginatorTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,7 +25,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route("/artefact")
  */
-class ArtefactController extends Controller implements PaginatorAwareInterface {
+class ArtefactController extends AbstractController implements PaginatorAwareInterface {
     use PaginatorTrait;
 
     /**
@@ -108,14 +110,13 @@ class ArtefactController extends Controller implements PaginatorAwareInterface {
      * @Route("/{id}/add_image", name="artefact_add_image", methods={"GET", "POST"})
      * @Template()
      */
-    public function addImage(Request $request, Artefact $artefact) {
+    public function addImage(Request $request, Artefact $artefact, EntityManagerInterface $em) {
         $image = new Image();
         $image->setArtefact($artefact);
         $form = $this->createForm(ImageType::class, $image);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->persist($image);
             $em->flush();
             $this->addFlash('success', 'Image has been added.');
@@ -145,7 +146,7 @@ class ArtefactController extends Controller implements PaginatorAwareInterface {
      * @ParamConverter("image", options={"id" = "image_id"})
      * @Template()
      */
-    public function editImage(Request $request, FileUploader $fileUploader, Artefact $artefact, Image $image) {
+    public function editImage(Request $request, FileUploader $fileUploader, Artefact $artefact, Image $image, EntityManagerInterface $em) {
         $form = $this->createForm(ImageType::class, $image);
         $form->remove('imageFile');
         $form->add('newImageFile', FileType::class, array(
@@ -167,7 +168,6 @@ class ArtefactController extends Controller implements PaginatorAwareInterface {
                 $image->preUpdate(); // force doctrine to update.
             }
 
-            $em = $this->getDoctrine()->getManager();
             $em->flush();
             $this->addFlash('success', 'Image has been updated.');
 
@@ -194,8 +194,7 @@ class ArtefactController extends Controller implements PaginatorAwareInterface {
      * @Route("/{id}/remove_image/{image_id}", name="artefact_remove_image", methods={"GET"})
      * @ParamConverter("image", options={"id" = "image_id"})
      */
-    public function removeImage(Request $request, Artefact $artefact, Image $image) {
-        $em = $this->getDoctrine()->getManager();
+    public function removeImage(Request $request, Artefact $artefact, Image $image, EntityManagerInterface $em) {
         if ($artefact->hasImage($image)) {
             $artefact->removeImage($image);
             $em->remove($image);

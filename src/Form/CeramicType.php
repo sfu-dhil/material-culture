@@ -1,11 +1,11 @@
 <?php
 
-namespace AppBundle\Form;
+namespace App\Form;
 
-use AppBundle\Entity\Ceramic;
-use AppBundle\Entity\Glaze;
-use AppBundle\Entity\Typology;
-use AppBundle\Entity\Vessel;
+use App\Entity\Ceramic;
+use App\Entity\Glaze;
+use App\Entity\Typology;
+use App\Entity\Vessel;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,7 +21,7 @@ class CeramicType extends ArtefactType {
      * @param FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options) : void {
         parent::buildForm($builder, $options);
 
         $builder->add('paste', null, array(

@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -11,12 +11,12 @@ use Nines\UtilBundle\Entity\AbstractTerm;
  * Form.
  *
  * @ORM\Table(name="vessel")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\VesselRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\VesselRepository")
  */
 class Vessel extends AbstractTerm {
     /**
      * @var Ceramic[]|Collection
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Ceramic", mappedBy="vessel")
+     * @ORM\OneToMany(targetEntity="App\Entity\Ceramic", mappedBy="vessel")
      */
     private $ceramics;
 
@@ -28,7 +28,7 @@ class Vessel extends AbstractTerm {
     /**
      * Add ceramic.
      *
-     * @param \AppBundle\Entity\Ceramic $ceramic
+     * @param \App\Entity\Ceramic $ceramic
      *
      * @return Vessel
      */
@@ -41,7 +41,7 @@ class Vessel extends AbstractTerm {
     /**
      * Remove ceramic.
      *
-     * @param \AppBundle\Entity\Ceramic $ceramic
+     * @param \App\Entity\Ceramic $ceramic
      *
      * @return bool TRUE if this collection contained the specified element, FALSE otherwise.
      */

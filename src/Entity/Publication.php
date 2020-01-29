@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="publication", indexes={
  *   @ORM\Index(columns={"title","abstract"}, flags={"fulltext"})
  * })
- * @ORM\Entity(repositoryClass="AppBundle\Repository\PublicationRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\PublicationRepository")
  */
 class Publication extends AbstractEntity {
     /**
@@ -55,7 +55,7 @@ class Publication extends AbstractEntity {
 
     /**
      * @var Collection|Reference[]
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Reference", mappedBy="publication")
+     * @ORM\OneToMany(targetEntity="App\Entity\Reference", mappedBy="publication")
      */
     private $references;
 
@@ -143,7 +143,7 @@ class Publication extends AbstractEntity {
     /**
      * Add reference.
      *
-     * @param \AppBundle\Entity\Reference $reference
+     * @param \App\Entity\Reference $reference
      *
      * @return Publication
      */
@@ -156,7 +156,7 @@ class Publication extends AbstractEntity {
     /**
      * Remove reference.
      *
-     * @param \AppBundle\Entity\Reference $reference
+     * @param \App\Entity\Reference $reference
      *
      * @return bool TRUE if this collection contained the specified element, FALSE otherwise.
      */
