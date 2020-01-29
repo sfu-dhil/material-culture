@@ -35,8 +35,6 @@ class Institution extends AbstractEntity {
      * @var string
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Url(
-     *     checkDNS = "ANY",
-     *     dnsMessage = "The domain name '{{ value }}' does not exist.",
      *     protocols = {"http", "https"}
      * )
      */
