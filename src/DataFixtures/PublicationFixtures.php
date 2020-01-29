@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * (c) 2020 Michael Joyce <mjoyce@sfu.ca>
+ * This source file is subject to the GPL v2, bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\DataFixtures;
 
 use App\Entity\Publication;
@@ -13,12 +21,12 @@ class PublicationFixtures extends Fixture {
     /**
      * {@inheritdoc}
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager) : void {
         $item1 = new Publication();
         $item1->setTitle('Domestic Architecture and Power: The Historical Archaeology of Colonial Ecuador.');
         $item1->setCitation('<p id="citation-text">&ldquo;Domestic Architecture and Power: The Historical Archaeology of Colonial Ecuador.&rdquo; Choice Reviews Online 37.10 (2000): 37&ndash;5754&ndash;37&ndash;5754. Crossref. Web.</p>');
         $item1->setAbstract('Jamieson\'s book is based on fieldwork conducted in 1993-4. No other published accounts...</p>');
-        $item1->setUrls(array('http://google.com', 'http://example.com'));
+        $item1->setUrls(['http://google.com', 'http://example.com']);
         $item1->setDoi('https://doi.org/10.5860/choice.37-5754');
         $this->addReference('_reference_Publication1', $item1);
         $manager->persist($item1);

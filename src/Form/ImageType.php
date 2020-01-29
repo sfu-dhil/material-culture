@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * (c) 2020 Michael Joyce <mjoyce@sfu.ca>
+ * This source file is subject to the GPL v2, bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Form;
 
 use App\Entity\Artefact;
@@ -16,7 +24,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * ImageType form.
  */
 class ImageType extends AbstractType {
-
     /**
      * @var FileUploader
      */
@@ -28,57 +35,53 @@ class ImageType extends AbstractType {
 
     /**
      * Add form fields to $builder.
-     *
-     * @param FormBuilderInterface $builder
-     * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options) : void {
-        $builder->add('artefact', EntityType::class, array(
+        $builder->add('artefact', EntityType::class, [
             'class' => Artefact::class,
             'disabled' => true,
-        ));
+        ]);
 
-        $builder->add('imageFile', FileType::class, array(
+        $builder->add('imageFile', FileType::class, [
             'label' => 'Image',
             'required' => true,
-            'attr' => array(
+            'attr' => [
                 'help_block' => "Select a file to upload which is less than {$this->fileUploader->getMaxUploadSize(false)} in size.",
                 'data-maxsize' => $this->fileUploader->getMaxUploadSize(),
-            ),
-        ));
+            ],
+        ]);
 
-        $builder->add('description', null, array(
+        $builder->add('description', null, [
             'label' => 'Description',
             'required' => false,
-            'attr' => array(
+            'attr' => [
                 'help_block' => '',
                 'class' => 'tinymce',
-            ),
-        ));
+            ],
+        ]);
 
-        $builder->add('public', ChoiceType::class, array(
+        $builder->add('public', ChoiceType::class, [
             'label' => 'Public',
             'expanded' => true,
             'multiple' => false,
             'required' => true,
-            'choices' => array(
+            'choices' => [
                 'No' => 0,
                 'Yes' => 1,
-            ),
-            'attr' => array(
+            ],
+            'attr' => [
                 'help_block' => '',
-            ),
-        ));
+            ],
+        ]);
 
-        $builder->add('copyright', null, array(
+        $builder->add('copyright', null, [
             'label' => 'Copyright statement',
             'required' => false,
-            'attr' => array(
+            'attr' => [
                 'help_block' => '',
                 'class' => 'tinymce',
-            ),
-        ));
-
+            ],
+        ]);
     }
 
     /**
@@ -86,12 +89,10 @@ class ImageType extends AbstractType {
      *
      * Set default, optional, and required options passed to the
      * buildForm() method via the $options parameter.
-     *
-     * @param OptionsResolver $resolver
      */
-    public function configureOptions(OptionsResolver $resolver) {
-        $resolver->setDefaults(array(
+    public function configureOptions(OptionsResolver $resolver) : void {
+        $resolver->setDefaults([
             'data_class' => Image::class,
-        ));
+        ]);
     }
 }

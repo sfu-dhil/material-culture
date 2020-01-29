@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * (c) 2020 Michael Joyce <mjoyce@sfu.ca>
+ * This source file is subject to the GPL v2, bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\DataFixtures;
 
 use App\Entity\Can;
@@ -14,7 +22,7 @@ class CanFixtures extends Fixture implements DependentFixtureInterface {
     /**
      * {@inheritdoc}
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager) : void {
         $item2 = new Can();
         $item2->setCompany('Can Can Co');
         $item2->setBrand('Cannings & Co');
@@ -27,7 +35,7 @@ class CanFixtures extends Fixture implements DependentFixtureInterface {
         $item2->setPackagingLocation($this->getReference('_reference_Location4'));
         $item2->setManufactureDate('c1780');
         $item2->setInstitution($this->getReference('_reference_Institution3'));
-        $item2->setCatalogNumbers(array('askdjfhk'));
+        $item2->setCatalogNumbers(['askdjfhk']);
         $item2->setDescription('Can with soiled label');
         $item2->setFurtherReading('Introduction to cans');
         $this->addReference('_reference_Can2', $item2);
@@ -43,7 +51,7 @@ class CanFixtures extends Fixture implements DependentFixtureInterface {
      * @return array
      */
     public function getDependencies() {
-        return array(
+        return [
             VesselFixtures::class,
             GlazeFixtures::class,
             LocationFixtures::class,
@@ -51,6 +59,6 @@ class CanFixtures extends Fixture implements DependentFixtureInterface {
             InstitutionFixtures::class,
             ManufacturerFixtures::class,
             ContentFixtures::class,
-        );
+        ];
     }
 }

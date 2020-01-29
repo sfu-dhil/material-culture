@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * (c) 2020 Michael Joyce <mjoyce@sfu.ca>
+ * This source file is subject to the GPL v2, bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Form;
 
 use App\Entity\Institution;
@@ -14,41 +22,38 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class InstitutionType extends AbstractType {
     /**
      * Add form fields to $builder.
-     *
-     * @param FormBuilderInterface $builder
-     * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options) : void {
-        $builder->add('name', null, array(
+        $builder->add('name', null, [
             'label' => 'Name',
             'required' => true,
-            'attr' => array(
+            'attr' => [
                 'help_block' => '',
-            ),
-        ));
-        $builder->add('url', UrlType::class, array(
+            ],
+        ]);
+        $builder->add('url', UrlType::class, [
             'label' => 'Url',
             'required' => false,
-            'attr' => array(
+            'attr' => [
                 'help_block' => '',
-            ),
-        ));
-        $builder->add('address', null, array(
+            ],
+        ]);
+        $builder->add('address', null, [
             'label' => 'Address',
             'required' => false,
-            'attr' => array(
+            'attr' => [
                 'help_block' => '',
                 'class' => 'tinymce',
-            ),
-        ));
-        $builder->add('contact', null, array(
+            ],
+        ]);
+        $builder->add('contact', null, [
             'label' => 'Contact',
             'required' => false,
-            'attr' => array(
+            'attr' => [
                 'help_block' => '',
                 'class' => 'tinymce',
-            ),
-        ));
+            ],
+        ]);
     }
 
     /**
@@ -56,12 +61,10 @@ class InstitutionType extends AbstractType {
      *
      * Set default, optional, and required options passed to the
      * buildForm() method via the $options parameter.
-     *
-     * @param OptionsResolver $resolver
      */
-    public function configureOptions(OptionsResolver $resolver) {
-        $resolver->setDefaults(array(
+    public function configureOptions(OptionsResolver $resolver) : void {
+        $resolver->setDefaults([
             'data_class' => Institution::class,
-        ));
+        ]);
     }
 }

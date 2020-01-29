@@ -1,9 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * (c) 2020 Michael Joyce <mjoyce@sfu.ca>
+ * This source file is subject to the GPL v2, bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\DataFixtures;
 
 use App\Entity\Reference;
-use App\Entity\Vessel;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -15,7 +22,7 @@ class ReferenceFixtures extends Fixture implements DependentFixtureInterface {
     /**
      * {@inheritdoc}
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager) : void {
         $item1 = new Reference();
         $item1->setArtefact($this->getReference('_reference_Bottle3'));
         $item1->setPublication($this->getReference('_reference_Publication1'));
@@ -47,11 +54,11 @@ class ReferenceFixtures extends Fixture implements DependentFixtureInterface {
      * @return array
      */
     public function getDependencies() {
-        return array(
+        return [
             BottleFixtures::class,
             CanFixtures::class,
             CeramicFixtures::class,
             PublicationFixtures::class,
-        );
+        ];
     }
 }

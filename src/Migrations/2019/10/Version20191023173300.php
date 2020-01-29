@@ -1,4 +1,12 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
+/*
+ * (c) 2020 Michael Joyce <mjoyce@sfu.ca>
+ * This source file is subject to the GPL v2, bundled
+ * with this source code in the file LICENSE.
+ */
 
 namespace App\Migrations;
 
@@ -8,12 +16,10 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20191023173300 extends AbstractMigration
-{
-    public function up(Schema $schema) : void
-    {
+final class Version20191023173300 extends AbstractMigration {
+    public function up(Schema $schema) : void {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('CREATE TABLE circa_date (id INT AUTO_INCREMENT NOT NULL, value VARCHAR(255) NOT NULL, start INT DEFAULT NULL, start_circa TINYINT(1) DEFAULT \'0\' NOT NULL, end INT DEFAULT NULL, end_circa TINYINT(1) DEFAULT \'0\' NOT NULL, created DATETIME NOT NULL, updated DATETIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE artefact (id INT AUTO_INCREMENT NOT NULL, recovery_location_id INT DEFAULT NULL, recovery_date_id INT DEFAULT NULL, manufacture_location_id INT DEFAULT NULL, manufacture_date_id INT DEFAULT NULL, institution_id INT DEFAULT NULL, catalog_number VARCHAR(255) DEFAULT NULL, description LONGTEXT DEFAULT NULL, further_reading LONGTEXT DEFAULT NULL, note LONGTEXT DEFAULT NULL, created DATETIME NOT NULL, updated DATETIME NOT NULL, category VARCHAR(255) NOT NULL, INDEX IDX_8D158D2DFFEA558 (recovery_location_id), INDEX IDX_8D158D2DF14EB5E4 (recovery_date_id), INDEX IDX_8D158D2D348C30E0 (manufacture_location_id), INDEX IDX_8D158D2D3E6BE89F (manufacture_date_id), INDEX IDX_8D158D2D10405986 (institution_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
@@ -67,8 +73,7 @@ final class Version20191023173300 extends AbstractMigration
         $this->addSql('ALTER TABLE wbnt_dfgb_test ADD CONSTRAINT FK_A86F10518E63F6D6 FOREIGN KEY (testrelated_id) REFERENCES wbnt_dfgb_testrelated (id) ON DELETE CASCADE');
     }
 
-    public function down(Schema $schema) : void
-    {
+    public function down(Schema $schema) : void {
         $this->throwIrreversibleMigrationException();
     }
 }

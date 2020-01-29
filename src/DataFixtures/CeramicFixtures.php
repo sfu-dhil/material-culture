@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * (c) 2020 Michael Joyce <mjoyce@sfu.ca>
+ * This source file is subject to the GPL v2, bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\DataFixtures;
 
 use App\Entity\Ceramic;
@@ -14,7 +22,7 @@ class CeramicFixtures extends Fixture implements DependentFixtureInterface {
     /**
      * {@inheritdoc}
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager) : void {
         $item1 = new Ceramic();
         $item1->setVessel($this->getReference('_reference_Vessel4'));
         $item1->setGlaze($this->getReference('_reference_Glaze1'));
@@ -41,13 +49,13 @@ class CeramicFixtures extends Fixture implements DependentFixtureInterface {
      * @return array
      */
     public function getDependencies() {
-        return array(
+        return [
             VesselFixtures::class,
             GlazeFixtures::class,
             TypologyFixtures::class,
             LocationFixtures::class,
             LocationFixtures::class,
             InstitutionFixtures::class,
-        );
+        ];
     }
 }

@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * (c) 2020 Michael Joyce <mjoyce@sfu.ca>
+ * This source file is subject to the GPL v2, bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Controller;
 
 use App\Entity\Artefact;
@@ -31,9 +39,6 @@ class ArtefactController extends AbstractController implements PaginatorAwareInt
     /**
      * Add an image to a artefact.
      *
-     * @param Request $request
-     * @param Artefact $artefact
-     *
      * @throws HttpException
      *
      * @return RedirectResponse
@@ -44,11 +49,11 @@ class ArtefactController extends AbstractController implements PaginatorAwareInt
     public function showAction(Request $request, Artefact $artefact) {
         switch ($artefact->getCategory()) {
             case Artefact::BOTTLE:
-                return $this->redirectToRoute('bottle_show', array('id' => $artefact->getId()));
+                return $this->redirectToRoute('bottle_show', ['id' => $artefact->getId()]);
             case Artefact::CAN:
-                return $this->redirectToRoute('can_show', array('id' => $artefact->getId()));
+                return $this->redirectToRoute('can_show', ['id' => $artefact->getId()]);
             case Artefact::CERAMIC:
-                return $this->redirectToRoute('ceramic_show', array('id' => $artefact->getId()));
+                return $this->redirectToRoute('ceramic_show', ['id' => $artefact->getId()]);
             default:
                 throw new HttpException(500, 'Cannot generate URL for artefact of type ' . $artefact->getCategory());
         }
@@ -56,9 +61,6 @@ class ArtefactController extends AbstractController implements PaginatorAwareInt
 
     /**
      * Edit the references associated with an artefact.
-     *
-     * @param Request $request
-     * @param Artefact $artefact
      *
      * @return array|RedirectResponse
      *
@@ -89,20 +91,17 @@ class ArtefactController extends AbstractController implements PaginatorAwareInt
             $em->flush();
             $this->addFlash('success', 'The artefact has been updated.');
 
-            return $this->redirectToRoute('artefact_show', array('id' => $artefact->getId()));
+            return $this->redirectToRoute('artefact_show', ['id' => $artefact->getId()]);
         }
 
-        return array(
+        return [
             'artefact' => $artefact,
             'form' => $form->createView(),
-        );
+        ];
     }
 
     /**
      * Add an image to a artefact.
-     *
-     * @param Request $request
-     * @param Artefact $artefact
      *
      * @return array|RedirectResponse
      *
@@ -121,23 +120,18 @@ class ArtefactController extends AbstractController implements PaginatorAwareInt
             $em->flush();
             $this->addFlash('success', 'Image has been added.');
 
-            return $this->redirectToRoute('artefact_show', array('id' => $artefact->getId()));
+            return $this->redirectToRoute('artefact_show', ['id' => $artefact->getId()]);
         }
 
-        return array(
+        return [
             'artefact' => $artefact,
             'image' => $image,
             'form' => $form->createView(),
-        );
+        ];
     }
 
     /**
      * Add an image to a artefact.
-     *
-     * @param Request $request
-     * @param Artefact $artefact
-     * @param Image $image
-     * @param FileUploader $fileUploader
      *
      * @return array|RedirectResponse
      *
@@ -149,16 +143,16 @@ class ArtefactController extends AbstractController implements PaginatorAwareInt
     public function editImage(Request $request, FileUploader $fileUploader, Artefact $artefact, Image $image, EntityManagerInterface $em) {
         $form = $this->createForm(ImageType::class, $image);
         $form->remove('imageFile');
-        $form->add('newImageFile', FileType::class, array(
+        $form->add('newImageFile', FileType::class, [
             'label' => 'Replacement Image',
             'required' => true,
             'required' => false,
-            'attr' => array(
+            'attr' => [
                 'help_block' => "Select a file to upload which is less than {$fileUploader->getMaxUploadSize(false)} in size.",
                 'data-maxsize' => $fileUploader->getMaxUploadSize(),
-            ),
+            ],
             'mapped' => false,
-        ));
+        ]);
 
         $form->handleRequest($request);
 
@@ -171,22 +165,18 @@ class ArtefactController extends AbstractController implements PaginatorAwareInt
             $em->flush();
             $this->addFlash('success', 'Image has been updated.');
 
-            return $this->redirectToRoute('artefact_show', array('id' => $artefact->getId()));
+            return $this->redirectToRoute('artefact_show', ['id' => $artefact->getId()]);
         }
 
-        return array(
+        return [
             'artefact' => $artefact,
             'image' => $image,
             'form' => $form->createView(),
-        );
+        ];
     }
 
     /**
      * Add an image to a artefact.
-     *
-     * @param Request $request
-     * @param Artefact $artefact
-     * @param Image $image
      *
      * @return RedirectResponse
      *
@@ -204,6 +194,6 @@ class ArtefactController extends AbstractController implements PaginatorAwareInt
             $this->addFlash('warning', 'The image was not removed.');
         }
 
-        return $this->redirectToRoute('artefact_show', array('id' => $artefact->getId()));
+        return $this->redirectToRoute('artefact_show', ['id' => $artefact->getId()]);
     }
 }

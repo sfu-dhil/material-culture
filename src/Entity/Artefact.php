@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * (c) 2020 Michael Joyce <mjoyce@sfu.ca>
+ * This source file is subject to the GPL v2, bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -22,11 +30,11 @@ use Nines\UtilBundle\Entity\AbstractEntity;
  * })
  */
 abstract class Artefact extends AbstractEntity {
-    const BOTTLE = 'bottle';
+    public const BOTTLE = 'bottle';
 
-    const CAN = 'can';
+    public const CAN = 'can';
 
-    const CERAMIC = 'ceramic';
+    public const CERAMIC = 'ceramic';
 
     /**
      * @var Location
@@ -96,7 +104,7 @@ abstract class Artefact extends AbstractEntity {
 
     public function __construct() {
         parent::__construct();
-        $this->catalogNumbers = array();
+        $this->catalogNumbers = [];
         $this->references = new ArrayCollection();
         $this->images = new ArrayCollection();
     }
@@ -125,7 +133,7 @@ abstract class Artefact extends AbstractEntity {
      * @return $this
      */
     public function addCatalogNumber($catalogNumber) {
-        if ( ! in_array($catalogNumber, $this->catalogNumbers)) {
+        if ( ! in_array($catalogNumber, $this->catalogNumbers, true)) {
             $this->catalogNumbers[] = $catalogNumber;
             sort($this->catalogNumbers);
         }
@@ -141,7 +149,7 @@ abstract class Artefact extends AbstractEntity {
      * @return $this
      */
     public function removeCatalogNumber($catalogNumber) {
-        if (($key = array_search($catalogNumber, $this->catalogNumbers))) {
+        if (($key = array_search($catalogNumber, $this->catalogNumbers, true))) {
             array_splice($this->catalogNumbers, $key, 1);
         }
 
@@ -374,8 +382,6 @@ abstract class Artefact extends AbstractEntity {
 
     /**
      * Check if the artefact record contains an image.
-     *
-     * @param Image $image
      *
      * @return bool true if the collection of images contains the image.
      */

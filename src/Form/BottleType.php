@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * (c) 2020 Michael Joyce <mjoyce@sfu.ca>
+ * This source file is subject to the GPL v2, bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Form;
 
 use App\Entity\Bottle;
@@ -17,81 +25,78 @@ use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
 class BottleType extends ArtefactType {
     /**
      * Add form fields to $builder.
-     *
-     * @param FormBuilderInterface $builder
-     * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options) : void {
         parent::buildForm($builder, $options);
 
-        $builder->add('company', null, array(
+        $builder->add('company', null, [
             'label' => 'Company',
             'required' => false,
-            'attr' => array(
+            'attr' => [
                 'help_block' => '',
-            ),
-        ));
-        $builder->add('brand', null, array(
+            ],
+        ]);
+        $builder->add('brand', null, [
             'label' => 'Brand',
             'required' => false,
-            'attr' => array(
+            'attr' => [
                 'help_block' => '',
-            ),
-        ));
-        $builder->add('manufacturer', Select2EntityType::class, array(
+            ],
+        ]);
+        $builder->add('manufacturer', Select2EntityType::class, [
             'label' => 'Manufacturer',
             'multiple' => false,
             'remote_route' => 'manufacturer_typeahead',
             'class' => Manufacturer::class,
             'required' => false,
             'allow_clear' => true,
-            'attr' => array(
+            'attr' => [
                 'add_path' => 'manufacturer_new',
                 'add_label' => 'New Manufacturer',
                 'help_block' => '',
-            ),
-        ));
-        $builder->add('packagingLocation', Select2EntityType::class, array(
+            ],
+        ]);
+        $builder->add('packagingLocation', Select2EntityType::class, [
             'label' => 'Packaging Location',
             'multiple' => false,
             'remote_route' => 'location_typeahead',
             'class' => Location::class,
             'required' => false,
             'allow_clear' => true,
-            'attr' => array(
+            'attr' => [
                 'add_path' => 'location_new_popup',
                 'add_label' => 'New Location',
                 'help_block' => '',
-            ),
-        ));
+            ],
+        ]);
 
-        $builder->add('content', Select2EntityType::class, array(
+        $builder->add('content', Select2EntityType::class, [
             'label' => 'Contents',
             'multiple' => false,
             'remote_route' => 'content_typeahead',
             'class' => Content::class,
             'required' => false,
             'allow_clear' => true,
-            'attr' => array(
+            'attr' => [
                 'add_path' => 'content_new',
                 'add_label' => 'New Content',
                 'help_block' => '',
-            ),
-        ));
-        $builder->add('references', CollectionType::class, array(
+            ],
+        ]);
+        $builder->add('references', CollectionType::class, [
             'label' => 'Bibliographic References',
             'allow_add' => true,
             'allow_delete' => true,
             'allow_delete' => true,
             'prototype' => true,
             'entry_type' => ReferenceType::class,
-            'entry_options' => array('label' => false),
+            'entry_options' => ['label' => false],
             'required' => false,
-            'attr' => array(
+            'attr' => [
                 'help_block' => '',
                 'class' => 'collection collection-complex',
-            )
-        ));
+            ],
+        ]);
     }
 
     /**
@@ -99,12 +104,10 @@ class BottleType extends ArtefactType {
      *
      * Set default, optional, and required options passed to the
      * buildForm() method via the $options parameter.
-     *
-     * @param OptionsResolver $resolver
      */
-    public function configureOptions(OptionsResolver $resolver) {
-        $resolver->setDefaults(array(
+    public function configureOptions(OptionsResolver $resolver) : void {
+        $resolver->setDefaults([
             'data_class' => Bottle::class,
-        ));
+        ]);
     }
 }

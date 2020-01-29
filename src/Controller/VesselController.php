@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * (c) 2020 Michael Joyce <mjoyce@sfu.ca>
+ * This source file is subject to the GPL v2, bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Controller;
 
 use App\Entity\Vessel;
@@ -27,8 +35,6 @@ class VesselController extends AbstractController implements PaginatorAwareInter
     /**
      * Lists all Vessel entities.
      *
-     * @param Request $request
-     *
      * @return array
      *
      * @Route("/", name="vessel_index", methods={"GET"})
@@ -42,17 +48,15 @@ class VesselController extends AbstractController implements PaginatorAwareInter
 
         $vessels = $this->paginator->paginate($query, $request->query->getint('page', 1), 25);
 
-        return array(
+        return [
             'vessels' => $vessels,
-        );
+        ];
     }
 
     /**
      * Typeahead API endpoint for Vessel entities.
      *
      * To make this work, add something like this to VesselRepository:
-     *
-     * @param Request $request
      *
      * @IsGranted("ROLE_CONTENT_ADMIN")
      * @Route("/typeahead", name="vessel_typeahead", methods={"GET"})
@@ -62,14 +66,14 @@ class VesselController extends AbstractController implements PaginatorAwareInter
     public function typeahead(Request $request, VesselRepository $repo) {
         $q = $request->query->get('q');
         if ( ! $q) {
-            return new JsonResponse(array());
+            return new JsonResponse([]);
         }
-        $data = array();
+        $data = [];
         foreach ($repo->typeaheadQuery($q) as $result) {
-            $data[] = array(
+            $data[] = [
                 'id' => $result->getId(),
                 'text' => (string) $result,
-            );
+            ];
         }
 
         return new JsonResponse($data);
@@ -93,8 +97,6 @@ class VesselController extends AbstractController implements PaginatorAwareInter
      *    }
      * </pre></code>
      *
-     * @param Request $request
-     *
      * @Route("/search", name="vessel_search", methods={"GET"})
      * @Template()
      *
@@ -106,19 +108,17 @@ class VesselController extends AbstractController implements PaginatorAwareInter
             $query = $repo->searchQuery($q);
             $vessels = $this->paginator->paginate($query, $request->query->getInt('page', 1), 25);
         } else {
-            $vessels = array();
+            $vessels = [];
         }
 
-        return array(
+        return [
             'results' => $vessels,
             'q' => $q,
-        );
+        ];
     }
 
     /**
      * Creates a new Vessel entity.
-     *
-     * @param Request $request
      *
      * @return array|RedirectResponse
      *
@@ -138,19 +138,17 @@ class VesselController extends AbstractController implements PaginatorAwareInter
 
             $this->addFlash('success', 'The new vessel was created.');
 
-            return $this->redirectToRoute('vessel_show', array('id' => $vessel->getId()));
+            return $this->redirectToRoute('vessel_show', ['id' => $vessel->getId()]);
         }
 
-        return array(
+        return [
             'vessel' => $vessel,
             'form' => $form->createView(),
-        );
+        ];
     }
 
     /**
      * Creates a new Vessel entity in a popup.
-     *
-     * @param Request $request
      *
      * @return array|RedirectResponse
      *
@@ -165,24 +163,19 @@ class VesselController extends AbstractController implements PaginatorAwareInter
     /**
      * Finds and displays a Vessel entity.
      *
-     * @param Vessel $vessel
-     *
      * @return array
      *
      * @Route("/{id}", name="vessel_show", methods={"GET"})
      * @Template()
      */
     public function showAction(Vessel $vessel) {
-        return array(
+        return [
             'vessel' => $vessel,
-        );
+        ];
     }
 
     /**
      * Displays a form to edit an existing Vessel entity.
-     *
-     * @param Request $request
-     * @param Vessel $vessel
      *
      * @return array|RedirectResponse
      *
@@ -199,20 +192,17 @@ class VesselController extends AbstractController implements PaginatorAwareInter
             $em->flush();
             $this->addFlash('success', 'The vessel has been updated.');
 
-            return $this->redirectToRoute('vessel_show', array('id' => $vessel->getId()));
+            return $this->redirectToRoute('vessel_show', ['id' => $vessel->getId()]);
         }
 
-        return array(
+        return [
             'vessel' => $vessel,
             'edit_form' => $editForm->createView(),
-        );
+        ];
     }
 
     /**
      * Deletes a Vessel entity.
-     *
-     * @param Request $request
-     * @param Vessel $vessel
      *
      * @return array|RedirectResponse
      *

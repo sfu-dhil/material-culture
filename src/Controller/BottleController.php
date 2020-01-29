@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * (c) 2020 Michael Joyce <mjoyce@sfu.ca>
+ * This source file is subject to the GPL v2, bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Controller;
 
 use App\Entity\Bottle;
@@ -26,8 +34,6 @@ class BottleController extends AbstractController implements PaginatorAwareInter
     /**
      * Lists all Bottle entities.
      *
-     * @param Request $request
-     *
      * @return array
      *
      * @Route("/", name="bottle_index", methods={"GET"})
@@ -40,9 +46,9 @@ class BottleController extends AbstractController implements PaginatorAwareInter
 
         $bottles = $this->paginator->paginate($query, $request->query->getint('page', 1), 25);
 
-        return array(
+        return [
             'bottles' => $bottles,
-        );
+        ];
     }
 
     /**
@@ -63,8 +69,6 @@ class BottleController extends AbstractController implements PaginatorAwareInter
      *    }
      * </pre></code>
      *
-     * @param Request $request
-     *
      * @Route("/search", name="bottle_search", methods={"GET"})
      * @Template()
      *
@@ -76,19 +80,17 @@ class BottleController extends AbstractController implements PaginatorAwareInter
             $query = $repo->searchQuery($q);
             $bottles = $this->paginator->paginate($query, $request->query->getInt('page', 1), 25);
         } else {
-            $bottles = array();
+            $bottles = [];
         }
 
-        return array(
+        return [
             'bottles' => $bottles,
             'q' => $q,
-        );
+        ];
     }
 
     /**
      * Creates a new Bottle entity.
-     *
-     * @param Request $request
      *
      * @return array|RedirectResponse
      *
@@ -110,20 +112,17 @@ class BottleController extends AbstractController implements PaginatorAwareInter
 
             $this->addFlash('success', 'The new bottle was created.');
 
-            return $this->redirectToRoute('bottle_show', array('id' => $bottle->getId()));
+            return $this->redirectToRoute('bottle_show', ['id' => $bottle->getId()]);
         }
 
-        return array(
+        return [
             'bottle' => $bottle,
             'form' => $form->createView(),
-        );
+        ];
     }
 
     /**
      * Finds and displays a Bottle entity.
-     *
-     * @param Request $request
-     * @param Bottle $bottle
      *
      * @return array
      *
@@ -133,17 +132,14 @@ class BottleController extends AbstractController implements PaginatorAwareInter
     public function showAction(Request $request, Bottle $bottle) {
         $images = $this->paginator->paginate($bottle->getImages(), $request->query->getint('page', 1), 25);
 
-        return array(
+        return [
             'bottle' => $bottle,
             'images' => $images,
-        );
+        ];
     }
 
     /**
      * Displays a form to edit an existing Bottle entity.
-     *
-     * @param Request $request
-     * @param Bottle $bottle
      *
      * @return array|RedirectResponse
      *
@@ -159,20 +155,17 @@ class BottleController extends AbstractController implements PaginatorAwareInter
             $em->flush();
             $this->addFlash('success', 'The bottle has been updated.');
 
-            return $this->redirectToRoute('bottle_show', array('id' => $bottle->getId()));
+            return $this->redirectToRoute('bottle_show', ['id' => $bottle->getId()]);
         }
 
-        return array(
+        return [
             'bottle' => $bottle,
             'edit_form' => $editForm->createView(),
-        );
+        ];
     }
 
     /**
      * Deletes a Bottle entity.
-     *
-     * @param Request $request
-     * @param Bottle $bottle
      *
      * @return array|RedirectResponse
      *

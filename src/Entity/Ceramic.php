@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * (c) 2020 Michael Joyce <mjoyce@sfu.ca>
+ * This source file is subject to the GPL v2, bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -151,12 +159,11 @@ class Ceramic extends Artefact {
     /**
      * Set typology.
      *
-     * @param \App\Entity\Typology|null $typology
+     * @param null|\App\Entity\Typology $typology
      *
      * @return Ceramic
      */
-    public function setTypology(\App\Entity\Typology $typology = null)
-    {
+    public function setTypology(Typology $typology = null) {
         $this->typology = $typology;
 
         return $this;
@@ -165,10 +172,9 @@ class Ceramic extends Artefact {
     /**
      * Get typology.
      *
-     * @return \App\Entity\Typology|null
+     * @return null|\App\Entity\Typology
      */
-    public function getTypology()
-    {
+    public function getTypology() {
         return $this->typology;
     }
 }

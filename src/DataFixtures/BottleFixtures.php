@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * (c) 2020 Michael Joyce <mjoyce@sfu.ca>
+ * This source file is subject to the GPL v2, bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\DataFixtures;
 
 use App\Entity\Bottle;
@@ -14,7 +22,7 @@ class BottleFixtures extends Fixture implements DependentFixtureInterface {
     /**
      * {@inheritdoc}
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager) : void {
         $item3 = new Bottle();
         $item3->setCompany('Coca Cola');
         $item3->setBrand('Fanta');
@@ -40,7 +48,7 @@ class BottleFixtures extends Fixture implements DependentFixtureInterface {
      * @return array
      */
     public function getDependencies() {
-        return array(
+        return [
             VesselFixtures::class,
             GlazeFixtures::class,
             LocationFixtures::class,
@@ -48,6 +56,6 @@ class BottleFixtures extends Fixture implements DependentFixtureInterface {
             InstitutionFixtures::class,
             ManufacturerFixtures::class,
             ContentFixtures::class,
-        );
+        ];
     }
 }

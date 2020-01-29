@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * (c) 2020 Michael Joyce <mjoyce@sfu.ca>
+ * This source file is subject to the GPL v2, bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Controller;
 
 use App\Entity\Glaze;
@@ -27,8 +35,6 @@ class GlazeController extends AbstractController implements PaginatorAwareInterf
     /**
      * Lists all Glaze entities.
      *
-     * @param Request $request
-     *
      * @return array
      *
      * @Route("/", name="glaze_index", methods={"GET"})
@@ -41,17 +47,15 @@ class GlazeController extends AbstractController implements PaginatorAwareInterf
 
         $glazes = $this->paginator->paginate($query, $request->query->getint('page', 1), 25);
 
-        return array(
+        return [
             'glazes' => $glazes,
-        );
+        ];
     }
 
     /**
      * Typeahead API endpoint for Glaze entities.
      *
      * To make this work, add something like this to GlazeRepository:
-     *
-     * @param Request $request
      *
      * @IsGranted("ROLE_CONTENT_ADMIN")
      * @Route("/typeahead", name="glaze_typeahead", methods={"GET"})
@@ -61,14 +65,14 @@ class GlazeController extends AbstractController implements PaginatorAwareInterf
     public function typeahead(Request $request, GlazeRepository $repo) {
         $q = $request->query->get('q');
         if ( ! $q) {
-            return new JsonResponse(array());
+            return new JsonResponse([]);
         }
-        $data = array();
+        $data = [];
         foreach ($repo->typeaheadQuery($q) as $result) {
-            $data[] = array(
+            $data[] = [
                 'id' => $result->getId(),
                 'text' => (string) $result,
-            );
+            ];
         }
 
         return new JsonResponse($data);
@@ -92,8 +96,6 @@ class GlazeController extends AbstractController implements PaginatorAwareInterf
      *    }
      * </pre></code>
      *
-     * @param Request $request
-     *
      * @Route("/search", name="glaze_search", methods={"GET"})
      * @Template()
      *
@@ -105,19 +107,17 @@ class GlazeController extends AbstractController implements PaginatorAwareInterf
             $query = $repo->searchQuery($q);
             $glazes = $this->paginator->paginate($query, $request->query->getInt('page', 1), 25);
         } else {
-            $glazes = array();
+            $glazes = [];
         }
 
-        return array(
+        return [
             'results' => $glazes,
             'q' => $q,
-        );
+        ];
     }
 
     /**
      * Creates a new Glaze entity.
-     *
-     * @param Request $request
      *
      * @return array|RedirectResponse
      *
@@ -136,19 +136,17 @@ class GlazeController extends AbstractController implements PaginatorAwareInterf
 
             $this->addFlash('success', 'The new glaze was created.');
 
-            return $this->redirectToRoute('glaze_show', array('id' => $glaze->getId()));
+            return $this->redirectToRoute('glaze_show', ['id' => $glaze->getId()]);
         }
 
-        return array(
+        return [
             'glaze' => $glaze,
             'form' => $form->createView(),
-        );
+        ];
     }
 
     /**
      * Creates a new Glaze entity in a popup.
-     *
-     * @param Request $request
      *
      * @return array|RedirectResponse
      *
@@ -163,24 +161,19 @@ class GlazeController extends AbstractController implements PaginatorAwareInterf
     /**
      * Finds and displays a Glaze entity.
      *
-     * @param Glaze $glaze
-     *
      * @return array
      *
      * @Route("/{id}", name="glaze_show", methods={"GET"})
      * @Template()
      */
     public function showAction(Glaze $glaze) {
-        return array(
+        return [
             'glaze' => $glaze,
-        );
+        ];
     }
 
     /**
      * Displays a form to edit an existing Glaze entity.
-     *
-     * @param Request $request
-     * @param Glaze $glaze
      *
      * @return array|RedirectResponse
      *
@@ -196,20 +189,17 @@ class GlazeController extends AbstractController implements PaginatorAwareInterf
             $em->flush();
             $this->addFlash('success', 'The glaze has been updated.');
 
-            return $this->redirectToRoute('glaze_show', array('id' => $glaze->getId()));
+            return $this->redirectToRoute('glaze_show', ['id' => $glaze->getId()]);
         }
 
-        return array(
+        return [
             'glaze' => $glaze,
             'edit_form' => $editForm->createView(),
-        );
+        ];
     }
 
     /**
      * Deletes a Glaze entity.
-     *
-     * @param Request $request
-     * @param Glaze $glaze
      *
      * @return array|RedirectResponse
      *

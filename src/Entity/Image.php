@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * (c) 2020 Michael Joyce <mjoyce@sfu.ca>
+ * This source file is subject to the GPL v2, bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -12,7 +20,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Image extends ImageEntity {
     /**
-     * @var boolean
+     * @var bool
      * @ORM\Column(type="boolean", nullable=false, options={"default": false})
      */
     private $public;
@@ -100,8 +108,7 @@ class Image extends ImageEntity {
      *
      * @return Image
      */
-    public function setPublic($public)
-    {
+    public function setPublic($public) {
         $this->public = $public;
 
         return $this;
@@ -112,20 +119,18 @@ class Image extends ImageEntity {
      *
      * @return bool
      */
-    public function getPublic()
-    {
+    public function getPublic() {
         return $this->public;
     }
 
     /**
      * Set copyright.
      *
-     * @param string|null $copyright
+     * @param null|string $copyright
      *
      * @return Image
      */
-    public function setCopyright($copyright = null)
-    {
+    public function setCopyright($copyright = null) {
         $this->copyright = $copyright;
 
         return $this;
@@ -134,10 +139,9 @@ class Image extends ImageEntity {
     /**
      * Get copyright.
      *
-     * @return string|null
+     * @return null|string
      */
-    public function getCopyright()
-    {
+    public function getCopyright() {
         return $this->copyright;
     }
 }

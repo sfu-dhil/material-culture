@@ -1,8 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * (c) 2020 Michael Joyce <mjoyce@sfu.ca>
+ * This source file is subject to the GPL v2, bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Tests\Entity;
 
-use App\Entity\Artefact;
 use App\Entity\Publication;
 use PHPUnit\Framework\TestCase;
 
@@ -12,31 +19,31 @@ class PublicationTest extends TestCase {
      */
     private $publication;
 
-    public function testAddUrlEmpty() {
+    public function testAddUrlEmpty() : void {
         $this->publication->AddUrl('http://example.com');
-        static::assertEquals(array('http://example.com'), $this->publication->getUrls());
+        static::assertSame(['http://example.com'], $this->publication->getUrls());
     }
 
-    public function testAddUrl() {
+    public function testAddUrl() : void {
         $this->publication->AddUrl('http://example.com');
         $this->publication->AddUrl('http://some-other-example.com');
-        static::assertEquals(array('http://example.com', 'http://some-other-example.com'), $this->publication->getUrls());
+        static::assertSame(['http://example.com', 'http://some-other-example.com'], $this->publication->getUrls());
     }
 
-    public function testSetUrls() {
-        $this->publication->SetUrls(array('http://example.com', 'http://some-other-example.com'));
-        static::assertEquals(array('http://example.com', 'http://some-other-example.com'), $this->publication->getUrls());
+    public function testSetUrls() : void {
+        $this->publication->SetUrls(['http://example.com', 'http://some-other-example.com']);
+        static::assertSame(['http://example.com', 'http://some-other-example.com'], $this->publication->getUrls());
     }
 
-    public function testAddDuplicateUrl() {
+    public function testAddDuplicateUrl() : void {
         $this->publication->AddUrl('http://example.com');
         $this->publication->AddUrl('http://example.com');
-        static::assertEquals(array('http://example.com'), $this->publication->getUrls());
+        static::assertSame(['http://example.com'], $this->publication->getUrls());
     }
 
-    public function testSetDuplicateUrls() {
-        $this->publication->SetUrls(array('http://example.com', 'http://some-other-example.com', 'http://example.com'));
-        static::assertEquals(array('http://example.com', 'http://some-other-example.com'), $this->publication->getUrls());
+    public function testSetDuplicateUrls() : void {
+        $this->publication->SetUrls(['http://example.com', 'http://some-other-example.com', 'http://example.com']);
+        static::assertSame(['http://example.com', 'http://some-other-example.com'], $this->publication->getUrls());
     }
 
     protected function setUp() : void {

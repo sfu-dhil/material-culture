@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * (c) 2020 Michael Joyce <mjoyce@sfu.ca>
+ * This source file is subject to the GPL v2, bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Controller;
 
 use App\Entity\Typology;
@@ -27,8 +35,6 @@ class TypologyController extends AbstractController implements PaginatorAwareInt
     /**
      * Lists all Typology entities.
      *
-     * @param Request $request
-     *
      * @return array
      *
      * @Route("/", name="typology_index", methods={"GET"})
@@ -42,17 +48,15 @@ class TypologyController extends AbstractController implements PaginatorAwareInt
 
         $typologies = $this->paginator->paginate($query, $request->query->getint('page', 1), 25);
 
-        return array(
+        return [
             'typologies' => $typologies,
-        );
+        ];
     }
 
     /**
      * Typeahead API endpoint for Typology entities.
      *
      * To make this work, add something like this to TypologyRepository:
-     *
-     * @param Request $request
      *
      * @IsGranted("ROLE_CONTENT_ADMIN")
      * @Route("/typeahead", name="typology_typeahead", methods={"GET"})
@@ -62,14 +66,14 @@ class TypologyController extends AbstractController implements PaginatorAwareInt
     public function typeahead(Request $request, TypologyRepository $repo) {
         $q = $request->query->get('q');
         if ( ! $q) {
-            return new JsonResponse(array());
+            return new JsonResponse([]);
         }
-        $data = array();
+        $data = [];
         foreach ($repo->typeaheadQuery($q) as $result) {
-            $data[] = array(
+            $data[] = [
                 'id' => $result->getId(),
                 'text' => (string) $result,
-            );
+            ];
         }
 
         return new JsonResponse($data);
@@ -93,8 +97,6 @@ class TypologyController extends AbstractController implements PaginatorAwareInt
      *    }
      * </pre></code>
      *
-     * @param Request $request
-     *
      * @Route("/search", name="typology_search", methods={"GET"})
      * @Template()
      *
@@ -106,19 +108,17 @@ class TypologyController extends AbstractController implements PaginatorAwareInt
             $query = $repo->searchQuery($q);
             $typologies = $this->paginator->paginate($query, $request->query->getInt('page', 1), 25);
         } else {
-            $typologies = array();
+            $typologies = [];
         }
 
-        return array(
+        return [
             'results' => $typologies,
             'q' => $q,
-        );
+        ];
     }
 
     /**
      * Creates a new Typology entity.
-     *
-     * @param Request $request
      *
      * @return array|RedirectResponse
      *
@@ -138,19 +138,17 @@ class TypologyController extends AbstractController implements PaginatorAwareInt
 
             $this->addFlash('success', 'The new typology was created.');
 
-            return $this->redirectToRoute('typology_show', array('id' => $typology->getId()));
+            return $this->redirectToRoute('typology_show', ['id' => $typology->getId()]);
         }
 
-        return array(
+        return [
             'typology' => $typology,
             'form' => $form->createView(),
-        );
+        ];
     }
 
     /**
      * Creates a new Typology entity in a popup.
-     *
-     * @param Request $request
      *
      * @return array|RedirectResponse
      *
@@ -165,24 +163,19 @@ class TypologyController extends AbstractController implements PaginatorAwareInt
     /**
      * Finds and displays a Typology entity.
      *
-     * @param Typology $typology
-     *
      * @return array
      *
      * @Route("/{id}", name="typology_show", methods={"GET"})
      * @Template()
      */
     public function showAction(Typology $typology) {
-        return array(
+        return [
             'typology' => $typology,
-        );
+        ];
     }
 
     /**
      * Displays a form to edit an existing Typology entity.
-     *
-     * @param Request $request
-     * @param Typology $typology
      *
      * @return array|RedirectResponse
      *
@@ -199,20 +192,17 @@ class TypologyController extends AbstractController implements PaginatorAwareInt
             $em->flush();
             $this->addFlash('success', 'The typology has been updated.');
 
-            return $this->redirectToRoute('typology_show', array('id' => $typology->getId()));
+            return $this->redirectToRoute('typology_show', ['id' => $typology->getId()]);
         }
 
-        return array(
+        return [
             'typology' => $typology,
             'edit_form' => $editForm->createView(),
-        );
+        ];
     }
 
     /**
      * Deletes a Typology entity.
-     *
-     * @param Request $request
-     * @param Typology $typology
      *
      * @return array|RedirectResponse
      *

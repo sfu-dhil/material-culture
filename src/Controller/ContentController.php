@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * (c) 2020 Michael Joyce <mjoyce@sfu.ca>
+ * This source file is subject to the GPL v2, bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Controller;
 
 use App\Entity\Content;
@@ -27,8 +35,6 @@ class ContentController extends AbstractController implements PaginatorAwareInte
     /**
      * Lists all Content entities.
      *
-     * @param Request $request
-     *
      * @return array
      *
      * @Route("/", name="content_index", methods={"GET"})
@@ -41,17 +47,15 @@ class ContentController extends AbstractController implements PaginatorAwareInte
 
         $contents = $this->paginator->paginate($query, $request->query->getint('page', 1), 25);
 
-        return array(
+        return [
             'contents' => $contents,
-        );
+        ];
     }
 
     /**
      * Typeahead API endpoint for Content entities.
      *
      * To make this work, add something like this to ContentRepository:
-     *
-     * @param Request $request
      *
      * @IsGranted("ROLE_CONTENT_ADMIN")
      * @Route("/typeahead", name="content_typeahead", methods={"GET"})
@@ -61,14 +65,14 @@ class ContentController extends AbstractController implements PaginatorAwareInte
     public function typeahead(Request $request, ContentRepository $repo) {
         $q = $request->query->get('q');
         if ( ! $q) {
-            return new JsonResponse(array());
+            return new JsonResponse([]);
         }
-        $data = array();
+        $data = [];
         foreach ($repo->typeaheadQuery($q) as $result) {
-            $data[] = array(
+            $data[] = [
                 'id' => $result->getId(),
                 'text' => (string) $result,
-            );
+            ];
         }
 
         return new JsonResponse($data);
@@ -92,8 +96,6 @@ class ContentController extends AbstractController implements PaginatorAwareInte
      *    }
      * </pre></code>
      *
-     * @param Request $request
-     *
      * @Route("/search", name="content_search", methods={"GET"})
      * @Template()
      *
@@ -105,19 +107,17 @@ class ContentController extends AbstractController implements PaginatorAwareInte
             $query = $repo->searchQuery($q);
             $contents = $this->paginator->paginate($query, $request->query->getInt('page', 1), 25);
         } else {
-            $contents = array();
+            $contents = [];
         }
 
-        return array(
+        return [
             'results' => $contents,
             'q' => $q,
-        );
+        ];
     }
 
     /**
      * Creates a new Content entity.
-     *
-     * @param Request $request
      *
      * @return array|RedirectResponse
      *
@@ -136,19 +136,17 @@ class ContentController extends AbstractController implements PaginatorAwareInte
 
             $this->addFlash('success', 'The new content was created.');
 
-            return $this->redirectToRoute('content_show', array('id' => $content->getId()));
+            return $this->redirectToRoute('content_show', ['id' => $content->getId()]);
         }
 
-        return array(
+        return [
             'content' => $content,
             'form' => $form->createView(),
-        );
+        ];
     }
 
     /**
      * Creates a new Content entity in a popup.
-     *
-     * @param Request $request
      *
      * @return array|RedirectResponse
      *
@@ -163,24 +161,19 @@ class ContentController extends AbstractController implements PaginatorAwareInte
     /**
      * Finds and displays a Content entity.
      *
-     * @param Content $content
-     *
      * @return array
      *
      * @Route("/{id}", name="content_show", methods={"GET"})
      * @Template()
      */
     public function showAction(Content $content) {
-        return array(
+        return [
             'content' => $content,
-        );
+        ];
     }
 
     /**
      * Displays a form to edit an existing Content entity.
-     *
-     * @param Request $request
-     * @param Content $content
      *
      * @return array|RedirectResponse
      *
@@ -196,20 +189,17 @@ class ContentController extends AbstractController implements PaginatorAwareInte
             $em->flush();
             $this->addFlash('success', 'The content has been updated.');
 
-            return $this->redirectToRoute('content_show', array('id' => $content->getId()));
+            return $this->redirectToRoute('content_show', ['id' => $content->getId()]);
         }
 
-        return array(
+        return [
             'content' => $content,
             'edit_form' => $editForm->createView(),
-        );
+        ];
     }
 
     /**
      * Deletes a Content entity.
-     *
-     * @param Request $request
-     * @param Content $content
      *
      * @return array|RedirectResponse
      *

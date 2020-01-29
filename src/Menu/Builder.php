@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * (c) 2020 Michael Joyce <mjoyce@sfu.ca>
+ * This source file is subject to the GPL v2, bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Menu;
 
 use Knp\Menu\FactoryInterface;
@@ -16,7 +24,7 @@ class Builder implements ContainerAwareInterface {
     use ContainerAwareTrait;
 
     // U+25BE, black down-pointing small triangle.
-    const CARET = ' ▾';
+    public const CARET = ' ▾';
 
     /**
      * @var FactoryInterface
@@ -35,10 +43,6 @@ class Builder implements ContainerAwareInterface {
 
     /**
      * Build the menu builder.
-     *
-     * @param FactoryInterface $factory
-     * @param AuthorizationCheckerInterface $authChecker
-     * @param TokenStorageInterface $tokenStorage
      */
     public function __construct(FactoryInterface $factory, AuthorizationCheckerInterface $authChecker, TokenStorageInterface $tokenStorage) {
         $this->factory = $factory;
@@ -64,92 +68,90 @@ class Builder implements ContainerAwareInterface {
     /**
      * Build the navigation menu and return it.
      *
-     * @param array $options
-     *
      * @return ItemInterface
      */
     public function mainMenu(array $options) {
         $menu = $this->factory->createItem('root');
-        $menu->setChildrenAttributes(array(
+        $menu->setChildrenAttributes([
             'class' => 'nav navbar-nav',
-        ));
+        ]);
 
-        $browse = $menu->addChild('browse', array(
+        $browse = $menu->addChild('browse', [
             'uri' => '#',
             'label' => 'Explore ' . self::CARET,
-        ));
+        ]);
         $browse->setAttribute('dropdown', true);
         $browse->setLinkAttribute('class', 'dropdown-toggle');
         $browse->setLinkAttribute('data-toggle', 'dropdown');
         $browse->setChildrenAttribute('class', 'dropdown-menu');
 
-        $browse->addChild('bottle', array(
+        $browse->addChild('bottle', [
             'label' => 'Bottles',
             'route' => 'bottle_index',
-        ));
+        ]);
 
-        $browse->addChild('can', array(
+        $browse->addChild('can', [
             'label' => 'Cans',
             'route' => 'can_index',
-        ));
+        ]);
 
-        $browse->addChild('ceramic', array(
+        $browse->addChild('ceramic', [
             'label' => 'Majolicas',
             'route' => 'ceramic_index',
-        ));
+        ]);
 
-        $browse->addChild('image', array(
+        $browse->addChild('image', [
             'label' => 'Images',
             'route' => 'image_index',
-        ));
+        ]);
 
-        $divider1 = $browse->addChild('divider1', array(
+        $divider1 = $browse->addChild('divider1', [
             'label' => '',
-        ));
-        $divider1->setAttributes(array(
+        ]);
+        $divider1->setAttributes([
             'role' => 'separator',
             'class' => 'divider',
-        ));
+        ]);
 
-        $browse->addChild('content', array(
+        $browse->addChild('content', [
             'label' => 'Contents',
             'route' => 'content_index',
-        ));
+        ]);
 
-        $browse->addChild('glaze', array(
+        $browse->addChild('glaze', [
             'label' => 'Glazes',
             'route' => 'glaze_index',
-        ));
+        ]);
 
-        $browse->addChild('institution', array(
+        $browse->addChild('institution', [
             'label' => 'Institutions',
             'route' => 'institution_index',
-        ));
+        ]);
 
-        $browse->addChild('location', array(
+        $browse->addChild('location', [
             'label' => 'Locations',
             'route' => 'location_index',
-        ));
+        ]);
 
-        $browse->addChild('manufacturer', array(
+        $browse->addChild('manufacturer', [
             'label' => 'Manufacturers',
             'route' => 'manufacturer_index',
-        ));
+        ]);
 
-        $browse->addChild('publication', array(
+        $browse->addChild('publication', [
             'label' => 'Publications',
             'route' => 'publication_index',
-        ));
+        ]);
 
-        $browse->addChild('typology', array(
+        $browse->addChild('typology', [
             'label' => 'Typology',
             'route' => 'typology_index',
-        ));
+        ]);
 
-        $browse->addChild('vessel', array(
+        $browse->addChild('vessel', [
             'label' => 'Ceramic Vessels',
             'route' => 'vessel_index',
-        ));
+        ]);
 
 //        if ($this->hasRole('ROLE_USER')) {
 //            $divider = $browse->addChild('divider', array(

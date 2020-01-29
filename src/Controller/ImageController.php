@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * (c) 2020 Michael Joyce <mjoyce@sfu.ca>
+ * This source file is subject to the GPL v2, bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Controller;
 
 use App\Entity\Image;
@@ -25,8 +33,6 @@ class ImageController extends AbstractController implements PaginatorAwareInterf
     /**
      * Lists all Image entities.
      *
-     * @param Request $request
-     *
      * @return array
      *
      * @Route("/", name="image_index", methods={"GET"})
@@ -39,9 +45,9 @@ class ImageController extends AbstractController implements PaginatorAwareInterf
 
         $images = $this->paginator->paginate($query, $request->query->getint('page', 1), 25);
 
-        return array(
+        return [
             'images' => $images,
-        );
+        ];
     }
 
     /**
@@ -62,8 +68,6 @@ class ImageController extends AbstractController implements PaginatorAwareInterf
      *    }
      * </pre></code>
      *
-     * @param Request $request
-     *
      * @Route("/search", name="image_search", methods={"GET"})
      * @Template()
      *
@@ -75,19 +79,17 @@ class ImageController extends AbstractController implements PaginatorAwareInterf
             $query = $repo->searchQuery($q);
             $images = $this->paginator->paginate($query, $request->query->getInt('page', 1), 25);
         } else {
-            $images = array();
+            $images = [];
         }
 
-        return array(
+        return [
             'images' => $images,
             'q' => $q,
-        );
+        ];
     }
 
     /**
      * Finds and displays a Image entity.
-     *
-     * @param Image $image
      *
      * @return array
      *
@@ -95,15 +97,13 @@ class ImageController extends AbstractController implements PaginatorAwareInterf
      * @Template()
      */
     public function showAction(Image $image) {
-        return array(
+        return [
             'image' => $image,
-        );
+        ];
     }
 
     /**
      * Finds and returns a raw image file.
-     *
-     * @param Image $image
      *
      * @Route("/{id}/view", name="image_view", methods={"GET"})
      *
@@ -119,8 +119,6 @@ class ImageController extends AbstractController implements PaginatorAwareInterf
 
     /**
      * Finds and returns a raw image file.
-     *
-     * @param Image $image
      *
      * @Route("/{id}/thumbnail", name="image_thumbnail", methods={"GET"})
      *

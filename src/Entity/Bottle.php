@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * (c) 2020 Michael Joyce <mjoyce@sfu.ca>
+ * This source file is subject to the GPL v2, bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -41,6 +49,10 @@ class Bottle extends Artefact {
      */
     private $content;
 
+    public function __construct() {
+        parent::__construct();
+    }
+
     /**
      * Force all entities to provide a stringify function.
      *
@@ -48,10 +60,6 @@ class Bottle extends Artefact {
      */
     public function __toString() {
         return $this->company . ' ' . $this->brand;
-    }
-
-    public function __construct() {
-        parent::__construct();
     }
 
     public function getCategory() {
@@ -149,12 +157,11 @@ class Bottle extends Artefact {
     /**
      * Set packagingLocation.
      *
-     * @param \App\Entity\Location|null $packagingLocation
+     * @param null|\App\Entity\Location $packagingLocation
      *
      * @return Bottle
      */
-    public function setPackagingLocation(\App\Entity\Location $packagingLocation = null)
-    {
+    public function setPackagingLocation(Location $packagingLocation = null) {
         $this->packagingLocation = $packagingLocation;
 
         return $this;
@@ -163,10 +170,9 @@ class Bottle extends Artefact {
     /**
      * Get packagingLocation.
      *
-     * @return \App\Entity\Location|null
+     * @return null|\App\Entity\Location
      */
-    public function getPackagingLocation()
-    {
+    public function getPackagingLocation() {
         return $this->packagingLocation;
     }
 }

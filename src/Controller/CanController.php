@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * (c) 2020 Michael Joyce <mjoyce@sfu.ca>
+ * This source file is subject to the GPL v2, bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Controller;
 
 use App\Entity\Can;
@@ -11,7 +19,6 @@ use Nines\UtilBundle\Controller\PaginatorTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,8 +34,6 @@ class CanController extends AbstractController implements PaginatorAwareInterfac
     /**
      * Lists all Can entities.
      *
-     * @param Request $request
-     *
      * @return array
      *
      * @Route("/", name="can_index", methods={"GET"})
@@ -41,9 +46,9 @@ class CanController extends AbstractController implements PaginatorAwareInterfac
 
         $cans = $this->paginator->paginate($query, $request->query->getint('page', 1), 25);
 
-        return array(
+        return [
             'cans' => $cans,
-        );
+        ];
     }
 
     /**
@@ -64,8 +69,6 @@ class CanController extends AbstractController implements PaginatorAwareInterfac
      *    }
      * </pre></code>
      *
-     * @param Request $request
-     *
      * @Route("/search", name="can_search", methods={"GET"})
      * @Template()
      *
@@ -77,19 +80,17 @@ class CanController extends AbstractController implements PaginatorAwareInterfac
             $query = $repo->searchQuery($q);
             $cans = $this->paginator->paginate($query, $request->query->getInt('page', 1), 25);
         } else {
-            $cans = array();
+            $cans = [];
         }
 
-        return array(
+        return [
             'cans' => $cans,
             'q' => $q,
-        );
+        ];
     }
 
     /**
      * Creates a new Can entity.
-     *
-     * @param Request $request
      *
      * @return array|RedirectResponse
      *
@@ -108,20 +109,17 @@ class CanController extends AbstractController implements PaginatorAwareInterfac
 
             $this->addFlash('success', 'The new can was created.');
 
-            return $this->redirectToRoute('can_show', array('id' => $can->getId()));
+            return $this->redirectToRoute('can_show', ['id' => $can->getId()]);
         }
 
-        return array(
+        return [
             'can' => $can,
             'form' => $form->createView(),
-        );
+        ];
     }
 
     /**
      * Finds and displays a Can entity.
-     *
-     * @param Request $request
-     * @param Can $can
      *
      * @return array
      *
@@ -131,17 +129,14 @@ class CanController extends AbstractController implements PaginatorAwareInterfac
     public function showAction(Request $request, Can $can) {
         $images = $this->paginator->paginate($can->getImages(), $request->query->getint('page', 1), 25);
 
-        return array(
+        return [
             'can' => $can,
             'images' => $images,
-        );
+        ];
     }
 
     /**
      * Displays a form to edit an existing Can entity.
-     *
-     * @param Request $request
-     * @param Can $can
      *
      * @return array|RedirectResponse
      *
@@ -157,20 +152,17 @@ class CanController extends AbstractController implements PaginatorAwareInterfac
             $em->flush();
             $this->addFlash('success', 'The can has been updated.');
 
-            return $this->redirectToRoute('can_show', array('id' => $can->getId()));
+            return $this->redirectToRoute('can_show', ['id' => $can->getId()]);
         }
 
-        return array(
+        return [
             'can' => $can,
             'edit_form' => $editForm->createView(),
-        );
+        ];
     }
 
     /**
      * Deletes a Can entity.
-     *
-     * @param Request $request
-     * @param Can $can
      *
      * @return array|RedirectResponse
      *

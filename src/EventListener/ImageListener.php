@@ -1,15 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * (c) 2020 Michael Joyce <mjoyce@sfu.ca>
+ * This source file is subject to the GPL v2, bundled
+ * with this source code in the file LICENSE.
  */
 
 namespace App\EventListener;
 
 use App\Entity\ImageEntity;
-use App\Entity\ImageTrait;
 use App\Services\FileUploader;
 use App\Services\Thumbnailer;
 use Doctrine\ORM\Event\LifecycleEventArgs;
@@ -54,7 +55,7 @@ class ImageListener {
         $this->logger = $logger;
     }
 
-    private function uploadFile(ImageEntity $image) {
+    private function uploadFile(ImageEntity $image) : void {
         $file = $image->getImageFile();
         if ( ! $file instanceof UploadedFile) {
             return;
@@ -72,29 +73,29 @@ class ImageListener {
         $image->setThumbnailPath($this->thumbnailer->thumbnail($image));
     }
 
-    public function setThumbWidth($width) {
+    public function setThumbWidth($width) : void {
         $this->thumbWidth = $width;
     }
 
-    public function setThumbHeight($height) {
+    public function setThumbHeight($height) : void {
         $this->thumbHeight = $height;
     }
 
-    public function prePersist(LifecycleEventArgs $args) {
+    public function prePersist(LifecycleEventArgs $args) : void {
         $entity = $args->getEntity();
         if ($entity instanceof ImageEntity) {
             $this->uploadFile($entity);
         }
     }
 
-    public function preUpdate(LifecycleEventArgs $args) {
+    public function preUpdate(LifecycleEventArgs $args) : void {
         $entity = $args->getEntity();
         if ($entity instanceof ImageEntity) {
             $this->uploadFile($entity);
         }
     }
 
-    public function postLoad(LifecycleEventArgs $args) {
+    public function postLoad(LifecycleEventArgs $args) : void {
         $entity = $args->getEntity();
         if ($entity instanceof ImageEntity) {
             $filePath = $this->uploader->getImageDir() . '/' . $entity->getImageFilePath();
@@ -102,7 +103,7 @@ class ImageListener {
             if (file_exists($filePath)) {
                 $entity->setImageFile(new File($filePath));
             }
-            if(file_exists($thumbnailPath)) {
+            if (file_exists($thumbnailPath)) {
                 $entity->setThumbnailFile(new File($thumbnailPath));
             }
         }

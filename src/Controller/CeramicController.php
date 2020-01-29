@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * (c) 2020 Michael Joyce <mjoyce@sfu.ca>
+ * This source file is subject to the GPL v2, bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Controller;
 
 use App\Entity\Ceramic;
@@ -11,7 +19,6 @@ use Nines\UtilBundle\Controller\PaginatorTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,8 +34,6 @@ class CeramicController extends AbstractController implements PaginatorAwareInte
     /**
      * Lists all Ceramic entities.
      *
-     * @param Request $request
-     *
      * @return array
      *
      * @Route("/", name="ceramic_index", methods={"GET"})
@@ -41,9 +46,9 @@ class CeramicController extends AbstractController implements PaginatorAwareInte
 
         $ceramics = $this->paginator->paginate($query, $request->query->getint('page', 1), 25);
 
-        return array(
+        return [
             'ceramics' => $ceramics,
-        );
+        ];
     }
 
     /**
@@ -64,8 +69,6 @@ class CeramicController extends AbstractController implements PaginatorAwareInte
      *    }
      * </pre></code>
      *
-     * @param Request $request
-     *
      * @Route("/search", name="ceramic_search", methods={"GET"})
      * @Template()
      *
@@ -77,19 +80,17 @@ class CeramicController extends AbstractController implements PaginatorAwareInte
             $query = $repo->searchQuery($q);
             $ceramics = $this->paginator->paginate($query, $request->query->getInt('page', 1), 25);
         } else {
-            $ceramics = array();
+            $ceramics = [];
         }
 
-        return array(
+        return [
             'ceramics' => $ceramics,
             'q' => $q,
-        );
+        ];
     }
 
     /**
      * Creates a new Ceramic entity.
-     *
-     * @param Request $request
      *
      * @return array|RedirectResponse
      *
@@ -108,20 +109,17 @@ class CeramicController extends AbstractController implements PaginatorAwareInte
 
             $this->addFlash('success', 'The new ceramic was created.');
 
-            return $this->redirectToRoute('ceramic_show', array('id' => $ceramic->getId()));
+            return $this->redirectToRoute('ceramic_show', ['id' => $ceramic->getId()]);
         }
 
-        return array(
+        return [
             'ceramic' => $ceramic,
             'form' => $form->createView(),
-        );
+        ];
     }
 
     /**
      * Finds and displays a Ceramic entity.
-     *
-     * @param Request $request
-     * @param Ceramic $ceramic
      *
      * @return array
      *
@@ -131,17 +129,14 @@ class CeramicController extends AbstractController implements PaginatorAwareInte
     public function showAction(Request $request, Ceramic $ceramic) {
         $images = $this->paginator->paginate($ceramic->getImages(), $request->query->getint('page', 1), 25);
 
-        return array(
+        return [
             'ceramic' => $ceramic,
             'images' => $images,
-        );
+        ];
     }
 
     /**
      * Displays a form to edit an existing Ceramic entity.
-     *
-     * @param Request $request
-     * @param Ceramic $ceramic
      *
      * @return array|RedirectResponse
      *
@@ -157,20 +152,17 @@ class CeramicController extends AbstractController implements PaginatorAwareInte
             $em->flush();
             $this->addFlash('success', 'The ceramic has been updated.');
 
-            return $this->redirectToRoute('ceramic_show', array('id' => $ceramic->getId()));
+            return $this->redirectToRoute('ceramic_show', ['id' => $ceramic->getId()]);
         }
 
-        return array(
+        return [
             'ceramic' => $ceramic,
             'edit_form' => $editForm->createView(),
-        );
+        ];
     }
 
     /**
      * Deletes a Ceramic entity.
-     *
-     * @param Request $request
-     * @param Ceramic $ceramic
      *
      * @return array|RedirectResponse
      *

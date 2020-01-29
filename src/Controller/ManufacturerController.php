@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * (c) 2020 Michael Joyce <mjoyce@sfu.ca>
+ * This source file is subject to the GPL v2, bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Controller;
 
 use App\Entity\Manufacturer;
@@ -27,8 +35,6 @@ class ManufacturerController extends AbstractController implements PaginatorAwar
     /**
      * Lists all Manufacturer entities.
      *
-     * @param Request $request
-     *
      * @return array
      *
      * @Route("/", name="manufacturer_index", methods={"GET"})
@@ -42,17 +48,15 @@ class ManufacturerController extends AbstractController implements PaginatorAwar
 
         $manufacturers = $this->paginator->paginate($query, $request->query->getint('page', 1), 25);
 
-        return array(
+        return [
             'manufacturers' => $manufacturers,
-        );
+        ];
     }
 
     /**
      * Typeahead API endpoint for Manufacturer entities.
      *
      * To make this work, add something like this to ManufacturerRepository:
-     *
-     * @param Request $request
      *
      * @IsGranted("ROLE_CONTENT_ADMIN")
      * @Route("/typeahead", name="manufacturer_typeahead", methods={"GET"})
@@ -62,14 +66,14 @@ class ManufacturerController extends AbstractController implements PaginatorAwar
     public function typeahead(Request $request, ManufacturerRepository $repo) {
         $q = $request->query->get('q');
         if ( ! $q) {
-            return new JsonResponse(array());
+            return new JsonResponse([]);
         }
-        $data = array();
+        $data = [];
         foreach ($repo->typeaheadQuery($q) as $result) {
-            $data[] = array(
+            $data[] = [
                 'id' => $result->getId(),
                 'text' => (string) $result,
-            );
+            ];
         }
 
         return new JsonResponse($data);
@@ -93,8 +97,6 @@ class ManufacturerController extends AbstractController implements PaginatorAwar
      *    }
      * </pre></code>
      *
-     * @param Request $request
-     *
      * @Route("/search", name="manufacturer_search", methods={"GET"})
      * @Template()
      *
@@ -106,19 +108,17 @@ class ManufacturerController extends AbstractController implements PaginatorAwar
             $query = $repo->searchQuery($q);
             $manufacturers = $this->paginator->paginate($query, $request->query->getInt('page', 1), 25);
         } else {
-            $manufacturers = array();
+            $manufacturers = [];
         }
 
-        return array(
+        return [
             'results' => $manufacturers,
             'q' => $q,
-        );
+        ];
     }
 
     /**
      * Creates a new Manufacturer entity.
-     *
-     * @param Request $request
      *
      * @return array|RedirectResponse
      *
@@ -138,19 +138,17 @@ class ManufacturerController extends AbstractController implements PaginatorAwar
 
             $this->addFlash('success', 'The new manufacturer was created.');
 
-            return $this->redirectToRoute('manufacturer_show', array('id' => $manufacturer->getId()));
+            return $this->redirectToRoute('manufacturer_show', ['id' => $manufacturer->getId()]);
         }
 
-        return array(
+        return [
             'manufacturer' => $manufacturer,
             'form' => $form->createView(),
-        );
+        ];
     }
 
     /**
      * Creates a new Manufacturer entity in a popup.
-     *
-     * @param Request $request
      *
      * @return array|RedirectResponse
      *
@@ -165,24 +163,19 @@ class ManufacturerController extends AbstractController implements PaginatorAwar
     /**
      * Finds and displays a Manufacturer entity.
      *
-     * @param Manufacturer $manufacturer
-     *
      * @return array
      *
      * @Route("/{id}", name="manufacturer_show", methods={"GET"})
      * @Template()
      */
     public function showAction(Manufacturer $manufacturer) {
-        return array(
+        return [
             'manufacturer' => $manufacturer,
-        );
+        ];
     }
 
     /**
      * Displays a form to edit an existing Manufacturer entity.
-     *
-     * @param Request $request
-     * @param Manufacturer $manufacturer
      *
      * @return array|RedirectResponse
      *
@@ -199,20 +192,17 @@ class ManufacturerController extends AbstractController implements PaginatorAwar
             $em->flush();
             $this->addFlash('success', 'The manufacturer has been updated.');
 
-            return $this->redirectToRoute('manufacturer_show', array('id' => $manufacturer->getId()));
+            return $this->redirectToRoute('manufacturer_show', ['id' => $manufacturer->getId()]);
         }
 
-        return array(
+        return [
             'manufacturer' => $manufacturer,
             'edit_form' => $editForm->createView(),
-        );
+        ];
     }
 
     /**
      * Deletes a Manufacturer entity.
-     *
-     * @param Request $request
-     * @param Manufacturer $manufacturer
      *
      * @return array|RedirectResponse
      *

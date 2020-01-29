@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * (c) 2020 Michael Joyce <mjoyce@sfu.ca>
+ * This source file is subject to the GPL v2, bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -130,7 +138,7 @@ class Location extends AbstractTerm {
 
     public function __construct() {
         parent::__construct();
-        $this->alternateNames = array();
+        $this->alternateNames = [];
         $this->artefactsManufactured = new ArrayCollection();
         $this->artefactsRecovered = new ArrayCollection();
         $this->bottlesPacked = new ArrayCollection();
@@ -452,8 +460,7 @@ class Location extends AbstractTerm {
      *
      * @return Location
      */
-    public function addBottlesPacked(\App\Entity\Artefact $bottlesPacked)
-    {
+    public function addBottlesPacked(Artefact $bottlesPacked) {
         $this->bottlesPacked[] = $bottlesPacked;
 
         return $this;
@@ -464,10 +471,9 @@ class Location extends AbstractTerm {
      *
      * @param \App\Entity\Artefact $bottlesPacked
      *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     * @return bool TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeBottlesPacked(\App\Entity\Artefact $bottlesPacked)
-    {
+    public function removeBottlesPacked(Artefact $bottlesPacked) {
         return $this->bottlesPacked->removeElement($bottlesPacked);
     }
 
@@ -476,8 +482,7 @@ class Location extends AbstractTerm {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getBottlesPacked()
-    {
+    public function getBottlesPacked() {
         return $this->bottlesPacked;
     }
 
@@ -488,8 +493,7 @@ class Location extends AbstractTerm {
      *
      * @return Location
      */
-    public function addCansPacked(\App\Entity\Artefact $cansPacked)
-    {
+    public function addCansPacked(Artefact $cansPacked) {
         $this->cansPacked[] = $cansPacked;
 
         return $this;
@@ -500,10 +504,9 @@ class Location extends AbstractTerm {
      *
      * @param \App\Entity\Artefact $cansPacked
      *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     * @return bool TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeCansPacked(\App\Entity\Artefact $cansPacked)
-    {
+    public function removeCansPacked(Artefact $cansPacked) {
         return $this->cansPacked->removeElement($cansPacked);
     }
 
@@ -512,8 +515,7 @@ class Location extends AbstractTerm {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getCansPacked()
-    {
+    public function getCansPacked() {
         return $this->cansPacked;
     }
 }

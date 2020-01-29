@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * (c) 2020 Michael Joyce <mjoyce@sfu.ca>
+ * This source file is subject to the GPL v2, bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Controller;
 
 use App\Entity\Publication;
@@ -27,8 +35,6 @@ class PublicationController extends AbstractController implements PaginatorAware
     /**
      * Lists all Publication entities.
      *
-     * @param Request $request
-     *
      * @return array
      *
      * @Route("/", name="publication_index", methods={"GET"})
@@ -42,17 +48,15 @@ class PublicationController extends AbstractController implements PaginatorAware
 
         $publications = $this->paginator->paginate($query, $request->query->getint('page', 1), 25);
 
-        return array(
+        return [
             'publications' => $publications,
-        );
+        ];
     }
 
     /**
      * Typeahead API endpoint for Publication entities.
      *
      * To make this work, add something like this to PublicationRepository:
-     *
-     * @param Request $request
      *
      * @IsGranted("ROLE_CONTENT_ADMIN")
      * @Route("/typeahead", name="publication_typeahead", methods={"GET"})
@@ -62,14 +66,14 @@ class PublicationController extends AbstractController implements PaginatorAware
     public function typeahead(Request $request, PublicationRepository $repo) {
         $q = $request->query->get('q');
         if ( ! $q) {
-            return new JsonResponse(array());
+            return new JsonResponse([]);
         }
-        $data = array();
+        $data = [];
         foreach ($repo->typeaheadQuery($q) as $result) {
-            $data[] = array(
+            $data[] = [
                 'id' => $result->getId(),
                 'text' => (string) $result,
-            );
+            ];
         }
 
         return new JsonResponse($data);
@@ -93,8 +97,6 @@ class PublicationController extends AbstractController implements PaginatorAware
      *    }
      * </pre></code>
      *
-     * @param Request $request
-     *
      * @Route("/search", name="publication_search", methods={"GET"})
      * @Template()
      *
@@ -106,19 +108,17 @@ class PublicationController extends AbstractController implements PaginatorAware
             $query = $repo->searchQuery($q);
             $publications = $this->paginator->paginate($query, $request->query->getInt('page', 1), 25);
         } else {
-            $publications = array();
+            $publications = [];
         }
 
-        return array(
+        return [
             'results' => $publications,
             'q' => $q,
-        );
+        ];
     }
 
     /**
      * Creates a new Publication entity.
-     *
-     * @param Request $request
      *
      * @return array|RedirectResponse
      *
@@ -139,19 +139,17 @@ class PublicationController extends AbstractController implements PaginatorAware
 
             $this->addFlash('success', 'The new publication was created.');
 
-            return $this->redirectToRoute('publication_show', array('id' => $publication->getId()));
+            return $this->redirectToRoute('publication_show', ['id' => $publication->getId()]);
         }
 
-        return array(
+        return [
             'publication' => $publication,
             'form' => $form->createView(),
-        );
+        ];
     }
 
     /**
      * Creates a new Publication entity in a popup.
-     *
-     * @param Request $request
      *
      * @return array|RedirectResponse
      *
@@ -166,24 +164,19 @@ class PublicationController extends AbstractController implements PaginatorAware
     /**
      * Finds and displays a Publication entity.
      *
-     * @param Publication $publication
-     *
      * @return array
      *
      * @Route("/{id}", name="publication_show", methods={"GET"})
      * @Template()
      */
     public function showAction(Publication $publication) {
-        return array(
+        return [
             'publication' => $publication,
-        );
+        ];
     }
 
     /**
      * Displays a form to edit an existing Publication entity.
-     *
-     * @param Request $request
-     * @param Publication $publication
      *
      * @return array|RedirectResponse
      *
@@ -201,20 +194,17 @@ class PublicationController extends AbstractController implements PaginatorAware
             $em->flush();
             $this->addFlash('success', 'The publication has been updated.');
 
-            return $this->redirectToRoute('publication_show', array('id' => $publication->getId()));
+            return $this->redirectToRoute('publication_show', ['id' => $publication->getId()]);
         }
 
-        return array(
+        return [
             'publication' => $publication,
             'edit_form' => $editForm->createView(),
-        );
+        ];
     }
 
     /**
      * Deletes a Publication entity.
-     *
-     * @param Request $request
-     * @param Publication $publication
      *
      * @return array|RedirectResponse
      *

@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * (c) 2020 Michael Joyce <mjoyce@sfu.ca>
+ * This source file is subject to the GPL v2, bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Controller;
 
 use App\Entity\Institution;
@@ -27,8 +35,6 @@ class InstitutionController extends AbstractController implements PaginatorAware
     /**
      * Lists all Institution entities.
      *
-     * @param Request $request
-     *
      * @return array
      *
      * @Route("/", name="institution_index", methods={"GET"})
@@ -41,17 +47,15 @@ class InstitutionController extends AbstractController implements PaginatorAware
 
         $institutions = $this->paginator->paginate($query, $request->query->getint('page', 1), 25);
 
-        return array(
+        return [
             'institutions' => $institutions,
-        );
+        ];
     }
 
     /**
      * Typeahead API endpoint for Institution entities.
      *
      * To make this work, add something like this to InstitutionRepository:
-     *
-     * @param Request $request
      *
      * @IsGranted("ROLE_CONTENT_ADMIN")
      * @Route("/typeahead", name="institution_typeahead", methods={"GET"})
@@ -61,14 +65,14 @@ class InstitutionController extends AbstractController implements PaginatorAware
     public function typeahead(Request $request, InstitutionRepository $repo) {
         $q = $request->query->get('q');
         if ( ! $q) {
-            return new JsonResponse(array());
+            return new JsonResponse([]);
         }
-        $data = array();
+        $data = [];
         foreach ($repo->typeaheadQuery($q) as $result) {
-            $data[] = array(
+            $data[] = [
                 'id' => $result->getId(),
                 'text' => (string) $result,
-            );
+            ];
         }
 
         return new JsonResponse($data);
@@ -92,8 +96,6 @@ class InstitutionController extends AbstractController implements PaginatorAware
      *    }
      * </pre></code>
      *
-     * @param Request $request
-     *
      * @Route("/search", name="institution_search", methods={"GET"})
      * @Template()
      *
@@ -105,19 +107,17 @@ class InstitutionController extends AbstractController implements PaginatorAware
             $query = $repo->searchQuery($q);
             $institutions = $this->paginator->paginate($query, $request->query->getInt('page', 1), 25);
         } else {
-            $institutions = array();
+            $institutions = [];
         }
 
-        return array(
+        return [
             'results' => $institutions,
             'q' => $q,
-        );
+        ];
     }
 
     /**
      * Creates a new Institution entity.
-     *
-     * @param Request $request
      *
      * @return array|RedirectResponse
      *
@@ -136,19 +136,17 @@ class InstitutionController extends AbstractController implements PaginatorAware
 
             $this->addFlash('success', 'The new institution was created.');
 
-            return $this->redirectToRoute('institution_show', array('id' => $institution->getId()));
+            return $this->redirectToRoute('institution_show', ['id' => $institution->getId()]);
         }
 
-        return array(
+        return [
             'institution' => $institution,
             'form' => $form->createView(),
-        );
+        ];
     }
 
     /**
      * Creates a new Institution entity in a popup.
-     *
-     * @param Request $request
      *
      * @return array|RedirectResponse
      *
@@ -163,24 +161,19 @@ class InstitutionController extends AbstractController implements PaginatorAware
     /**
      * Finds and displays a Institution entity.
      *
-     * @param Institution $institution
-     *
      * @return array
      *
      * @Route("/{id}", name="institution_show", methods={"GET"})
      * @Template()
      */
     public function showAction(Institution $institution) {
-        return array(
+        return [
             'institution' => $institution,
-        );
+        ];
     }
 
     /**
      * Displays a form to edit an existing Institution entity.
-     *
-     * @param Request $request
-     * @param Institution $institution
      *
      * @return array|RedirectResponse
      *
@@ -196,20 +189,17 @@ class InstitutionController extends AbstractController implements PaginatorAware
             $em->flush();
             $this->addFlash('success', 'The institution has been updated.');
 
-            return $this->redirectToRoute('institution_show', array('id' => $institution->getId()));
+            return $this->redirectToRoute('institution_show', ['id' => $institution->getId()]);
         }
 
-        return array(
+        return [
             'institution' => $institution,
             'edit_form' => $editForm->createView(),
-        );
+        ];
     }
 
     /**
      * Deletes a Institution entity.
-     *
-     * @param Request $request
-     * @param Institution $institution
      *
      * @return array|RedirectResponse
      *

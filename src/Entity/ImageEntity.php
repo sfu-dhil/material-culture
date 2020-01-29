@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * (c) 2020 Michael Joyce <mjoyce@sfu.ca>
+ * This source file is subject to the GPL v2, bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -71,11 +79,6 @@ abstract class ImageEntity extends AbstractEntity {
         return $this->originalName;
     }
 
-    /**
-     * @param string $originalName
-     *
-     * @return ImageEntity
-     */
     public function setOriginalName(string $originalName) : ImageEntity {
         $this->originalName = $originalName;
 
@@ -89,11 +92,6 @@ abstract class ImageEntity extends AbstractEntity {
         return $this->imageFile;
     }
 
-    /**
-     * @param File $imageFile
-     *
-     * @return ImageEntity
-     */
     public function setImageFile(File $imageFile) : ImageEntity {
         $this->imageFile = $imageFile;
 
@@ -107,11 +105,6 @@ abstract class ImageEntity extends AbstractEntity {
         return $this->thumbnailFile;
     }
 
-    /**
-     * @param File $thumbnailFile
-     *
-     * @return ImageEntity
-     */
     public function setThumbnailFile(File $thumbnailFile) : ImageEntity {
         $this->thumbnailFile = $thumbnailFile;
 
@@ -125,11 +118,6 @@ abstract class ImageEntity extends AbstractEntity {
         return $this->imageFilePath;
     }
 
-    /**
-     * @param string $imageFilePath
-     *
-     * @return ImageEntity
-     */
     public function setImageFilePath(string $imageFilePath) : ImageEntity {
         $this->imageFilePath = $imageFilePath;
 
@@ -143,11 +131,6 @@ abstract class ImageEntity extends AbstractEntity {
         return $this->thumbnailPath;
     }
 
-    /**
-     * @param string $thumbnailPath
-     *
-     * @return ImageEntity
-     */
     public function setThumbnailPath(string $thumbnailPath) : ImageEntity {
         $this->thumbnailPath = $thumbnailPath;
 
@@ -161,11 +144,6 @@ abstract class ImageEntity extends AbstractEntity {
         return $this->imageSize;
     }
 
-    /**
-     * @param int $imageSize
-     *
-     * @return ImageEntity
-     */
     public function setImageSize(int $imageSize) : ImageEntity {
         $this->imageSize = $imageSize;
 
@@ -179,11 +157,6 @@ abstract class ImageEntity extends AbstractEntity {
         return $this->imageWidth;
     }
 
-    /**
-     * @param int $imageWidth
-     *
-     * @return ImageEntity
-     */
     public function setImageWidth(int $imageWidth) : ImageEntity {
         $this->imageWidth = $imageWidth;
 
@@ -197,11 +170,6 @@ abstract class ImageEntity extends AbstractEntity {
         return $this->imageHeight;
     }
 
-    /**
-     * @param int $imageHeight
-     *
-     * @return ImageEntity
-     */
     public function setImageHeight(int $imageHeight) : ImageEntity {
         $this->imageHeight = $imageHeight;
 

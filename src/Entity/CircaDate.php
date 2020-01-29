@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * (c) 2020 Michael Joyce <mjoyce@sfu.ca>
+ * This source file is subject to the GPL v2, bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -47,6 +55,27 @@ class CircaDate extends AbstractEntity {
      */
     private $endCirca;
 
+    public function __construct() {
+        parent::__construct();
+        $this->start = null;
+        $this->startCirca = false;
+        $this->end = null;
+        $this->endCirca = false;
+    }
+
+    /**
+     * Return a string representation.
+     *
+     * @return string
+     */
+    public function __toString() {
+        if (($this->startCirca === $this->endCirca) && ($this->start === $this->end)) {
+            return ($this->startCirca ? 'c' : '') . $this->start;
+        }
+
+        return ($this->startCirca ? 'c' : '') . $this->start . '-' . ($this->endCirca ? 'c' : '') . $this->end;
+    }
+
     /**
      * Build an approximate date and return it.
      *
@@ -69,27 +98,6 @@ class CircaDate extends AbstractEntity {
         return $date;
     }
 
-    public function __construct() {
-        parent::__construct();
-        $this->start = null;
-        $this->startCirca = false;
-        $this->end = null;
-        $this->endCirca = false;
-    }
-
-    /**
-     * Return a string representation.
-     *
-     * @return string
-     */
-    public function __toString() {
-        if (($this->startCirca === $this->endCirca) && ($this->start === $this->end)) {
-            return ($this->startCirca ? 'c' : '') . $this->start;
-        }
-
-        return ($this->startCirca ? 'c' : '') . $this->start . '-' . ($this->endCirca ? 'c' : '') . $this->end;
-    }
-
     public function getValue() {
         return (string) $this;
     }
@@ -97,7 +105,7 @@ class CircaDate extends AbstractEntity {
     public function setValue($value) {
         $this->value = $value;
         $value = strtolower(preg_replace('/\s*/', '', (string) $value));
-        $matches = array();
+        $matches = [];
         if (false === strpos($value, '-')) {
             // not a range
             if (preg_match(YEAR_RE, $value, $matches)) {

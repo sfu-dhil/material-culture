@@ -1,17 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * (c) 2020 Michael Joyce <mjoyce@sfu.ca>
+ * This source file is subject to the GPL v2, bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Controller;
 
 use App\Entity\Reference;
-use App\Form\ReferenceType;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Bundle\PaginatorBundle\Definition\PaginatorAwareInterface;
 use Nines\UtilBundle\Controller\PaginatorTrait;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -26,8 +30,6 @@ class ReferenceController extends AbstractController implements PaginatorAwareIn
     /**
      * Lists all Reference entities.
      *
-     * @param Request $request
-     *
      * @return array
      *
      * @Route("/", name="reference_index", methods={"GET"})
@@ -40,15 +42,13 @@ class ReferenceController extends AbstractController implements PaginatorAwareIn
 
         $references = $this->paginator->paginate($query, $request->query->getint('page', 1), 25);
 
-        return array(
+        return [
             'references' => $references,
-        );
+        ];
     }
 
     /**
      * Finds and displays a Reference entity.
-     *
-     * @param Reference $reference
      *
      * @return array
      *
@@ -56,8 +56,8 @@ class ReferenceController extends AbstractController implements PaginatorAwareIn
      * @Template()
      */
     public function showAction(Reference $reference) {
-        return array(
+        return [
             'reference' => $reference,
-        );
+        ];
     }
 }

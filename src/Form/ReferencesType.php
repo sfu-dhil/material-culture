@@ -1,16 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * (c) 2020 Michael Joyce <mjoyce@sfu.ca>
+ * This source file is subject to the GPL v2, bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace App\Form;
 
 use App\Entity\Artefact;
-use App\Entity\Publication;
-use App\Entity\Reference;
-use phpDocumentor\Reflection\Types\Collection;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
 
 /**
  * ReferenceType form.
@@ -18,26 +22,23 @@ use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
 class ReferencesType extends AbstractType {
     /**
      * Add form fields to $builder.
-     *
-     * @param FormBuilderInterface $builder
-     * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options) : void {
-        $builder->add('references', CollectionType::class, array(
+        $builder->add('references', CollectionType::class, [
             'label' => 'References',
             'allow_add' => true,
             'allow_delete' => true,
             'prototype' => true,
             'entry_type' => ReferenceType::class,
-            'entry_options' => array(
+            'entry_options' => [
                 'label' => false,
-            ),
+            ],
             'required' => false,
-            'attr' => array(
+            'attr' => [
                 'help_block' => '',
                 'class' => 'collection collection-complex',
-            )
-        ));
+            ],
+        ]);
     }
 
     /**
@@ -45,12 +46,10 @@ class ReferencesType extends AbstractType {
      *
      * Set default, optional, and required options passed to the
      * buildForm() method via the $options parameter.
-     *
-     * @param OptionsResolver $resolver
      */
-    public function configureOptions(OptionsResolver $resolver) {
-        $resolver->setDefaults(array(
+    public function configureOptions(OptionsResolver $resolver) : void {
+        $resolver->setDefaults([
             'data_class' => Artefact::class,
-        ));
+        ]);
     }
 }
