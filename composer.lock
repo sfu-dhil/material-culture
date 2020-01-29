@@ -64,6 +64,63 @@
             "time": "2018-09-09T10:23:02+00:00"
         },
         {
+<<<<<<< HEAD
+            "name": "beberlei/doctrineextensions",
+            "version": "v1.2.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/beberlei/DoctrineExtensions.git",
+                "reference": "af72c4a136b744f1268ca8bb4da47a2f8af78f86"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/beberlei/DoctrineExtensions/zipball/af72c4a136b744f1268ca8bb4da47a2f8af78f86",
+                "reference": "af72c4a136b744f1268ca8bb4da47a2f8af78f86",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/orm": "^2.6",
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.14",
+                "nesbot/carbon": "*",
+                "phpunit/phpunit": "^7.0 || ^8.0",
+                "symfony/yaml": "^4.2",
+                "zf1/zend-date": "^1.12",
+                "zf1/zend-registry": "^1.12"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DoctrineExtensions\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Benjamin Eberlei",
+                    "email": "kontakt@beberlei.de"
+                },
+                {
+                    "name": "Steve Lacey",
+                    "email": "steve@stevelacey.net"
+                }
+            ],
+            "description": "A set of extensions to Doctrine 2 that add support for additional query functions available in MySQL and Oracle.",
+            "keywords": [
+                "database",
+                "doctrine",
+                "orm"
+            ],
+            "time": "2019-12-05T09:49:04+00:00"
+        },
+        {
+=======
+>>>>>>> first pass at the upgrade.
             "name": "doctrine/annotations",
             "version": "v1.8.0",
             "source": {
@@ -460,6 +517,32 @@
         },
         {
             "name": "doctrine/doctrine-bundle",
+<<<<<<< HEAD
+            "version": "1.12.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/DoctrineBundle.git",
+                "reference": "18fb7d271676dcb8e882adb0157ac1445c8fe89c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/18fb7d271676dcb8e882adb0157ac1445c8fe89c",
+                "reference": "18fb7d271676dcb8e882adb0157ac1445c8fe89c",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/dbal": "^2.5.12",
+                "doctrine/doctrine-cache-bundle": "~1.2",
+                "doctrine/persistence": "^1.3.3",
+                "jdorn/sql-formatter": "^1.2.16",
+                "php": "^7.1",
+                "symfony/cache": "^3.4.30|^4.3.3",
+                "symfony/config": "^3.4.30|^4.3.3",
+                "symfony/console": "^3.4.30|^4.3.3",
+                "symfony/dependency-injection": "^3.4.30|^4.3.3",
+                "symfony/doctrine-bridge": "^3.4.30|^4.3.3",
+                "symfony/framework-bundle": "^3.4.30|^4.3.3",
+=======
             "version": "2.0.7",
             "source": {
                 "type": "git",
@@ -483,6 +566,7 @@
                 "symfony/dependency-injection": "^4.3.3|^5.0",
                 "symfony/doctrine-bridge": "^4.3.7|^5.0",
                 "symfony/framework-bundle": "^3.4.30|^4.3.3|^5.0",
+>>>>>>> first pass at the upgrade.
                 "symfony/service-contracts": "^1.1.1|^2.0"
             },
             "conflict": {
@@ -493,6 +577,17 @@
                 "doctrine/coding-standard": "^6.0",
                 "doctrine/orm": "^2.6",
                 "ocramius/proxy-manager": "^2.1",
+<<<<<<< HEAD
+                "php-coveralls/php-coveralls": "^2.1",
+                "phpunit/phpunit": "^7.5",
+                "symfony/phpunit-bridge": "^4.2",
+                "symfony/property-info": "^3.4.30|^4.3.3",
+                "symfony/proxy-manager-bridge": "^3.4|^4|^5",
+                "symfony/twig-bridge": "^3.4|^4.1",
+                "symfony/validator": "^3.4.30|^4.3.3",
+                "symfony/web-profiler-bundle": "^3.4.30|^4.3.3",
+                "symfony/yaml": "^3.4.30|^4.3.3",
+=======
                 "phpunit/phpunit": "^7.5",
                 "symfony/phpunit-bridge": "^4.2",
                 "symfony/property-info": "^4.3.3|^5.0",
@@ -501,6 +596,7 @@
                 "symfony/validator": "^3.4.30|^4.3.3|^5.0",
                 "symfony/web-profiler-bundle": "^3.4.30|^4.3.3|^5.0",
                 "symfony/yaml": "^3.4.30|^4.3.3|^5.0",
+>>>>>>> first pass at the upgrade.
                 "twig/twig": "^1.34|^2.12"
             },
             "suggest": {
@@ -510,7 +606,11 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
+                    "dev-master": "1.12.x-dev"
+=======
                     "dev-master": "2.0.x-dev"
+>>>>>>> first pass at the upgrade.
                 }
             },
             "autoload": {
@@ -548,6 +648,48 @@
                 "orm",
                 "persistence"
             ],
+<<<<<<< HEAD
+            "time": "2020-01-10T12:25:22+00:00"
+        },
+        {
+            "name": "doctrine/doctrine-cache-bundle",
+            "version": "1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/DoctrineCacheBundle.git",
+                "reference": "6bee2f9b339847e8a984427353670bad4e7bdccb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/DoctrineCacheBundle/zipball/6bee2f9b339847e8a984427353670bad4e7bdccb",
+                "reference": "6bee2f9b339847e8a984427353670bad4e7bdccb",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/cache": "^1.4.2",
+                "doctrine/inflector": "^1.0",
+                "php": "^7.1",
+                "symfony/doctrine-bridge": "^3.4|^4.0"
+            },
+            "require-dev": {
+                "instaclick/coding-standard": "~1.1",
+                "instaclick/object-calisthenics-sniffs": "dev-master",
+                "instaclick/symfony2-coding-standard": "dev-remaster",
+                "phpunit/phpunit": "^7.0",
+                "predis/predis": "~0.8",
+                "satooshi/php-coveralls": "^1.0",
+                "squizlabs/php_codesniffer": "~1.5",
+                "symfony/console": "^3.4|^4.0",
+                "symfony/finder": "^3.4|^4.0",
+                "symfony/framework-bundle": "^3.4|^4.0",
+                "symfony/phpunit-bridge": "^3.4|^4.0",
+                "symfony/security-acl": "^2.8",
+                "symfony/validator": "^3.4|^4.0",
+                "symfony/yaml": "^3.4|^4.0"
+            },
+            "suggest": {
+                "symfony/security-acl": "For using this bundle to cache ACLs"
+=======
             "time": "2020-01-18T11:56:15+00:00"
         },
         {
@@ -576,11 +718,16 @@
                 "phpstan/phpstan": "^0.9.2",
                 "phpstan/phpstan-strict-rules": "^0.9",
                 "phpunit/phpunit": "^6.4|^7.0"
+>>>>>>> first pass at the upgrade.
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
+                    "dev-master": "1.4.x-dev"
+=======
                     "dev-master": "2.1.x-dev"
+>>>>>>> first pass at the upgrade.
                 }
             },
             "autoload": {
@@ -599,6 +746,81 @@
                 {
                     "name": "Fabien Potencier",
                     "email": "fabien@symfony.com"
+<<<<<<< HEAD
+                },
+                {
+                    "name": "Benjamin Eberlei",
+                    "email": "kontakt@beberlei.de"
+                },
+                {
+                    "name": "Fabio B. Silva",
+                    "email": "fabio.bat.silva@gmail.com"
+                },
+                {
+                    "name": "Guilherme Blanco",
+                    "email": "guilhermeblanco@hotmail.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                },
+                {
+                    "name": "Doctrine Project",
+                    "homepage": "http://www.doctrine-project.org/"
+                }
+            ],
+            "description": "Symfony Bundle for Doctrine Cache",
+            "homepage": "https://www.doctrine-project.org",
+            "keywords": [
+                "cache",
+                "caching"
+            ],
+            "time": "2019-11-29T11:22:01+00:00"
+        },
+        {
+            "name": "doctrine/doctrine-migrations-bundle",
+            "version": "v1.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/DoctrineMigrationsBundle.git",
+                "reference": "49fa399181db4bf4f9f725126bd1cb65c4398dce"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/DoctrineMigrationsBundle/zipball/49fa399181db4bf4f9f725126bd1cb65c4398dce",
+                "reference": "49fa399181db4bf4f9f725126bd1cb65c4398dce",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/doctrine-bundle": "~1.0",
+                "doctrine/migrations": "^1.1",
+                "php": ">=5.4.0",
+                "symfony/framework-bundle": "~2.7|~3.3|~4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8.36 || ^5.7.27 || ^7.4"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Doctrine\\Bundle\\MigrationsBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+=======
+>>>>>>> first pass at the upgrade.
                 },
                 {
                     "name": "Doctrine Project",
@@ -1262,6 +1484,142 @@
                 "validator"
             ],
             "time": "2020-01-20T21:40:59+00:00"
+<<<<<<< HEAD
+        },
+        {
+            "name": "fig/link-util",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/link-util.git",
+                "reference": "47f55860678a9e202206047bc02767556d298106"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/link-util/zipball/47f55860678a9e202206047bc02767556d298106",
+                "reference": "47f55860678a9e202206047bc02767556d298106",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0",
+                "psr/link": "~1.0@dev"
+            },
+            "provide": {
+                "psr/link-implementation": "1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.1",
+                "squizlabs/php_codesniffer": "^2.3.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Fig\\Link\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common utility implementations for HTTP links",
+            "keywords": [
+                "http",
+                "http-link",
+                "link",
+                "psr",
+                "psr-13",
+                "rest"
+            ],
+            "time": "2019-12-18T15:40:05+00:00"
+        },
+        {
+            "name": "friendsofsymfony/user-bundle",
+            "version": "v2.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
+                "reference": "1049935edd24ec305cc6cfde1875372fa9600446"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/1049935edd24ec305cc6cfde1875372fa9600446",
+                "reference": "1049935edd24ec305cc6cfde1875372fa9600446",
+                "shasum": ""
+            },
+            "require": {
+                "paragonie/random_compat": "^1 || ^2",
+                "php": "^5.5.9 || ^7.0",
+                "symfony/form": "^2.8 || ^3.0 || ^4.0",
+                "symfony/framework-bundle": "^2.8 || ^3.0 || ^4.0",
+                "symfony/security-bundle": "^2.8 || ^3.0 || ^4.0",
+                "symfony/templating": "^2.8 || ^3.0 || ^4.0",
+                "symfony/twig-bundle": "^2.8 || ^3.0 || ^4.0",
+                "symfony/validator": "^2.8 || ^3.0 || ^4.0",
+                "twig/twig": "^1.28 || ^2.0"
+            },
+            "conflict": {
+                "doctrine/doctrine-bundle": "<1.3",
+                "symfony/doctrine-bridge": "<2.7"
+            },
+            "require-dev": {
+                "doctrine/doctrine-bundle": "^1.3",
+                "friendsofphp/php-cs-fixer": "^2.2",
+                "phpunit/phpunit": "^4.8.35|^5.7.11|^6.5",
+                "swiftmailer/swiftmailer": "^4.3 || ^5.0 || ^6.0",
+                "symfony/console": "^2.8 || ^3.0 || ^4.0",
+                "symfony/phpunit-bridge": "^2.8 || ^3.0 || ^4.0",
+                "symfony/yaml": "^2.8 || ^3.0 || ^4.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "FOS\\UserBundle\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christophe Coevoet",
+                    "email": "stof@notk.org"
+                },
+                {
+                    "name": "FriendsOfSymfony Community",
+                    "homepage": "https://github.com/friendsofsymfony/FOSUserBundle/contributors"
+                },
+                {
+                    "name": "Thibault Duplessis"
+                }
+            ],
+            "description": "Symfony FOSUserBundle",
+            "homepage": "http://friendsofsymfony.github.com",
+            "keywords": [
+                "User management"
+            ],
+            "time": "2018-03-08T08:59:27+00:00"
+=======
+>>>>>>> first pass at the upgrade.
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -1705,6 +2063,18 @@
         },
         {
             "name": "knplabs/knp-paginator-bundle",
+<<<<<<< HEAD
+            "version": "v4.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/KnpLabs/KnpPaginatorBundle.git",
+                "reference": "ea6ac65818a734a9afaa05270e162506e726c184"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/ea6ac65818a734a9afaa05270e162506e726c184",
+                "reference": "ea6ac65818a734a9afaa05270e162506e726c184",
+=======
             "version": "v5.1.1",
             "source": {
                 "type": "git",
@@ -1715,6 +2085,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/086da9cd27262ba45bcaca3a6777e97068fce8de",
                 "reference": "086da9cd27262ba45bcaca3a6777e97068fce8de",
+>>>>>>> first pass at the upgrade.
                 "shasum": ""
             },
             "require": {
@@ -1770,7 +2141,11 @@
                 "paginator",
                 "symfony"
             ],
+<<<<<<< HEAD
+            "time": "2019-11-30T12:18:02+00:00"
+=======
             "time": "2020-01-21T17:00:39+00:00"
+>>>>>>> first pass at the upgrade.
         },
         {
             "name": "monolog/monolog",
@@ -2570,6 +2945,42 @@
             "time": "2020-01-04T13:00:46+00:00"
         },
         {
+<<<<<<< HEAD
+            "name": "symfony/http-client",
+            "version": "v5.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/http-client.git",
+                "reference": "20802daa0c9ad4f78da7d518a924a5666cf3aa4e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/http-client/zipball/20802daa0c9ad4f78da7d518a924a5666cf3aa4e",
+                "reference": "20802daa0c9ad4f78da7d518a924a5666cf3aa4e",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2.5",
+                "psr/log": "^1.0",
+                "symfony/http-client-contracts": "^1.1.8|^2",
+                "symfony/polyfill-php73": "^1.11",
+                "symfony/service-contracts": "^1.0|^2"
+            },
+            "provide": {
+                "php-http/async-client-implementation": "*",
+                "php-http/client-implementation": "*",
+                "psr/http-client-implementation": "1.0",
+                "symfony/http-client-implementation": "1.1"
+            },
+            "require-dev": {
+                "guzzlehttp/promises": "^1.3.1",
+                "nyholm/psr7": "^1.0",
+                "php-http/httplug": "^1.0|^2.0",
+                "psr/http-client": "^1.0",
+                "symfony/dependency-injection": "^4.4|^5.0",
+                "symfony/http-kernel": "^4.4|^5.0",
+                "symfony/process": "^4.4|^5.0"
+=======
             "name": "symfony/cache",
             "version": "v4.4.3",
             "source": {
@@ -2611,11 +3022,16 @@
                 "symfony/config": "^4.2|^5.0",
                 "symfony/dependency-injection": "^3.4|^4.1|^5.0",
                 "symfony/var-dumper": "^4.4|^5.0"
+>>>>>>> first pass at the upgrade.
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
+                    "dev-master": "5.0-dev"
+=======
                     "dev-master": "4.4-dev"
+>>>>>>> first pass at the upgrade.
                 }
             },
             "autoload": {
@@ -2642,6 +3058,26 @@
             ],
             "description": "Symfony Cache component with PSR-6, PSR-16, and tags",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+            "time": "2020-01-21T08:40:24+00:00"
+        },
+        {
+            "name": "symfony/http-client-contracts",
+            "version": "v2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/http-client-contracts.git",
+                "reference": "378868b61b85c5cac6822d4f84e26999c9f2e881"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/http-client-contracts/zipball/378868b61b85c5cac6822d4f84e26999c9f2e881",
+                "reference": "378868b61b85c5cac6822d4f84e26999c9f2e881",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2.5"
+=======
             "keywords": [
                 "caching",
                 "psr6"
@@ -2665,6 +3101,7 @@
             "require": {
                 "php": "^7.2.5",
                 "psr/cache": "^1.0"
+>>>>>>> first pass at the upgrade.
             },
             "suggest": {
                 "symfony/cache-implementation": ""
@@ -2704,6 +3141,28 @@
                 "interoperability",
                 "standards"
             ],
+<<<<<<< HEAD
+            "time": "2019-11-26T23:25:11+00:00"
+        },
+        {
+            "name": "symfony/mime",
+            "version": "v5.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/mime.git",
+                "reference": "2a3c7fee1f1a0961fa9cf360d5da553d05095e59"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/mime/zipball/2a3c7fee1f1a0961fa9cf360d5da553d05095e59",
+                "reference": "2a3c7fee1f1a0961fa9cf360d5da553d05095e59",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2.5",
+                "symfony/polyfill-intl-idn": "^1.10",
+                "symfony/polyfill-mbstring": "^1.0"
+=======
             "time": "2019-11-18T17:27:11+00:00"
         },
         {
@@ -2727,8 +3186,16 @@
             },
             "conflict": {
                 "symfony/finder": "<3.4"
+>>>>>>> first pass at the upgrade.
+            },
+            "conflict": {
+                "symfony/mailer": "<4.4"
             },
             "require-dev": {
+<<<<<<< HEAD
+                "egulias/email-validator": "^2.1.10",
+                "symfony/dependency-injection": "^4.4|^5.0"
+=======
                 "symfony/event-dispatcher": "^3.4|^4.0|^5.0",
                 "symfony/finder": "^3.4|^4.0|^5.0",
                 "symfony/messenger": "^4.1|^5.0",
@@ -2737,11 +3204,16 @@
             },
             "suggest": {
                 "symfony/yaml": "To use the yaml reference dumper"
+>>>>>>> first pass at the upgrade.
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
+                    "dev-master": "5.0-dev"
+=======
                     "dev-master": "4.4-dev"
+>>>>>>> first pass at the upgrade.
                 }
             },
             "autoload": {
@@ -2768,7 +3240,15 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+            "keywords": [
+                "mime",
+                "mime-type"
+            ],
+            "time": "2020-01-04T14:08:26+00:00"
+=======
             "time": "2020-01-04T13:00:46+00:00"
+>>>>>>> first pass at the upgrade.
         },
         {
             "name": "symfony/console",
@@ -2847,6 +3327,19 @@
             "time": "2020-01-10T21:54:01+00:00"
         },
         {
+<<<<<<< HEAD
+            "name": "symfony/polyfill-apcu",
+            "version": "v1.13.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-apcu.git",
+                "reference": "a8e961c841b9ec52927a87914f8820a1ad8f8116"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-apcu/zipball/a8e961c841b9ec52927a87914f8820a1ad8f8116",
+                "reference": "a8e961c841b9ec52927a87914f8820a1ad8f8116",
+=======
             "name": "symfony/debug",
             "version": "v4.4.3",
             "source": {
@@ -2858,6 +3351,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/debug/zipball/89c3fd5c299b940333bc6fe9f1b8db1b0912c759",
                 "reference": "89c3fd5c299b940333bc6fe9f1b8db1b0912c759",
+>>>>>>> first pass at the upgrade.
                 "shasum": ""
             },
             "require": {
@@ -2873,7 +3367,11 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
+                    "dev-master": "1.13-dev"
+=======
                     "dev-master": "4.4-dev"
+>>>>>>> first pass at the upgrade.
                 }
             },
             "autoload": {
@@ -2900,6 +3398,29 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+            "keywords": [
+                "apcu",
+                "compatibility",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "time": "2019-11-27T13:56:44+00:00"
+        },
+        {
+            "name": "symfony/polyfill-ctype",
+            "version": "v1.13.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-ctype.git",
+                "reference": "f8f0b461be3385e56d6de3dbb5a0df24c0c275e3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/f8f0b461be3385e56d6de3dbb5a0df24c0c275e3",
+                "reference": "f8f0b461be3385e56d6de3dbb5a0df24c0c275e3",
+=======
             "time": "2020-01-08T17:29:02+00:00"
         },
         {
@@ -2914,6 +3435,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/6faf589e1f6af78692aed3ab6b3c336c58d5d83c",
                 "reference": "6faf589e1f6af78692aed3ab6b3c336c58d5d83c",
+>>>>>>> first pass at the upgrade.
                 "shasum": ""
             },
             "require": {
@@ -2946,7 +3468,11 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
+                    "dev-master": "1.13-dev"
+=======
                     "dev-master": "4.4-dev"
+>>>>>>> first pass at the upgrade.
                 }
             },
             "autoload": {
@@ -2973,6 +3499,28 @@
             ],
             "description": "Symfony DependencyInjection Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+            "keywords": [
+                "compatibility",
+                "ctype",
+                "polyfill",
+                "portable"
+            ],
+            "time": "2019-11-27T13:56:44+00:00"
+        },
+        {
+            "name": "symfony/polyfill-iconv",
+            "version": "v1.13.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-iconv.git",
+                "reference": "a019efccc03f1a335af6b4f20c30f5ea8060be36"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-iconv/zipball/a019efccc03f1a335af6b4f20c30f5ea8060be36",
+                "reference": "a019efccc03f1a335af6b4f20c30f5ea8060be36",
+=======
             "time": "2020-01-21T07:39:36+00:00"
         },
         {
@@ -2987,6 +3535,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/doctrine-bridge/zipball/0755dfc0a9815e5a5e4050e2a671ccad9a8bfffa",
                 "reference": "0755dfc0a9815e5a5e4050e2a671ccad9a8bfffa",
+>>>>>>> first pass at the upgrade.
                 "shasum": ""
             },
             "require": {
@@ -3040,7 +3589,11 @@
             "type": "symfony-bridge",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
+                    "dev-master": "1.13-dev"
+=======
                     "dev-master": "4.4-dev"
+>>>>>>> first pass at the upgrade.
                 }
             },
             "autoload": {
@@ -3067,6 +3620,29 @@
             ],
             "description": "Symfony Doctrine Bridge",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+            "keywords": [
+                "compatibility",
+                "iconv",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "time": "2019-11-27T13:56:44+00:00"
+        },
+        {
+            "name": "symfony/polyfill-intl-icu",
+            "version": "v1.13.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-intl-icu.git",
+                "reference": "b3dffd68afa61ca70f2327f2dd9bbeb6aa53d70b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-icu/zipball/b3dffd68afa61ca70f2327f2dd9bbeb6aa53d70b",
+                "reference": "b3dffd68afa61ca70f2327f2dd9bbeb6aa53d70b",
+=======
             "time": "2020-01-04T13:00:46+00:00"
         },
         {
@@ -3081,6 +3657,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/dotenv/zipball/b74a1638f53e3c65e4bbfc2a03c23fdc400fd243",
                 "reference": "b74a1638f53e3c65e4bbfc2a03c23fdc400fd243",
+>>>>>>> first pass at the upgrade.
                 "shasum": ""
             },
             "require": {
@@ -3092,7 +3669,11 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
+                    "dev-master": "1.13-dev"
+=======
                     "dev-master": "4.4-dev"
+>>>>>>> first pass at the upgrade.
                 }
             },
             "autoload": {
@@ -3124,6 +3705,22 @@
                 "env",
                 "environment"
             ],
+<<<<<<< HEAD
+            "time": "2019-11-27T13:56:44+00:00"
+        },
+        {
+            "name": "symfony/polyfill-intl-idn",
+            "version": "v1.13.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-intl-idn.git",
+                "reference": "6f9c239e61e1b0c9229a28ff89a812dc449c3d46"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-idn/zipball/6f9c239e61e1b0c9229a28ff89a812dc449c3d46",
+                "reference": "6f9c239e61e1b0c9229a28ff89a812dc449c3d46",
+=======
             "time": "2020-01-08T17:29:02+00:00"
         },
         {
@@ -3138,6 +3735,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/error-handler/zipball/a59789092e40ad08465dc2cdc55651be503d0d5a",
                 "reference": "a59789092e40ad08465dc2cdc55651be503d0d5a",
+>>>>>>> first pass at the upgrade.
                 "shasum": ""
             },
             "require": {
@@ -3153,7 +3751,11 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
+                    "dev-master": "1.13-dev"
+=======
                     "dev-master": "4.4-dev"
+>>>>>>> first pass at the upgrade.
                 }
             },
             "autoload": {
@@ -3180,6 +3782,30 @@
             ],
             "description": "Symfony ErrorHandler Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+            "keywords": [
+                "compatibility",
+                "idn",
+                "intl",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "time": "2019-11-27T13:56:44+00:00"
+        },
+        {
+            "name": "symfony/polyfill-mbstring",
+            "version": "v1.13.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-mbstring.git",
+                "reference": "7b4aab9743c30be783b73de055d24a39cf4b954f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/7b4aab9743c30be783b73de055d24a39cf4b954f",
+                "reference": "7b4aab9743c30be783b73de055d24a39cf4b954f",
+=======
             "time": "2020-01-08T17:29:02+00:00"
         },
         {
@@ -3194,6 +3820,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/9e3de195e5bc301704dd6915df55892f6dfc208b",
                 "reference": "9e3de195e5bc301704dd6915df55892f6dfc208b",
+>>>>>>> first pass at the upgrade.
                 "shasum": ""
             },
             "require": {
@@ -3223,7 +3850,11 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
+                    "dev-master": "1.13-dev"
+=======
                     "dev-master": "4.4-dev"
+>>>>>>> first pass at the upgrade.
                 }
             },
             "autoload": {
@@ -3250,6 +3881,29 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+            "keywords": [
+                "compatibility",
+                "mbstring",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "time": "2019-11-27T14:18:11+00:00"
+        },
+        {
+            "name": "symfony/polyfill-php56",
+            "version": "v1.13.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-php56.git",
+                "reference": "53dd1cdf3cb986893ccf2b96665b25b3abb384f4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-php56/zipball/53dd1cdf3cb986893ccf2b96665b25b3abb384f4",
+                "reference": "53dd1cdf3cb986893ccf2b96665b25b3abb384f4",
+=======
             "time": "2020-01-10T21:54:01+00:00"
         },
         {
@@ -3264,6 +3918,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/event-dispatcher-contracts/zipball/c43ab685673fb6c8d84220c77897b1d6cdbe1d18",
                 "reference": "c43ab685673fb6c8d84220c77897b1d6cdbe1d18",
+>>>>>>> first pass at the upgrade.
                 "shasum": ""
             },
             "require": {
@@ -3276,7 +3931,11 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
+                    "dev-master": "1.13-dev"
+=======
                     "dev-master": "1.1-dev"
+>>>>>>> first pass at the upgrade.
                 }
             },
             "autoload": {
@@ -3308,6 +3967,22 @@
                 "interoperability",
                 "standards"
             ],
+<<<<<<< HEAD
+            "time": "2019-11-27T13:56:44+00:00"
+        },
+        {
+            "name": "symfony/polyfill-php70",
+            "version": "v1.13.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-php70.git",
+                "reference": "af23c7bb26a73b850840823662dda371484926c4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-php70/zipball/af23c7bb26a73b850840823662dda371484926c4",
+                "reference": "af23c7bb26a73b850840823662dda371484926c4",
+=======
             "time": "2019-09-17T09:54:03+00:00"
         },
         {
@@ -3322,6 +3997,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/expression-language/zipball/8b145496d7e2e7103b1a1b8f1fce81c6e084b380",
                 "reference": "8b145496d7e2e7103b1a1b8f1fce81c6e084b380",
+>>>>>>> first pass at the upgrade.
                 "shasum": ""
             },
             "require": {
@@ -3332,7 +4008,11 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
+                    "dev-master": "1.13-dev"
+=======
                     "dev-master": "4.4-dev"
+>>>>>>> first pass at the upgrade.
                 }
             },
             "autoload": {
@@ -3359,6 +4039,28 @@
             ],
             "description": "Symfony ExpressionLanguage Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+            "keywords": [
+                "compatibility",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "time": "2019-11-27T13:56:44+00:00"
+        },
+        {
+            "name": "symfony/polyfill-php72",
+            "version": "v1.13.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-php72.git",
+                "reference": "66fea50f6cb37a35eea048d75a7d99a45b586038"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-php72/zipball/66fea50f6cb37a35eea048d75a7d99a45b586038",
+                "reference": "66fea50f6cb37a35eea048d75a7d99a45b586038",
+=======
             "time": "2020-01-04T13:00:46+00:00"
         },
         {
@@ -3373,6 +4075,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/filesystem/zipball/266c9540b475f26122b61ef8b23dd9198f5d1cfd",
                 "reference": "266c9540b475f26122b61ef8b23dd9198f5d1cfd",
+>>>>>>> first pass at the upgrade.
                 "shasum": ""
             },
             "require": {
@@ -3382,7 +4085,11 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
+                    "dev-master": "1.13-dev"
+=======
                     "dev-master": "4.4-dev"
+>>>>>>> first pass at the upgrade.
                 }
             },
             "autoload": {
@@ -3409,6 +4116,28 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+            "keywords": [
+                "compatibility",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "time": "2019-11-27T13:56:44+00:00"
+        },
+        {
+            "name": "symfony/polyfill-php73",
+            "version": "v1.13.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-php73.git",
+                "reference": "4b0e2222c55a25b4541305a053013d5647d3a25f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-php73/zipball/4b0e2222c55a25b4541305a053013d5647d3a25f",
+                "reference": "4b0e2222c55a25b4541305a053013d5647d3a25f",
+=======
             "time": "2020-01-21T08:20:44+00:00"
         },
         {
@@ -3423,6 +4152,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/finder/zipball/3a50be43515590faf812fbd7708200aabc327ec3",
                 "reference": "3a50be43515590faf812fbd7708200aabc327ec3",
+>>>>>>> first pass at the upgrade.
                 "shasum": ""
             },
             "require": {
@@ -3431,7 +4161,11 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
+                    "dev-master": "1.13-dev"
+=======
                     "dev-master": "4.4-dev"
+>>>>>>> first pass at the upgrade.
                 }
             },
             "autoload": {
@@ -3458,6 +4192,28 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+            "keywords": [
+                "compatibility",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "time": "2019-11-27T16:25:15+00:00"
+        },
+        {
+            "name": "symfony/polyfill-util",
+            "version": "v1.13.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-util.git",
+                "reference": "964a67f293b66b95883a5ed918a65354fcd2258f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-util/zipball/964a67f293b66b95883a5ed918a65354fcd2258f",
+                "reference": "964a67f293b66b95883a5ed918a65354fcd2258f",
+=======
             "time": "2020-01-04T13:00:46+00:00"
         },
         {
@@ -3472,6 +4228,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/flex/zipball/c497c0c77cb9018cccd9c092832ebf9826612f92",
                 "reference": "c497c0c77cb9018cccd9c092832ebf9826612f92",
+>>>>>>> first pass at the upgrade.
                 "shasum": ""
             },
             "require": {
@@ -3487,9 +4244,14 @@
             "type": "composer-plugin",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
+                    "dev-master": "1.13-dev"
+                }
+=======
                     "dev-master": "1.5-dev"
                 },
                 "class": "Symfony\\Flex\\Flex"
+>>>>>>> first pass at the upgrade.
             },
             "autoload": {
                 "psr-4": {
@@ -3506,8 +4268,78 @@
                     "email": "fabien.potencier@gmail.com"
                 }
             ],
+<<<<<<< HEAD
+            "description": "Symfony utilities for portability of PHP codes",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compat",
+                "compatibility",
+                "polyfill",
+                "shim"
+            ],
+            "time": "2019-11-27T13:56:44+00:00"
+        },
+        {
+            "name": "symfony/service-contracts",
+            "version": "v2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/service-contracts.git",
+                "reference": "144c5e51266b281231e947b51223ba14acf1a749"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/service-contracts/zipball/144c5e51266b281231e947b51223ba14acf1a749",
+                "reference": "144c5e51266b281231e947b51223ba14acf1a749",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2.5",
+                "psr/container": "^1.0"
+            },
+            "suggest": {
+                "symfony/service-implementation": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Contracts\\Service\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Generic abstractions related to writing services",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "abstractions",
+                "contracts",
+                "decoupling",
+                "interfaces",
+                "interoperability",
+                "standards"
+            ],
+            "time": "2019-11-18T17:27:11+00:00"
+=======
             "description": "Composer plugin for Symfony",
             "time": "2020-01-27T15:38:49+00:00"
+>>>>>>> first pass at the upgrade.
         },
         {
             "name": "symfony/form",
@@ -3594,6 +4426,19 @@
             "time": "2020-01-04T13:00:46+00:00"
         },
         {
+<<<<<<< HEAD
+            "name": "symfony/symfony",
+            "version": "v3.4.37",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/symfony.git",
+                "reference": "1bd873459b36cf505c7b515ba6e0e2ee40890b8a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/1bd873459b36cf505c7b515ba6e0e2ee40890b8a",
+                "reference": "1bd873459b36cf505c7b515ba6e0e2ee40890b8a",
+=======
             "name": "symfony/framework-bundle",
             "version": "v4.4.3",
             "source": {
@@ -3605,6 +4450,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/framework-bundle/zipball/427849319016364de98cf1e03f5c52fd77ec5a91",
                 "reference": "427849319016364de98cf1e03f5c52fd77ec5a91",
+>>>>>>> first pass at the upgrade.
                 "shasum": ""
             },
             "require": {
@@ -3622,6 +4468,71 @@
                 "symfony/routing": "^4.4|^5.0"
             },
             "conflict": {
+<<<<<<< HEAD
+                "monolog/monolog": ">=2",
+                "phpdocumentor/reflection-docblock": "<3.0||>=3.2.0,<3.2.2",
+                "phpdocumentor/type-resolver": "<0.3.0",
+                "phpunit/phpunit": "<4.8.35|<5.4.3,>=5.0"
+            },
+            "provide": {
+                "psr/cache-implementation": "1.0",
+                "psr/container-implementation": "1.0",
+                "psr/log-implementation": "1.0",
+                "psr/simple-cache-implementation": "1.0"
+            },
+            "replace": {
+                "symfony/asset": "self.version",
+                "symfony/browser-kit": "self.version",
+                "symfony/cache": "self.version",
+                "symfony/class-loader": "self.version",
+                "symfony/config": "self.version",
+                "symfony/console": "self.version",
+                "symfony/css-selector": "self.version",
+                "symfony/debug": "self.version",
+                "symfony/debug-bundle": "self.version",
+                "symfony/dependency-injection": "self.version",
+                "symfony/doctrine-bridge": "self.version",
+                "symfony/dom-crawler": "self.version",
+                "symfony/dotenv": "self.version",
+                "symfony/event-dispatcher": "self.version",
+                "symfony/expression-language": "self.version",
+                "symfony/filesystem": "self.version",
+                "symfony/finder": "self.version",
+                "symfony/form": "self.version",
+                "symfony/framework-bundle": "self.version",
+                "symfony/http-foundation": "self.version",
+                "symfony/http-kernel": "self.version",
+                "symfony/inflector": "self.version",
+                "symfony/intl": "self.version",
+                "symfony/ldap": "self.version",
+                "symfony/lock": "self.version",
+                "symfony/monolog-bridge": "self.version",
+                "symfony/options-resolver": "self.version",
+                "symfony/process": "self.version",
+                "symfony/property-access": "self.version",
+                "symfony/property-info": "self.version",
+                "symfony/proxy-manager-bridge": "self.version",
+                "symfony/routing": "self.version",
+                "symfony/security": "self.version",
+                "symfony/security-bundle": "self.version",
+                "symfony/security-core": "self.version",
+                "symfony/security-csrf": "self.version",
+                "symfony/security-guard": "self.version",
+                "symfony/security-http": "self.version",
+                "symfony/serializer": "self.version",
+                "symfony/stopwatch": "self.version",
+                "symfony/templating": "self.version",
+                "symfony/translation": "self.version",
+                "symfony/twig-bridge": "self.version",
+                "symfony/twig-bundle": "self.version",
+                "symfony/validator": "self.version",
+                "symfony/var-dumper": "self.version",
+                "symfony/web-link": "self.version",
+                "symfony/web-profiler-bundle": "self.version",
+                "symfony/web-server-bundle": "self.version",
+                "symfony/workflow": "self.version",
+                "symfony/yaml": "self.version"
+=======
                 "doctrine/persistence": "<1.3",
                 "phpdocumentor/reflection-docblock": "<3.0",
                 "phpdocumentor/type-resolver": "<0.2.1",
@@ -3647,6 +4558,7 @@
                 "symfony/validator": "<4.4",
                 "symfony/web-profiler-bundle": "<4.4",
                 "symfony/workflow": "<4.3.6"
+>>>>>>> first pass at the upgrade.
             },
             "require-dev": {
                 "doctrine/annotations": "~1.7",
@@ -3722,7 +4634,14 @@
             ],
             "description": "Symfony FrameworkBundle",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+            "keywords": [
+                "framework"
+            ],
+            "time": "2020-01-21T12:30:09+00:00"
+=======
             "time": "2020-01-21T08:30:33+00:00"
+>>>>>>> first pass at the upgrade.
         },
         {
             "name": "symfony/http-client",
@@ -3850,6 +4769,19 @@
             "time": "2019-11-26T23:25:11+00:00"
         },
         {
+<<<<<<< HEAD
+            "name": "twig/twig",
+            "version": "v2.12.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twigphp/Twig.git",
+                "reference": "97b6311585cae66a26833b14b33785f5797f7d39"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/97b6311585cae66a26833b14b33785f5797f7d39",
+                "reference": "97b6311585cae66a26833b14b33785f5797f7d39",
+=======
             "name": "symfony/http-foundation",
             "version": "v4.4.3",
             "source": {
@@ -3861,6 +4793,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/http-foundation/zipball/c33998709f3fe9b8e27e0277535b07fbf6fde37a",
                 "reference": "c33998709f3fe9b8e27e0277535b07fbf6fde37a",
+>>>>>>> first pass at the upgrade.
                 "shasum": ""
             },
             "require": {
@@ -5261,6 +6194,9 @@
             },
             "require-dev": {
                 "psr/container": "^1.0",
+<<<<<<< HEAD
+                "symfony/phpunit-bridge": "^4.4|^5.0"
+=======
                 "psr/log": "~1.0",
                 "symfony/event-dispatcher": "^4.3",
                 "symfony/expression-language": "^3.4|^4.0|^5.0",
@@ -5275,6 +6211,7 @@
                 "symfony/http-foundation": "",
                 "symfony/ldap": "For using LDAP integration",
                 "symfony/validator": "For using the user password constraint"
+>>>>>>> first pass at the upgrade.
             },
             "type": "library",
             "extra": {
@@ -5300,6 +6237,10 @@
                     "email": "fabien@symfony.com"
                 },
                 {
+<<<<<<< HEAD
+                    "name": "Twig Team",
+                    "role": "Contributors"
+=======
                     "name": "Symfony Community",
                     "homepage": "https://symfony.com/contributors"
                 }
@@ -5344,6 +6285,7 @@
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\Security\\Csrf\\": ""
+>>>>>>> first pass at the upgrade.
                 },
                 "exclude-from-classmap": [
                     "/Tests/"
@@ -5363,15 +6305,33 @@
                     "homepage": "https://symfony.com/contributors"
                 }
             ],
+<<<<<<< HEAD
+            "description": "Twig, the flexible, fast, and secure template language for PHP",
+            "homepage": "https://twig.symfony.com",
+            "keywords": [
+                "templating"
+            ],
+            "time": "2019-12-28T07:12:03+00:00"
+=======
             "description": "Symfony Security Component - CSRF Library",
             "homepage": "https://symfony.com",
             "time": "2020-01-04T13:00:46+00:00"
+>>>>>>> first pass at the upgrade.
         },
         {
             "name": "symfony/security-guard",
             "version": "v4.4.3",
             "source": {
                 "type": "git",
+<<<<<<< HEAD
+                "url": "https://github.com/ubermichael/nines-bundles.git",
+                "reference": "ee4f87075dc46e41df31b83401328f67cc09d49b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ubermichael/nines-bundles/zipball/ee4f87075dc46e41df31b83401328f67cc09d49b",
+                "reference": "ee4f87075dc46e41df31b83401328f67cc09d49b",
+=======
                 "url": "https://github.com/symfony/security-guard.git",
                 "reference": "f457f2d6d7392259b1ede1d036a26b6c1fa20202"
             },
@@ -5379,6 +6339,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/security-guard/zipball/f457f2d6d7392259b1ede1d036a26b6c1fa20202",
                 "reference": "f457f2d6d7392259b1ede1d036a26b6c1fa20202",
+>>>>>>> first pass at the upgrade.
                 "shasum": ""
             },
             "require": {
@@ -5417,6 +6378,27 @@
                     "homepage": "https://symfony.com/contributors"
                 }
             ],
+<<<<<<< HEAD
+            "description": "Some useful bundles.",
+            "support": {
+                "source": "https://github.com/ubermichael/nines-bundles/tree/2.x",
+                "issues": "https://github.com/ubermichael/nines-bundles/issues"
+            },
+            "time": "2020-01-03T21:51:39+00:00"
+        },
+        {
+            "name": "zendframework/zend-code",
+            "version": "3.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/zend-code.git",
+                "reference": "268040548f92c2bfcba164421c1add2ba43abaaa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/zend-code/zipball/268040548f92c2bfcba164421c1add2ba43abaaa",
+                "reference": "268040548f92c2bfcba164421c1add2ba43abaaa",
+=======
             "description": "Symfony Security Component - Guard",
             "homepage": "https://symfony.com",
             "time": "2020-01-08T17:29:02+00:00"
@@ -5433,6 +6415,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/security-http/zipball/3a872eac6be8e446592f72bddcbd293d831a1e1a",
                 "reference": "3a872eac6be8e446592f72bddcbd293d831a1e1a",
+>>>>>>> first pass at the upgrade.
                 "shasum": ""
             },
             "require": {
@@ -5446,10 +6429,21 @@
                 "symfony/event-dispatcher": ">=5",
                 "symfony/security-csrf": "<3.4.11|~4.0,<4.0.11"
             },
+            "conflict": {
+                "phpspec/prophecy": "<1.9.0"
+            },
             "require-dev": {
+<<<<<<< HEAD
+                "doctrine/annotations": "^1.7",
+                "ext-phar": "*",
+                "phpunit/phpunit": "^7.5.16 || ^8.4",
+                "zendframework/zend-coding-standard": "^1.0",
+                "zendframework/zend-stdlib": "^2.7 || ^3.0"
+=======
                 "psr/log": "~1.0",
                 "symfony/routing": "^3.4|^4.0|^5.0",
                 "symfony/security-csrf": "^3.4.11|^4.0.11|^5.0"
+>>>>>>> first pass at the upgrade.
             },
             "suggest": {
                 "symfony/routing": "For using the HttpUtils class to create sub-requests, redirect the user, and match URLs",
@@ -5458,7 +6452,13 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
+                    "dev-master": "3.4.x-dev",
+                    "dev-develop": "3.5.x-dev",
+                    "dev-dev-4.0": "4.0.x-dev"
+=======
                     "dev-master": "4.4-dev"
+>>>>>>> first pass at the upgrade.
                 }
             },
             "autoload": {
@@ -5483,9 +6483,14 @@
                     "homepage": "https://symfony.com/contributors"
                 }
             ],
+<<<<<<< HEAD
+            "abandoned": "laminas/laminas-code",
+            "time": "2019-12-10T19:21:15+00:00"
+=======
             "description": "Symfony Security Component - HTTP Integration",
             "homepage": "https://symfony.com",
             "time": "2020-01-21T11:12:16+00:00"
+>>>>>>> first pass at the upgrade.
         },
         {
             "name": "symfony/serializer",
@@ -5595,6 +6600,42 @@
             "license": [
                 "MIT"
             ],
+<<<<<<< HEAD
+            "abandoned": "laminas/laminas-eventmanager",
+            "time": "2018-04-25T15:33:34+00:00"
+        }
+    ],
+    "packages-dev": [
+        {
+            "name": "doctrine/data-fixtures",
+            "version": "1.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/data-fixtures.git",
+                "reference": "39e9777c9089351a468f780b01cffa3cb0a42907"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/39e9777c9089351a468f780b01cffa3cb0a42907",
+                "reference": "39e9777c9089351a468f780b01cffa3cb0a42907",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/common": "^2.11",
+                "doctrine/persistence": "^1.3.3",
+                "php": "^7.2"
+            },
+            "conflict": {
+                "doctrine/phpcr-odm": "<1.3.0"
+            },
+            "require-dev": {
+                "alcaeus/mongo-php-adapter": "^1.1",
+                "doctrine/coding-standard": "^6.0",
+                "doctrine/dbal": "^2.5.4",
+                "doctrine/mongodb-odm": "^1.3.0",
+                "doctrine/orm": "^2.7.0",
+                "phpunit/phpunit": "^7.0"
+=======
             "description": "A pack for the Symfony serializer",
             "time": "2018-12-10T12:14:14+00:00"
         },
@@ -5615,6 +6656,7 @@
             "require": {
                 "php": "^7.2.5",
                 "psr/container": "^1.0"
+>>>>>>> first pass at the upgrade.
             },
             "suggest": {
                 "symfony/service-implementation": ""
@@ -5654,7 +6696,11 @@
                 "interoperability",
                 "standards"
             ],
+<<<<<<< HEAD
+            "time": "2020-01-17T11:11:28+00:00"
+=======
             "time": "2019-11-18T17:27:11+00:00"
+>>>>>>> first pass at the upgrade.
         },
         {
             "name": "symfony/stopwatch",
@@ -5707,6 +6753,14 @@
             "time": "2020-01-04T13:00:46+00:00"
         },
         {
+<<<<<<< HEAD
+            "name": "drupal/coder",
+            "version": "8.3.7",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/coder.git",
+                "reference": "c11c2957653bdbfd68adc851692d094b43d39221"
+=======
             "name": "symfony/string",
             "version": "v5.0.3",
             "source": {
@@ -5719,6 +6773,7 @@
                 "url": "https://api.github.com/repos/symfony/string/zipball/978261d3c4ffd64f99dea0e78b026690a67fe7fe",
                 "reference": "978261d3c4ffd64f99dea0e78b026690a67fe7fe",
                 "shasum": ""
+>>>>>>> first pass at the upgrade.
             },
             "require": {
                 "php": "^7.2.5",
@@ -5727,11 +6782,16 @@
                 "symfony/polyfill-mbstring": "~1.0",
                 "symfony/translation-contracts": "^1.1|^2"
             },
+<<<<<<< HEAD
+            "require-dev": {
+                "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0 || ^7.0"
+=======
             "type": "library",
             "extra": {
                 "branch-alias": {
                     "dev-master": "5.0-dev"
                 }
+>>>>>>> first pass at the upgrade.
             },
             "autoload": {
                 "psr-4": {
@@ -5768,6 +6828,30 @@
                 "utf-8",
                 "utf8"
             ],
+<<<<<<< HEAD
+            "time": "2019-12-07T16:00:28+00:00"
+        },
+        {
+            "name": "joshtronic/php-loremipsum",
+            "version": "1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/joshtronic/php-loremipsum.git",
+                "reference": "cdb2e05cf4f48822920e5fb85c0983a155109885"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/joshtronic/php-loremipsum/zipball/cdb2e05cf4f48822920e5fb85c0983a155109885",
+                "reference": "cdb2e05cf4f48822920e5fb85c0983a155109885",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": ">=1",
+                "phpunit/phpunit": ">=4"
+=======
             "time": "2020-01-14T17:54:59+00:00"
         },
         {
@@ -5813,6 +6897,7 @@
                 "psr/log-implementation": "To use logging capability in translator",
                 "symfony/config": "",
                 "symfony/yaml": ""
+>>>>>>> first pass at the upgrade.
             },
             "type": "library",
             "extra": {
@@ -5842,9 +6927,20 @@
                     "homepage": "https://symfony.com/contributors"
                 }
             ],
+<<<<<<< HEAD
+            "description": "Lorem ipsum generator in PHP without dependencies",
+            "homepage": "https://github.com/joshtronic/php-loremipsum",
+            "keywords": [
+                "generator",
+                "ipsum",
+                "lorem"
+            ],
+            "time": "2020-01-10T03:49:13+00:00"
+=======
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
             "time": "2020-01-15T13:29:06+00:00"
+>>>>>>> first pass at the upgrade.
         },
         {
             "name": "symfony/translation-contracts",
@@ -5904,6 +7000,19 @@
             "time": "2019-11-18T17:27:11+00:00"
         },
         {
+<<<<<<< HEAD
+            "name": "myclabs/deep-copy",
+            "version": "1.9.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/myclabs/DeepCopy.git",
+                "reference": "b2c28789e80a97badd14145fda39b545d83ca3ef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/b2c28789e80a97badd14145fda39b545d83ca3ef",
+                "reference": "b2c28789e80a97badd14145fda39b545d83ca3ef",
+=======
             "name": "symfony/twig-bridge",
             "version": "v4.4.3",
             "source": {
@@ -5915,6 +7024,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/twig-bridge/zipball/d5f3e83e2cc2fcdd60c351b5be1beb9533cf698c",
                 "reference": "d5f3e83e2cc2fcdd60c351b5be1beb9533cf698c",
+>>>>>>> first pass at the upgrade.
                 "shasum": ""
             },
             "require": {
@@ -6002,9 +7112,13 @@
                     "homepage": "https://symfony.com/contributors"
                 }
             ],
+<<<<<<< HEAD
+            "time": "2020-01-17T21:11:47+00:00"
+=======
             "description": "Symfony Twig Bridge",
             "homepage": "https://symfony.com",
             "time": "2020-01-08T17:29:02+00:00"
+>>>>>>> first pass at the upgrade.
         },
         {
             "name": "symfony/twig-bundle",
@@ -6202,6 +7316,19 @@
             "time": "2020-01-21T08:20:44+00:00"
         },
         {
+<<<<<<< HEAD
+            "name": "phpdocumentor/reflection-docblock",
+            "version": "4.3.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
+                "reference": "da3fd972d6bafd628114f7e7e036f45944b62e9c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/da3fd972d6bafd628114f7e7e036f45944b62e9c",
+                "reference": "da3fd972d6bafd628114f7e7e036f45944b62e9c",
+=======
             "name": "symfony/var-dumper",
             "version": "v4.4.3",
             "source": {
@@ -6213,6 +7340,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/var-dumper/zipball/7cfa470bc3b1887a7b2a47c0a702a84ad614fa92",
                 "reference": "7cfa470bc3b1887a7b2a47c0a702a84ad614fa92",
+>>>>>>> first pass at the upgrade.
                 "shasum": ""
             },
             "require": {
@@ -6225,6 +7353,12 @@
                 "symfony/console": "<3.4"
             },
             "require-dev": {
+<<<<<<< HEAD
+                "doctrine/instantiator": "^1.0.5",
+                "mockery/mockery": "^1.0",
+                "phpdocumentor/type-resolver": "0.4.*",
+                "phpunit/phpunit": "^6.4"
+=======
                 "ext-iconv": "*",
                 "symfony/console": "^3.4|^4.0|^5.0",
                 "symfony/process": "^4.4|^5.0",
@@ -6234,6 +7368,7 @@
                 "ext-iconv": "To convert non-UTF-8 strings to UTF-8 (or symfony/polyfill-iconv in case ext-iconv cannot be used).",
                 "ext-intl": "To show region name in time zone dump",
                 "symfony/console": "To use the ServerDumpCommand and/or the bin/var-dump-server script"
+>>>>>>> first pass at the upgrade.
             },
             "bin": [
                 "Resources/bin/var-dump-server"
@@ -6269,6 +7404,10 @@
                     "homepage": "https://symfony.com/contributors"
                 }
             ],
+<<<<<<< HEAD
+            "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
+            "time": "2019-12-28T18:55:12+00:00"
+=======
             "description": "Symfony mechanism for exploring and dumping PHP variables",
             "homepage": "https://symfony.com",
             "keywords": [
@@ -6276,6 +7415,7 @@
                 "dump"
             ],
             "time": "2020-01-04T13:00:46+00:00"
+>>>>>>> first pass at the upgrade.
         },
         {
             "name": "symfony/var-exporter",
@@ -6338,6 +7478,31 @@
             "time": "2020-01-04T13:00:46+00:00"
         },
         {
+<<<<<<< HEAD
+            "name": "phpspec/prophecy",
+            "version": "v1.10.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpspec/prophecy.git",
+                "reference": "b4400efc9d206e83138e2bb97ed7f5b14b831cd9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/b4400efc9d206e83138e2bb97ed7f5b14b831cd9",
+                "reference": "b4400efc9d206e83138e2bb97ed7f5b14b831cd9",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/instantiator": "^1.0.2",
+                "php": "^5.3|^7.0",
+                "phpdocumentor/reflection-docblock": "^2.0|^3.0.2|^4.0|^5.0",
+                "sebastian/comparator": "^1.2.3|^2.0|^3.0|^4.0",
+                "sebastian/recursion-context": "^1.0|^2.0|^3.0|^4.0"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "^2.5 || ^3.2",
+                "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.5 || ^7.1"
+=======
             "name": "symfony/web-link",
             "version": "v4.4.3",
             "source": {
@@ -6368,11 +7533,16 @@
             },
             "suggest": {
                 "symfony/http-kernel": ""
+>>>>>>> first pass at the upgrade.
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
+                    "dev-master": "1.10.x-dev"
+=======
                     "dev-master": "4.4-dev"
+>>>>>>> first pass at the upgrade.
                 }
             },
             "autoload": {
@@ -6400,6 +7570,29 @@
             "description": "Symfony WebLink Component",
             "homepage": "https://symfony.com",
             "keywords": [
+<<<<<<< HEAD
+                "Double",
+                "Dummy",
+                "fake",
+                "mock",
+                "spy",
+                "stub"
+            ],
+            "time": "2020-01-20T15:57:02+00:00"
+        },
+        {
+            "name": "phpunit/php-code-coverage",
+            "version": "7.0.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
+                "reference": "f1884187926fbb755a9aaf0b3836ad3165b478bf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/f1884187926fbb755a9aaf0b3836ad3165b478bf",
+                "reference": "f1884187926fbb755a9aaf0b3836ad3165b478bf",
+=======
                 "dns-prefetch",
                 "http",
                 "http2",
@@ -6425,6 +7618,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/yaml/zipball/cd014e425b3668220adb865f53bff64b3ad21767",
                 "reference": "cd014e425b3668220adb865f53bff64b3ad21767",
+>>>>>>> first pass at the upgrade.
                 "shasum": ""
             },
             "require": {
@@ -6468,9 +7662,20 @@
                     "homepage": "https://symfony.com/contributors"
                 }
             ],
+<<<<<<< HEAD
+            "description": "Library that provides collection, processing, and rendering functionality for PHP code coverage information.",
+            "homepage": "https://github.com/sebastianbergmann/php-code-coverage",
+            "keywords": [
+                "coverage",
+                "testing",
+                "xunit"
+            ],
+            "time": "2019-11-20T13:55:58+00:00"
+=======
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
             "time": "2020-01-21T11:12:16+00:00"
+>>>>>>> first pass at the upgrade.
         },
         {
             "name": "tetranz/select2entity-bundle",
@@ -6702,6 +7907,19 @@
             "time": "2019-12-28T07:17:28+00:00"
         },
         {
+<<<<<<< HEAD
+            "name": "phpunit/phpunit",
+            "version": "8.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/phpunit.git",
+                "reference": "018b6ac3c8ab20916db85fa91bf6465acb64d1e0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/018b6ac3c8ab20916db85fa91bf6465acb64d1e0",
+                "reference": "018b6ac3c8ab20916db85fa91bf6465acb64d1e0",
+=======
             "name": "ubermichael/nines",
             "version": "4.x-dev",
             "source": {
@@ -6713,6 +7931,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/ubermichael/nines-bundles/zipball/f962ab6fa6781a00ea9a72b6a51800a954885d83",
                 "reference": "f962ab6fa6781a00ea9a72b6a51800a954885d83",
+>>>>>>> first pass at the upgrade.
                 "shasum": ""
             },
             "require": {
@@ -6731,6 +7950,14 @@
                 "symfony/phpunit-bridge": "^5.0"
             },
             "type": "library",
+<<<<<<< HEAD
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "8.5-dev"
+                }
+            },
+=======
+>>>>>>> first pass at the upgrade.
             "autoload": {
                 "psr-4": {
                     "Nines\\BlogBundle\\": "BlogBundle",
@@ -6750,12 +7977,23 @@
                     "email": "ubermichael@gmail.com"
                 }
             ],
+<<<<<<< HEAD
+            "description": "The PHP Unit Testing framework.",
+            "homepage": "https://phpunit.de/",
+            "keywords": [
+                "phpunit",
+                "testing",
+                "xunit"
+            ],
+            "time": "2020-01-08T08:49:49+00:00"
+=======
             "description": "Some useful bundles.",
             "support": {
                 "source": "https://github.com/ubermichael/nines-bundles/tree/4.x",
                 "issues": "https://github.com/ubermichael/nines-bundles/issues"
             },
             "time": "2020-01-27T23:45:02+00:00"
+>>>>>>> first pass at the upgrade.
         },
         {
             "name": "webmozart/assert",
@@ -6921,6 +8159,19 @@
     ],
     "packages-dev": [
         {
+<<<<<<< HEAD
+            "name": "sebastian/environment",
+            "version": "4.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/environment.git",
+                "reference": "464c90d7bdf5ad4e8a6aea15c091fec0603d4368"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/464c90d7bdf5ad4e8a6aea15c091fec0603d4368",
+                "reference": "464c90d7bdf5ad4e8a6aea15c091fec0603d4368",
+=======
             "name": "doctrine/data-fixtures",
             "version": "1.4.2",
             "source": {
@@ -6932,6 +8183,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/39e9777c9089351a468f780b01cffa3cb0a42907",
                 "reference": "39e9777c9089351a468f780b01cffa3cb0a42907",
+>>>>>>> first pass at the upgrade.
                 "shasum": ""
             },
             "require": {
@@ -6982,7 +8234,11 @@
             "keywords": [
                 "database"
             ],
+<<<<<<< HEAD
+            "time": "2019-11-20T08:46:58+00:00"
+=======
             "time": "2020-01-17T11:11:28+00:00"
+>>>>>>> first pass at the upgrade.
         },
         {
             "name": "doctrine/doctrine-fixtures-bundle",
@@ -7494,6 +8750,19 @@
             "time": "2020-01-04T13:00:46+00:00"
         },
         {
+<<<<<<< HEAD
+            "name": "squizlabs/php_codesniffer",
+            "version": "3.5.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
+                "reference": "557a1fc7ac702c66b0bbfe16ab3d55839ef724cb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/557a1fc7ac702c66b0bbfe16ab3d55839ef724cb",
+                "reference": "557a1fc7ac702c66b0bbfe16ab3d55839ef724cb",
+=======
             "name": "symfony/maker-bundle",
             "version": "v1.14.3",
             "source": {
@@ -7505,6 +8774,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/c864e7f9b8d1e1f5f60acc3beda11299f637aded",
                 "reference": "c864e7f9b8d1e1f5f60acc3beda11299f637aded",
+>>>>>>> first pass at the upgrade.
                 "shasum": ""
             },
             "require": {
@@ -7559,6 +8829,22 @@
                 "scaffold",
                 "scaffolding"
             ],
+<<<<<<< HEAD
+            "time": "2019-12-04T04:46:47+00:00"
+        },
+        {
+            "name": "symfony/phpunit-bridge",
+            "version": "v4.4.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/phpunit-bridge.git",
+                "reference": "901b0c06134b4b7c7e6dea152256b944a152117b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/901b0c06134b4b7c7e6dea152256b944a152117b",
+                "reference": "901b0c06134b4b7c7e6dea152256b944a152117b",
+=======
             "time": "2019-11-07T00:56:03+00:00"
         },
         {
@@ -7573,6 +8859,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/7f835941a01bea2d03776451c9e42c2a2da6c34c",
                 "reference": "7f835941a01bea2d03776451c9e42c2a2da6c34c",
+>>>>>>> first pass at the upgrade.
                 "shasum": ""
             },
             "require": {
@@ -7590,7 +8877,11 @@
             "type": "symfony-bridge",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
+                    "dev-master": "4.4-dev"
+=======
                     "dev-master": "5.0-dev"
+>>>>>>> first pass at the upgrade.
                 },
                 "thanks": {
                     "name": "phpunit/phpunit",
@@ -7624,7 +8915,11 @@
             ],
             "description": "Symfony PHPUnit Bridge",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+            "time": "2020-01-21T08:20:44+00:00"
+=======
             "time": "2020-01-21T08:40:24+00:00"
+>>>>>>> first pass at the upgrade.
         },
         {
             "name": "symfony/profiler-pack",
@@ -7655,6 +8950,36 @@
             "time": "2018-12-10T12:11:44+00:00"
         },
         {
+<<<<<<< HEAD
+            "name": "webmozart/assert",
+            "version": "1.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webmozart/assert.git",
+                "reference": "573381c0a64f155a0d9a23f4b0c797194805b925"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webmozart/assert/zipball/573381c0a64f155a0d9a23f4b0c797194805b925",
+                "reference": "573381c0a64f155a0d9a23f4b0c797194805b925",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.3.3 || ^7.0",
+                "symfony/polyfill-ctype": "^1.8"
+            },
+            "conflict": {
+                "vimeo/psalm": "<3.6.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8.36 || ^7.5.13"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Webmozart\\Assert\\": "src/"
+                }
+=======
             "name": "symfony/test-pack",
             "version": "v1.0.6",
             "source": {
@@ -7673,14 +8998,31 @@
                 "symfony/browser-kit": "*",
                 "symfony/css-selector": "*",
                 "symfony/phpunit-bridge": "*"
+>>>>>>> first pass at the upgrade.
             },
             "type": "symfony-pack",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
+<<<<<<< HEAD
+            "authors": [
+                {
+                    "name": "Bernhard Schussek",
+                    "email": "bschussek@gmail.com"
+                }
+            ],
+            "description": "Assertions to validate method input/output with nice error messages.",
+            "keywords": [
+                "assert",
+                "check",
+                "validate"
+            ],
+            "time": "2019-11-24T13:36:37+00:00"
+=======
             "description": "A pack for functional and end-to-end testing within a Symfony app",
             "time": "2019-06-21T06:27:32+00:00"
+>>>>>>> first pass at the upgrade.
         },
         {
             "name": "symfony/web-profiler-bundle",
