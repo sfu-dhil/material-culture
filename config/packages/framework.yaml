@@ -10,6 +10,11 @@ framework:
         cookie_secure: auto
         cookie_samesite: lax
 
+        name: PHP_SESSION_MC
+        cookie_path: '%router.request_context.base_url%'
+        cookie_domain: '%router.request_context.host%'
+
+
     #esi: true
     #fragments: true
     php_errors:
