@@ -11,7 +11,7 @@ parameters:
     asset.request_context.base_path: '%env(string:ROUTE_BASE)%'
     asset.request_context.secure: auto
 
-    mc.img.dir: '%kernel.project_dir%/public/upload/artefact'
+    mc.img.dir: '%env(string:MAJOLICA_UPLOAD_DIR)%'
     mc.img.prefix: images/upload
     mc.thumb.width: 320
     mc.thumb.height: 240
