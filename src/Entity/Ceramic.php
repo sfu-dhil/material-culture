@@ -60,7 +60,7 @@ class Ceramic extends Artefact {
      *
      * @return string
      */
-    public function __toString() {
+    public function __toString() : string {
         return 'Ceramic #' . $this->getId();
     }
 
