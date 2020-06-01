@@ -60,7 +60,7 @@ class ArtefactTest extends TestCase {
     protected function setUp() : void {
         parent::setUp();
         $this->artefact = new class() extends Artefact {
-            public function __toString() {
+            public function __toString() : string {
                 return 'dummy';
             }
 
