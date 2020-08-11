@@ -64,6 +64,7 @@ class ImageListener {
         $image->setImageFilePath($filename);
         $image->setOriginalName($file->getClientOriginalName());
         $image->setImageSize($file->getClientSize());
+
         $dimensions = getimagesize($this->uploader->getImageDir() . '/' . $filename);
         $image->setImageWidth($dimensions[0]);
         $image->setImageHeight($dimensions[1]);
