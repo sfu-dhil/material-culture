@@ -145,7 +145,6 @@ class ArtefactController extends AbstractController implements PaginatorAwareInt
         $form->remove('imageFile');
         $form->add('newImageFile', FileType::class, [
             'label' => 'Replacement Image',
-            'required' => true,
             'required' => false,
             'attr' => [
                 'help_block' => "Select a file to upload which is less than {$fileUploader->getMaxUploadSize(false)} in size.",
