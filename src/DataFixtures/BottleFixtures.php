@@ -49,8 +49,6 @@ class BottleFixtures extends Fixture implements DependentFixtureInterface {
      */
     public function getDependencies() {
         return [
-            VesselFixtures::class,
-            GlazeFixtures::class,
             LocationFixtures::class,
             LocationFixtures::class,
             InstitutionFixtures::class,

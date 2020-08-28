@@ -37,13 +37,6 @@ class ReferenceFixtures extends Fixture implements DependentFixtureInterface {
         $this->addReference('_reference_Reference2', $item2);
         $manager->persist($item2);
 
-        $item3 = new Reference();
-        $item3->setArtefact($this->getReference('_reference_Ceramic1'));
-        $item3->setPublication($this->getReference('_reference_Publication3'));
-        $item3->setDescription('<p>The artefact is described on page 1.</p>');
-        $this->addReference('_reference_Reference3', $item3);
-        $manager->persist($item3);
-
         $manager->flush();
     }
 
@@ -57,7 +50,6 @@ class ReferenceFixtures extends Fixture implements DependentFixtureInterface {
         return [
             BottleFixtures::class,
             CanFixtures::class,
-            CeramicFixtures::class,
             PublicationFixtures::class,
         ];
     }

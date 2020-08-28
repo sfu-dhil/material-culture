@@ -26,15 +26,12 @@ use Nines\UtilBundle\Entity\AbstractEntity;
  * @ORM\DiscriminatorMap({
  *   "bottle" = "Bottle",
  *   "can" = "Can",
- *   "ceramic" = "Ceramic"
  * })
  */
 abstract class Artefact extends AbstractEntity {
     public const BOTTLE = 'bottle';
 
     public const CAN = 'can';
-
-    public const CERAMIC = 'ceramic';
 
     /**
      * @var Location

@@ -52,8 +52,6 @@ class ArtefactController extends AbstractController implements PaginatorAwareInt
                 return $this->redirectToRoute('bottle_show', ['id' => $artefact->getId()]);
             case Artefact::CAN:
                 return $this->redirectToRoute('can_show', ['id' => $artefact->getId()]);
-            case Artefact::CERAMIC:
-                return $this->redirectToRoute('ceramic_show', ['id' => $artefact->getId()]);
             default:
                 throw new HttpException(500, 'Cannot generate URL for artefact of type ' . $artefact->getCategory());
         }

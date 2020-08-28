@@ -95,11 +95,6 @@ class Builder implements ContainerAwareInterface {
             'route' => 'can_index',
         ]);
 
-        $browse->addChild('ceramic', [
-            'label' => 'Majolicas',
-            'route' => 'ceramic_index',
-        ]);
-
         $browse->addChild('image', [
             'label' => 'Images',
             'route' => 'image_index',
@@ -116,11 +111,6 @@ class Builder implements ContainerAwareInterface {
         $browse->addChild('content', [
             'label' => 'Contents',
             'route' => 'content_index',
-        ]);
-
-        $browse->addChild('glaze', [
-            'label' => 'Glazes',
-            'route' => 'glaze_index',
         ]);
 
         $browse->addChild('institution', [
@@ -141,16 +131,6 @@ class Builder implements ContainerAwareInterface {
         $browse->addChild('publication', [
             'label' => 'Publications',
             'route' => 'publication_index',
-        ]);
-
-        $browse->addChild('typology', [
-            'label' => 'Typology',
-            'route' => 'typology_index',
-        ]);
-
-        $browse->addChild('vessel', [
-            'label' => 'Ceramic Vessels',
-            'route' => 'vessel_index',
         ]);
 
 //        if ($this->hasRole('ROLE_USER')) {
