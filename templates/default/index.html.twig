@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Contained Consumption: Majolicas, Cans and Bottles</h1>
+    <h1>{{ homepage.title }}</h1>
 
     <div id="carousel" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
@@ -47,33 +47,6 @@
         </a>
     </div>
 
-    <h2>The Catalogue</h2>
-    <p>This is a constantly updated catalogue of objects. Objects that are implicated in the spread of capitalism and
-        consumer culture around the Pacific World, from the 16<sup>th</sup> to the 20<sup>th</sup> century.</p>
-    <p>The creation of goods for household and public consumption has fascinated historians, anthropologists, and
-        archaeologists for a very long time, and this catalogue is a small contribution to a very large topic. The
-        catalogue itself is not intended as a finished product, but instead as a collaborative research tool,
-        encouraging researchers, institutions, collectors and the public to contribute information and photographs of
-        objects, whether in museums, public collections, archaeological reports, or private collections. The catalogue
-        falls into two distinct categories:</p>
-    <h2>The Majolicas</h2>
-    <p>The majolica ceramics come from the Andean countries. First produced under the mercantilist system of the Spanish
-        colonies, these tin-glazed ceramics were widely traded, and continue to be produced in various parts of the
-        Americas today. We have a fair understanding of the trade in majolicas produced and consumed in North America,
-        Mesoamerica, and the Caribbean. The production and consumption of majolicas in the Andean countries has been
-        less studied. This catalogue is an ongoing attempt to expand our understanding of the Andean majolicas, and I
-        encourage you to contact me if you have Andean majolicas you would like to see added to the catalogue.</p>
-    <h2>Tin Cans and Glass Bottles</h2>
-    <p>The other role of this catalogue is to collect examples of the commercial tin cans and bottles used to preserve
-        and market food and beverages in Ecuador and British Columbia, from 1860 to 1914. Ecuador and British Columbia
-        because these are the places I have research connections, and because they represent two different trajectories
-        of imperial, and post-imperial, history in the eastern Pacific. I have restricted the catalogue to items
-        produced between 1830 and 1914 because this period encompasses the massive change in packaging technology that
-        happened from the second half of the 19<sup>th</sup> century up until the Great War and the opening of the
-        Panama Canal, when global trade developments and corporate mergers began to change the playing field of the
-        consumer goods trade in the eastern Pacific.</p>
-    <p>Please feel free to browse through the dropdown menus above, and to be in touch via the “contact” link if you
-        have questions, or items you would like to see catalogued here. If you have specific information on individual
-        objects already in the catalogue, I encourage you to contribute using the comment function in each item’s
-        individual entry.</p>
+    {{ homepage.content|raw }}
+
 {% endblock %}
