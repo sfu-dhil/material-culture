@@ -37,67 +37,67 @@ abstract class Artefact extends AbstractEntity {
      * @var Location
      * @ORM\ManyToOne(targetEntity="App\Entity\Location", inversedBy="artefactsRecovered")
      */
-    private $recoveryLocation;
+    protected $recoveryLocation;
 
     /**
      * @var CircaDate
      * @ORM\ManyToOne(targetEntity="App\Entity\CircaDate", cascade={"persist", "remove"})
      */
-    private $recoveryDate;
+    protected $recoveryDate;
 
     /**
      * @var Location
      * @ORM\ManyToOne(targetEntity="App\Entity\Location", inversedBy="artefactsManufactured")
      */
-    private $manufactureLocation;
+    protected $manufactureLocation;
 
     /**
      * @var CircaDate
      * @ORM\ManyToOne(targetEntity="App\Entity\CircaDate", cascade={"persist", "remove"})
      */
-    private $manufactureDate;
+    protected $manufactureDate;
 
     /**
      * @var Institution
      * @ORM\ManyToOne(targetEntity="App\Entity\Institution", inversedBy="artefacts")
      */
-    private $institution;
+    protected $institution;
 
     /**
      * @var string
      * @ORM\Column(type="array", nullable=false)
      */
-    private $catalogNumbers;
+    protected $catalogNumbers;
 
     /**
      * @var string
      * @ORM\Column(type="text", nullable=true)
      */
-    private $description;
+    protected $description;
 
     /**
      * @var string
      * @ORM\Column(type="text", nullable=true)
      */
-    private $furtherReading;
+    protected $furtherReading;
 
     /**
      * @var string
      * @ORM\Column(type="text", nullable=true)
      */
-    private $note;
+    protected $note;
 
     /**
      * @var Collection|Reference[]
      * @ORM\OneToMany(targetEntity="App\Entity\Reference", mappedBy="artefact", cascade={"persist"})
      */
-    private $references;
+    protected $references;
 
     /**
      * @var Collection|Image[]
      * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="artefact")
      */
-    private $images;
+    protected $images;
 
     public function __construct() {
         parent::__construct();

@@ -11,10 +11,11 @@ parameters:
     asset.request_context.base_path: '%env(string:ROUTE_BASE)%'
     asset.request_context.secure: auto
 
-    mc.img.dir: '%env(string:MAJOLICA_UPLOAD_DIR)%'
-    mc.img.prefix: images/upload
-    mc.thumb.width: 320
-    mc.thumb.height: 240
+    mc.image.dir: '%env(string:MAJOLICA_UPLOAD_DIR)%'
+    mc.image.prefix: images/upload
+    mc.thumb.width: 450
+    mc.thumb.height: 350
+
     dhil.piwik_enabled: '%env(bool:PIWIK_ENABLED)%'
     dhil.piwik_url: null
     dhil.piwik_siteid: null
@@ -47,7 +48,9 @@ services:
 
     App\Services\FileUploader:
         arguments:
-            $imageDir: '%mc.img.dir%'
+            $root: '%kernel.project_dir%'
+        calls:
+            - [ setUploadDir, [ '%mc.image.dir%/%kernel.environment%'] ]
 
     App\Services\Thumbnailer:
         calls:

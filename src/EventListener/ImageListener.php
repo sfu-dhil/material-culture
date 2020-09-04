@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace App\EventListener;
 
-use App\Entity\ImageEntity;
+use App\Entity\Image;
 use App\Services\FileUploader;
 use App\Services\Thumbnailer;
 use Doctrine\ORM\Event\LifecycleEventArgs;
@@ -55,23 +55,25 @@ class ImageListener {
         $this->logger = $logger;
     }
 
-    private function uploadFile(ImageEntity $image) : void {
+    private function uploadFile(Image $image) : void {
         $file = $image->getImageFile();
         if ( ! $file instanceof UploadedFile) {
             return;
         }
-        $filename = $this->uploader->upload($file);
-        $image->setImageFilePath($filename);
         $image->setOriginalName($file->getClientOriginalName());
-        $image->setImageSize($file->getClientSize());
 
-        $dimensions = getimagesize($this->uploader->getImageDir() . '/' . $filename);
+        $filename = $this->uploader->upload($file);
+        $path = $this->uploader->getUploadDir() . '/' . $filename;
+
+        $dimensions = getimagesize($path);
         $image->setImageWidth($dimensions[0]);
         $image->setImageHeight($dimensions[1]);
 
-        $clippingFile = new File($this->uploader->getImageDir() . '/' . $filename);
+        $clippingFile = new File($path);
+        $image->setImageSize($clippingFile->getSize());
         $image->setImageFile($clippingFile);
-        $image->setThumbnailPath($this->thumbnailer->thumbnail($image));
+        $image->setImagePath($filename);
+        $image->setThumbPath($this->thumbnailer->thumbnail($image));
     }
 
     public function setThumbWidth($width) : void {
@@ -84,28 +86,28 @@ class ImageListener {
 
     public function prePersist(LifecycleEventArgs $args) : void {
         $entity = $args->getEntity();
-        if ($entity instanceof ImageEntity) {
+        if ($entity instanceof Image) {
             $this->uploadFile($entity);
         }
     }
 
     public function preUpdate(LifecycleEventArgs $args) : void {
         $entity = $args->getEntity();
-        if ($entity instanceof ImageEntity) {
+        if ($entity instanceof Image) {
             $this->uploadFile($entity);
         }
     }
 
     public function postLoad(LifecycleEventArgs $args) : void {
         $entity = $args->getEntity();
-        if ($entity instanceof ImageEntity) {
-            $filePath = $this->uploader->getImageDir() . '/' . $entity->getImageFilePath();
-            $thumbnailPath = $this->uploader->getImageDir() . '/' . $entity->getThumbnailPath();
+        if ($entity instanceof Image) {
+            $filePath = $this->uploader->getUploadDir() . '/' . $entity->getImagePath();
+            $thumbnailPath = $this->uploader->getUploadDir() . '/' . $entity->getThumbPath();
             if (file_exists($filePath)) {
                 $entity->setImageFile(new File($filePath));
             }
             if (file_exists($thumbnailPath)) {
-                $entity->setThumbnailFile(new File($thumbnailPath));
+                $entity->setThumbFile(new File($thumbnailPath));
             }
         }
     }

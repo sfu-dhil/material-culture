@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use PHPUnit\Runner\Exception;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
@@ -18,30 +20,53 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * @author Michael Joyce <ubermichael@gmail.com>
  */
 class FileUploader {
+
+    public const FORBIDDEN = '/[^a-z0-9_. -]/i';
+
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    private $root;
+
     /**
      * @var string
      */
-    private $imageDir;
+    private $uploadDir;
 
-    public function __construct($imageDir) {
-        $this->imageDir = $imageDir;
+    public function __construct(LoggerInterface $logger, $root) {
+        $this->logger = $logger;
+        $this->root = $root;
+    }
+
+    public function setUploadDir($dir) {
+        if( $dir[0] !== '/') {
+            $this->uploadDir = $this->root . '/' . $dir;
+        } else {
+            $this->uploadDir = $dir;
+        }
     }
 
     public function upload(UploadedFile $file) {
-        $filename = md5(uniqid()) . '.' . $file->guessExtension();
-        if ( ! file_exists($this->imageDir)) {
-            mkdir($this->imageDir, 0777, true);
+        $basename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        $filename = implode('.', [
+            preg_replace(self::FORBIDDEN, '_', $basename),
+            uniqid(),
+            $file->guessExtension(),
+        ]);
+        if ( ! file_exists($this->uploadDir)) {
+            mkdir($this->uploadDir, 0777, true);
         }
-        $file->move($this->imageDir, $filename);
-
+        $file->move($this->uploadDir, $filename);
         return $filename;
     }
 
     /**
      * @return string
      */
-    public function getImageDir() {
-        return $this->imageDir;
+    public function getUploadDir() {
+        return $this->uploadDir;
     }
 
     public function getMaxUploadSize($asBytes = true) {
