@@ -21,12 +21,6 @@ use Symfony\Component\HttpFoundation\File\File;
  */
 abstract class ImageEntity extends AbstractEntity {
     /**
-     * @var string
-     * @ORM\Column(type="string", length=64, nullable=false)
-     */
-    private $originalName;
-
-    /**
      * @var File
      */
     private $imageFile;
@@ -34,21 +28,26 @@ abstract class ImageEntity extends AbstractEntity {
     /**
      * @var File
      */
-    private $thumbnailFile;
+    private $thumbFile;
+
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", length=48, nullable=false)
+     * @ORM\Column(type="string", length=64, nullable=false)
      */
-    private $imageFilePath;
+    private $originalName;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", length=48, nullable=false)
+     * @ORM\Column(type="string", length=128, nullable=false)
      */
-    private $thumbnailPath;
+    private $imagePath;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=128, nullable=false)
+     */
+    private $thumbPath;
 
     /**
      * @var int
@@ -58,18 +57,25 @@ abstract class ImageEntity extends AbstractEntity {
 
     /**
      * @var int
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=false)
      */
     private $imageWidth;
 
     /**
      * @var int
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=false)
      */
     private $imageHeight;
 
     public function __construct() {
         parent::__construct();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString() : string {
+        return $this->imageFile->getFilename();
     }
 
     /**
@@ -101,12 +107,12 @@ abstract class ImageEntity extends AbstractEntity {
     /**
      * @return File
      */
-    public function getThumbnailFile() : ?File {
-        return $this->thumbnailFile;
+    public function getThumbFile() : ?File {
+        return $this->thumbFile;
     }
 
-    public function setThumbnailFile(File $thumbnailFile) : ImageEntity {
-        $this->thumbnailFile = $thumbnailFile;
+    public function setThumbFile(File $thumbFile) : ImageEntity {
+        $this->thumbFile = $thumbFile;
 
         return $this;
     }
@@ -114,12 +120,12 @@ abstract class ImageEntity extends AbstractEntity {
     /**
      * @return string
      */
-    public function getImageFilePath() : ?string {
-        return $this->imageFilePath;
+    public function getImagePath() : ?string {
+        return $this->imagePath;
     }
 
-    public function setImageFilePath(string $imageFilePath) : ImageEntity {
-        $this->imageFilePath = $imageFilePath;
+    public function setImagePath(string $imagePath) : ImageEntity {
+        $this->imagePath = $imagePath;
 
         return $this;
     }
@@ -127,12 +133,12 @@ abstract class ImageEntity extends AbstractEntity {
     /**
      * @return string
      */
-    public function getThumbnailPath() : ?string {
-        return $this->thumbnailPath;
+    public function getThumbPath() : ?string {
+        return $this->thumbPath;
     }
 
-    public function setThumbnailPath(string $thumbnailPath) : ImageEntity {
-        $this->thumbnailPath = $thumbnailPath;
+    public function setThumbPath(string $thumbPath) : ImageEntity {
+        $this->thumbPath = $thumbPath;
 
         return $this;
     }

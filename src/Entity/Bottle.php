@@ -59,7 +59,11 @@ class Bottle extends Artefact {
      * @return string
      */
     public function __toString() : string {
-        return $this->company . ' ' . $this->brand;
+        $s = implode(' ', array_merge([$this->company, $this->brand], $this->catalogNumbers));
+        if(($trimmed = trim($s))) {
+            return $trimmed;
+        }
+        return "Bottle #" . $this->id;
     }
 
     public function getCategory() {
