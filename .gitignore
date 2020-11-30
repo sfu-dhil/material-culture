@@ -33,3 +33,4 @@ config/deploy.yml
 public/js/jquery.collection.js
 templates/jquery.collection.html.twig
 config/deploy.yaml
+src/.preload.php
