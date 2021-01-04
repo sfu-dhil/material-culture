@@ -37,7 +37,7 @@ class CanController extends AbstractController implements PaginatorAwareInterfac
      * @return array
      *
      * @Route("/", name="can_index", methods={"GET"})
-     * @Template()
+     * @Template
      */
     public function indexAction(Request $request, EntityManagerInterface $em) {
         $qb = $em->createQueryBuilder();
@@ -70,7 +70,7 @@ class CanController extends AbstractController implements PaginatorAwareInterfac
      * </pre></code>
      *
      * @Route("/search", name="can_search", methods={"GET"})
-     * @Template()
+     * @Template
      *
      * @return array
      */
@@ -95,8 +95,8 @@ class CanController extends AbstractController implements PaginatorAwareInterfac
      * @return array|RedirectResponse
      *
      * @IsGranted("ROLE_CONTENT_ADMIN")
-     * @Route("/new", name="can_new", methods={"GET","POST"})
-     * @Template()
+     * @Route("/new", name="can_new", methods={"GET", "POST"})
+     * @Template
      */
     public function newAction(Request $request, EntityManagerInterface $em) {
         $can = new Can();
@@ -124,7 +124,7 @@ class CanController extends AbstractController implements PaginatorAwareInterfac
      * @return array
      *
      * @Route("/{id}", name="can_show", methods={"GET"})
-     * @Template()
+     * @Template
      */
     public function showAction(Request $request, Can $can) {
         $images = $this->paginator->paginate($can->getImages(), $request->query->getint('page', 1), 25);
@@ -141,8 +141,8 @@ class CanController extends AbstractController implements PaginatorAwareInterfac
      * @return array|RedirectResponse
      *
      * @IsGranted("ROLE_CONTENT_ADMIN")
-     * @Route("/{id}/edit", name="can_edit", methods={"GET","POST"})
-     * @Template()
+     * @Route("/{id}/edit", name="can_edit", methods={"GET", "POST"})
+     * @Template
      */
     public function editAction(Request $request, Can $can, EntityManagerInterface $em) {
         $editForm = $this->createForm(CanType::class, $can);

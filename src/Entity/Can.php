@@ -61,15 +61,14 @@ class Can extends Artefact {
 
     /**
      * Force all entities to provide a stringify function.
-     *
-     * @return string
      */
     public function __toString() : string {
         $s = implode(' ', array_merge([$this->company, $this->brand], $this->catalogNumbers));
-        if(($trimmed = trim($s))) {
+        if (($trimmed = trim($s))) {
             return $trimmed;
         }
-        return "Can #" . $this->id;
+
+        return 'Can #' . $this->id;
     }
 
     public function getCategory() {
@@ -149,7 +148,7 @@ class Can extends Artefact {
      *
      * @return Can
      */
-    public function setManufacturer(Manufacturer $manufacturer = null) {
+    public function setManufacturer(?Manufacturer $manufacturer = null) {
         $this->manufacturer = $manufacturer;
 
         return $this;
@@ -171,7 +170,7 @@ class Can extends Artefact {
      *
      * @return Can
      */
-    public function setContent(Content $content = null) {
+    public function setContent(?Content $content = null) {
         $this->content = $content;
 
         return $this;
@@ -193,7 +192,7 @@ class Can extends Artefact {
      *
      * @return Can
      */
-    public function setPackagingLocation(Location $packagingLocation = null) {
+    public function setPackagingLocation(?Location $packagingLocation = null) {
         $this->packagingLocation = $packagingLocation;
 
         return $this;

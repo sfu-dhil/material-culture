@@ -24,8 +24,8 @@ use Nines\UtilBundle\Entity\AbstractEntity;
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="category", type="string")
  * @ORM\DiscriminatorMap({
- *   "bottle" = "Bottle",
- *   "can" = "Can",
+ *     "bottle": "Bottle",
+ *     "can": "Can",
  * })
  */
 abstract class Artefact extends AbstractEntity {
@@ -237,7 +237,7 @@ abstract class Artefact extends AbstractEntity {
      *
      * @return Artefact
      */
-    public function setRecoveryLocation(Location $recoveryLocation = null) {
+    public function setRecoveryLocation(?Location $recoveryLocation = null) {
         $this->recoveryLocation = $recoveryLocation;
 
         return $this;
@@ -283,7 +283,7 @@ abstract class Artefact extends AbstractEntity {
      *
      * @return Artefact
      */
-    public function setManufactureLocation(Location $manufactureLocation = null) {
+    public function setManufactureLocation(?Location $manufactureLocation = null) {
         $this->manufactureLocation = $manufactureLocation;
 
         return $this;
@@ -329,7 +329,7 @@ abstract class Artefact extends AbstractEntity {
      *
      * @return Artefact
      */
-    public function setInstitution(Institution $institution = null) {
+    public function setInstitution(?Institution $institution = null) {
         $this->institution = $institution;
 
         return $this;

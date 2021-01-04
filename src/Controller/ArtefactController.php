@@ -44,7 +44,7 @@ class ArtefactController extends AbstractController implements PaginatorAwareInt
      * @return RedirectResponse
      *
      * @Route("/{id}", name="artefact_show", methods={"GET"})
-     * @Template()
+     * @Template
      */
     public function showAction(Request $request, Artefact $artefact) {
         switch ($artefact->getCategory()) {
@@ -63,8 +63,8 @@ class ArtefactController extends AbstractController implements PaginatorAwareInt
      * @return array|RedirectResponse
      *
      * @IsGranted("ROLE_CONTENT_ADMIN")
-     * @Route("/{id}/references", name="artefact_references", methods={"GET","POST"})
-     * @Template()
+     * @Route("/{id}/references", name="artefact_references", methods={"GET", "POST"})
+     * @Template
      */
     public function referencesAction(Request $request, Artefact $artefact) {
         $oldReferences = $artefact->getReferences()->getValues();
@@ -75,12 +75,14 @@ class ArtefactController extends AbstractController implements PaginatorAwareInt
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             dump($artefact);
+
             foreach ($artefact->getReferences() as $reference) {
                 if ( ! $reference->getId()) {
                     $reference->setArtefact($artefact);
                 }
             }
             $newReferences = $artefact->getReferences();
+
             foreach ($oldReferences as $reference) {
                 if ( ! $newReferences->contains($reference)) {
                     $em->remove($reference);
@@ -105,7 +107,7 @@ class ArtefactController extends AbstractController implements PaginatorAwareInt
      *
      * @IsGranted("ROLE_CONTENT_ADMIN")
      * @Route("/{id}/add_image", name="artefact_add_image", methods={"GET", "POST"})
-     * @Template()
+     * @Template
      */
     public function addImage(Request $request, Artefact $artefact, EntityManagerInterface $em) {
         $image = new Image();
@@ -134,9 +136,9 @@ class ArtefactController extends AbstractController implements PaginatorAwareInt
      * @return array|RedirectResponse
      *
      * @IsGranted("ROLE_CONTENT_ADMIN")
-     * @Route("/{id}/edit_image/{image_id}", name="artefact_edit_image", methods={"GET","POST"})
-     * @ParamConverter("image", options={"id" = "image_id"})
-     * @Template()
+     * @Route("/{id}/edit_image/{image_id}", name="artefact_edit_image", methods={"GET", "POST"})
+     * @ParamConverter("image", options={"id": "image_id"})
+     * @Template
      */
     public function editImage(Request $request, FileUploader $fileUploader, Artefact $artefact, Image $image, EntityManagerInterface $em) {
         $form = $this->createForm(ImageType::class, $image);
@@ -179,7 +181,7 @@ class ArtefactController extends AbstractController implements PaginatorAwareInt
      *
      * @IsGranted("ROLE_CONTENT_ADMIN")
      * @Route("/{id}/remove_image/{image_id}", name="artefact_remove_image", methods={"GET"})
-     * @ParamConverter("image", options={"id" = "image_id"})
+     * @ParamConverter("image", options={"id": "image_id"})
      */
     public function removeImage(Request $request, Artefact $artefact, Image $image, EntityManagerInterface $em) {
         if ($artefact->hasImage($image)) {

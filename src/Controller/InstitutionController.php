@@ -38,7 +38,7 @@ class InstitutionController extends AbstractController implements PaginatorAware
      * @return array
      *
      * @Route("/", name="institution_index", methods={"GET"})
-     * @Template()
+     * @Template
      */
     public function indexAction(Request $request, EntityManagerInterface $em) {
         $qb = $em->createQueryBuilder();
@@ -68,6 +68,7 @@ class InstitutionController extends AbstractController implements PaginatorAware
             return new JsonResponse([]);
         }
         $data = [];
+
         foreach ($repo->typeaheadQuery($q) as $result) {
             $data[] = [
                 'id' => $result->getId(),
@@ -97,7 +98,7 @@ class InstitutionController extends AbstractController implements PaginatorAware
      * </pre></code>
      *
      * @Route("/search", name="institution_search", methods={"GET"})
-     * @Template()
+     * @Template
      *
      * @return array
      */
@@ -122,8 +123,8 @@ class InstitutionController extends AbstractController implements PaginatorAware
      * @return array|RedirectResponse
      *
      * @IsGranted("ROLE_CONTENT_ADMIN")
-     * @Route("/new", name="institution_new", methods={"GET","POST"})
-     * @Template()
+     * @Route("/new", name="institution_new", methods={"GET", "POST"})
+     * @Template
      */
     public function newAction(Request $request, EntityManagerInterface $em) {
         $institution = new Institution();
@@ -151,8 +152,8 @@ class InstitutionController extends AbstractController implements PaginatorAware
      * @return array|RedirectResponse
      *
      * @IsGranted("ROLE_CONTENT_ADMIN")
-     * @Route("/new_popup", name="institution_new_popup", methods={"GET","POST"})
-     * @Template()
+     * @Route("/new_popup", name="institution_new_popup", methods={"GET", "POST"})
+     * @Template
      */
     public function newPopupAction(Request $request, EntityManagerInterface $em) {
         return $this->newAction($request, $em);
@@ -164,7 +165,7 @@ class InstitutionController extends AbstractController implements PaginatorAware
      * @return array
      *
      * @Route("/{id}", name="institution_show", methods={"GET"})
-     * @Template()
+     * @Template
      */
     public function showAction(Institution $institution) {
         return [
@@ -178,8 +179,8 @@ class InstitutionController extends AbstractController implements PaginatorAware
      * @return array|RedirectResponse
      *
      * @IsGranted("ROLE_CONTENT_ADMIN")
-     * @Route("/{id}/edit", name="institution_edit", methods={"GET","POST"})
-     * @Template()
+     * @Route("/{id}/edit", name="institution_edit", methods={"GET", "POST"})
+     * @Template
      */
     public function editAction(Request $request, Institution $institution, EntityManagerInterface $em) {
         $editForm = $this->createForm(InstitutionType::class, $institution);

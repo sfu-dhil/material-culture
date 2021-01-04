@@ -38,7 +38,7 @@ class PublicationController extends AbstractController implements PaginatorAware
      * @return array
      *
      * @Route("/", name="publication_index", methods={"GET"})
-     * @Template()
+     * @Template
      */
     public function indexAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
@@ -69,6 +69,7 @@ class PublicationController extends AbstractController implements PaginatorAware
             return new JsonResponse([]);
         }
         $data = [];
+
         foreach ($repo->typeaheadQuery($q) as $result) {
             $data[] = [
                 'id' => $result->getId(),
@@ -98,7 +99,7 @@ class PublicationController extends AbstractController implements PaginatorAware
      * </pre></code>
      *
      * @Route("/search", name="publication_search", methods={"GET"})
-     * @Template()
+     * @Template
      *
      * @return array
      */
@@ -123,8 +124,8 @@ class PublicationController extends AbstractController implements PaginatorAware
      * @return array|RedirectResponse
      *
      * @IsGranted("ROLE_CONTENT_ADMIN")
-     * @Route("/new", name="publication_new", methods={"GET","POST"})
-     * @Template()
+     * @Route("/new", name="publication_new", methods={"GET", "POST"})
+     * @Template
      */
     public function newAction(Request $request) {
         $publication = new Publication();
@@ -154,8 +155,8 @@ class PublicationController extends AbstractController implements PaginatorAware
      * @return array|RedirectResponse
      *
      * @IsGranted("ROLE_CONTENT_ADMIN")
-     * @Route("/new_popup", name="publication_new_popup", methods={"GET","POST"})
-     * @Template()
+     * @Route("/new_popup", name="publication_new_popup", methods={"GET", "POST"})
+     * @Template
      */
     public function newPopupAction(Request $request, EntityManagerInterface $em) {
         return $this->newAction($request, $em);
@@ -167,7 +168,7 @@ class PublicationController extends AbstractController implements PaginatorAware
      * @return array
      *
      * @Route("/{id}", name="publication_show", methods={"GET"})
-     * @Template()
+     * @Template
      */
     public function showAction(Publication $publication) {
         return [
@@ -181,8 +182,8 @@ class PublicationController extends AbstractController implements PaginatorAware
      * @return array|RedirectResponse
      *
      * @IsGranted("ROLE_CONTENT_ADMIN")
-     * @Route("/{id}/edit", name="publication_edit", methods={"GET","POST"})
-     * @Template()
+     * @Route("/{id}/edit", name="publication_edit", methods={"GET", "POST"})
+     * @Template
      */
     public function editAction(Request $request, Publication $publication) {
         $editForm = $this->createForm(PublicationType::class, $publication);

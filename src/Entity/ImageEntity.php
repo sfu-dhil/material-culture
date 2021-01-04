@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\File\File;
 /**
  * Class ImageEntity.
  *
- * @ORM\MappedSuperclass()
+ * @ORM\MappedSuperclass
  */
 abstract class ImageEntity extends AbstractEntity {
     /**
@@ -29,7 +29,6 @@ abstract class ImageEntity extends AbstractEntity {
      * @var File
      */
     private $thumbFile;
-
 
     /**
      * @var string
@@ -85,7 +84,7 @@ abstract class ImageEntity extends AbstractEntity {
         return $this->originalName;
     }
 
-    public function setOriginalName(string $originalName) : ImageEntity {
+    public function setOriginalName(string $originalName) : self {
         $this->originalName = $originalName;
 
         return $this;
@@ -98,7 +97,7 @@ abstract class ImageEntity extends AbstractEntity {
         return $this->imageFile;
     }
 
-    public function setImageFile(File $imageFile) : ImageEntity {
+    public function setImageFile(File $imageFile) : self {
         $this->imageFile = $imageFile;
 
         return $this;
@@ -111,7 +110,7 @@ abstract class ImageEntity extends AbstractEntity {
         return $this->thumbFile;
     }
 
-    public function setThumbFile(File $thumbFile) : ImageEntity {
+    public function setThumbFile(File $thumbFile) : self {
         $this->thumbFile = $thumbFile;
 
         return $this;
@@ -124,7 +123,7 @@ abstract class ImageEntity extends AbstractEntity {
         return $this->imagePath;
     }
 
-    public function setImagePath(string $imagePath) : ImageEntity {
+    public function setImagePath(string $imagePath) : self {
         $this->imagePath = $imagePath;
 
         return $this;
@@ -137,7 +136,7 @@ abstract class ImageEntity extends AbstractEntity {
         return $this->thumbPath;
     }
 
-    public function setThumbPath(string $thumbPath) : ImageEntity {
+    public function setThumbPath(string $thumbPath) : self {
         $this->thumbPath = $thumbPath;
 
         return $this;
@@ -150,7 +149,7 @@ abstract class ImageEntity extends AbstractEntity {
         return $this->imageSize;
     }
 
-    public function setImageSize(int $imageSize) : ImageEntity {
+    public function setImageSize(int $imageSize) : self {
         $this->imageSize = $imageSize;
 
         return $this;
@@ -163,7 +162,7 @@ abstract class ImageEntity extends AbstractEntity {
         return $this->imageWidth;
     }
 
-    public function setImageWidth(int $imageWidth) : ImageEntity {
+    public function setImageWidth(int $imageWidth) : self {
         $this->imageWidth = $imageWidth;
 
         return $this;
@@ -176,7 +175,7 @@ abstract class ImageEntity extends AbstractEntity {
         return $this->imageHeight;
     }
 
-    public function setImageHeight(int $imageHeight) : ImageEntity {
+    public function setImageHeight(int $imageHeight) : self {
         $this->imageHeight = $imageHeight;
 
         return $this;

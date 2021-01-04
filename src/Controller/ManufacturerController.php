@@ -38,7 +38,7 @@ class ManufacturerController extends AbstractController implements PaginatorAwar
      * @return array
      *
      * @Route("/", name="manufacturer_index", methods={"GET"})
-     * @Template()
+     * @Template
      */
     public function indexAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
@@ -69,6 +69,7 @@ class ManufacturerController extends AbstractController implements PaginatorAwar
             return new JsonResponse([]);
         }
         $data = [];
+
         foreach ($repo->typeaheadQuery($q) as $result) {
             $data[] = [
                 'id' => $result->getId(),
@@ -98,7 +99,7 @@ class ManufacturerController extends AbstractController implements PaginatorAwar
      * </pre></code>
      *
      * @Route("/search", name="manufacturer_search", methods={"GET"})
-     * @Template()
+     * @Template
      *
      * @return array
      */
@@ -123,8 +124,8 @@ class ManufacturerController extends AbstractController implements PaginatorAwar
      * @return array|RedirectResponse
      *
      * @IsGranted("ROLE_CONTENT_ADMIN")
-     * @Route("/new", name="manufacturer_new", methods={"GET","POST"})
-     * @Template()
+     * @Route("/new", name="manufacturer_new", methods={"GET", "POST"})
+     * @Template
      */
     public function newAction(Request $request) {
         $manufacturer = new Manufacturer();
@@ -153,8 +154,8 @@ class ManufacturerController extends AbstractController implements PaginatorAwar
      * @return array|RedirectResponse
      *
      * @IsGranted("ROLE_CONTENT_ADMIN")
-     * @Route("/new_popup", name="manufacturer_new_popup", methods={"GET","POST"})
-     * @Template()
+     * @Route("/new_popup", name="manufacturer_new_popup", methods={"GET", "POST"})
+     * @Template
      */
     public function newPopupAction(Request $request, EntityManagerInterface $em) {
         return $this->newAction($request, $em);
@@ -166,7 +167,7 @@ class ManufacturerController extends AbstractController implements PaginatorAwar
      * @return array
      *
      * @Route("/{id}", name="manufacturer_show", methods={"GET"})
-     * @Template()
+     * @Template
      */
     public function showAction(Manufacturer $manufacturer) {
         return [
@@ -180,8 +181,8 @@ class ManufacturerController extends AbstractController implements PaginatorAwar
      * @return array|RedirectResponse
      *
      * @IsGranted("ROLE_CONTENT_ADMIN")
-     * @Route("/{id}/edit", name="manufacturer_edit", methods={"GET","POST"})
-     * @Template()
+     * @Route("/{id}/edit", name="manufacturer_edit", methods={"GET", "POST"})
+     * @Template
      */
     public function editAction(Request $request, Manufacturer $manufacturer) {
         $editForm = $this->createForm(ManufacturerType::class, $manufacturer);

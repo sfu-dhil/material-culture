@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Publication.
  *
  * @ORM\Table(name="publication", indexes={
- *   @ORM\Index(columns={"title","abstract"}, flags={"fulltext"})
+ *     @ORM\Index(columns={"title", "abstract"}, flags={"fulltext"})
  * })
  * @ORM\Entity(repositoryClass="App\Repository\PublicationRepository")
  */
@@ -75,8 +75,6 @@ class Publication extends AbstractEntity {
 
     /**
      * Force all entities to provide a stringify function.
-     *
-     * @return string
      */
     public function __toString() : string {
         return $this->title;

@@ -36,7 +36,7 @@ class ImageController extends AbstractController implements PaginatorAwareInterf
      * @return array
      *
      * @Route("/", name="image_index", methods={"GET"})
-     * @Template()
+     * @Template
      */
     public function indexAction(Request $request, EntityManagerInterface $em) {
         $qb = $em->createQueryBuilder();
@@ -69,7 +69,7 @@ class ImageController extends AbstractController implements PaginatorAwareInterf
      * </pre></code>
      *
      * @Route("/search", name="image_search", methods={"GET"})
-     * @Template()
+     * @Template
      *
      * @return array
      */
@@ -94,7 +94,7 @@ class ImageController extends AbstractController implements PaginatorAwareInterf
      * @return array
      *
      * @Route("/{id}", name="image_show", methods={"GET"})
-     * @Template()
+     * @Template
      */
     public function showAction(Image $image) {
         return [

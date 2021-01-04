@@ -40,8 +40,6 @@ class Reference extends AbstractEntity {
 
     /**
      * Force all entities to provide a stringify function.
-     *
-     * @return string
      */
     public function __toString() : string {
         return $this->publication . ' ' . $this->artefact;
@@ -76,7 +74,7 @@ class Reference extends AbstractEntity {
      *
      * @return Reference
      */
-    public function setPublication(Publication $publication = null) {
+    public function setPublication(?Publication $publication = null) {
         $this->publication = $publication;
 
         return $this;
@@ -98,7 +96,7 @@ class Reference extends AbstractEntity {
      *
      * @return Reference
      */
-    public function setArtefact(Artefact $artefact = null) {
+    public function setArtefact(?Artefact $artefact = null) {
         $this->artefact = $artefact;
 
         return $this;
