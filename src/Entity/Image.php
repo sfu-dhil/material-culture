@@ -50,8 +50,6 @@ class Image extends ImageEntity {
 
     /**
      * Force all entities to provide a stringify function.
-     *
-     * @return string
      */
     public function __toString() : string {
         return $this->getOriginalName();
@@ -86,7 +84,7 @@ class Image extends ImageEntity {
      *
      * @return Image
      */
-    public function setArtefact(Artefact $artefact = null) {
+    public function setArtefact(?Artefact $artefact = null) {
         $this->artefact = $artefact;
 
         return $this;

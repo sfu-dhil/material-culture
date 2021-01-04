@@ -66,7 +66,7 @@ class Thumbnailer {
             return $thumbname;
         } catch (ImagickException $e) {
             $this->logger->critical('Thumbnailer Imagick exception: ' . $e);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->logger->critical('Thumbnailer unknown exception: ' . $e);
         }
     }

@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Institution.
  *
  * @ORM\Table(name="institution", indexes={
- *   @ORM\Index(columns={"name", "url"}, flags={"fulltext"})
+ *     @ORM\Index(columns={"name", "url"}, flags={"fulltext"})
  * })
  * @ORM\Entity(repositoryClass="App\Repository\InstitutionRepository")
  */
@@ -35,7 +35,7 @@ class Institution extends AbstractEntity {
      * @var string
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Url(
-     *     protocols = {"http", "https"}
+     *     protocols={"http", "https"}
      * )
      */
     private $url;
@@ -65,8 +65,6 @@ class Institution extends AbstractEntity {
 
     /**
      * Force all entities to provide a stringify function.
-     *
-     * @return string
      */
     public function __toString() : string {
         return $this->name;

@@ -55,15 +55,14 @@ class Bottle extends Artefact {
 
     /**
      * Force all entities to provide a stringify function.
-     *
-     * @return string
      */
     public function __toString() : string {
         $s = implode(' ', array_merge([$this->company, $this->brand], $this->catalogNumbers));
-        if(($trimmed = trim($s))) {
+        if (($trimmed = trim($s))) {
             return $trimmed;
         }
-        return "Bottle #" . $this->id;
+
+        return 'Bottle #' . $this->id;
     }
 
     public function getCategory() {
@@ -121,7 +120,7 @@ class Bottle extends Artefact {
      *
      * @return Bottle
      */
-    public function setManufacturer(Manufacturer $manufacturer = null) {
+    public function setManufacturer(?Manufacturer $manufacturer = null) {
         $this->manufacturer = $manufacturer;
 
         return $this;
@@ -143,7 +142,7 @@ class Bottle extends Artefact {
      *
      * @return Bottle
      */
-    public function setContent(Content $content = null) {
+    public function setContent(?Content $content = null) {
         $this->content = $content;
 
         return $this;
@@ -165,7 +164,7 @@ class Bottle extends Artefact {
      *
      * @return Bottle
      */
-    public function setPackagingLocation(Location $packagingLocation = null) {
+    public function setPackagingLocation(?Location $packagingLocation = null) {
         $this->packagingLocation = $packagingLocation;
 
         return $this;

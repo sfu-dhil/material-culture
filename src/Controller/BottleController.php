@@ -37,7 +37,7 @@ class BottleController extends AbstractController implements PaginatorAwareInter
      * @return array
      *
      * @Route("/", name="bottle_index", methods={"GET"})
-     * @Template()
+     * @Template
      */
     public function indexAction(Request $request, EntityManagerInterface $em) {
         $qb = $em->createQueryBuilder();
@@ -70,7 +70,7 @@ class BottleController extends AbstractController implements PaginatorAwareInter
      * </pre></code>
      *
      * @Route("/search", name="bottle_search", methods={"GET"})
-     * @Template()
+     * @Template
      *
      * @return array
      */
@@ -95,8 +95,8 @@ class BottleController extends AbstractController implements PaginatorAwareInter
      * @return array|RedirectResponse
      *
      * @IsGranted("ROLE_CONTENT_ADMIN")
-     * @Route("/new", name="bottle_new", methods={"GET","POST"})
-     * @Template()
+     * @Route("/new", name="bottle_new", methods={"GET", "POST"})
+     * @Template
      */
     public function newAction(Request $request, EntityManagerInterface $em) {
         $bottle = new Bottle();
@@ -127,7 +127,7 @@ class BottleController extends AbstractController implements PaginatorAwareInter
      * @return array
      *
      * @Route("/{id}", name="bottle_show", methods={"GET"})
-     * @Template()
+     * @Template
      */
     public function showAction(Request $request, Bottle $bottle) {
         $images = $this->paginator->paginate($bottle->getImages(), $request->query->getint('page', 1), 25);
@@ -144,8 +144,8 @@ class BottleController extends AbstractController implements PaginatorAwareInter
      * @return array|RedirectResponse
      *
      * @IsGranted("ROLE_CONTENT_ADMIN")
-     * @Route("/{id}/edit", name="bottle_edit", methods={"GET","POST"})
-     * @Template()
+     * @Route("/{id}/edit", name="bottle_edit", methods={"GET", "POST"})
+     * @Template
      */
     public function editAction(Request $request, Bottle $bottle, EntityManagerInterface $em) {
         $editForm = $this->createForm(BottleType::class, $bottle);

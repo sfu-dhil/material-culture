@@ -33,7 +33,7 @@ class ReferenceController extends AbstractController implements PaginatorAwareIn
      * @return array
      *
      * @Route("/", name="reference_index", methods={"GET"})
-     * @Template()
+     * @Template
      */
     public function indexAction(Request $request, EntityManagerInterface $em) {
         $qb = $em->createQueryBuilder();
@@ -53,7 +53,7 @@ class ReferenceController extends AbstractController implements PaginatorAwareIn
      * @return array
      *
      * @Route("/{id}", name="reference_show", methods={"GET"})
-     * @Template()
+     * @Template
      */
     public function showAction(Reference $reference) {
         return [
