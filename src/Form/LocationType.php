@@ -12,8 +12,8 @@ namespace App\Form;
 
 use App\Entity\Location;
 use Nines\UtilBundle\Form\TermType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
