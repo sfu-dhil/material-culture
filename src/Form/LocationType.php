@@ -12,6 +12,7 @@ namespace App\Form;
 
 use App\Entity\Location;
 use Nines\UtilBundle\Form\TermType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -31,18 +32,26 @@ class LocationType extends TermType {
                 'help_block' => '',
             ],
         ]);
-        $builder->add('latitude', null, [
+        $builder->add('latitude', NumberType::class, [
             'label' => 'Latitude',
+            'html5' => true,
+            'input' => 'number',
+            'scale' => 8,
             'required' => false,
             'attr' => [
                 'help_block' => '',
+                'step' => 'any',
             ],
         ]);
-        $builder->add('longitude', null, [
+        $builder->add('longitude', NumberType::class, [
             'label' => 'Longitude',
+            'html5' => true,
+            'input' => 'number',
+            'scale' => 8,
             'required' => false,
             'attr' => [
                 'help_block' => '',
+                'step' => 'any',
             ],
         ]);
     }
