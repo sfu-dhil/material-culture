@@ -15,7 +15,8 @@ use App\Entity\Location;
 use Nines\UserBundle\DataFixtures\UserFixtures;
 use Nines\UtilBundle\Tests\ControllerBaseCase;
 
-class LocationControllerTest extends ControllerBaseCase {
+class LocationControllerTest extends ControllerBaseCase
+{
     protected function fixtures() : array {
         return [
             UserFixtures::class,

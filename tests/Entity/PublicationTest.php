@@ -13,7 +13,8 @@ namespace App\Tests\Entity;
 use App\Entity\Publication;
 use PHPUnit\Framework\TestCase;
 
-class PublicationTest extends TestCase {
+class PublicationTest extends TestCase
+{
     /**
      * @var Publication
      */

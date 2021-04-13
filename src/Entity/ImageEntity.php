@@ -19,7 +19,8 @@ use Symfony\Component\HttpFoundation\File\File;
  *
  * @ORM\MappedSuperclass
  */
-abstract class ImageEntity extends AbstractEntity {
+abstract class ImageEntity extends AbstractEntity
+{
     /**
      * @var File
      */

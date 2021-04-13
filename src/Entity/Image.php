@@ -18,7 +18,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="image")
  * @ORM\Entity(repositoryClass="App\Repository\ImageRepository")
  */
-class Image extends ImageEntity {
+class Image extends ImageEntity
+{
     /**
      * @var bool
      * @ORM\Column(type="boolean", nullable=false, options={"default": false})

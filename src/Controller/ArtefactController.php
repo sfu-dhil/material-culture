@@ -33,7 +33,8 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route("/artefact")
  */
-class ArtefactController extends AbstractController implements PaginatorAwareInterface {
+class ArtefactController extends AbstractController implements PaginatorAwareInterface
+{
     use PaginatorTrait;
 
     /**
