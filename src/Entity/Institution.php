@@ -24,7 +24,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * })
  * @ORM\Entity(repositoryClass="App\Repository\InstitutionRepository")
  */
-class Institution extends AbstractEntity {
+class Institution extends AbstractEntity
+{
     /**
      * @var string
      * @ORM\Column(type="string", nullable=false)

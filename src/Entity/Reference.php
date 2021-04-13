@@ -19,7 +19,8 @@ use Nines\UtilBundle\Entity\AbstractEntity;
  * @ORM\Table(name="reference")
  * @ORM\Entity(repositoryClass="App\Repository\ReferenceRepository")
  */
-class Reference extends AbstractEntity {
+class Reference extends AbstractEntity
+{
     /**
      * @var Publication
      * @ORM\ManyToOne(targetEntity="App\Entity\Publication", inversedBy="references")

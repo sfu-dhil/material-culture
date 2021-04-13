@@ -28,7 +28,8 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route("/bottle")
  */
-class BottleController extends AbstractController implements PaginatorAwareInterface {
+class BottleController extends AbstractController implements PaginatorAwareInterface
+{
     use PaginatorTrait;
 
     /**

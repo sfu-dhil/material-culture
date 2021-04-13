@@ -29,7 +29,8 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route("/manufacturer")
  */
-class ManufacturerController extends AbstractController implements PaginatorAwareInterface {
+class ManufacturerController extends AbstractController implements PaginatorAwareInterface
+{
     use PaginatorTrait;
 
     /**

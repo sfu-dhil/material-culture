@@ -18,7 +18,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * ContentType form.
  */
-class ContentType extends TermType {
+class ContentType extends TermType
+{
     /**
      * Add form fields to $builder.
      */

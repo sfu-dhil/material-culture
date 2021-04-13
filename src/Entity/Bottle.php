@@ -18,7 +18,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="artefact_bottle")
  * @ORM\Entity(repositoryClass="App\Repository\BottleRepository")
  */
-class Bottle extends Artefact {
+class Bottle extends Artefact
+{
     /**
      * @var string
      * @ORM\Column(type="string", nullable=true)

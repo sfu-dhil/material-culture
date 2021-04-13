@@ -23,7 +23,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * ImageType form.
  */
-class ImageType extends AbstractType {
+class ImageType extends AbstractType
+{
     /**
      * @var FileUploader
      */

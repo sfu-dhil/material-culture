@@ -15,7 +15,8 @@ use App\Entity\Bottle;
 use Nines\UserBundle\DataFixtures\UserFixtures;
 use Nines\UtilBundle\Tests\ControllerBaseCase;
 
-class BottleControllerTest extends ControllerBaseCase {
+class BottleControllerTest extends ControllerBaseCase
+{
     protected function fixtures() : array {
         return [
             UserFixtures::class,
