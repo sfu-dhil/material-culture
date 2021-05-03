@@ -22,8 +22,7 @@ use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
 /**
  * CanType form.
  */
-class CanType extends ArtefactType
-{
+class CanType extends ArtefactType {
     /**
      * Add form fields to $builder.
      */

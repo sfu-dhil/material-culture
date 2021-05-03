@@ -13,8 +13,7 @@ namespace App\Tests\Entity;
 use App\Entity\Artefact;
 use PHPUnit\Framework\TestCase;
 
-class ArtefactTest extends TestCase
-{
+class ArtefactTest extends TestCase {
     /**
      * @var Artefact
      */

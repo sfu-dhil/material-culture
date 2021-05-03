@@ -23,8 +23,7 @@ use Nines\UtilBundle\Entity\AbstractTerm;
  * @ORM\Table(name="location")
  * @ORM\Entity(repositoryClass="App\Repository\LocationRepository")
  */
-class Location extends AbstractTerm
-{
+class Location extends AbstractTerm {
     /**
      * @var string
      * @ORM\Column(type="string", length=16, nullable=true)

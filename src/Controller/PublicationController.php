@@ -29,8 +29,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route("/publication")
  */
-class PublicationController extends AbstractController implements PaginatorAwareInterface
-{
+class PublicationController extends AbstractController implements PaginatorAwareInterface {
     use PaginatorTrait;
 
     /**

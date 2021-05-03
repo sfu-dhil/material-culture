@@ -28,8 +28,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route("/can")
  */
-class CanController extends AbstractController implements PaginatorAwareInterface
-{
+class CanController extends AbstractController implements PaginatorAwareInterface {
     use PaginatorTrait;
 
     /**
