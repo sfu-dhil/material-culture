@@ -28,8 +28,7 @@ use Nines\UtilBundle\Entity\AbstractEntity;
  *     "can": "Can",
  * })
  */
-abstract class Artefact extends AbstractEntity
-{
+abstract class Artefact extends AbstractEntity {
     public const BOTTLE = 'bottle';
 
     public const CAN = 'can';

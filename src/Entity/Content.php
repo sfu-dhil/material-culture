@@ -20,8 +20,7 @@ use Nines\UtilBundle\Entity\AbstractTerm;
  * @ORM\Table(name="content")
  * @ORM\Entity(repositoryClass="App\Repository\ContentRepository")
  */
-class Content extends AbstractTerm
-{
+class Content extends AbstractTerm {
     /**
      * @var Bottle[]|Collection
      * @ORM\OneToMany(targetEntity="App\Entity\Bottle", mappedBy="content")

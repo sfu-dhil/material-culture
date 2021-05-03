@@ -21,8 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * PublicationType form.
  */
-class PublicationType extends AbstractType
-{
+class PublicationType extends AbstractType {
     /**
      * Add form fields to $builder.
      */

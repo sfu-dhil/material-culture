@@ -22,8 +22,7 @@ use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
 /**
  * BottleType form.
  */
-class BottleType extends ArtefactType
-{
+class BottleType extends ArtefactType {
     /**
      * Add form fields to $builder.
      */

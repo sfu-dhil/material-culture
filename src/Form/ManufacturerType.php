@@ -18,8 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * ManufacturerType form.
  */
-class ManufacturerType extends TermType
-{
+class ManufacturerType extends TermType {
     /**
      * Add form fields to $builder.
      */

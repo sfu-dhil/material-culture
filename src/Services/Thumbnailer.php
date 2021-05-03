@@ -22,8 +22,7 @@ use Psr\Log\LoggerInterface;
  *
  * @author mjoyce
  */
-class Thumbnailer
-{
+class Thumbnailer {
     private $thumbWidth;
 
     private $thumbHeight;

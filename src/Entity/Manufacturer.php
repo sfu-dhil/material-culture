@@ -21,8 +21,7 @@ use Nines\UtilBundle\Entity\AbstractTerm;
  * @ORM\Table(name="manufacturer")
  * @ORM\Entity(repositoryClass="App\Repository\ManufacturerRepository")
  */
-class Manufacturer extends AbstractTerm
-{
+class Manufacturer extends AbstractTerm {
     /**
      * @var Bottle[]|Collection
      * @ORM\OneToMany(targetEntity="App\Entity\Bottle", mappedBy="manufacturer")

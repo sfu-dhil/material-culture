@@ -20,8 +20,7 @@ use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
 /**
  * ReferenceType form.
  */
-class ReferenceType extends AbstractType
-{
+class ReferenceType extends AbstractType {
     /**
      * Add form fields to $builder.
      */
