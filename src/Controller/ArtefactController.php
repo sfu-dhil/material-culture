@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * (c) 2020 Michael Joyce <mjoyce@sfu.ca>
+ * (c) 2021 Michael Joyce <mjoyce@sfu.ca>
  * This source file is subject to the GPL v2, bundled
  * with this source code in the file LICENSE.
  */
@@ -50,8 +50,10 @@ class ArtefactController extends AbstractController implements PaginatorAwareInt
         switch ($artefact->getCategory()) {
             case Artefact::BOTTLE:
                 return $this->redirectToRoute('bottle_show', ['id' => $artefact->getId()]);
+
             case Artefact::CAN:
                 return $this->redirectToRoute('can_show', ['id' => $artefact->getId()]);
+
             default:
                 throw new HttpException(500, 'Cannot generate URL for artefact of type ' . $artefact->getCategory());
         }
